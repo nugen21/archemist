@@ -34,7 +34,7 @@ jobs:
           
           # 2. Diagnostic: Can we even list the bucket?
           echo "Checking bucket access..."
-          aws s3 ls s3://archemist-roasters --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
+          aws s3 ls s3://archemist --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
           
           # 3. Final synchronization attempt
-          aws s3 sync dist/ s3://archemist-roasters --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard --delete --debug
+          aws s3 sync dist/ s3://archemist --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard --delete --debug
