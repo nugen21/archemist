@@ -23,6 +23,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug Buckets
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.NCP_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.NCP_SECRET_KEY }}
+        run: |
+          aws s3 ls --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
+
       - name: Deploy to NCP Object Storage
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.NCP_ACCESS_KEY }}
