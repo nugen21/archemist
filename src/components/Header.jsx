@@ -58,7 +58,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation Overlay */}
-      <div className={`fixed inset-0 z-[110] bg-[#0b0c0b] transition-all duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'}`}>
+      <div className={`fixed inset-0 z-[110] bg-[#0b0c0b]/90 backdrop-blur-2xl transition-all duration-500 ease-in-out lg:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'}`}>
         <div className="flex flex-col h-full p-8 pt-24 text-center">
           <button 
             onClick={() => setIsMenuOpen(false)}
