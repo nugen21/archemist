@@ -39,10 +39,17 @@ jobs:
           aws configure set default.s3.addressing_style path
 
           echo "Target Bucket: ${BUCKET_NAME}"
-          echo "Checking bucket access..."
-          aws s3 ls s3://${BUCKET_NAME} --endpoint-url https://kr.object.ncloudstorage.com
+          echo "Test 1: Simple PutObject (s3api)"
+          echo "test" > test.txt
+          aws s3api put-object --bucket ${BUCKET_NAME} --key test.txt --body test.txt --endpoint-url https://kr.object.ncloudstorage.com || echo "Test 1 Failed"
 
-          echo "Uploading..."
+          echo "Test 2: PutObject with public-read ACL"
+          aws s3api put-object --bucket ${BUCKET_NAME} --key test-acl.txt --body test.txt --acl public-read --endpoint-url https://kr.object.ncloudstorage.com || echo "Test 2 Failed"
+
+          echo "Test 3: Standard S3 Sync (No ACL, No Delete)"
+          aws s3 sync dist/ s3://${BUCKET_NAME} --endpoint-url https://kr.object.ncloudstorage.com || echo "Test 3 Failed"
+
+          echo "Final Attempt: Full Production Sync"
           aws s3 sync dist/ s3://${BUCKET_NAME} \
             --endpoint-url https://kr.object.ncloudstorage.com \
             --delete \
