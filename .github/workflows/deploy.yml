@@ -47,4 +47,4 @@ jobs:
             --endpoint-url https://kr.object.ncloudstorage.com \
             --delete \
             --acl public-read \
-            --addressing_style path
+            --addressing-style path
