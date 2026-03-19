@@ -19,7 +19,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps --force
 
       - name: Build
         run: npm run build
@@ -37,4 +37,4 @@ jobs:
             --endpoint-url https://kr.object.ncloudstorage.com \
             --region kr-standard \
             --delete \
-            --acl public-read
+            --no-progress
