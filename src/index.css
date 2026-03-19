@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-matte-black: #181a19;
+  --color-copper: #a1764c;
+}
+
+body {
+  background-color: var(--color-matte-black);
+  color: white;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
