@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Admin = ({ isAdmin, setAdminAuth }) => {
   const [activeTab, setActiveTab] = useState('register'); // 'register' or 'manage'
@@ -6,6 +6,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const [loginForm, setLoginForm] = useState({ id: '', password: '' });
   const [beans, setBeans] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const fileInputRef = useRef(null);
   
   const [formData, setFormData] = useState({
     category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
@@ -63,6 +64,22 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) { // 2MB limit for Base64 efficiency
+        alert('파일 크기가 너무 큽니다. 2MB 이하의 이미지를 사용해 주세요.');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const existing = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
@@ -95,12 +112,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       image: ''
     });
     setEditingId(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const handleEdit = (bean) => {
     setFormData({
       ...bean,
-      category: bean.category || 'bean', // Migration for old data
+      category: bean.category || 'bean',
       image: bean.image || ''
     });
     setEditingId(bean.id);
@@ -210,16 +228,57 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="md:col-span-2 lg:col-span-3">
                 <InputField label="상품명" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
               </div>
               
               <div className="md:col-span-2 lg:col-span-2">
-                <InputField label="상품 이미지 URL" name="image" value={formData.image} onChange={handleChange} placeholder="https://example.com/image.png 또는 /images/name.png" />
+                <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">상품 이미지 업로드 (Recommended: Square, Max 2MB)</label>
+                <div className="flex gap-4 items-start">
+                  <div className="relative group flex-1">
+                    <input 
+                      type="file" 
+                      ref={fileInputRef}
+                      onChange={handleImageUpload} 
+                      accept="image/*"
+                      className="hidden" 
+                      id="image-upload"
+                    />
+                    <label 
+                      htmlFor="image-upload"
+                      className="flex flex-col items-center justify-center w-full h-40 bg-[#0b0c0b] border-2 border-dashed border-gray-800 rounded-2xl cursor-pointer hover:border-copper transition-all p-4 group-hover:bg-[#111]"
+                    >
+                      {formData.image ? (
+                        <div className="relative w-full h-full">
+                          <img src={formData.image} alt="Preview" className="w-full h-full object-contain rounded-lg" />
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
+                            <span className="text-white text-[10px] font-bold uppercase tracking-widest">Change Image</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-center">
+                          <UploadIcon />
+                          <p className="mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest">Click to upload image</p>
+                        </div>
+                      )}
+                    </label>
+                  </div>
+                  {formData.image && (
+                    <button 
+                      type="button" 
+                      onClick={() => setFormData(prev => ({ ...prev, image: '' }))}
+                      className="mt-2 text-[10px] font-bold text-gray-600 hover:text-red-500 uppercase tracking-widest transition"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
               </div>
 
-              <InputField label="가격" name="price" value={formData.price} onChange={handleChange} placeholder="예: 18,000원" />
+              <div className="flex flex-col justify-end">
+                <InputField label="가격" name="price" value={formData.price} onChange={handleChange} placeholder="예: 18,000원" />
+              </div>
 
               {formData.category === 'bean' && (
                 <>
@@ -323,6 +382,14 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   );
 };
 
+const UploadIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A1764C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-auto block">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+    <polyline points="17 8 12 3 7 8"></polyline>
+    <line x1="12" y1="3" x2="12" y2="15"></line>
+  </svg>
+);
+
 const TrashIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -330,7 +397,7 @@ const TrashIcon = () => (
 );
 
 const InputField = ({ label, name, value, onChange, type = "text", required = false, placeholder = "" }) => (
-  <div>
+  <div className="w-full">
     <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">{label}</label>
     <input type={type} name={name} value={value} onChange={onChange} required={required} placeholder={placeholder} className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-colors placeholder:text-gray-600 shadow-inner" />
   </div>
