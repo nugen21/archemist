@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import BeanDetail from './components/BeanDetail';
 import Admin from './components/Admin';
 import EmailSubscription from './components/EmailSubscription';
+import Products from './components/Products';
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash);
