@@ -40,9 +40,8 @@ jobs:
 
           echo "Target Bucket: ${BUCKET_NAME}"
           echo "Checking bucket access..."
-          aws s3 ls s3://${BUCKET_NAME} --endpoint-url http://archemist.s3-website.kr.object.ncloudstorage.com
+          aws s3 ls s3://${BUCKET_NAME} --endpoint-url https://kr.object.ncloudstorage.com
 
           echo "Uploading..."
           aws s3 sync dist/ s3://archemist \
-            --endpoint-url http://archemist.s3-website.kr.object.ncloudstorage.com \
-            --delete
+            --endpoint-url https://kr.object.ncloudstorage.com
