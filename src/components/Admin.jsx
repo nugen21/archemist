@@ -7,8 +7,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const [beans, setBeans] = useState([]);
   const [formData, setFormData] = useState({
     name: '', country: '', region: '', variety: '', altitude: '', process: '', 
-    roaster: '', roastWb: '', roastGround: '', roastDate: '', degassing: '', 
-    cupNotes: '', recipe: '', visible: true
+    roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
+    cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true
   });
 
   const loadBeans = () => {
@@ -62,8 +62,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const resetForm = () => {
     setFormData({
       name: '', country: '', region: '', variety: '', altitude: '', process: '', 
-      roaster: '', roastWb: '', roastGround: '', roastDate: '', degassing: '', 
-      cupNotes: '', recipe: '', visible: true
+      roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
+      cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true
     });
     setEditingId(null);
   };
@@ -223,14 +223,24 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               
               <InputField label="8. 홀빈 배전도" name="roastWb" value={formData.roastWb} onChange={handleChange} placeholder="예: 64.6" />
               <InputField label="9. 분쇄 배전도" name="roastGround" value={formData.roastGround} onChange={handleChange} placeholder="예: 77.4" />
-              <InputField label="10. 로스팅 날짜" name="roastDate" type="date" value={formData.roastDate} onChange={handleChange} />
+              <InputField label="10. 로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
+              <InputField label="11. 로스팅 날짜" name="roastDate" type="date" value={formData.roastDate} onChange={handleChange} />
               
               <div className="lg:col-span-3">
-                 <InputField label="11. 추천 디개싱 기간" name="degassing" value={formData.degassing} onChange={handleChange} placeholder="예: 로스팅 후 7~14일" />
+                 <InputField label="12. 추천 디개싱 기간" name="degassing" value={formData.degassing} onChange={handleChange} placeholder="예: 로스팅 후 7~14일" />
               </div>
               <div className="lg:col-span-3">
-                 <InputField label="12. 컵 노트" name="cupNotes" value={formData.cupNotes} onChange={handleChange} placeholder="예: 쟈스민, 복숭아, 베르가못, 꿀" />
+                 <InputField label="13. 컵 노트" name="cupNotes" value={formData.cupNotes} onChange={handleChange} placeholder="예: 쟈스민, 복숭아, 베르가못, 꿀" />
               </div>
+
+              <div className="md:col-span-2 lg:col-span-3 mt-4 border-t border-gray-800 pt-6">
+                <h4 className="text-copper font-bold text-xs uppercase tracking-widest mb-4">Advanced Alchemy Report Specs</h4>
+              </div>
+              
+              <InputField label="14. 추출 기구" name="dripper" value={formData.dripper} onChange={handleChange} placeholder="예: Hario V60" />
+              <InputField label="15. 원두량" name="coffeeAmount" value={formData.coffeeAmount} onChange={handleChange} placeholder="예: 18g" />
+              <InputField label="16. 그라인더 세팅" name="grind" value={formData.grind} onChange={handleChange} placeholder="예: Comandante 25 clicks" />
+              <InputField label="17. 추출 온도" name="temp" value={formData.temp} onChange={handleChange} placeholder="예: 94°C" />
             </div>
             
             <div>

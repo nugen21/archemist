@@ -87,22 +87,14 @@ export default function RecommendedBeans({ isAdmin }) {
                 <p className="text-sm text-gray-200 font-medium leading-relaxed">{bean.cupNotes || '다채롭고 우아한 플레이버'}</p>
               </div>
               
-              <div className="mt-auto">
-                <details className="group/recipe cursor-pointer">
-                  <summary className="text-[11px] text-copper tracking-widest font-bold uppercase hover:text-yellow-500 transition-colors flex items-center justify-between select-none p-2 -mx-2 rounded hover:bg-white/5">
-                    <span>View Brewing Recipe</span>
-                    <span className="transition-transform duration-300 group-open/recipe:rotate-180">▼</span>
-                  </summary>
-                  <div className="mt-3 text-[13px] text-gray-300 leading-relaxed bg-black p-5 rounded-xl border border-gray-800 whitespace-pre-wrap shadow-inner">
-                    {bean.recipe || '추천 추출 레시피 미제공'}
-                    {bean.degassing && (
-                      <div className="mt-4 pt-4 border-t border-gray-800/60">
-                        <p className="text-[10px] text-copper tracking-widest uppercase mb-1">Degassing Info</p>
-                        <p className="text-xs">{bean.degassing}</p>
-                      </div>
-                    )}
-                  </div>
-                </details>
+              <div className="mt-auto pt-6">
+                <a 
+                  href={`#bean/${bean.id}`}
+                  className="w-full bg-copper/10 border border-copper/30 text-copper py-3 rounded-xl hover:bg-copper hover:text-matte-black transition-all duration-300 uppercase text-[11px] tracking-widest font-bold flex items-center justify-center gap-2 group/btn"
+                >
+                  View Alchemy Report
+                  <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                </a>
               </div>
             </div>
           ))}

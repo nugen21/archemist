@@ -5,6 +5,7 @@ import RecommendedBeans from './components/RecommendedBeans';
 import Events from './components/Events';
 import Brand from './components/Brand';
 import Contact from './components/Contact';
+import BeanDetail from './components/BeanDetail';
 import Admin from './components/Admin';
 import EmailSubscription from './components/EmailSubscription';
 
@@ -23,12 +24,28 @@ function App() {
     localStorage.setItem('archemist_is_admin', state ? 'true' : 'false');
   };
 
+  const handleBack = () => {
+    window.location.hash = '';
+  };
+
+  // Route: Admin
   if (currentPath === '#admin') {
     return <Admin isAdmin={isAdmin} setAdminAuth={handleAdminAuth} />;
   }
 
+  // Route: Subscribe
   if (currentPath === '#subscribe') {
     return <EmailSubscription />;
+  }
+
+  // Route: Bean Detail
+  if (currentPath.startsWith('#bean/')) {
+    const id = parseInt(currentPath.split('/')[1]);
+    const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
+    const bean = saved.find(b => b.id === id);
+    if (bean) {
+      return <BeanDetail bean={bean} onBack={handleBack} />;
+    }
   }
 
   return (
@@ -36,8 +53,11 @@ function App() {
       {/* Landing Page Content */}
       <main className="flex-grow">
         <Header />
-        <Hero />
+        <Hero id="home" />
         <RecommendedBeans isAdmin={isAdmin} />
+        <Products category="dripbag" />
+        <Products category="coldbrew" />
+        <Products category="beverage" />
         <Events />
         <Brand />
         <Contact />
