@@ -6,6 +6,7 @@ import Events from './components/Events';
 import Brand from './components/Brand';
 import Contact from './components/Contact';
 import Admin from './components/Admin';
+import EmailSubscription from './components/EmailSubscription';
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash);
@@ -24,6 +25,10 @@ function App() {
 
   if (currentPath === '#admin') {
     return <Admin isAdmin={isAdmin} setAdminAuth={handleAdminAuth} />;
+  }
+
+  if (currentPath === '#subscribe') {
+    return <EmailSubscription />;
   }
 
   return (
