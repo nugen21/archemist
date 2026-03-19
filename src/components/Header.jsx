@@ -4,12 +4,12 @@ import { Menu, X } from 'lucide-react';
 export default function Header() {
   const navLinks = [
     { name: '홈', href: '#home' },
-    { name: '이벤트', href: '#events' },
     { name: '브랜드', href: '#brand' },
+    { name: '이벤트', href: '#events' },
     { name: '원두', href: '#recommended' },
     { name: '드립팩', href: '#dripbag' },
     { name: '콜드브루', href: '#coldbrew' },
-    { name: '음료', href: '#beverage' },
+    { name: '매장음료', href: '#beverage' },
     { name: '문의', href: '#contact', bold: true },
   ];
 
