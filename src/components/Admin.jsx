@@ -14,9 +14,32 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true
   });
 
-  const loadBeans = () => {
-    const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
-    setBeans(saved);
+  const loadBeans = async () => {
+    const saved = localStorage.getItem('archemist_beans');
+    if (saved) {
+      setBeans(JSON.parse(saved));
+    } else {
+      try {
+        const response = await fetch('/products.json');
+        if (response.ok) {
+          const data = await response.json();
+          setBeans(data);
+          localStorage.setItem('archemist_beans', JSON.stringify(data));
+        }
+      } catch (error) {
+        console.error('Failed to load initial products:', error);
+      }
+    }
+  };
+
+  const handleExportJSON = () => {
+    const dataStr = JSON.stringify(beans, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    const exportFileDefaultName = 'products.json';
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
   };
 
   const handleLoginChange = (e) => {
@@ -154,7 +177,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
              <button onClick={() => { setActiveTab('manage'); resetForm(); }} className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${activeTab === 'manage' ? 'bg-copper text-[#111]' : 'text-gray-400 hover:text-gray-200'}`}>목록 관리 ({beans.length})</button>
            </div>
 
-           <div className="flex gap-4">
+           <div className="flex gap-4 items-center">
+             <button onClick={handleExportJSON} className="text-[9px] px-3 py-1 border border-gray-700 rounded-lg hover:border-copper transition-colors font-bold uppercase tracking-widest text-gray-400 hover:text-copper" title="현재 데이터를 JSON으로 내보냅니다">Export JSON</button>
              <button onClick={() => setAdminAuth(false)} className="text-xs tracking-widest text-gray-500 hover:text-red-400 uppercase font-bold transition">Logout</button>
              <button onClick={handleReturn} className="text-xs tracking-widest text-gray-400 hover:text-copper uppercase font-bold transition">← 홈으로</button>
            </div>

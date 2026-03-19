@@ -3,9 +3,22 @@ import React, { useState, useEffect } from 'react';
 export default function RecommendedBeans({ isAdmin }) {
   const [beans, setBeans] = useState([]);
 
-  const loadBeans = () => {
-    const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
-    setBeans(saved);
+  const loadBeans = async () => {
+    const saved = localStorage.getItem('archemist_beans');
+    if (saved) {
+      setBeans(JSON.parse(saved));
+    } else {
+      try {
+        const response = await fetch('/products.json');
+        if (response.ok) {
+          const data = await response.json();
+          setBeans(data);
+          localStorage.setItem('archemist_beans', JSON.stringify(data));
+        }
+      } catch (error) {
+        console.error('Failed to load initial products:', error);
+      }
+    }
   };
 
   useEffect(() => {

@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1710850000001,
+    "category": "bean",
+    "name": "에티오피아 예가체프 G1 워시드",
+    "price": "22,000원",
+    "country": "에티오피아",
+    "region": "예가체프",
+    "variety": "게이샤",
+    "process": "Washed",
+    "cupNotes": "쟈스민, 레몬, 베르가못, 꿀",
+    "dripper": "Hario V60",
+    "coffeeAmount": "18g",
+    "grind": "25 clicks",
+    "temp": "92°C",
+    "recipe": "1. 92도 온수 40g으로 30초간 뜸들이기\n2. 120g을 1분까지 부드럽게 추출\n3. 나머지 120g을 2분까지 추출하여 마무리",
+    "visible": true
+  },
+  {
+    "id": 1710850000002,
+    "category": "dripbag",
+    "name": "아케미스트 시그니처 드립백 (10ea)",
+    "price": "15,000원",
+    "cupNotes": "다크 초콜릿, 견과류, 묵직한 바디감",
+    "recipe": "90도 온수 150ml를 3~4회 나누어 추출하세요.",
+    "visible": true
+  },
+  {
+    "id": 1710850000003,
+    "category": "coldbrew",
+    "name": "빈티지 콜드브루 원액 (500ml)",
+    "price": "18,000원",
+    "cupNotes": "부드러운 목넘김, 와인 같은 산미, 깔끔한 끝맛",
+    "recipe": "물 또는 우유와 1:3 비율로 희석하여 즐기세요.",
+    "visible": true
+  },
+  {
+    "id": 1710850000004,
+    "category": "beverage",
+    "name": "알케미 시그니처 라떼",
+    "price": "7,500원",
+    "cupNotes": "아케미스트만의 특제 시럽과 블렌딩 우유가 어우러진 고소한 라떼",
+    "recipe": "매장에서 즉시 제조되는 신선한 시그니처 음료입니다.",
+    "visible": true
+  }
+]

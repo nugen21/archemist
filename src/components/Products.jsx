@@ -58,9 +58,22 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
 export default function Products() {
   const [products, setProducts] = useState([]);
 
-  const loadProducts = () => {
-    const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
-    setProducts(saved.filter(p => p.visible !== false));
+  const loadProducts = async () => {
+    const saved = localStorage.getItem('archemist_beans');
+    if (saved) {
+      setProducts(JSON.parse(saved).filter(p => p.visible !== false));
+    } else {
+      try {
+        const response = await fetch('/products.json');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data.filter(p => p.visible !== false));
+          localStorage.setItem('archemist_beans', JSON.stringify(data));
+        }
+      } catch (error) {
+        console.error('Failed to load initial products:', error);
+      }
+    }
   };
 
   useEffect(() => {
