@@ -40,5 +40,5 @@ jobs:
           echo "Checking bucket access..."
           aws s3 ls s3://archemist --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
           
-          # 3. Final synchronization attempt (using legacy checksum-mode to avoid CRC64NVME issue)
-          aws s3 sync dist/ s3://archemist --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard --delete --acl public-read --checksum-algorithm CRC32
+          # 3. Final synchronization attempt (using path-style and legacy checksums)
+          aws s3 sync dist/ s3://archemist --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard --delete --acl public-read --addressing_style path
