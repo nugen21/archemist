@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const navLinks = [
     { name: '홈', href: '#home' },
     { name: '이벤트', href: '#events' },
@@ -20,7 +18,7 @@ export default function Header() {
       {/* Unified Navigation Row */}
       <div className="flex flex-col sm:flex-row sm:justify-between items-center px-4 sm:px-8 md:px-16">
         
-        {/* Logo & Toggle Row (Visible on all, but on mobile it acts as top part) */}
+        {/* Logo & Mobile Login Button */}
         <div className="w-full sm:w-auto flex justify-between items-center py-3 sm:py-5 shrink-0">
           <div className="flex items-center">
             <a href="#home" className="flex items-center gap-2">
@@ -29,18 +27,12 @@ export default function Header() {
             </a>
           </div>
 
-          <div className="flex items-center gap-3 sm:hidden">
-            {/* Naver Login (Mobile Icon Only) */}
+          {/* Naver Login (Mobile Icon Only) */}
+          <div className="sm:hidden flex items-center">
             <button className="bg-[#03C75A] text-white p-1.5 rounded-sm shadow-lg shadow-[#03C75A]/10">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M16.04 11.234L8.605 0.408H0.2V23.592H8.16V12.766L15.594 23.592H24V0.408H16.04V11.234Z"/>
               </svg>
-            </button>
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-400 p-1"
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -68,20 +60,6 @@ export default function Header() {
             </svg>
             <span>네이버 로그인</span>
           </button>
-        </div>
-      </div>
-
-      {/* Mobile Sidebar Overlay (For secondary/helper tasks) */}
-      <div className={`fixed inset-0 z-[110] bg-[#0b0c0b]/90 backdrop-blur-2xl transition-all duration-500 ease-in-out sm:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'}`}>
-        <div className="flex flex-col h-full p-8 pt-24 text-center">
-          <button onClick={() => setIsMenuOpen(false)} className="absolute top-6 right-6 text-gray-500"><X size={28} /></button>
-          <div className="flex flex-col gap-8">
-            <a href="#admin" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif tracking-widest text-gray-400">ADMIN PANEL</a>
-            <a href="https://smartstore.naver.com" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif tracking-widest text-gray-400">OFFICIAL STORE</a>
-          </div>
-          <div className="mt-auto pb-12">
-            <button className="w-full bg-[#03C75A] text-white py-4 rounded-xl font-bold tracking-widest text-sm shadow-2xl uppercase">Native Naver Auth</button>
-          </div>
         </div>
       </div>
     </header>
