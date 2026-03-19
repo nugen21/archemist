@@ -28,6 +28,13 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.NCP_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.NCP_SECRET_KEY }}
         run: |
+          # 1. Configure signatures andAddressing style
           aws configure set default.s3.signature_version s3v4
           aws configure set default.s3.addressing_style virtual
+          
+          # 2. Diagnostic: Can we even list the bucket?
+          echo "Checking bucket access..."
+          aws s3 ls s3://archemist-roasters --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
+          
+          # 3. Final synchronization attempt
           aws s3 sync dist/ s3://archemist-roasters --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard --delete --debug
