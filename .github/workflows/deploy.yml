@@ -1,4 +1,4 @@
-# Deployment Version: 1.3 (Sub-account permissions verification)
+# Deployment Version: 1.4 (Main account keys: ncp-3681292-0 active)
 name: Deploy to Naver Cloud Object Storage
 
 on:
@@ -31,7 +31,6 @@ jobs:
           BUCKET_NAME: "archemist"
         run: |
           echo "Checking build output..."
-          ls -al
           ls -al dist || echo "dist not found"
 
           # 1. Configure signatures and Addressing style
@@ -39,7 +38,10 @@ jobs:
           aws configure set default.s3.addressing_style virtual
 
           echo "Target Bucket: ${BUCKET_NAME}"
-          echo "Final Verification: Precision Sync"
+          echo "Final Production Sync..."
           aws s3 sync dist/ s3://${BUCKET_NAME}/ \
             --endpoint-url https://kr.object.ncloudstorage.com \
-            --region kr-standard
+            --region kr-standard \
+            --delete \
+            --acl public-read \
+            --addressing-style virtual
