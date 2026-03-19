@@ -33,9 +33,6 @@ jobs:
           aws configure set default.s3.signature_version s3v4
           aws configure set default.s3.addressing_style virtual
 
-          # Debug: List buckets to verify connection
-          aws s3 ls --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
-
           aws s3 sync dist/ s3://${BUCKET_NAME} \
             --endpoint-url https://kr.object.ncloudstorage.com \
             --region kr-standard \
