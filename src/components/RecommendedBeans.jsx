@@ -64,10 +64,17 @@ export default function RecommendedBeans({ isAdmin }) {
               {isAdmin && (
                 <button 
                   onClick={() => handleHide(bean.id)}
-                  className="absolute top-4 right-4 text-[10px] font-bold text-gray-500 hover:text-red-400 uppercase tracking-widest transition-colors bg-black/50 px-2 py-1 rounded border border-gray-800"
+                  className="absolute top-4 right-4 z-20 text-[10px] font-bold text-gray-500 hover:text-red-400 uppercase tracking-widest transition-colors bg-black/50 px-2 py-1 rounded border border-gray-800"
                 >
                   숨기기 (Hide)
                 </button>
+              )}
+
+              {bean.image && (
+                <div className="relative w-full h-48 mb-6 rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                  <img src={bean.image} alt={bean.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0b] to-transparent"></div>
+                </div>
               )}
 
               <div className="mb-6 border-b border-gray-800 pb-5">

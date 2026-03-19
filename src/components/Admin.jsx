@@ -11,7 +11,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
     roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
-    cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true
+    cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
+    image: ''
   });
 
   const loadBeans = async () => {
@@ -90,7 +91,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       category: 'bean',
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
       roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
-      cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true
+      cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
+      image: ''
     });
     setEditingId(null);
   };
@@ -98,7 +100,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const handleEdit = (bean) => {
     setFormData({
       ...bean,
-      category: bean.category || 'bean' // Migration for old data
+      category: bean.category || 'bean', // Migration for old data
+      image: bean.image || ''
     });
     setEditingId(bean.id);
     setActiveTab('register');
@@ -212,6 +215,10 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <InputField label="상품명" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
               </div>
               
+              <div className="md:col-span-2 lg:col-span-2">
+                <InputField label="상품 이미지 URL" name="image" value={formData.image} onChange={handleChange} placeholder="https://example.com/image.png 또는 /images/name.png" />
+              </div>
+
               <InputField label="가격" name="price" value={formData.price} onChange={handleChange} placeholder="예: 18,000원" />
 
               {formData.category === 'bean' && (
@@ -269,7 +276,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-gray-800">
-                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Type</th>
+                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Image / Type</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Name</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Price / Date</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">Actions</th>
@@ -281,7 +288,12 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                   ) : (
                     filteredBeans.map((item) => (
                       <tr key={item.id} className={`hover:bg-white/[0.02] transition-colors group ${!item.visible ? 'opacity-50' : ''}`}>
-                        <td className="py-5 px-4">
+                        <td className="py-5 px-4 flex items-center gap-3">
+                           {item.image ? (
+                             <img src={item.image} alt={item.name} className="w-10 h-10 rounded-lg object-cover border border-gray-800" />
+                           ) : (
+                             <div className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-xs text-gray-600">No Img</div>
+                           )}
                            <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-tighter border ${item.category === 'bean' ? 'bg-copper/20 text-copper border-copper/30' : item.category === 'dripbag' ? 'bg-blue-900/20 text-blue-400 border-blue-900/30' : 'bg-green-900/20 text-green-400 border-green-900/30'}`}>
                              {item.category || 'bean'}
                            </span>
