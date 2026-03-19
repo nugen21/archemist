@@ -1,4 +1,4 @@
-# Deployment Version: 1.2 (Sub-account: archemist-deployer active)
+# Deployment Version: 1.3 (Sub-account permissions verification)
 name: Deploy to Naver Cloud Object Storage
 
 on:
