@@ -27,18 +27,24 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.NCP_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.NCP_SECRET_KEY }}
+          BUCKET_NAME: "archemist"
         run: |
           echo "Checking build output..."
           ls -al
           ls -al dist || echo "dist not found"
 
+          # 1. Configure signatures and Addressing style
           aws configure set default.s3.signature_version s3v4
           aws configure set default.s3.addressing_style path
 
+          echo "Target Bucket: ${BUCKET_NAME}"
           echo "Checking bucket access..."
-          aws s3 ls s3://archemist --endpoint-url https://kr.object.ncloudstorage.com
-
+          aws s3 ls s3://${BUCKET_NAME} --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
+          
           echo "Uploading..."
-          aws s3 sync dist/ s3://archemist \
+          aws s3 sync dist/ s3://${BUCKET_NAME} \
             --endpoint-url https://kr.object.ncloudstorage.com \
-            --delete
+            --region kr-standard \
+            --delete \
+            --acl public-read \
+            --addressing_style path
