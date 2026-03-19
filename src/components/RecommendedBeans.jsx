@@ -32,7 +32,7 @@ export default function RecommendedBeans({ isAdmin }) {
     }
   };
 
-  const visibleBeans = beans.filter(bean => bean.visible !== false);
+  const visibleBeans = beans.filter(bean => bean.visible !== false && (bean.category === 'bean' || !bean.category));
   if (visibleBeans.length === 0) return null; 
 
   return (
