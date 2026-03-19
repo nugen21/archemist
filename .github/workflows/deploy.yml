@@ -28,17 +28,17 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.NCP_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.NCP_SECRET_KEY }}
         run: |
-          # 0. Masked Access Key Check (for user verification)
-          KEY_STR="${AWS_ACCESS_KEY_ID}"
-          echo "Current Access Key ID starts with: ${KEY_STR:0:5}*****"
-          
-          # 1. Configure signatures andAddressing style
+          echo "Checking build output..."
+          ls -al
+          ls -al dist || echo "dist not found"
+
           aws configure set default.s3.signature_version s3v4
-          aws configure set default.s3.addressing_style virtual
-          
-          # 2. Diagnostic: Can we even list the bucket?
+          aws configure set default.s3.addressing_style path
+
           echo "Checking bucket access..."
-          aws s3 ls s3://archemist --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard
-          
-          # 3. Final synchronization attempt (using path-style and legacy checksums)
-          aws s3 sync dist/ s3://archemist --endpoint-url https://kr.object.ncloudstorage.com --region kr-standard --delete --acl public-read --addressing_style path
+          aws s3 ls s3://archemist --endpoint-url https://kr.object.ncloudstorage.com
+
+          echo "Uploading..."
+          aws s3 sync dist/ s3://archemist \
+            --endpoint-url https://kr.object.ncloudstorage.com \
+            --delete
