@@ -9,4 +9,4 @@ Modern and clean landing page for Archemist Roasters.
 - Automated deployment to Naver Cloud via GitHub Actions
 
 ## Deployment
-Automated via GitHub Actions on every push to the `main` branch.
+Automated via GitHub Actions on every push to the `main` branch. (CI/CD verified)
