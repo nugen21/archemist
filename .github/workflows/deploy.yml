@@ -28,6 +28,10 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.NCP_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.NCP_SECRET_KEY }}
         run: |
+          # 0. Masked Access Key Check (for user verification)
+          KEY_STR="${AWS_ACCESS_KEY_ID}"
+          echo "Current Access Key ID starts with: ${KEY_STR:0:5}*****"
+          
           # 1. Configure signatures andAddressing style
           aws configure set default.s3.signature_version s3v4
           aws configure set default.s3.addressing_style virtual
