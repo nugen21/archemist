@@ -43,5 +43,8 @@ jobs:
           aws s3 ls s3://${BUCKET_NAME} --endpoint-url https://kr.object.ncloudstorage.com
 
           echo "Uploading..."
-          aws s3 sync dist/ s3://archemist \
-            --endpoint-url https://kr.object.ncloudstorage.com
+          aws s3 sync dist/ s3://${BUCKET_NAME} \
+            --endpoint-url https://kr.object.ncloudstorage.com \
+            --delete \
+            --acl public-read \
+            --addressing_style path
