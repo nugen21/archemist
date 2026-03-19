@@ -31,11 +31,16 @@ jobs:
           BUCKET_NAME: "archemist"
         run: |
           aws configure set default.s3.signature_version s3v4
-          aws configure set default.s3.addressing_style virtual
+          aws configure set default.s3.addressing_style path
           
-          # Disable modern checksums that NCP doesn't support
-          aws configure set default.s3.request_checksum_calculation when_required
-          aws configure set default.s3.response_checksum_validation when_required
+          # Disable modern checksums that NCP doesn't support (Global)
+          aws configure set default.request_checksum_calculation when_required
+          aws configure set default.response_checksum_validation when_required
+
+          # Debug: check bucket's ACL permissions
+          aws s3api get-bucket-acl --bucket ${BUCKET_NAME} \
+            --endpoint-url https://kr.object.ncloudstorage.com \
+            --region kr-standard || echo "Could not get bucket ACL"
 
           aws s3 sync dist/ s3://${BUCKET_NAME} \
             --endpoint-url https://kr.object.ncloudstorage.com \
