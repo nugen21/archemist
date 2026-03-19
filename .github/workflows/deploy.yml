@@ -1,3 +1,4 @@
+# Deployment Version: 1.1
 name: Deploy to Naver Cloud Object Storage
 
 on:
