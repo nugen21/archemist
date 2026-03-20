@@ -30,7 +30,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-sm text-gray-400 mb-1">카카오톡 문의</p>
-                <span className="text-lg text-gray-200 font-medium whitespace-nowrap">아케미스트</span>
+                <span className="text-lg text-gray-200 font-medium whitespace-nowrap">아키미스트</span>
               </div>
             </div>
             

@@ -64,7 +64,7 @@ export default function RecommendedBeans({ isAdmin }) {
           <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white mb-4 tracking-tight italic drop-shadow-[0_0_20px_rgba(161,118,76,0.2)]">
             RECOMMENDED BEANS
           </h2>
-          <p className="text-gray-400 font-serif italic text-lg sm:text-xl max-w-2xl mx-auto">아케미스트가 엄선한 이달의 최상위 원두 큐레이션</p>
+          <p className="text-gray-400 font-serif italic text-lg sm:text-xl max-w-2xl mx-auto">아키미스트가 엄선한 이달의 최상위 원두 큐레이션</p>
         </div>
 
         <div className="flex overflow-x-auto gap-8 pb-16 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 group/scroll relative">

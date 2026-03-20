@@ -28,7 +28,7 @@ const EmailSubscription = () => {
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-copper font-serif tracking-widest uppercase mb-3">Subscribe</h2>
             <p className="text-gray-400 text-sm tracking-wide leading-relaxed">
-              아케미스트의 새로운 원두 소식과<br/>로스팅 리포트를 가장 먼저 받아보세요.
+              아키미스트의 새로운 원두 소식과<br/>로스팅 리포트를 가장 먼저 받아보세요.
             </p>
           </div>
 

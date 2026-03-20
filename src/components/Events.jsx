@@ -53,7 +53,7 @@ export default function Events() {
             </div>
             <div className="p-8 sm:p-10 flex flex-col grow justify-between gap-8">
               <p className="text-gray-300 text-lg leading-relaxed font-light break-keep">
-                아케미스트 로스터스가 주최하는 소규모 게스트 참여형 커핑 이벤트입니다. 새롭게 입고된 다양한 스페셜티 원두를 가장 먼저 만나보고, 커피를 사랑하는 소수의 인원들과 함께 심도 깊은 커핑을 즐겨보세요.
+                아키미스트 로스터스가 주최하는 소규모 게스트 참여형 커핑 이벤트입니다. 새롭게 입고된 다양한 스페셜티 원두를 가장 먼저 만나보고, 커피를 사랑하는 소수의 인원들과 함께 심도 깊은 커핑을 즐겨보세요.
               </p>
               <a 
                 href="#naver-booking" 
