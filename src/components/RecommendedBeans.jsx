@@ -4,48 +4,30 @@ export default function RecommendedBeans({ isAdmin }) {
   const [beans, setBeans] = useState([]);
 
   const loadBeans = async () => {
+    const localSaved = localStorage.getItem('archemist_beans');
+    
+    // Priority 1: Local Storage (Absolute source of truth for the session)
+    if (localSaved) {
+      const all = JSON.parse(localSaved);
+      setBeans(all.filter(p => p.recommended === true));
+      return;
+    }
+
+    // Priority 2: Server Fallback (Only if local is empty)
     try {
       const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
-        
-        // Merge with local visibility state if exists
-        const localSaved = localStorage.getItem('archemist_beans');
-        let finalData = serverData;
-        
-        if (localSaved) {
-          const localData = JSON.parse(localSaved);
-          // 1. Update existing server items with local visibility/recommendation overrides
-          const mergedServerData = serverData.map(serverItem => {
-            const localItem = localData.find(l => String(l.id) === String(serverItem.id));
-            if (localItem) {
-              return { 
-                ...serverItem, 
-                visible: localItem.visible !== undefined ? localItem.visible : serverItem.visible,
-                recommended: localItem.recommended !== undefined ? localItem.recommended : serverItem.recommended
-              };
-            }
-            return serverItem;
-          });
-
-          // 2. Identify and preserve local-only items (newly registered products)
-          const serverIds = new Set(serverData.map(s => String(s.id)));
-          const localOnlyData = localData.filter(l => !serverIds.has(String(l.id)));
-          
-          finalData = [...mergedServerData, ...localOnlyData];
+        setBeans(serverData.filter(p => p.recommended === true));
+        // Seed localStorage if empty
+        try {
+          localStorage.setItem('archemist_beans', JSON.stringify(serverData));
+        } catch (e) {
+          console.warn('Storage quota exceeded:', e);
         }
-        
-        setBeans(finalData.filter(p => p.recommended === true));
-        // REMOVED: localStorage.setItem here to prevent overwriting Admin changes
       }
     } catch (error) {
-      console.error('Failed to load initial products:', error);
-      // Fallback to local only if fetch fails
-      const saved = localStorage.getItem('archemist_beans');
-      if (saved) {
-        const all = JSON.parse(saved);
-        setBeans(all.filter(p => p.recommended === true));
-      }
+      console.error('RecommendedBeans: Failed to load products:', error);
     }
   };
 

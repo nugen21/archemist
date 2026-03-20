@@ -75,44 +75,28 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   const loadProducts = async () => {
+    const localSaved = localStorage.getItem('archemist_beans');
+    
+    // Priority 1: Local Storage
+    if (localSaved) {
+      setProducts(JSON.parse(localSaved).filter(p => p.visible !== false));
+      return;
+    }
+
+    // Priority 2: Server Fallback
     try {
       const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
-        
-        // Merge with local visibility state if exists
-        const localSaved = localStorage.getItem('archemist_beans');
-        let finalData = serverData;
-        
-        if (localSaved) {
-          const localData = JSON.parse(localSaved);
-          const mergedServerData = serverData.map(serverItem => {
-            const localItem = localData.find(l => String(l.id) === String(serverItem.id));
-            if (localItem) {
-              return { 
-                ...serverItem, 
-                visible: localItem.visible !== undefined ? localItem.visible : serverItem.visible,
-                recommended: localItem.recommended !== undefined ? localItem.recommended : serverItem.recommended
-              };
-            }
-            return serverItem;
-          });
-
-          const serverIds = new Set(serverData.map(s => String(s.id)));
-          const localOnlyData = localData.filter(l => !serverIds.has(String(l.id)));
-          
-          finalData = [...mergedServerData, ...localOnlyData];
+        setProducts(serverData.filter(p => p.visible !== false));
+        try {
+          localStorage.setItem('archemist_beans', JSON.stringify(serverData));
+        } catch (e) {
+          console.warn('Storage quota exceeded:', e);
         }
-        
-        setProducts(finalData.filter(p => p.visible !== false));
-        // REMOVED: localStorage.setItem here to prevent overwriting Admin changes
       }
     } catch (error) {
-      console.error('Failed to load initial products:', error);
-      const saved = localStorage.getItem('archemist_beans');
-      if (saved) {
-        setProducts(JSON.parse(saved).filter(p => p.visible !== false));
-      }
+      console.error('Products: Server load failed:', error);
     }
   };
 

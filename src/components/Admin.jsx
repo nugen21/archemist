@@ -15,18 +15,26 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: ''
   });
-  const loadBeans = async () => {
+  const loadBeans = async (forceFetch = false) => {
+    const localSaved = localStorage.getItem('archemist_beans');
+    
+    // Local-Authoritative: If we have local data, use it and don't fetch unless forced
+    if (localSaved && !forceFetch) {
+      console.log('Admin: Loading from Local Storage (Authoritative)');
+      setBeans(JSON.parse(localSaved));
+      return;
+    }
+
+    console.log('Admin: Fetching from Server (Seed/Sync)');
     try {
       const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
-        const localSaved = localStorage.getItem('archemist_beans');
         let finalData = serverData;
         
         if (localSaved) {
           const localData = JSON.parse(localSaved);
           const mergedServerData = serverData.map(serverItem => {
-            // Use String comparison for ID to be type-safe
             const localItem = localData.find(l => String(l.id) === String(serverItem.id));
             if (localItem) {
               return { 
@@ -40,17 +48,19 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
           const serverIds = new Set(serverData.map(s => String(s.id)));
           const localOnlyData = localData.filter(l => !serverIds.has(String(l.id)));
-          
           finalData = [...mergedServerData, ...localOnlyData];
         }
         
         setBeans(finalData);
-        localStorage.setItem('archemist_beans', JSON.stringify(finalData));
+        try {
+          localStorage.setItem('archemist_beans', JSON.stringify(finalData));
+        } catch (e) {
+          console.warn('Storage quota exceeded, could not save to localStorage:', e);
+        }
       }
     } catch (error) {
-      console.error('Failed to load initial products:', error);
-      const saved = localStorage.getItem('archemist_beans');
-      if (saved) setBeans(JSON.parse(saved));
+      console.error('Admin: Failed to load products:', error);
+      if (localSaved) setBeans(JSON.parse(localSaved));
     }
   };
 
@@ -156,10 +166,17 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   };
 
   const handleToggleRecommended = (id) => {
+    console.log('Admin: Toggling Recommendation for ID:', id);
     const updated = beans.map(bean => 
-      bean.id === id ? { ...bean, recommended: !bean.recommended } : bean
+      String(bean.id) === String(id) ? { ...bean, recommended: !bean.recommended } : bean
     );
-    localStorage.setItem('archemist_beans', JSON.stringify(updated));
+    try {
+      localStorage.setItem('archemist_beans', JSON.stringify(updated));
+      console.log('Admin: Saved updated state to localStorage');
+    } catch (e) {
+      console.error('Admin: Failed to save to localStorage:', e);
+      alert('저장 공간이 부족하여 설정을 저장할 수 없습니다.');
+    }
     setBeans(updated);
     window.dispatchEvent(new Event('beansUpdated'));
   };
