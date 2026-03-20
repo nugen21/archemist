@@ -14,6 +14,19 @@ function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash);
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem('archemist_is_admin') === 'true');
 
+  // Diagnostic Patch to catch clobbering writes
+  useEffect(() => {
+    const originalSetItem = localStorage.setItem;
+    localStorage.setItem = function(key, value) {
+      if (key === 'archemist_beans') {
+        process.env.NODE_ENV !== 'production' && console.log('DEBUG: localStorage.setItem for archemist_beans');
+        // Actually log to production console for this final debug run
+        console.count(`WRITES to archemist_beans:`);
+      }
+      originalSetItem.apply(this, arguments);
+    };
+  }, []);
+
   useEffect(() => {
     const onHashChange = () => setCurrentPath(window.location.hash);
     window.addEventListener('hashchange', onHashChange);
