@@ -58,9 +58,9 @@ export default function RecommendedBeans({ isAdmin }) {
           <p className="text-copper font-serif italic text-lg sm:text-xl">아케미스트의 이달의 추천 원두 라인업</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="flex overflow-x-auto gap-8 pb-16 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 group/scroll relative">
           {visibleBeans.map((bean) => (
-            <div key={bean.id} className="bg-[#0b0c0b] border border-copper/20 rounded-3xl p-6 sm:p-8 flex flex-col hover:border-copper/50 transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.5)] group h-full relative">
+            <div key={bean.id} className="bg-[#0b0c0b] border border-copper/20 rounded-3xl p-6 sm:p-8 flex flex-col hover:border-copper/50 transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.5)] group h-full relative w-[300px] sm:w-[420px] shrink-0 snap-start">
               
               {/* Admin Hide Action */}
               {isAdmin && (
@@ -81,7 +81,7 @@ export default function RecommendedBeans({ isAdmin }) {
 
               <div className="mb-6 border-b border-gray-800 pb-5">
                 <p className="text-[10px] text-copper tracking-widest uppercase mb-1">{bean.country} {bean.region && `| ${bean.region}`}</p>
-                <h3 className="text-2xl font-bold text-gray-100 mb-2 leading-tight group-hover:text-copper transition-colors">{bean.name}</h3>
+                <h3 className="text-2xl font-bold text-gray-100 mb-2 leading-tight group-hover:text-copper transition-colors h-16 line-clamp-2">{bean.name}</h3>
                 <p className="text-sm text-gray-400 font-serif italic">{bean.variety} / {bean.process}</p>
               </div>
 
@@ -106,7 +106,7 @@ export default function RecommendedBeans({ isAdmin }) {
 
               <div className="mb-6 bg-black/40 p-4 rounded-xl border border-gray-800/80 shadow-inner">
                 <p className="text-[10px] text-copper uppercase tracking-widest mb-2 font-bold">Cup Notes</p>
-                <p className="text-sm text-gray-200 font-medium leading-relaxed">{bean.cupNotes || '다채롭고 우아한 플레이버'}</p>
+                <p className="text-sm text-gray-200 font-medium leading-relaxed line-clamp-2">{bean.cupNotes || '다채롭고 우아한 플레이버'}</p>
               </div>
               
               <div className="mt-auto pt-6">
