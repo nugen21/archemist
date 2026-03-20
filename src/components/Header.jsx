@@ -21,7 +21,7 @@ export default function Header() {
       if (!window.naver) return;
 
       const naverLogin = new window.naver.LoginWithNaverId({
-        clientId: "YOUR_NAVER_CLIENT_ID", // TODO: Replace with real Client ID
+        clientId: "alHUBeHRQr9g_lfpvkrU", 
         callbackUrl: window.location.origin + "/",
         isPopup: false,
         loginButton: { color: "green", type: 2, height: 40 }
