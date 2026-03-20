@@ -88,35 +88,43 @@ export default function Products() {
     return () => window.removeEventListener('beansUpdated', loadProducts);
   }, []);
 
+  const beans = products.filter(p => p.category === 'bean' || !p.category);
   const dripBags = products.filter(p => p.category === 'dripbag');
   const coldBrew = products.filter(p => p.category === 'coldbrew');
   const beverages = products.filter(p => p.category === 'beverage');
 
-  // Fallback demo items if empty (Optional: remove this in production if you want empty sections to be hidden)
+  // Fallback demo items if empty
   const showFallback = products.length === 0;
 
   return (
     <div className="bg-[#111211]">
       <ProductSection 
+        title="Single Origin Beans" 
+        category="bean" 
+        emoji="🫘" 
+        items={beans} 
+        bgColor="bg-[#111211]" 
+      />
+      <ProductSection 
         title="Dripbag Selection" 
         category="dripbag" 
         emoji="📦" 
         items={dripBags} 
-        bgColor="bg-gradient-to-b from-[#181a19] to-[#111211]" 
+        bgColor="bg-gradient-to-b from-[#111211] to-[#181a19]" 
       />
       <ProductSection 
         title="Coldbrew Essence" 
         category="coldbrew" 
         emoji="🧪" 
         items={coldBrew} 
-        bgColor="bg-[#111211]" 
+        bgColor="bg-[#181a19]" 
       />
       <ProductSection 
         title="Cafe Beverages" 
         category="beverage" 
         emoji="☕" 
         items={beverages} 
-        bgColor="bg-gradient-to-t from-[#0b0c0b] to-[#111211]" 
+        bgColor="bg-gradient-to-t from-[#0b0c0b] to-[#181a19]" 
       />
       
       {showFallback && (
