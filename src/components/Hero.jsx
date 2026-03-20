@@ -8,16 +8,16 @@ export default function Hero({ id }) {
       </div>
 
       <div className="max-w-5xl text-center z-10 relative mt-16 break-keep w-full flex flex-col items-center">
-        <div className="flex flex-col items-center justify-center mb-10 sm:mb-14 max-w-xs sm:max-w-md md:max-w-[24rem]">
+        <div className="flex flex-col items-center justify-center mb-10 sm:mb-14 max-w-xs sm:max-w-md md:max-w-[28rem]">
           <img
-            src="/logo-icon.png"
+            src="/logo-alchemist.png"
             alt="Archemist Roasters Icon"
-            className="w-full h-auto object-contain drop-shadow-[0_0_40px_rgba(161,118,76,0.3)] mb-3 sm:mb-5"
+            className="w-full h-auto object-contain drop-shadow-[0_0_60px_rgba(161,118,76,0.4)] mb-3 sm:mb-5"
           />
           <img
-            src="/logo-text.png"
+            src="/logo-text-new.png"
             alt="Archemist Roasters"
-            className="w-full h-auto object-contain px-2 -ml-3"
+            className="w-full h-auto object-contain px-4"
           />
         </div>
 

@@ -78,9 +78,9 @@ export default function Header() {
         {/* Logo & Mobile Login Button */}
         <div className="w-full sm:w-auto flex justify-between items-center py-3 sm:py-5 shrink-0">
           <div className="flex items-center">
-            <a href="#home" className="flex items-center gap-2">
-              <img src="/logo-icon.png" alt="Logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
-              <span className="text-white font-serif font-bold tracking-[0.2em] text-[10px] sm:text-sm hidden sm:inline-block">ARCHEMIST</span>
+            <a href="#home" className="flex items-center gap-2 sm:gap-3">
+              <img src="/logo-alchemist.png" alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+              <img src="/logo-text-new.png" alt="ARCHEMIST" className="h-4 sm:h-5 object-contain" />
             </a>
           </div>
 
