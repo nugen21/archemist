@@ -29,13 +29,13 @@ export default function Brand() {
         {/* Space Gallery */}
         <div className="mb-24">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-100 mb-12">로스터리 공간</h2>
-          <div className="w-full relative group overflow-hidden rounded shadow-2xl">
+          <div className="w-full relative group overflow-hidden rounded-2xl shadow-2xl bg-gray-900/50 min-h-[300px] flex items-center justify-center">
             <img 
-              src="/roasting_room_new.png" 
+              src="/roastery_new_bright.png" 
               alt="아키미스트 로스팅 룸" 
-              className="w-full h-auto md:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-auto md:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700 relative z-10"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-colors duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
           </div>
         </div>
 
