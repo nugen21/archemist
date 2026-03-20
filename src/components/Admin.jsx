@@ -18,7 +18,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
   const loadBeans = async () => {
     try {
-      const response = await fetch('/products.json');
+      const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
         const localSaved = localStorage.getItem('archemist_beans');
@@ -180,6 +180,12 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
   useEffect(() => {
     if (isAdmin) loadBeans();
+    window.addEventListener('beansUpdated', loadBeans);
+    window.addEventListener('storage', loadBeans);
+    return () => {
+      window.removeEventListener('beansUpdated', loadBeans);
+      window.removeEventListener('storage', loadBeans);
+    };
   }, [isAdmin]);
 
   const filteredBeans = categoryFilter === 'all' 

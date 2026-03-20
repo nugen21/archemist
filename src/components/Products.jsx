@@ -76,7 +76,7 @@ export default function Products() {
 
   const loadProducts = async () => {
     try {
-      const response = await fetch('/products.json');
+      const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
         
