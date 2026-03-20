@@ -56,9 +56,7 @@ function App() {
         <Header />
         <Hero id="home" />
         <RecommendedBeans isAdmin={isAdmin} />
-        <Products category="dripbag" />
-        <Products category="coldbrew" />
-        <Products category="beverage" />
+        <Products />
         <Events />
         <Brand />
         <Contact />
