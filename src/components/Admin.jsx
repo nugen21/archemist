@@ -26,7 +26,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         
         if (localSaved) {
           const localData = JSON.parse(localSaved);
-          finalData = serverData.map(serverItem => {
+          const mergedServerData = serverData.map(serverItem => {
             const localItem = localData.find(l => l.id === serverItem.id);
             if (localItem) {
               return { 
@@ -37,6 +37,11 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
             }
             return serverItem;
           });
+
+          const serverIds = new Set(serverData.map(s => s.id));
+          const localOnlyData = localData.filter(l => !serverIds.has(l.id));
+          
+          finalData = [...mergedServerData, ...localOnlyData];
         }
         
         setBeans(finalData);

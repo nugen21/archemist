@@ -86,7 +86,7 @@ export default function Products() {
         
         if (localSaved) {
           const localData = JSON.parse(localSaved);
-          finalData = serverData.map(serverItem => {
+          const mergedServerData = serverData.map(serverItem => {
             const localItem = localData.find(l => l.id === serverItem.id);
             if (localItem) {
               return { 
@@ -97,6 +97,11 @@ export default function Products() {
             }
             return serverItem;
           });
+
+          const serverIds = new Set(serverData.map(s => s.id));
+          const localOnlyData = localData.filter(l => !serverIds.has(l.id));
+          
+          finalData = [...mergedServerData, ...localOnlyData];
         }
         
         setProducts(finalData.filter(p => p.visible !== false));
