@@ -78,7 +78,14 @@ export default function Products() {
           const localData = JSON.parse(localSaved);
           finalData = serverData.map(serverItem => {
             const localItem = localData.find(l => l.id === serverItem.id);
-            return localItem ? { ...serverItem, visible: localItem.visible } : serverItem;
+            if (localItem) {
+              return { 
+                ...serverItem, 
+                visible: localItem.visible !== undefined ? localItem.visible : serverItem.visible,
+                recommended: localItem.recommended !== undefined ? localItem.recommended : serverItem.recommended
+              };
+            }
+            return serverItem;
           });
         }
         

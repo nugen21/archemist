@@ -17,20 +17,35 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   });
 
   const loadBeans = async () => {
-    const saved = localStorage.getItem('archemist_beans');
-    if (saved) {
-      setBeans(JSON.parse(saved));
-    } else {
-      try {
-        const response = await fetch('/products.json');
-        if (response.ok) {
-          const data = await response.json();
-          setBeans(data);
-          localStorage.setItem('archemist_beans', JSON.stringify(data));
+    try {
+      const response = await fetch('/products.json');
+      if (response.ok) {
+        const serverData = await response.json();
+        const localSaved = localStorage.getItem('archemist_beans');
+        let finalData = serverData;
+        
+        if (localSaved) {
+          const localData = JSON.parse(localSaved);
+          finalData = serverData.map(serverItem => {
+            const localItem = localData.find(l => l.id === serverItem.id);
+            if (localItem) {
+              return { 
+                ...serverItem, 
+                visible: localItem.visible !== undefined ? localItem.visible : serverItem.visible,
+                recommended: localItem.recommended !== undefined ? localItem.recommended : serverItem.recommended
+              };
+            }
+            return serverItem;
+          });
         }
-      } catch (error) {
-        console.error('Failed to load initial products:', error);
+        
+        setBeans(finalData);
+        localStorage.setItem('archemist_beans', JSON.stringify(finalData));
       }
+    } catch (error) {
+      console.error('Failed to load initial products:', error);
+      const saved = localStorage.getItem('archemist_beans');
+      if (saved) setBeans(JSON.parse(saved));
     }
   };
 
