@@ -6,14 +6,16 @@ export default function RecommendedBeans({ isAdmin }) {
   const loadBeans = async () => {
     const saved = localStorage.getItem('archemist_beans');
     if (saved) {
-      setBeans(JSON.parse(saved));
+      const all = JSON.parse(saved);
+      setBeans(all.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true));
     } else {
       try {
         const response = await fetch('/products.json');
         if (response.ok) {
           const data = await response.json();
-          setBeans(data);
-          localStorage.setItem('archemist_beans', JSON.stringify(data));
+          const filteredData = data.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true);
+          setBeans(filteredData);
+          localStorage.setItem('archemist_beans', JSON.stringify(filteredData));
         }
       } catch (error) {
         console.error('Failed to load initial products:', error);

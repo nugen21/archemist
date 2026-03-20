@@ -13,7 +13,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
     roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-    image: ''
+    recommended: false, image: ''
   });
 
   const loadBeans = async () => {
@@ -60,8 +60,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
   const handleImageUpload = (e) => {
@@ -109,7 +109,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
       roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-      image: ''
+      recommended: false, image: ''
     });
     setEditingId(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -128,6 +128,15 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const handleToggleVisibility = (id) => {
     const updated = beans.map(bean => 
       bean.id === id ? { ...bean, visible: !bean.visible } : bean
+    );
+    localStorage.setItem('archemist_beans', JSON.stringify(updated));
+    setBeans(updated);
+    window.dispatchEvent(new Event('beansUpdated'));
+  };
+
+  const handleToggleRecommended = (id) => {
+    const updated = beans.map(bean => 
+      bean.id === id ? { ...bean, recommended: !bean.recommended } : bean
     );
     localStorage.setItem('archemist_beans', JSON.stringify(updated));
     setBeans(updated);
@@ -280,6 +289,18 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <InputField label="가격" name="price" value={formData.price} onChange={handleChange} placeholder="예: 18,000원" />
               </div>
 
+              <div className="flex items-center space-x-3 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
+                <input 
+                  type="checkbox" 
+                  id="recommended-check"
+                  name="recommended" 
+                  checked={formData.recommended} 
+                  onChange={handleChange}
+                  className="w-5 h-5 rounded border-gray-800 bg-black text-copper focus:ring-copper cursor-pointer"
+                />
+                <label htmlFor="recommended-check" className="text-xs font-bold text-gray-400 cursor-pointer uppercase tracking-widest">추천 상품으로 설정</label>
+              </div>
+
               {formData.category === 'bean' && (
                 <>
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
@@ -359,11 +380,17 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                         </td>
                         <td className="py-5 px-4">
                           <p className="font-bold text-gray-200 group-hover:text-copper transition-colors">{item.name}</p>
-                          <span className={`text-[10px] ${item.visible ? 'text-gray-500' : 'text-red-900'}`}>{item.visible ? 'Published' : 'Hidden'}</span>
+                          <div className="flex gap-2 items-center mt-1">
+                            <span className={`text-[10px] ${item.visible ? 'text-gray-500' : 'text-red-900'}`}>{item.visible ? 'Published' : 'Hidden'}</span>
+                            {item.recommended && (
+                              <span className="bg-copper/10 text-copper text-[8px] font-bold px-1.5 py-0.5 rounded border border-copper/20 uppercase tracking-tighter">Recommended</span>
+                            )}
+                          </div>
                         </td>
                         <td className="py-5 px-4 text-xs text-gray-400">{item.price || item.roastDate || '-'}</td>
                         <td className="py-5 px-4 text-right">
                           <div className="flex justify-end gap-2">
+                            <button onClick={() => handleToggleRecommended(item.id)} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.recommended ? 'bg-copper text-black' : 'bg-gray-800 text-gray-500 hover:text-white'}`}>{item.recommended ? '추천됨' : '추천하기'}</button>
                             <button onClick={() => handleToggleVisibility(item.id)} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.visible ? 'bg-gray-800 text-gray-400 hover:text-white' : 'bg-copper/40 text-white hover:bg-copper'}`}>{item.visible ? '숨기기' : '보이기'}</button>
                             <button onClick={() => handleEdit(item)} className="bg-blue-900/20 text-blue-400 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all">수정</button>
                             <button onClick={() => handleDelete(item.id)} className="text-gray-600 hover:text-red-500 px-2 py-1.5 transition-colors"><TrashIcon /></button>
