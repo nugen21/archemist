@@ -28,7 +28,7 @@ export default function RecommendedBeans({ isAdmin }) {
           });
         }
         
-        setBeans(finalData.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true));
+        setBeans(finalData.filter(p => p.recommended === true));
         // Sync back to local to keep things in order
         localStorage.setItem('archemist_beans', JSON.stringify(finalData));
       }
@@ -38,7 +38,7 @@ export default function RecommendedBeans({ isAdmin }) {
       const saved = localStorage.getItem('archemist_beans');
       if (saved) {
         const all = JSON.parse(saved);
-        setBeans(all.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true));
+        setBeans(all.filter(p => p.recommended === true));
       }
     }
   };
@@ -67,7 +67,7 @@ export default function RecommendedBeans({ isAdmin }) {
     }
   };
 
-  const visibleBeans = beans.filter(bean => bean.visible !== false && (bean.category === 'bean' || !bean.category));
+  const visibleBeans = beans.filter(bean => bean.visible !== false);
   if (visibleBeans.length === 0) return null; 
 
   return (
@@ -82,9 +82,9 @@ export default function RecommendedBeans({ isAdmin }) {
              <p className="text-[10px] text-copper tracking-[0.4em] uppercase font-bold">The Alchemist's Selection</p>
           </div>
           <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white mb-4 tracking-tight italic drop-shadow-[0_0_20px_rgba(161,118,76,0.2)]">
-            RECOMMENDED BEANS
+            ALCHEMIST'S CHOICE
           </h2>
-          <p className="text-gray-400 font-serif italic text-lg sm:text-xl max-w-2xl mx-auto">아키미스트가 엄선한 이달의 최상위 원두 큐레이션</p>
+          <p className="text-gray-400 font-serif italic text-lg sm:text-xl max-w-2xl mx-auto">아키미스트가 엄선한 이달의 최상위 셀렉션</p>
         </div>
 
         <div className="flex overflow-x-auto gap-8 pb-16 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 group/scroll relative">

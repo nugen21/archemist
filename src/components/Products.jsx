@@ -34,12 +34,22 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
                 </div>
               )}
               <div className="flex justify-between items-start mb-6">
-                <div className="bg-copper/10 p-4 rounded-2xl group-hover:bg-copper/20 transition-colors">
+                <div className="bg-copper/10 p-4 rounded-2xl group-hover:bg-copper/20 transition-colors relative">
                   <span className="text-3xl opacity-80 group-hover:opacity-100 transition-opacity">{emoji}</span>
+                  {product.recommended && (
+                    <span className="absolute -top-2 -right-2 bg-copper text-[#111] text-[8px] font-black px-1.5 py-0.5 rounded-full shadow-lg border border-[#111]/20 animate-pulse">
+                      BEST
+                    </span>
+                  )}
                 </div>
-                <span className="text-copper font-bold tracking-widest text-sm drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
-                  {product.price || "Contact"}
-                </span>
+                <div className="flex flex-col items-end">
+                  <span className="text-copper font-bold tracking-widest text-sm drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
+                    {product.price || "Contact"}
+                  </span>
+                  {product.recommended && (
+                    <span className="text-[9px] text-copper/60 font-bold tracking-widest uppercase mt-1">Recommended Choice</span>
+                  )}
+                </div>
               </div>
               <h3 className="text-2xl font-serif font-bold text-white mb-4 group-hover:text-copper transition-colors h-16 line-clamp-2">
                 {product.name}
