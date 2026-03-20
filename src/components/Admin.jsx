@@ -18,14 +18,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const loadBeans = async (forceFetch = false) => {
     const localSaved = localStorage.getItem('archemist_beans');
     
-    // Local-Authoritative: If we have local data, use it and don't fetch unless forced
+    // Priority 1: If we have local state and aren't forcing a fetch, trust it.
     if (localSaved && !forceFetch) {
-      console.log('Admin: Loading from Local Storage (Authoritative)');
-      setBeans(JSON.parse(localSaved));
+      const data = JSON.parse(localSaved);
+      if (beans.length === 0 || forceFetch) setBeans(data);
       return;
     }
 
-    console.log('Admin: Fetching from Server (Seed/Sync)');
     try {
       const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
@@ -49,14 +48,12 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
           const serverIds = new Set(serverData.map(s => String(s.id)));
           const localOnlyData = localData.filter(l => !serverIds.has(String(l.id)));
           finalData = [...mergedServerData, ...localOnlyData];
+        } else {
+          // First time initialization: seed localStorage with server data
+          localStorage.setItem('archemist_beans', JSON.stringify(serverData));
         }
         
         setBeans(finalData);
-        try {
-          localStorage.setItem('archemist_beans', JSON.stringify(finalData));
-        } catch (e) {
-          console.warn('Storage quota exceeded, could not save to localStorage:', e);
-        }
       }
     } catch (error) {
       console.error('Admin: Failed to load products:', error);
@@ -197,11 +194,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
   useEffect(() => {
     if (isAdmin) loadBeans();
-    // Only listen to storage for cross-tab sync, not our own event to avoid loops
-    window.addEventListener('storage', loadBeans);
-    return () => {
-      window.removeEventListener('storage', loadBeans);
-    };
+    // Removed storage listener to prevent recursive loops in Admin
   }, [isAdmin]);
 
   const filteredBeans = categoryFilter === 'all' 
