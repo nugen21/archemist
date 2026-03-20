@@ -65,19 +65,31 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   const loadProducts = async () => {
-    const saved = localStorage.getItem('archemist_beans');
-    if (saved) {
-      setProducts(JSON.parse(saved).filter(p => p.visible !== false));
-    } else {
-      try {
-        const response = await fetch('/products.json');
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data.filter(p => p.visible !== false));
-          localStorage.setItem('archemist_beans', JSON.stringify(data));
+    try {
+      const response = await fetch('/products.json');
+      if (response.ok) {
+        const serverData = await response.json();
+        
+        // Merge with local visibility state if exists
+        const localSaved = localStorage.getItem('archemist_beans');
+        let finalData = serverData;
+        
+        if (localSaved) {
+          const localData = JSON.parse(localSaved);
+          finalData = serverData.map(serverItem => {
+            const localItem = localData.find(l => l.id === serverItem.id);
+            return localItem ? { ...serverItem, visible: localItem.visible } : serverItem;
+          });
         }
-      } catch (error) {
-        console.error('Failed to load initial products:', error);
+        
+        setProducts(finalData.filter(p => p.visible !== false));
+        localStorage.setItem('archemist_beans', JSON.stringify(finalData));
+      }
+    } catch (error) {
+      console.error('Failed to load initial products:', error);
+      const saved = localStorage.getItem('archemist_beans');
+      if (saved) {
+        setProducts(JSON.parse(saved).filter(p => p.visible !== false));
       }
     }
   };

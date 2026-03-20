@@ -4,21 +4,34 @@ export default function RecommendedBeans({ isAdmin }) {
   const [beans, setBeans] = useState([]);
 
   const loadBeans = async () => {
-    const saved = localStorage.getItem('archemist_beans');
-    if (saved) {
-      const all = JSON.parse(saved);
-      setBeans(all.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true));
-    } else {
-      try {
-        const response = await fetch('/products.json');
-        if (response.ok) {
-          const data = await response.json();
-          const filteredData = data.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true);
-          setBeans(filteredData);
-          localStorage.setItem('archemist_beans', JSON.stringify(filteredData));
+    try {
+      const response = await fetch('/products.json');
+      if (response.ok) {
+        const serverData = await response.json();
+        
+        // Merge with local visibility state if exists
+        const localSaved = localStorage.getItem('archemist_beans');
+        let finalData = serverData;
+        
+        if (localSaved) {
+          const localData = JSON.parse(localSaved);
+          finalData = serverData.map(serverItem => {
+            const localItem = localData.find(l => l.id === serverItem.id);
+            return localItem ? { ...serverItem, visible: localItem.visible } : serverItem;
+          });
         }
-      } catch (error) {
-        console.error('Failed to load initial products:', error);
+        
+        setBeans(finalData.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true));
+        // Sync back to local to keep things in order
+        localStorage.setItem('archemist_beans', JSON.stringify(finalData));
+      }
+    } catch (error) {
+      console.error('Failed to load initial products:', error);
+      // Fallback to local only if fetch fails
+      const saved = localStorage.getItem('archemist_beans');
+      if (saved) {
+        const all = JSON.parse(saved);
+        setBeans(all.filter(p => (p.category === 'bean' || !p.category) && p.recommended === true));
       }
     }
   };
