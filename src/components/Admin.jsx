@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const Admin = ({ isAdmin, setAdminAuth }) => {
-  const [activeTab, setActiveTab] = useState('register'); // 'register' or 'manage'
+  const [activeTab, setActiveTab] = useState('manage'); // 'register' or 'manage'
   const [editingId, setEditingId] = useState(null);
   const [loginForm, setLoginForm] = useState({ id: '', password: '' });
   const [beans, setBeans] = useState([]);
@@ -100,7 +100,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     resetForm();
     setBeans(updated);
     window.dispatchEvent(new Event('beansUpdated'));
-    setActiveTab('manage');
+    setActiveTab('manage'); // Automatically go back to list
   };
 
   const resetForm = () => {
@@ -123,6 +123,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     });
     setEditingId(bean.id);
     setActiveTab('register');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleToggleVisibility = (id) => {
@@ -197,25 +198,36 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         <div className="absolute top-0 right-0 w-64 h-64 bg-copper/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-copper/20 pb-4 relative z-10 gap-4">
-           <div>
+           <div className="flex items-center gap-4">
              <h2 className="text-3xl font-bold text-copper font-serif tracking-wide">관리자 패널</h2>
-             <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Product & Content Management</p>
+             <span className="bg-copper/10 text-copper text-[10px] font-bold px-3 py-1 rounded-full border border-copper/20 uppercase tracking-widest">
+               {activeTab === 'manage' ? 'List Management' : 'Product Registration'}
+             </span>
            </div>
            
-           <div className="flex bg-[#0b0c0b] p-1 rounded-xl border border-gray-800">
-             <button onClick={() => { setActiveTab('register'); resetForm(); }} className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${activeTab === 'register' && !editingId ? 'bg-copper text-[#111]' : 'text-gray-400 hover:text-gray-200'}`}>신규 등록</button>
-             <button onClick={() => { setActiveTab('manage'); resetForm(); }} className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${activeTab === 'manage' ? 'bg-copper text-[#111]' : 'text-gray-400 hover:text-gray-200'}`}>목록 관리 ({beans.length})</button>
-           </div>
-
            <div className="flex gap-4 items-center">
              <button onClick={handleExportJSON} className="text-[9px] px-3 py-1 border border-gray-700 rounded-lg hover:border-copper transition-colors font-bold uppercase tracking-widest text-gray-400 hover:text-copper" title="현재 데이터를 JSON으로 내보냅니다">Export JSON</button>
              <button onClick={() => setAdminAuth(false)} className="text-xs tracking-widest text-gray-500 hover:text-red-400 uppercase font-bold transition">Logout</button>
-             <button onClick={handleReturn} className="text-xs tracking-widest text-gray-400 hover:text-copper uppercase font-bold transition">← 홈으로</button>
+             <button onClick={handleReturn} className="text-xs tracking-widest text-gray-400 hover:text-copper uppercase font-bold transition flex items-center gap-2"><span>←</span> 홈으로</button>
            </div>
         </div>
         
         {activeTab === 'register' ? (
-          <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+          <div className="space-y-8 relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex justify-between items-center bg-[#0b0c0b] p-6 rounded-2xl border border-gray-800">
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-lg bg-copper/20 flex items-center justify-center text-copper">＋</span>
+                <h3 className="text-lg font-bold text-white tracking-tight">{editingId ? '상품 정보 수정' : '신규 상품 등록'}</h3>
+              </div>
+              <button 
+                onClick={() => { resetForm(); setActiveTab('manage'); }}
+                className="text-[10px] font-bold text-gray-500 hover:text-white uppercase tracking-widest transition-colors flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5"
+              >
+                ✕ 취소하고 목록으로 돌아가기
+              </button>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-8">
             <div className="bg-[#0b0c0b] p-6 rounded-2xl border border-gray-800">
               <label className="block text-xs font-bold text-copper tracking-widest uppercase mb-4">카테고리 선택 (Category)</label>
               <div className="flex flex-wrap gap-2">
@@ -343,15 +355,26 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               {editingId ? '정보 수정 완료' : '품목 등록 완료'}
             </button>
           </form>
-        ) : (
+        </div>
+      ) : (
           <div className="relative z-10">
-            <div className="flex gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                {['all', 'bean', 'dripbag', 'coldbrew', 'beverage'].map(cat => (
                  <button key={cat} onClick={() => setCategoryFilter(cat)} className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all ${categoryFilter === cat ? 'bg-copper text-black border-copper' : 'bg-[#0b0c0b] text-gray-500 border-gray-800'}`}>
                    {cat === 'all' ? 'All Items' : cat}
                  </button>
                ))}
             </div>
+
+            <button 
+              onClick={() => { resetForm(); setActiveTab('register'); }}
+              className="flex items-center justify-center gap-3 bg-gradient-to-r from-copper to-yellow-600 text-[#111] px-8 py-3.5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.3)] transition-all duration-300 font-bold tracking-widest text-xs uppercase"
+            >
+              <span className="text-lg">＋</span>
+              신규 상품 등록하기
+            </button>
+          </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
