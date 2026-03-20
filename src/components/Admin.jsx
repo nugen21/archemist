@@ -15,7 +15,6 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: ''
   });
-
   const loadBeans = async () => {
     try {
       const response = await fetch(`/products.json?t=${Date.now()}`);
@@ -27,7 +26,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         if (localSaved) {
           const localData = JSON.parse(localSaved);
           const mergedServerData = serverData.map(serverItem => {
-            const localItem = localData.find(l => l.id === serverItem.id);
+            // Use String comparison for ID to be type-safe
+            const localItem = localData.find(l => String(l.id) === String(serverItem.id));
             if (localItem) {
               return { 
                 ...serverItem, 
@@ -38,8 +38,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
             return serverItem;
           });
 
-          const serverIds = new Set(serverData.map(s => s.id));
-          const localOnlyData = localData.filter(l => !serverIds.has(l.id));
+          const serverIds = new Set(serverData.map(s => String(s.id)));
+          const localOnlyData = localData.filter(l => !serverIds.has(String(l.id)));
           
           finalData = [...mergedServerData, ...localOnlyData];
         }
@@ -180,10 +180,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
   useEffect(() => {
     if (isAdmin) loadBeans();
-    window.addEventListener('beansUpdated', loadBeans);
+    // Only listen to storage for cross-tab sync, not our own event to avoid loops
     window.addEventListener('storage', loadBeans);
     return () => {
-      window.removeEventListener('beansUpdated', loadBeans);
       window.removeEventListener('storage', loadBeans);
     };
   }, [isAdmin]);

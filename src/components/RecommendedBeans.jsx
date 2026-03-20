@@ -17,7 +17,7 @@ export default function RecommendedBeans({ isAdmin }) {
           const localData = JSON.parse(localSaved);
           // 1. Update existing server items with local visibility/recommendation overrides
           const mergedServerData = serverData.map(serverItem => {
-            const localItem = localData.find(l => l.id === serverItem.id);
+            const localItem = localData.find(l => String(l.id) === String(serverItem.id));
             if (localItem) {
               return { 
                 ...serverItem, 
@@ -29,8 +29,8 @@ export default function RecommendedBeans({ isAdmin }) {
           });
 
           // 2. Identify and preserve local-only items (newly registered products)
-          const serverIds = new Set(serverData.map(s => s.id));
-          const localOnlyData = localData.filter(l => !serverIds.has(l.id));
+          const serverIds = new Set(serverData.map(s => String(s.id)));
+          const localOnlyData = localData.filter(l => !serverIds.has(String(l.id)));
           
           finalData = [...mergedServerData, ...localOnlyData];
         }
