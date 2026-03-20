@@ -105,7 +105,7 @@ export default function Products() {
         }
         
         setProducts(finalData.filter(p => p.visible !== false));
-        localStorage.setItem('archemist_beans', JSON.stringify(finalData));
+        // REMOVED: localStorage.setItem here to prevent overwriting Admin changes
       }
     } catch (error) {
       console.error('Failed to load initial products:', error);

@@ -36,8 +36,7 @@ export default function RecommendedBeans({ isAdmin }) {
         }
         
         setBeans(finalData.filter(p => p.recommended === true));
-        // Sync back to local to keep things in order
-        localStorage.setItem('archemist_beans', JSON.stringify(finalData));
+        // REMOVED: localStorage.setItem here to prevent overwriting Admin changes
       }
     } catch (error) {
       console.error('Failed to load initial products:', error);
