@@ -5,7 +5,6 @@ export default function Header() {
   const [user, setUser] = useState(null);
   
   const navLinks = [
-    { name: '홈', href: '#home' },
     { name: '브랜드', href: '#brand' },
     { name: '이벤트', href: '#events' },
     { name: '원두', href: '#recommended' },
