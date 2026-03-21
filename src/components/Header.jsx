@@ -89,7 +89,7 @@ export default function Header() {
             {user ? (
                <div className="flex items-center gap-2">
                  <img src={user.profile_image} className="w-6 h-6 rounded-full border border-copper/30" alt="profile" />
-                 <button onClick={handle로그아웃} className="text-[9px] font-bold text-gray-500 uppercase tracking-widest">로그아웃</button>
+                 <button onClick={handleLogout} className="text-[9px] font-bold text-gray-500 uppercase tracking-widest">로그아웃</button>
                </div>
             ) : (
               <button onClick={handleLoginClick} className="bg-[#03C75A] text-white p-1.5 rounded-sm shadow-lg shadow-[#03C75A]/10">
@@ -124,7 +124,7 @@ export default function Header() {
                  <img src={user.profile_image} alt="profile" className="w-6 h-6 rounded-full border border-copper/40" />
                  <span className="text-[11px] font-bold text-gray-300 tracking-tighter">{user.name}님</span>
                </div>
-               <button onClick={handle로그아웃} className="text-[10px] font-bold text-gray-500 hover:text-red-400 transition-colors uppercase tracking-widest">로그아웃</button>
+               <button onClick={handleLogout} className="text-[10px] font-bold text-gray-500 hover:text-red-400 transition-colors uppercase tracking-widest">로그아웃</button>
             </div>
           ) : (
             <button 

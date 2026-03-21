@@ -41,6 +41,7 @@ function App() {
 
   const handleBack = () => {
     window.location.hash = '';
+    setCurrentPath('');
   };
 
   // Route: Admin
