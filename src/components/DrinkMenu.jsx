@@ -53,62 +53,62 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </header>
 
-      <main className="flex-grow flex items-center justify-center py-32 px-4 sm:px-8 md:px-12 relative z-10">
-        <div className="w-full max-w-5xl mx-auto flex flex-col gap-20">
+      <main className="flex-grow flex items-center justify-center py-20 px-4 sm:px-8 md:px-12 relative z-10">
+        <div className="w-full max-w-4xl mx-auto flex flex-col gap-14">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-10 relative">
-                <div className="flex items-baseline gap-4 mb-2">
-                  <h2 className="text-2xl sm:text-3xl font-serif font-black tracking-tighter text-white/50">
+              <div className="flex flex-col mb-8 relative">
+                <div className="flex items-baseline gap-3 mb-1.5">
+                  <h2 className="text-xl sm:text-2xl font-serif font-black tracking-tighter text-white/50">
                     ESPRESSO
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.3em] text-[9px] uppercase">에스프레소</span>
+                  <span className="text-copper/40 font-bold tracking-[0.3em] text-[8px] uppercase">에스프레소</span>
                 </div>
                 <div className="h-[1px] w-full bg-gradient-to-r from-copper/20 via-transparent to-transparent"></div>
               </div>
 
-              <div className="grid gap-6">
+              <div className="grid gap-4">
                 {espressoMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
-                    className={`group relative p-8 sm:p-10 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-700 ${item.isSpecial ? 'shadow-[0_0_40px_rgba(161,118,76,0.1)]' : ''}`}
+                    className={`group relative p-6 sm:p-7 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 ${item.isSpecial ? 'shadow-[0_0_30px_rgba(161,118,76,0.08)]' : ''}`}
                   >
                     {item.isSpecial && (
                       <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
                     )}
                     
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-4">
-                      <div className="flex items-baseline gap-5">
-                        <h3 className="text-4xl sm:text-5xl font-bold group-hover:text-copper transition-colors tracking-tight">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-3">
+                      <div className="flex items-baseline gap-4">
+                        <h3 className="text-2xl sm:text-3xl font-bold group-hover:text-copper transition-colors tracking-tight">
                           {item.name}
                         </h3>
                         {item.englishName && (
-                          <span className="text-xs text-gray-600 font-bold tracking-[0.1em] uppercase opacity-40 hidden lg:inline">
+                          <span className="text-[10px] text-gray-600 font-bold tracking-[0.1em] uppercase opacity-40 hidden lg:inline">
                             {item.englishName}
                           </span>
                         )}
                       </div>
                       
-                      <div className="flex items-baseline gap-5 shrink-0">
-                        {item.size && <span className="text-xs text-gray-600 font-bold uppercase tracking-widest">{item.size}</span>}
-                        <span className="text-5xl sm:text-6xl font-serif font-black text-copper drop-shadow-[0_0_20px_rgba(161,118,76,0.2)]">
+                      <div className="flex items-baseline gap-4 shrink-0">
+                        {item.size && <span className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">{item.size}</span>}
+                        <span className="text-3xl sm:text-4xl font-serif font-black text-copper">
                           {item.price}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-8">
-                      <div className="h-[1px] w-16 bg-copper/30 hidden sm:block"></div>
-                      <p className="text-gray-400 text-lg sm:text-xl font-medium leading-relaxed break-keep">
+                    <div className="flex items-center gap-6">
+                      <div className="h-[1px] w-12 bg-copper/30 hidden sm:block"></div>
+                      <p className="text-gray-400 text-base sm:text-lg font-medium leading-relaxed break-keep">
                         {item.cupNotes || item.description || ''}
                       </p>
                     </div>
 
                     {item.isSpecial && (
-                      <div className="absolute top-8 right-10 flex gap-2">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/80 animate-ping"></div>
-                        <div className="w-2.5 h-2.5 rounded-full bg-blue-400/80 animate-ping delay-300"></div>
+                      <div className="absolute top-6 right-8 flex gap-2">
+                        <div className="w-2 h-2 rounded-full bg-red-400/80 animate-pulse"></div>
+                        <div className="w-2 h-2 rounded-full bg-blue-400/80 animate-pulse delay-300"></div>
                       </div>
                     )}
                   </div>
@@ -120,16 +120,16 @@ export default function DrinkMenu({ onBack }) {
           {/* Hand Drip Menu Section */}
           {handDripMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-10 relative">
-                <div className="flex items-baseline justify-between gap-4 mb-2">
-                  <div className="flex items-baseline gap-4">
-                    <h2 className="text-2xl sm:text-3xl font-serif font-black tracking-tighter text-white/50">
+              <div className="flex flex-col mb-8 relative">
+                <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                  <div className="flex items-baseline gap-3">
+                    <h2 className="text-xl sm:text-2xl font-serif font-black tracking-tighter text-white/50">
                       HAND DRIP
                     </h2>
-                    <span className="text-copper/40 font-bold tracking-[0.3em] text-[9px] uppercase">핸드 드립</span>
+                    <span className="text-copper/40 font-bold tracking-[0.3em] text-[8px] uppercase">핸드 드립</span>
                   </div>
-                  <div className="bg-copper/5 border border-copper/10 px-4 py-1 rounded-full hidden sm:block">
-                    <span className="text-[10px] font-black text-copper/60 uppercase tracking-[0.15em]">
+                  <div className="bg-copper/5 border border-copper/10 px-3 py-1 rounded-full hidden sm:block">
+                    <span className="text-[9px] font-black text-copper/60 uppercase tracking-[0.12em]">
                       March 2026 Selection
                     </span>
                   </div>
@@ -137,28 +137,28 @@ export default function DrinkMenu({ onBack }) {
                 <div className="h-[1px] w-full bg-gradient-to-r from-copper/20 via-transparent to-transparent"></div>
               </div>
 
-              <div className="grid gap-6">
+              <div className="grid gap-4">
                 {handDripMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
-                    className="group relative p-8 sm:p-10 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-700"
+                    className="group relative p-6 sm:p-7 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500"
                   >
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div className="flex-grow">
-                        <h3 className="text-4xl sm:text-5xl font-bold mb-5 group-hover:text-copper transition-colors tracking-tight uppercase leading-tight">
+                        <h3 className="text-2xl sm:text-3xl font-bold mb-3 group-hover:text-copper transition-colors tracking-tight uppercase leading-tight">
                           {item.name}
                         </h3>
-                        <div className="flex items-center gap-6">
-                           <div className="h-6 w-[1px] bg-copper/30"></div>
-                           <p className="text-gray-400 text-base sm:text-lg font-bold tracking-wide leading-relaxed break-keep uppercase">
+                        <div className="flex items-center gap-4">
+                           <div className="h-4 w-[1px] bg-copper/30"></div>
+                           <p className="text-gray-400 text-sm sm:text-base font-bold tracking-wide leading-relaxed break-keep uppercase">
                              {item.cupNotes || item.description || ''}
                            </p>
                         </div>
                       </div>
                       
-                      <div className="flex items-baseline gap-8 shrink-0">
-                        <div className="h-16 w-[1px] border-l border-dotted border-white/20 hidden md:block"></div>
-                        <span className="text-6xl sm:text-7xl font-serif font-black text-copper drop-shadow-[0_0_30px_rgba(161,118,76,0.2)]">
+                      <div className="flex items-baseline gap-6 shrink-0">
+                        <div className="h-10 w-[1px] border-l border-dotted border-white/20 hidden md:block"></div>
+                        <span className="text-4xl sm:text-5xl font-serif font-black text-copper">
                           {item.price}
                         </span>
                       </div>
