@@ -53,7 +53,7 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </header>
 
-      <main className="pt-20 pb-10 px-6 sm:px-12 max-w-6xl mx-auto relative z-10 flex flex-col gap-10 lg:grid lg:grid-cols-2 lg:items-start lg:gap-16">
+      <main className="pt-16 pb-6 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto relative z-10 flex flex-col gap-8 md:grid md:grid-cols-2 md:items-start md:gap-12">
         {/* Espresso Menu Section */}
         {espressoMenu.length > 0 && (
           <section>
@@ -171,9 +171,6 @@ export default function DrinkMenu({ onBack }) {
           Archemist Roasters
         </p>
       </footer>
-    </div>
-  );
-}
     </div>
   );
 }
