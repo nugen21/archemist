@@ -58,7 +58,7 @@
     "size": "16oz",
     "cupNotes": "자체 블랜드 원두를 사용하는 고소해 매일 마실 수 있는 아메리카노",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/beverage.jpg"
   },
   {
@@ -71,7 +71,7 @@
     "size": "16oz",
     "cupNotes": "카페인 걱정 없는 커피를 원한다면 탁월한 선택",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/beverage.jpg"
   },
   {
@@ -84,7 +84,7 @@
     "size": "16oz",
     "cupNotes": "자체 블랜드 원두, 우유로 제조한 든든한 커피 우유",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/beverage.jpg"
   },
   {
@@ -97,7 +97,7 @@
     "size": "16oz",
     "cupNotes": "자체 블랜드 원두, 우유, 붉은/파란 큐라소 얼음으로 제조한 달달한 아이스 라떼",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "isSpecial": true,
     "image": "/images/icons/beverage.jpg"
   },
@@ -109,7 +109,7 @@
     "price": "15.0",
     "cupNotes": "PANAMA HACIENDA LA ESMERALDA PRIVATE COLLECTION GEISHA(W) EL VELO",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/bean.jpg"
   },
   {
@@ -120,7 +120,7 @@
     "price": "20.0",
     "cupNotes": "PANAMA HACIENDA LONG BOARD GEISHA(W)",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/bean.jpg"
   },
   {
@@ -131,7 +131,7 @@
     "price": "15.0",
     "cupNotes": "PANAMA HACIENDA LA ESMERALDA PRIVATE COLLECTION GEISHA(W) EL VELO",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/bean.jpg"
   }
 ]
