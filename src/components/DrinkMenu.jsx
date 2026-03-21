@@ -39,21 +39,22 @@ export default function DrinkMenu({ onBack }) {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-copper/5 rounded-full blur-[120px] animate-pulse delay-1000"></div>
       </div>
 
-      <header className="fixed top-0 w-full z-50 bg-[#0b0c0b]/40 backdrop-blur-xl border-b border-white/5 py-3 px-6 flex justify-between items-center transition-all duration-500 hover:bg-[#0b0c0b]/60">
+      <header className="fixed top-0 w-full z-50 bg-[#0b0c0b]/40 backdrop-blur-xl border-b border-white/5 py-4 px-6 flex justify-between items-center transition-all duration-500 hover:bg-[#0b0c0b]/60">
         <button 
           onClick={onBack}
-          className="group flex items-center gap-2 text-gray-500 hover:text-copper transition-all font-bold uppercase tracking-[0.2em] text-[9px]"
+          className="group flex items-center gap-2 text-gray-500 hover:text-copper transition-all font-bold uppercase tracking-[0.2em] text-[10px]"
         >
-          <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
           <span>HOME</span>
         </button>
-        <div className="flex items-center gap-3 scale-75 sm:scale-90 flex-grow justify-center -ml-16">
-          <img src="/logo-alchemist.png" alt="Logo" className="w-6 h-6 object-contain" />
-          <span className="text-lg font-serif font-black tracking-[-0.05em] text-white">ARCHEMIST</span>
+        <div className="flex items-center gap-4 flex-grow justify-center -ml-20">
+          <img src="/logo-alchemist.png" alt="Logo" className="w-10 h-10 object-contain" />
+          <span className="text-3xl sm:text-4xl font-serif font-black tracking-[-0.02em] text-white">ARCHEMIST ROASTERS</span>
         </div>
       </header>
 
-      <main className="flex-grow flex items-center justify-center py-20 px-4 sm:px-8 md:px-12 relative z-10">
+      <main className="flex-grow flex items-center justify-center py-24 px-4 sm:px-8 md:px-12 relative z-10">
+        {/* ... existing main content ... */}
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-8 md:grid md:grid-cols-2 md:items-start md:gap-12 lg:gap-16">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
@@ -167,10 +168,10 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </main>
 
-      <footer className="py-10 px-6 flex flex-col items-center gap-3 relative z-10">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-copper/20 to-transparent"></div>
-        <p className="text-gray-600 text-[8px] tracking-[0.6em] uppercase font-black text-center opacity-30">
-          Archemist Roasters
+      <footer className="py-12 px-6 flex flex-col items-center gap-4 relative z-10">
+        <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-copper/30 to-transparent"></div>
+        <p className="text-gray-500 text-[16px] tracking-[0.5em] uppercase font-black text-center opacity-40">
+          ARCHEMIST ROASTERS
         </p>
       </footer>
     </div>
