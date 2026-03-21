@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Brand() {
   return (
-    <section id="brand" className="py-3 px-4 sm:px-8 bg-matte-black border-t border-gray-800">
+    <section id="brand" className="py-3 px-4 sm:px-8 scroll-mt-24 bg-matte-black border-t border-gray-800">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 items-center mb-6">
           <div className="lg:w-1/2">

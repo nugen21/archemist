@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Events() {
   return (
-    <section id="events" className="py-3 px-4 sm:px-8 bg-[#111211] border-t border-gray-800">
+    <section id="events" className="py-3 px-4 sm:px-8 scroll-mt-24 bg-[#111211] border-t border-gray-800">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-4">
           <h2 className="text-sm font-bold tracking-widest text-copper uppercase mb-3 text-center w-full block">Special Experience</h2>

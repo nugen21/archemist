@@ -59,7 +59,7 @@ export default function RecommendedBeans({ isAdmin }) {
   if (visibleBeans.length === 0) return null; 
 
   return (
-    <section id="recommended" className="py-2 px-4 sm:px-8 bg-gradient-to-br from-[#1a110a] via-[#111211] to-[#0b0c0b] relative border-y border-copper/10 overflow-hidden">
+    <section id="recommended" className="py-2 px-4 sm:px-8 scroll-mt-24 bg-gradient-to-br from-[#1a110a] via-[#111211] to-[#0b0c0b] relative border-y border-copper/10 overflow-hidden">
       {/* Decorative Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-copper/40 to-transparent"></div>
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-copper/5 blur-[120px] rounded-full"></div>

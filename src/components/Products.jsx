@@ -4,7 +4,7 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
   if (items.length === 0) return null;
 
   return (
-    <section id={category} className={`py-2 sm:py-4 relative overflow-hidden ${bgColor}`}>
+    <section id={category} className={`py-2 sm:py-4 scroll-mt-24 relative overflow-hidden ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 gap-6">
           <div className="max-w-2xl">
