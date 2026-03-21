@@ -404,7 +404,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className={formData.category === 'beverage' ? "md:col-span-2 lg:col-span-2" : "md:col-span-2 lg:col-span-3"}>
-                <InputField label="상품명 (Name)" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
+                <InputField label="아키미스트 라인업" name="name" value={formData.name} onChange={handleChange} required placeholder="예: [BRAND] Ethiopia" />
               </div>
 
               {formData.category === 'beverage' && (
@@ -517,11 +517,11 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
               <div className="lg:col-span-3">
                  <InputField 
-                    label={formData.category === 'bean' ? "컵 노트" : "상품 설명 요약"} 
+                    label={formData.category === 'bean' ? "컵 노트" : "상품명"} 
                     name="cupNotes" 
                     value={formData.cupNotes} 
                     onChange={handleChange} 
-                    placeholder="예: 쟈스민, 복숭아, 베르가못, 꿀" 
+                    placeholder="예: 카페 라떼" 
                   />
               </div>
 
