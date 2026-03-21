@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ProductSection = ({ title, category, emoji, items, bgColor }) => {
+const ProductSection = ({ title, category, icon, items, bgColor }) => {
   if (items.length === 0) return null;
 
   return (
@@ -9,7 +9,9 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 gap-6">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-3xl">{emoji}</span>
+              <div className="w-10 h-10 rounded-full bg-copper/10 flex items-center justify-center p-1.5 border border-copper/20 shadow-[0_0_15px_rgba(161,118,76,0.2)]">
+                <img src={icon} alt={category} className="w-full h-full object-contain" />
+              </div>
               <span className="text-copper font-serif font-bold tracking-[0.3em] text-xs uppercase">{category.toUpperCase()} COLLECTION</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight italic">
@@ -34,10 +36,10 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
                 </div>
               )}
               <div className="flex justify-between items-start mb-4">
-                <div className="bg-copper/10 p-4 rounded-2xl group-hover:bg-copper/20 transition-colors relative">
-                  <span className="text-3xl opacity-80 group-hover:opacity-100 transition-opacity">{emoji}</span>
+                <div className="bg-copper/5 p-3 rounded-2xl group-hover:bg-copper/15 transition-all duration-500 relative border border-white/5 group-hover:border-copper/20 w-16 h-16 flex items-center justify-center">
+                  <img src={icon} alt={category} className="w-10 h-10 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_10px_rgba(161,118,76,0.3)]" />
                   {product.recommended && (
-                    <span className="absolute -top-2 -right-2 bg-copper text-[#111] text-[8px] font-black px-1.5 py-0.5 rounded-full shadow-lg border border-[#111]/20 animate-pulse">
+                    <span className="absolute -top-1 -right-1 bg-copper text-[#111] text-[7px] font-black px-1.5 py-0.5 rounded-full shadow-lg border border-[#111]/20 animate-pulse z-20">
                       BEST
                     </span>
                   )}
