@@ -10,7 +10,7 @@ export default function Header() {
     { name: '원두', href: '#recommended' },
     { name: '드립팩', href: '#dripbag' },
     { name: '콜드브루', href: '#coldbrew' },
-    { name: '매장음료', href: '#beverage' },
+    { name: '매장음료', href: '#menu' },
     { name: '문의', href: '#contact', bold: true },
   ];
 

@@ -7,6 +7,7 @@ import Brand from './components/Brand';
 import Contact from './components/Contact';
 import BeanDetail from './components/BeanDetail';
 import Admin from './components/Admin';
+import DrinkMenu from './components/DrinkMenu';
 import EmailSubscription from './components/EmailSubscription';
 import Products from './components/Products';
 
@@ -45,6 +46,11 @@ function App() {
   // Route: Admin
   if (currentPath === '#admin') {
     return <Admin isAdmin={isAdmin} setAdminAuth={handleAdminAuth} />;
+  }
+
+  // Route: Drink Menu
+  if (currentPath === '#menu') {
+    return <DrinkMenu onBack={handleBack} />;
   }
 
   // Route: Subscribe
