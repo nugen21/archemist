@@ -7,10 +7,10 @@ export default function Header() {
   const navLinks = [
     { name: '브랜드', href: '#brand' },
     { name: '이벤트', href: '#events' },
-    { name: '원두', href: '#recommended' },
-    { name: '드립팩', href: '#dripbag' },
-    { name: '콜드브루', href: '#coldbrew' },
-    { name: '매장음료', href: '#beverage' },
+    { name: '원두', href: '#recommended', icon: '/images/icons/bean.png' },
+    { name: '드립팩', href: '#dripbag', icon: '/images/icons/dripbag.png' },
+    { name: '콜드브루', href: '#coldbrew', icon: '/images/icons/coldbrew.png' },
+    { name: '매장음료', href: '#beverage', icon: '/images/icons/beverage.png' },
     { name: '문의', href: '#contact', bold: true },
   ];
 
@@ -108,9 +108,12 @@ export default function Header() {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`whitespace-nowrap px-3 sm:px-0 py-1 text-[11px] sm:text-[12px] transition-all duration-300 tracking-widest uppercase font-bold sm:font-medium ${link.bold ? 'text-copper sm:text-gray-200 sm:border-l sm:border-gray-800 sm:pl-8 sm:ml-2' : 'text-gray-500 sm:text-gray-400 hover:text-copper'}`}
+                className={`whitespace-nowrap px-3 sm:px-0 py-1 text-[11px] sm:text-[12px] transition-all duration-300 tracking-widest uppercase font-bold sm:font-medium flex items-center gap-2 ${link.bold ? 'text-copper sm:text-gray-200 sm:border-l sm:border-gray-800 sm:pl-8 sm:ml-2' : 'text-gray-500 sm:text-gray-400 hover:text-copper'}`}
               >
-                {link.name}
+                {link.icon && (
+                  <img src={link.icon} alt="" className="w-3.5 h-3.5 object-contain brightness-75 group-hover:brightness-100 transition-all" />
+                )}
+                <span>{link.name}</span>
               </a>
             ))}
           </div>
