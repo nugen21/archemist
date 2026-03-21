@@ -93,22 +93,29 @@ export default function RecommendedBeans({ isAdmin }) {
                 </button>
               )}
 
-              {bean.image && (
-                <div className="relative w-full h-52 mb-4 rounded-2xl overflow-hidden transition-all duration-700">
+              <div className="relative w-full h-52 mb-4 rounded-2xl overflow-hidden transition-all duration-700 bg-[#111211]/50 border border-white/5">
+                {bean.image ? (
                   <img src={bean.image} alt={bean.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111211] to-transparent"></div>
-                  <div className="absolute top-0 left-0 w-full h-full border-2 border-copper/10 group-hover:border-copper/0 transition-all pointer-events-none rounded-2xl"></div>
-                  
-                  {/* Category Icon Badge */}
-                  <div className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-copper/30 p-2 z-10 shadow-xl group-hover:border-copper transition-colors">
-                    <img 
-                      src={bean.category === 'dripbag' ? '/images/icons/dripbag.png' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.png' : bean.category === 'beverage' ? '/images/icons/beverage.png' : '/images/icons/bean.png'} 
-                      alt="icon" 
-                      className="w-full h-full object-contain"
-                    />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center p-12">
+                     <img 
+                        src={bean.category === 'dripbag' ? '/images/icons/dripbag.png' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.png' : bean.category === 'beverage' ? '/images/icons/beverage.png' : '/images/icons/bean.png'} 
+                        className="w-full h-full object-contain opacity-10 grayscale" 
+                        alt="icon fallback"
+                     />
                   </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111211] to-transparent"></div>
+                
+                {/* Category Icon Badge */}
+                <div className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-copper/30 p-2 z-10 shadow-xl group-hover:border-copper transition-colors">
+                  <img 
+                    src={bean.category === 'dripbag' ? '/images/icons/dripbag.png' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.png' : bean.category === 'beverage' ? '/images/icons/beverage.png' : '/images/icons/bean.png'} 
+                    alt="icon" 
+                    className="w-full h-full object-contain"
+                  />
                 </div>
-              )}
+              </div>
 
               <div className="mb-4 border-b border-copper/10 pb-4">
                 <div className="flex justify-between items-start mb-1">

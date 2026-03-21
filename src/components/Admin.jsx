@@ -522,7 +522,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                            {item.image ? (
                              <img src={item.image} alt={item.name} className="w-10 h-10 rounded-lg object-cover border border-gray-800" />
                            ) : (
-                             <div className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center text-xs text-gray-600">No Img</div>
+                             <div className="w-10 h-10 rounded-lg bg-[#0b0c0b] flex items-center justify-center p-1.5 border border-gray-800">
+                               <img 
+                                 src={`/images/icons/${item.category || 'bean'}.png`} 
+                                 className="w-full h-full object-contain opacity-50" 
+                                 alt="category"
+                               />
+                             </div>
                            )}
                            <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-tighter border ${item.category === 'bean' ? 'bg-copper/20 text-copper border-copper/30' : item.category === 'dripbag' ? 'bg-blue-900/20 text-blue-400 border-blue-900/30' : 'bg-green-900/20 text-green-400 border-green-900/30'}`}>
                              {item.category || 'bean'}
