@@ -93,7 +93,7 @@ export default function RecommendedBeans({ isAdmin }) {
               )}
 
               {bean.image && (
-                <div className="relative w-full h-52 mb-4 rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div className="relative w-full h-52 mb-4 rounded-2xl overflow-hidden transition-all duration-700">
                   <img src={bean.image} alt={bean.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111211] to-transparent"></div>
                   <div className="absolute top-0 left-0 w-full h-full border-2 border-copper/10 group-hover:border-copper/0 transition-all pointer-events-none rounded-2xl"></div>
