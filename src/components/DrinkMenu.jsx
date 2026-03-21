@@ -32,7 +32,7 @@ export default function DrinkMenu({ onBack }) {
   const handDripMenu = drinks.filter(d => d.subCategory === 'handdrip');
 
   return (
-    <div className="min-h-screen bg-[#0b0c0b] text-white font-sans selection:bg-copper relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#0b0c0b] text-white font-sans selection:bg-copper relative overflow-x-hidden flex flex-col">
       {/* Background Subtle Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-copper/10 rounded-full blur-[120px] animate-pulse"></div>
@@ -53,124 +53,124 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </header>
 
-      <main className="pt-16 pb-6 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto relative z-10 flex flex-col gap-8 md:grid md:grid-cols-2 md:items-start md:gap-12">
-        {/* Espresso Menu Section */}
-        {espressoMenu.length > 0 && (
-          <section>
-            <div className="flex flex-col mb-6 relative">
-              <div className="flex items-baseline gap-3 mb-1">
-                <h2 className="text-4xl sm:text-5xl font-serif font-black tracking-tighter text-white/90">
-                  ESPRESSO
-                </h2>
-                <span className="text-copper font-bold tracking-[0.3em] text-[8px] uppercase">에스프레소</span>
-              </div>
-              <div className="h-[1px] w-full bg-gradient-to-r from-copper/40 via-copper/10 to-transparent"></div>
-            </div>
-
-            <div className="grid gap-3">
-              {espressoMenu.map((item, idx) => (
-                <div 
-                  key={item.id || idx} 
-                  className={`group relative p-4 sm:p-5 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 ${item.isSpecial ? 'shadow-[0_0_20px_rgba(161,118,76,0.05)]' : ''}`}
-                >
-                  {item.isSpecial && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
-                  )}
-                  
-                  <div className="flex justify-between items-baseline gap-3 mb-1.5">
-                    <div className="flex items-baseline gap-2 overflow-hidden">
-                      <h3 className="text-lg font-bold group-hover:text-copper transition-colors tracking-tight truncate">
-                        {item.name}
-                      </h3>
-                      {item.englishName && (
-                        <span className="text-[9px] text-gray-600 font-bold tracking-[0.05em] uppercase opacity-60 truncate hidden sm:inline">
-                          {item.englishName}
-                        </span>
-                      )}
-                    </div>
-                    
-                    <div className="flex items-baseline gap-2 shrink-0">
-                      {item.size && <span className="text-[9px] text-gray-600 font-bold uppercase tracking-widest">{item.size}</span>}
-                      <span className="text-xl font-serif font-black text-copper">
-                        {item.price}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <p className="text-gray-500 text-[11px] font-medium leading-tight break-keep max-w-[95%]">
-                      {item.cupNotes || item.description || ''}
-                    </p>
-                  </div>
-
-                  {item.isSpecial && (
-                    <div className="absolute top-3 right-4 flex gap-1">
-                      <div className="w-1 h-1 rounded-full bg-red-400/60 animate-pulse"></div>
-                      <div className="w-1 h-1 rounded-full bg-blue-400/60 animate-pulse delay-300"></div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Hand Drip Menu Section */}
-        {handDripMenu.length > 0 && (
-          <section>
-            <div className="flex flex-col mb-6 relative">
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-1">
-                <div className="flex items-baseline gap-3">
+      <main className="flex-grow flex items-center justify-center py-20 px-4 sm:px-8 md:px-12 relative z-10">
+        <div className="w-full max-w-7xl mx-auto flex flex-col gap-8 md:grid md:grid-cols-2 md:items-start md:gap-12 lg:gap-16">
+          {/* Espresso Menu Section */}
+          {espressoMenu.length > 0 && (
+            <section>
+              <div className="flex flex-col mb-6 relative">
+                <div className="flex items-baseline gap-3 mb-1">
                   <h2 className="text-4xl sm:text-5xl font-serif font-black tracking-tighter text-white/90">
-                    HAND DRIP
+                    ESPRESSO
                   </h2>
-                  <span className="text-copper font-bold tracking-[0.3em] text-[8px] uppercase">핸드 드립</span>
+                  <span className="text-copper font-bold tracking-[0.3em] text-[8px] uppercase">에스프레소</span>
                 </div>
-                <div className="bg-copper/5 border border-copper/10 px-2 py-0.5 rounded-full hidden sm:block">
-                  <span className="text-[8px] font-black text-copper/60 uppercase tracking-[0.1em]">
-                    March 2026 Selection
-                  </span>
-                </div>
+                <div className="h-[1px] w-full bg-gradient-to-r from-copper/40 via-copper/10 to-transparent"></div>
               </div>
-              <div className="h-[1px] w-full bg-gradient-to-r from-copper/40 via-copper/10 to-transparent"></div>
-            </div>
 
-            <div className="grid gap-3">
-              {handDripMenu.map((item, idx) => (
-                <div 
-                  key={item.id || idx} 
-                  className="group relative p-4 sm:p-5 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500"
-                >
-                  <div className="flex flex-col gap-2">
-                    <div className="flex justify-between items-baseline gap-3">
-                      <h3 className="text-lg font-bold group-hover:text-copper transition-colors tracking-tight uppercase leading-tight truncate">
-                        {item.name}
-                      </h3>
-                      <span className="text-2xl font-serif font-black text-copper">
-                        {item.price}
-                      </span>
-                    </div>
+              <div className="grid gap-3">
+                {espressoMenu.map((item, idx) => (
+                  <div 
+                    key={item.id || idx} 
+                    className={`group relative p-4 sm:p-5 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 ${item.isSpecial ? 'shadow-[0_0_20px_rgba(161,118,76,0.05)]' : ''}`}
+                  >
+                    {item.isSpecial && (
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
+                    )}
                     
-                    <div className="flex items-center gap-3">
-                       <div className="h-3 w-[1px] bg-copper/20"></div>
-                       <p className="text-gray-500 text-[10px] font-bold tracking-tight leading-normal break-keep uppercase max-w-[90%]">
-                         {item.cupNotes || item.description || ''}
-                       </p>
+                    <div className="flex justify-between items-baseline gap-3 mb-1.5">
+                      <div className="flex items-baseline gap-2 overflow-hidden">
+                        <h3 className="text-lg font-bold group-hover:text-copper transition-colors tracking-tight truncate">
+                          {item.name}
+                        </h3>
+                        {item.englishName && (
+                          <span className="text-[9px] text-gray-600 font-bold tracking-[0.05em] uppercase opacity-60 truncate hidden sm:inline">
+                            {item.englishName}
+                          </span>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-baseline gap-2 shrink-0">
+                        {item.size && <span className="text-[9px] text-gray-600 font-bold uppercase tracking-widest">{item.size}</span>}
+                        <span className="text-xl font-serif font-black text-copper">
+                          {item.price}
+                        </span>
+                      </div>
                     </div>
+
+                    <div className="flex items-center gap-4">
+                      <p className="text-gray-500 text-[11px] font-medium leading-tight break-keep max-w-[95%]">
+                        {item.cupNotes || item.description || ''}
+                      </p>
+                    </div>
+
+                    {item.isSpecial && (
+                      <div className="absolute top-3 right-4 flex gap-1">
+                        <div className="w-1 h-1 rounded-full bg-red-400/60 animate-pulse"></div>
+                        <div className="w-1 h-1 rounded-full bg-blue-400/60 animate-pulse delay-300"></div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Hand Drip Menu Section */}
+          {handDripMenu.length > 0 && (
+            <section>
+              <div className="flex flex-col mb-6 relative">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-1">
+                  <div className="flex items-baseline gap-3">
+                    <h2 className="text-4xl sm:text-5xl font-serif font-black tracking-tighter text-white/90">
+                      HAND DRIP
+                    </h2>
+                    <span className="text-copper font-bold tracking-[0.3em] text-[8px] uppercase">핸드 드립</span>
+                  </div>
+                  <div className="bg-copper/5 border border-copper/10 px-2 py-0.5 rounded-full hidden sm:block">
+                    <span className="text-[8px] font-black text-copper/60 uppercase tracking-[0.1em]">
+                      March 2026 Selection
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+                <div className="h-[1px] w-full bg-gradient-to-r from-copper/40 via-copper/10 to-transparent"></div>
+              </div>
+
+              <div className="grid gap-3">
+                {handDripMenu.map((item, idx) => (
+                  <div 
+                    key={item.id || idx} 
+                    className="group relative p-4 sm:p-5 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500"
+                  >
+                    <div className="flex flex-col gap-2">
+                      <div className="flex justify-between items-baseline gap-3">
+                        <h3 className="text-lg font-bold group-hover:text-copper transition-colors tracking-tight uppercase leading-tight truncate">
+                          {item.name}
+                        </h3>
+                        <span className="text-2xl font-serif font-black text-copper">
+                          {item.price}
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center gap-3">
+                         <div className="h-3 w-[1px] bg-copper/20"></div>
+                         <p className="text-gray-500 text-[10px] font-bold tracking-tight leading-normal break-keep uppercase max-w-[90%]">
+                           {item.cupNotes || item.description || ''}
+                         </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
       </main>
 
-      <footer className="py-10 px-6 flex flex-col items-center gap-3">
+      <footer className="py-10 px-6 flex flex-col items-center gap-3 relative z-10">
         <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-copper/20 to-transparent"></div>
         <p className="text-gray-600 text-[8px] tracking-[0.6em] uppercase font-black text-center opacity-30">
           Archemist Roasters
         </p>
       </footer>
     </div>
-  );
-}
