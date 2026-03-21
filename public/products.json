@@ -33,7 +33,8 @@
     "cupNotes": "다크 초콜릿, 견과류, 묵직한 바디감",
     "visible": true,
     "recommended": true,
-    "image": "/images/dripbag.png"
+    "image": "/images/dripbag.png",
+    "roastDate": "2026.03.20"
   },
   {
     "id": 1710850000003,
