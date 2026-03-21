@@ -40,8 +40,9 @@ function App() {
   };
 
   const handleBack = () => {
-    window.location.hash = '';
-    setCurrentPath('');
+    window.location.hash = '#home';
+    setCurrentPath('#home');
+    window.scrollTo(0, 0);
   };
 
   // Route: Admin
