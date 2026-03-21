@@ -68,10 +68,10 @@ export default function RecommendedBeans({ isAdmin }) {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-4 relative">
           <div className="inline-block px-4 py-1 rounded-full border border-copper/20 bg-copper/5 mb-6">
-             <p className="text-[10px] text-copper tracking-[0.4em] uppercase font-bold">The Alchemist's Selection</p>
+             <p className="text-[10px] text-copper tracking-[0.4em] uppercase font-bold">연금술사의 셀렉션</p>
           </div>
           <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white mb-4 tracking-tight italic drop-shadow-[0_0_20px_rgba(161,118,76,0.2)]">
-            ROSTER'S CHOICE
+            로스터의 선택
           </h2>
           <p className="text-gray-400 font-serif italic text-lg sm:text-xl max-w-2xl mx-auto">아키미스트가 엄선한 이달의 최상위 셀렉션</p>
         </div>
@@ -81,7 +81,7 @@ export default function RecommendedBeans({ isAdmin }) {
             <div key={bean.id} className="bg-[#111211]/80 backdrop-blur-sm border border-copper/30 rounded-3xl p-5 flex flex-col hover:border-copper/60 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group h-full relative w-[300px] sm:w-[420px] shrink-0 snap-start mt-4 hover:-translate-y-2">
               
               <div className="absolute -top-3 left-8 px-4 py-1 bg-copper rounded-full shadow-lg z-10">
-                <p className="text-[9px] text-black font-black tracking-widest uppercase">Featured Choice</p>
+                <p className="text-[9px] text-black font-black tracking-widest uppercase">추천 상품</p>
               </div>
 
               {isAdmin && (
@@ -120,14 +120,14 @@ export default function RecommendedBeans({ isAdmin }) {
               <div className="mb-4 border-b border-copper/10 pb-4">
                 <div className="flex justify-between items-start mb-1">
                   <p className="text-[10px] text-copper/80 tracking-[0.2em] uppercase font-bold">
-                    {bean.category === 'beverage' ? 'Cafe Beverage' : bean.category === 'dripbag' ? 'Dripbag' : bean.country} 
+                    {bean.category === 'beverage' ? '매장 음료' : bean.category === 'dripbag' ? '드립백' : bean.country} 
                     {bean.region && ` | ${bean.region}`}
                   </p>
                   <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-20 line-clamp-2 italic">{bean.name}</h3>
                 <p className="text-sm text-gray-500 font-serif italic">
-                  {bean.category === 'beverage' ? 'Signature Recipe' : `${bean.variety || 'Specialty'} / ${bean.process || 'Handcrafted'}`}
+                  {bean.category === 'beverage' ? '시그니처 레시피' : `${bean.variety || '스페셜티'} / ${bean.process || '핸드크래프트'}`}
                 </p>
               </div>
 
@@ -147,7 +147,7 @@ export default function RecommendedBeans({ isAdmin }) {
                       </div>
                     )}
                     <div className="col-span-2">
-                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Roast Date</p>
+                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">로스팅 날짜</p>
                       <p className="text-gray-200 font-medium text-sm">{bean.roastDate || '-'}</p>
                     </div>
                   </>
@@ -159,7 +159,7 @@ export default function RecommendedBeans({ isAdmin }) {
               </div>
 
               <div className="mb-4 bg-copper/5 p-4 rounded-xl border border-copper/10 shadow-inner">
-                <p className="text-[10px] text-copper uppercase tracking-widest mb-2 font-bold">Cup Notes</p>
+                <p className="text-[10px] text-copper uppercase tracking-widest mb-2 font-bold">컵 노트</p>
                 <p className="text-sm text-gray-300 font-medium leading-relaxed line-clamp-2">{bean.cupNotes || '다채롭고 우아한 플레이버'}</p>
               </div>
               
@@ -168,7 +168,7 @@ export default function RecommendedBeans({ isAdmin }) {
                   href={`#bean/${bean.id}`}
                   className="w-full bg-copper text-black py-4 rounded-xl hover:bg-white transition-all duration-300 uppercase text-[11px] tracking-[0.2em] font-black flex items-center justify-center gap-2 group/btn shadow-[0_10px_20px_rgba(161,118,76,0.3)]"
                 >
-                  View Alchemy Report
+                  연금술 보고서 확인
                   <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                 </a>
               </div>

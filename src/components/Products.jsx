@@ -12,14 +12,14 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
               <div className="w-10 h-10 rounded-full bg-copper/10 flex items-center justify-center p-1.5 border border-copper/20 shadow-[0_0_15px_rgba(161,118,76,0.2)]">
                 <img src={icon} alt={category} className="w-full h-full object-contain" />
               </div>
-              <span className="text-copper font-serif font-bold tracking-[0.3em] text-xs uppercase">{category.toUpperCase()} COLLECTION</span>
+              <span className="text-copper font-serif font-bold tracking-[0.3em] text-xs uppercase">{category === 'bean' ? '싱글 오리진' : category === 'dripbag' ? '드립백' : category === 'coldbrew' ? '콜드브루' : '카페'} 컬렉션</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight italic">
               {title}
             </h2>
           </div>
           <p className="text-gray-500 text-sm tracking-widest uppercase font-bold border-b border-copper/30 pb-2">
-            Explore the Alchemy
+            아키미스트의 연구
           </p>
         </div>
 
@@ -49,7 +49,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                     {product.price || "Contact"}
                   </span>
                   {product.recommended && (
-                    <span className="text-[9px] text-copper/60 font-bold tracking-widest uppercase mt-1">Recommended Choice</span>
+                    <span className="text-[9px] text-copper/60 font-bold tracking-widest uppercase mt-1">아키미스트 추천 셀렉션</span>
                   )}
                 </div>
               </div>
@@ -59,7 +59,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
               {product.roastDate && (
                 <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-copper/40"></span>
-                  Roast Date: {product.roastDate}
+                  로스팅 날짜: {product.roastDate}
                 </p>
               )}
               <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
@@ -69,7 +69,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                 className="w-full py-4 rounded-xl border border-white/10 text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"
                 onClick={() => window.location.hash = '#contact'}
               >
-                Inquire Now
+                문의하기
               </button>
             </div>
           ))}
@@ -127,28 +127,28 @@ export default function Products() {
   return (
     <div className="bg-[#111211]">
       <ProductSection 
-        title="Single Origin Beans" 
+        title="싱글 오리진 원두" 
         category="bean" 
         icon="/images/icons/bean.jpg" 
         items={beans} 
         bgColor="bg-[#111211]" 
       />
       <ProductSection 
-        title="Dripbag Selection" 
+        title="드립백 셀렉션" 
         category="dripbag" 
         icon="/images/icons/dripbag.jpg" 
         items={dripBags} 
         bgColor="bg-gradient-to-b from-[#111211] to-[#181a19]" 
       />
       <ProductSection 
-        title="Coldbrew Essence" 
+        title="콜드브루 에센스" 
         category="coldbrew" 
         icon="/images/icons/coldbrew.jpg" 
         items={coldBrew} 
         bgColor="bg-[#181a19]" 
       />
       <ProductSection 
-        title="Cafe Beverages" 
+        title="카페 베버리지" 
         category="beverage" 
         icon="/images/icons/beverage.jpg" 
         items={beverages} 
@@ -157,8 +157,8 @@ export default function Products() {
       
       {showFallback && (
         <div className="py-20 text-center">
-          <p className="text-gray-600 text-xs tracking-[0.3em] uppercase">No Dynamic Products Registered Yet</p>
-          <a href="#admin" className="text-copper text-[10px] font-bold tracking-widest underline mt-4 inline-block">GO TO ADMIN PANEL</a>
+          <p className="text-gray-600 text-xs tracking-[0.3em] uppercase">등록된 상품이 없습니다.</p>
+          <a href="#admin" className="text-copper text-[10px] font-bold tracking-widest underline mt-4 inline-block">관리자 패널로 이동</a>
         </div>
       )}
     </div>

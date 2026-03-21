@@ -285,7 +285,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         <div className="max-w-md w-full bg-[#181a19] border border-copper/30 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-copper/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-copper font-serif tracking-widest uppercase mb-2">Admin Access</h2>
+            <h2 className="text-2xl font-bold text-copper font-serif tracking-widest uppercase mb-2">관리자 접속</h2>
             <p className="text-gray-500 text-xs tracking-wider">로스터리를 위한 관리자 인증이 필요합니다.</p>
           </div>
           <form onSubmit={handleLoginSubmit} className="space-y-6">
@@ -297,9 +297,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-2">Password</label>
               <input type="password" name="password" value={loginForm.password} onChange={handleLoginChange} required className="w-full bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-3.5 text-gray-200 focus:outline-none focus:border-copper transition-all" placeholder="••••••••" />
             </div>
-            <button type="submit" className="w-full bg-copper text-[#111] font-bold py-4 rounded-xl hover:shadow-[0_0_15px_rgba(161,118,76,0.4)] transition-all uppercase tracking-widest text-sm">Sign In</button>
+            <button type="submit" className="w-full bg-copper text-[#111] font-bold py-4 rounded-xl hover:shadow-[0_0_15px_rgba(161,118,76,0.4)] transition-all uppercase tracking-widest text-sm">로그인</button>
           </form>
-          <div className="mt-8 text-center"><button onClick={handleReturn} className="text-[10px] font-bold text-gray-600 hover:text-copper uppercase tracking-widest transition">← Back to Roastery</button></div>
+          <div className="mt-8 text-center"><button onClick={handleReturn} className="text-[10px] font-bold text-gray-600 hover:text-copper uppercase tracking-widest transition">← 로스터리 홈으로</button></div>
         </div>
       </div>
     );
@@ -324,10 +324,10 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                disabled={isPushing}
                className={`text-[10px] px-4 py-1.5 rounded-lg border transition-all font-black uppercase tracking-[0.2em] shadow-lg ${isPushing ? 'bg-gray-800 border-gray-700 text-gray-500' : 'bg-copper border-copper text-black hover:scale-105 active:scale-95'}`}
              >
-               {isPushing ? 'Pushing...' : '🚀 서버에 즉시 반영하기'}
+               {isPushing ? '서버 반영 중...' : '🚀 서버에 즉시 반영하기'}
              </button>
-             <button onClick={handleExportJSON} className="text-[9px] px-3 py-1 border border-gray-700 rounded-lg hover:border-copper transition-colors font-bold uppercase tracking-widest text-gray-400 hover:text-copper" title="현재 데이터를 JSON으로 내보냅니다">Export JSON</button>
-             <button onClick={() => setAdminAuth(false)} className="text-xs tracking-widest text-gray-500 hover:text-red-400 uppercase font-bold transition">Logout</button>
+             <button onClick={handleExportJSON} className="text-[9px] px-3 py-1 border border-gray-700 rounded-lg hover:border-copper transition-colors font-bold uppercase tracking-widest text-gray-400 hover:text-copper" title="현재 데이터를 JSON으로 내보냅니다">JSON 내보내기</button>
+             <button onClick={() => setAdminAuth(false)} className="text-xs tracking-widest text-gray-500 hover:text-red-400 uppercase font-bold transition">로그아웃</button>
              <button onClick={handleReturn} className="text-xs tracking-widest text-gray-400 hover:text-copper uppercase font-bold transition flex items-center gap-2"><span>←</span> 홈으로</button>
            </div>
         </div>
@@ -394,13 +394,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                         <div className="relative w-full h-full">
                           <img src={formData.image} alt="Preview" className="w-full h-full object-contain rounded-lg" />
                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity rounded-lg">
-                            <span className="text-white text-[10px] font-bold uppercase tracking-widest">Change Image</span>
+                            <span className="text-white text-[10px] font-bold uppercase tracking-widest">이미지 변경</span>
                           </div>
                         </div>
                       ) : (
                         <div className="text-center">
                           <UploadIcon />
-                          <p className="mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest">Click to upload image</p>
+                          <p className="mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-widest">클릭하여 이미지 업로드</p>
                         </div>
                       )}
                     </label>
@@ -411,7 +411,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                       onClick={() => setFormData(prev => ({ ...prev, image: '' }))}
                       className="mt-2 text-[10px] font-bold text-gray-600 hover:text-red-500 uppercase tracking-widest transition"
                     >
-                      Clear
+                      삭제
                     </button>
                   )}
                 </div>
@@ -506,10 +506,10 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-gray-800">
-                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Image / Type</th>
-                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Name</th>
-                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Price / Date</th>
-                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">Actions</th>
+                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">이미지 / 종류</th>
+                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">상품명</th>
+                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">가격 / 로스팅 날짜</th>
+                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">관리</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800/50">
@@ -537,9 +537,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                         <td className="py-5 px-4">
                           <p className="font-bold text-gray-200 group-hover:text-copper transition-colors">{item.name}</p>
                           <div className="flex gap-2 items-center mt-1">
-                            <span className={`text-[10px] ${item.visible ? 'text-gray-500' : 'text-red-900'}`}>{item.visible ? 'Published' : 'Hidden'}</span>
+                            <span className={`text-[10px] ${item.visible ? 'text-gray-500' : 'text-red-900'}`}>{item.visible ? '공개됨' : '숨김'}</span>
                             {item.recommended && (
-                              <span className="bg-copper/10 text-copper text-[8px] font-bold px-1.5 py-0.5 rounded border border-copper/20 uppercase tracking-tighter">Recommended</span>
+                              <span className="bg-copper/10 text-copper text-[8px] font-bold px-1.5 py-0.5 rounded border border-copper/20 uppercase tracking-tighter">추천 상품</span>
                             )}
                           </div>
                         </td>
