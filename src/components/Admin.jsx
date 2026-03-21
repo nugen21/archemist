@@ -51,15 +51,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     linkElement.click();
   };
 
-  const handlePushToGitHub = async () => {
+  const syncWithGitHub = async (latestBeans) => {
     let token = githubToken;
     if (!token) {
-      token = window.prompt('GitHub Personal Access Token을 입력해주세요 (repo 권한 필요):');
-      if (!token) return;
+      token = window.prompt('관리자 권한: GitHub Personal Access Token을 입력해주세요 (세션당 1회):');
+      if (!token) return false;
       setGithubToken(token);
     }
-
-    if (!window.confirm('현재 설정을 실시간 서버(GitHub)에 반영하시겠습니까? 약 1~2분 후 사이트에 적용됩니다.')) return;
 
     setIsPushing(true);
     const owner = 'nugen21';
@@ -67,19 +65,15 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     const path = 'public/products.json';
 
     try {
-      // 1. Get current file data to get SHA
       const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
         headers: { 'Authorization': `token ${token}` }
       });
       
-      if (!getRes.ok) throw new Error('파일 정보를 가져오지 못했습니다. 토큰 권한을 확인해주세요.');
+      if (!getRes.ok) throw new Error('GitHub 인증 실패 또는 파일 정보 로드 실패');
       const fileData = await getRes.json();
       const sha = fileData.sha;
 
-      // Update file
-      const updatedContent = JSON.stringify(beans, null, 2);
-      
-      // Standard robust way to handle UTF-8 to Base64 in browser
+      const updatedContent = JSON.stringify(latestBeans, null, 2);
       const bytes = new TextEncoder().encode(updatedContent);
       let binary = "";
       for (let i = 0; i < bytes.byteLength; i++) {
@@ -94,26 +88,31 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: 'Admin: Update products.json from Web Panel',
+          message: `Admin: Auto-Sync products.json (${new Date().toLocaleString()})`,
           content: base64Content,
           sha: sha,
           branch: 'main'
         })
       });
 
-      if (putRes.ok) {
-        alert('성공적으로 서버에 반영되었습니다! 배포 완료까지 약 1~2분 정도 소요됩니다.');
-      } else {
+      if (!putRes.ok) {
         const errorData = await putRes.json();
-        throw new Error(errorData.message || '업데이트에 실패했습니다.');
+        throw new Error(errorData.message || 'GitHub 업데이트 실패');
       }
+      console.log('Admin: Successfully auto-synced with GitHub');
+      return true;
     } catch (error) {
-      console.error('GitHub Sync Error:', error);
-      alert(`오류 발생: ${error.message}`);
-      setGithubToken(''); // Reset token on error for security/retry
+      console.error('GitHub Auto-Sync Error:', error);
+      alert(`자동 업데이트 실패: ${error.message}\n토큰을 다시 확인해주세요.`);
+      setGithubToken(''); 
+      return false;
     } finally {
       setIsPushing(false);
     }
+  };
+
+  const handlePushToGitHub = () => {
+    syncWithGitHub(beans);
   };
 
   const handleLoginChange = (e) => {
@@ -173,6 +172,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     setBeans(updated);
     window.dispatchEvent(new Event('beansUpdated'));
     setActiveTab('manage'); // Automatically go back to list
+    
+    // Auto-Sync to GitHub
+    syncWithGitHub(updated);
   };
 
   const resetForm = () => {
@@ -205,6 +207,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     localStorage.setItem('archemist_beans', JSON.stringify(updated));
     setBeans(updated);
     window.dispatchEvent(new Event('beansUpdated'));
+    
+    // Auto-Sync to GitHub
+    syncWithGitHub(updated);
   };
 
   const handleToggleRecommended = (id) => {
@@ -230,6 +235,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       localStorage.setItem('archemist_beans', JSON.stringify(updated));
       setBeans(updated);
       window.dispatchEvent(new Event('beansUpdated'));
+      
+      // Auto-Sync to GitHub
+      syncWithGitHub(updated);
     }
   };
 
