@@ -32,7 +32,7 @@
     "price": "15,000원",
     "cupNotes": "다크 초콜릿, 견과류, 묵직한 바디감",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/dripbag.png"
   },
   {
@@ -42,7 +42,7 @@
     "price": "18,000원",
     "cupNotes": "부드러운 목넘김, 와인 같은 산미, 깔끔한 끝맛",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/coldbrew.png"
   },
   {
