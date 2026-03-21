@@ -53,12 +53,12 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </header>
 
-      <main className="flex-grow flex flex-col items-center pt-40 pb-24 px-4 sm:px-8 md:px-12 relative z-10">
-        <div className="w-full max-w-4xl flex flex-col gap-14">
+      <main className="flex-grow flex flex-col items-center pt-36 pb-20 px-4 sm:px-8 md:px-12 relative z-10">
+        <div className="w-full max-w-4xl flex flex-col gap-10">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-8 relative">
+              <div className="flex flex-col mb-6 relative">
                 <div className="flex items-baseline gap-3 mb-1.5">
                   <h2 className="text-xl sm:text-2xl font-serif font-black tracking-tighter text-white/50">
                     ESPRESSO
@@ -68,11 +68,11 @@ export default function DrinkMenu({ onBack }) {
                 <div className="h-[1px] w-full bg-gradient-to-r from-copper/20 via-transparent to-transparent"></div>
               </div>
 
-              <div className="grid gap-4">
+              <div className="grid gap-3">
                 {espressoMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
-                    className={`group relative py-4 px-6 sm:px-8 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 ${item.isSpecial ? 'shadow-[0_0_30px_rgba(161,118,76,0.08)]' : ''}`}
+                    className={`group relative py-2.5 px-6 sm:px-8 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 ${item.isSpecial ? 'shadow-[0_0_20px_rgba(161,118,76,0.06)]' : ''}`}
                   >
                     {item.isSpecial && (
                       <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
@@ -120,7 +120,7 @@ export default function DrinkMenu({ onBack }) {
           {/* Hand Drip Menu Section */}
           {handDripMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-8 relative">
+              <div className="flex flex-col mb-6 relative">
                 <div className="flex items-baseline justify-between gap-4 mb-1.5">
                   <div className="flex items-baseline gap-3">
                     <h2 className="text-xl sm:text-2xl font-serif font-black tracking-tighter text-white/50">
@@ -137,11 +137,11 @@ export default function DrinkMenu({ onBack }) {
                 <div className="h-[1px] w-full bg-gradient-to-r from-copper/20 via-transparent to-transparent"></div>
               </div>
 
-              <div className="grid gap-4">
+              <div className="grid gap-3">
                 {handDripMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
-                    className="group relative py-4 px-6 sm:px-8 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500"
+                    className="group relative py-3 px-6 sm:px-8 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500"
                   >
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div className="flex-grow">
