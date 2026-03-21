@@ -60,10 +60,10 @@ export default function DrinkMenu({ onBack }) {
             <section>
               <div className="flex flex-col mb-12 relative">
                 <div className="flex items-baseline gap-6 mb-3">
-                  <h2 className="text-5xl sm:text-7xl font-serif font-black tracking-tighter text-white/50">
+                  <h2 className="text-5xl sm:text-7xl font-serif font-black tracking-normal text-white/50">
                     ESPRESSO
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.3em] text-lg sm:text-xl uppercase">에스프레소</span>
+                  <span className="text-copper/40 font-bold tracking-[0.4em] text-lg sm:text-xl uppercase">에스프레소</span>
                 </div>
                 <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
