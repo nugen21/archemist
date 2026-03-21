@@ -6,6 +6,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const [loginForm, setLoginForm] = useState({ id: '', password: '' });
   const [beans, setBeans] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const [githubToken, setGithubToken] = useState('');
+  const [isPushing, setIsPushing] = useState(false);
   const fileInputRef = useRef(null);
   
   const [formData, setFormData] = useState({
@@ -69,6 +71,62 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);
     linkElement.click();
+  };
+
+  const handlePushToGitHub = async () => {
+    let token = githubToken;
+    if (!token) {
+      token = window.prompt('GitHub Personal Access Token을 입력해주세요 (repo 권한 필요):');
+      if (!token) return;
+      setGithubToken(token);
+    }
+
+    if (!window.confirm('현재 설정을 실시간 서버(GitHub)에 반영하시겠습니까? 약 1~2분 후 사이트에 적용됩니다.')) return;
+
+    setIsPushing(true);
+    const owner = 'nugen21';
+    const repo = 'archemist';
+    const path = 'public/products.json';
+
+    try {
+      // 1. Get current file data to get SHA
+      const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      
+      if (!getRes.ok) throw new Error('파일 정보를 가져오지 못했습니다. 토큰 권한을 확인해주세요.');
+      const fileData = await getRes.json();
+      const sha = fileData.sha;
+
+      // 2. Update file
+      const updatedContent = JSON.stringify(beans, null, 2);
+      const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: 'Admin: Update products.json from Web Panel',
+          content: btoa(unescape(encodeURIComponent(updatedContent))), // Support UTF-8
+          sha: sha,
+          branch: 'main'
+        })
+      });
+
+      if (putRes.ok) {
+        alert('성공적으로 서버에 반영되었습니다! 배포 완료까지 약 1~2분 정도 소요됩니다.');
+      } else {
+        const errorData = await putRes.json();
+        throw new Error(errorData.message || '업데이트에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('GitHub Sync Error:', error);
+      alert(`오류 발생: ${error.message}`);
+      setGithubToken(''); // Reset token on error for security/retry
+    } finally {
+      setIsPushing(false);
+    }
   };
 
   const handleLoginChange = (e) => {
@@ -241,6 +299,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
            </div>
            
            <div className="flex gap-4 items-center">
+             <button 
+               onClick={handlePushToGitHub} 
+               disabled={isPushing}
+               className={`text-[10px] px-4 py-1.5 rounded-lg border transition-all font-black uppercase tracking-[0.2em] shadow-lg ${isPushing ? 'bg-gray-800 border-gray-700 text-gray-500' : 'bg-copper border-copper text-black hover:scale-105 active:scale-95'}`}
+             >
+               {isPushing ? 'Pushing...' : '🚀 서버에 즉시 반영하기'}
+             </button>
              <button onClick={handleExportJSON} className="text-[9px] px-3 py-1 border border-gray-700 rounded-lg hover:border-copper transition-colors font-bold uppercase tracking-widest text-gray-400 hover:text-copper" title="현재 데이터를 JSON으로 내보냅니다">Export JSON</button>
              <button onClick={() => setAdminAuth(false)} className="text-xs tracking-widest text-gray-500 hover:text-red-400 uppercase font-bold transition">Logout</button>
              <button onClick={handleReturn} className="text-xs tracking-widest text-gray-400 hover:text-copper uppercase font-bold transition flex items-center gap-2"><span>←</span> 홈으로</button>
