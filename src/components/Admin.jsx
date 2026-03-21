@@ -8,6 +8,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [githubToken, setGithubToken] = useState('');
   const [isPushing, setIsPushing] = useState(false);
+  const syncTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
   
   const [formData, setFormData] = useState({
@@ -52,63 +53,71 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   };
 
   const syncWithGitHub = async (latestBeans) => {
-    let token = githubToken;
-    if (!token) {
-      token = window.prompt('관리자 권한: GitHub Personal Access Token을 입력해주세요 (세션당 1회):');
-      if (!token) return false;
-      setGithubToken(token);
-    }
+    // Clear any pending sync to debounce
+    if (syncTimeoutRef.current) clearTimeout(syncTimeoutRef.current);
 
-    setIsPushing(true);
-    const owner = 'nugen21';
-    const repo = 'archemist';
-    const path = 'public/products.json';
-
-    try {
-      const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-        headers: { 'Authorization': `token ${token}` }
-      });
-      
-      if (!getRes.ok) throw new Error('GitHub 인증 실패 또는 파일 정보 로드 실패');
-      const fileData = await getRes.json();
-      const sha = fileData.sha;
-
-      const updatedContent = JSON.stringify(latestBeans, null, 2);
-      const bytes = new TextEncoder().encode(updatedContent);
-      let binary = "";
-      for (let i = 0; i < bytes.byteLength; i++) {
-        binary += String.fromCharCode(bytes[i]);
+    syncTimeoutRef.current = setTimeout(async () => {
+      let token = githubToken;
+      if (!token) {
+        token = window.prompt('관리자 권한: GitHub Personal Access Token을 입력해주세요 (세션당 1회):');
+        if (!token) return;
+        setGithubToken(token);
       }
-      const base64Content = btoa(binary);
 
-      const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `token ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: `Admin: Auto-Sync products.json (${new Date().toLocaleString()})`,
-          content: base64Content,
-          sha: sha,
-          branch: 'main'
-        })
-      });
+      setIsPushing(true);
+      const owner = 'nugen21';
+      const repo = 'archemist';
+      const path = 'public/products.json';
 
-      if (!putRes.ok) {
-        const errorData = await putRes.json();
-        throw new Error(errorData.message || 'GitHub 업데이트 실패');
+      try {
+        const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+          headers: { 'Authorization': `token ${token}`, 'Cache-Control': 'no-cache' }
+        });
+        
+        if (!getRes.ok) throw new Error('GitHub 인증 실패 또는 파일 정보 로드 실패');
+        const fileData = await getRes.json();
+        const sha = fileData.sha;
+
+        const updatedContent = JSON.stringify(latestBeans, null, 2);
+        const bytes = new TextEncoder().encode(updatedContent);
+        let binary = "";
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64Content = btoa(binary);
+
+        const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: `Admin: Auto-Sync products.json (${new Date().toLocaleString()})`,
+            content: base64Content,
+            sha: sha,
+            branch: 'main'
+          })
+        });
+
+        if (!putRes.ok) {
+          const errorData = await putRes.json();
+          if (putRes.status === 409) {
+             console.warn('Admin: SHA Conflict during sync, retrying...');
+             // Automatically retry once on conflict
+             return syncWithGitHub(latestBeans);
+          }
+          throw new Error(errorData.message || 'GitHub 업데이트 실패');
+        }
+        console.log('Admin: Successfully auto-synced with GitHub');
+      } catch (error) {
+        console.error('GitHub Auto-Sync Error:', error);
+        alert(`자동 업데이트 실패: ${error.message}\n토큰을 다시 확인해주세요.`);
+        setGithubToken(''); 
+      } finally {
+        setIsPushing(false);
       }
-      console.log('Admin: Successfully auto-synced with GitHub');
-      return true;
-    } catch (error) {
-      console.error('GitHub Auto-Sync Error:', error);
-      alert(`자동 업데이트 실패: ${error.message}\n토큰을 다시 확인해주세요.`);
-      setGithubToken(''); 
-      return false;
-    } finally {
-      setIsPushing(false);
-    }
+    }, 2000); // 2-second debounce to group rapid changes
   };
 
   const handlePushToGitHub = () => {
