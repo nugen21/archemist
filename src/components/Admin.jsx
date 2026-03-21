@@ -433,6 +433,10 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <label htmlFor="recommended-check" className="text-xs font-bold text-gray-400 cursor-pointer uppercase tracking-widest">추천 상품으로 설정</label>
               </div>
 
+              {formData.category !== 'beverage' && (
+                <InputField label="로스팅/제조 날짜" name="roastDate" value={formData.roastDate} onChange={handleChange} placeholder="예: 2024.03.21" />
+              )}
+
               {formData.category === 'bean' && (
                 <>
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
@@ -442,7 +446,6 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                   <InputField label="홀빈 배전도" name="roastWb" value={formData.roastWb} onChange={handleChange} placeholder="예: 64.6" />
                   <InputField label="분쇄 배전도" name="roastGround" value={formData.roastGround} onChange={handleChange} placeholder="예: 77.4" />
                   <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
-                  <InputField label="로스팅 날짜" name="roastDate" type="date" value={formData.roastDate} onChange={handleChange} />
                 </>
               )}
 
