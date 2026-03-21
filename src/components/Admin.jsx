@@ -376,8 +376,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <label className="block text-xs font-bold text-copper tracking-widest uppercase mb-4">메뉴 구분 (Type)</label>
                 <div className="flex gap-2">
                   {[
-                    { id: 'espresso', label: '에스프레소 메뉴', emoji: '☕' },
-                    { id: 'handdrip', label: '핸드 드립 메뉴', emoji: '💧' }
+                    { id: 'espresso', label: '에스프레소', emoji: '☕' },
+                    { id: 'handdrip', label: '핸드 드립', emoji: '💧' }
                   ].map((sub) => (
                     <button
                       key={sub.id}
