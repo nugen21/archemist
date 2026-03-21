@@ -52,7 +52,7 @@
     "price": "6,500원",
     "cupNotes": "고소한 우유와 진한 에스프레소의 조화",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/beverage.png"
   }
 ]
