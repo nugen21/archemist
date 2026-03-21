@@ -59,11 +59,11 @@ export default function BeanDetail({ bean, onBack }) {
               
               <div className="w-1/2 flex flex-col gap-5 text-right">
                 <div>
-                  <p className="text-[10px] text-gray-500 font-light tracking-wider uppercase mb-1">Agtron Scale (WB)</p>
+                  <p className="text-[10px] text-gray-500 font-light tracking-wider uppercase mb-1">Agtron Scale (홀빈)</p>
                   <p className="text-3xl text-gray-100 font-bold font-serif">{roastWb}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] text-gray-500 font-light tracking-wider uppercase mb-1">Agtron Scale (G)</p>
+                  <p className="text-[10px] text-gray-500 font-light tracking-wider uppercase mb-1">Agtron Scale (분쇄)</p>
                   <p className="text-3xl text-gray-100 font-bold font-serif">{roastGround}</p>
                 </div>
                 <div>

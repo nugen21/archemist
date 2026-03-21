@@ -121,7 +121,7 @@ export default function RecommendedBeans({ isAdmin }) {
                     {(bean.category === 'bean' || !bean.category || bean.category === 'dripbag') && (
                       <div className="col-span-2">
                         <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">
-                          {bean.category === 'dripbag' ? 'Agtron (Grind)' : 'Agtron (WB / G)'}
+                          {bean.category === 'dripbag' ? 'Agtron (분쇄)' : 'Agtron (홀빈 / 분쇄)'}
                         </p>
                         <p className="text-copper font-black text-xl font-serif">
                           {bean.category === 'dripbag' 
