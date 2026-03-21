@@ -24,7 +24,7 @@ export default function Hero({ id }) {
         <p className="text-base sm:text-lg md:text-[22px] text-gray-300 mb-4 sm:mb-6 max-w-4xl mx-auto leading-relaxed sm:leading-loose font-light px-4 md:px-8 whitespace-pre-wrap text-center">
           <strong className="block text-xl sm:text-2xl md:text-[28px] text-copper mb-2 sm:mb-3 font-medium">당신의 감각을 믿으세요.</strong>
           연금술사의 세심한 로스팅과 데이터는 오직 당신의 확신을 돕기 위한 도구일 뿐입니다.
-          우리는 그저 당신의 감각이 찾아낸 그 기분 좋은 마주침이 매일 아침 당신을 깨움을 돕습니다.
+          우리는 그저 당신의 감각이 찾아낸 그 기분 좋은 마주침이 매일 아침 당신을 깨우도록 돕습니다.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-2 w-full px-2">
