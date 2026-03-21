@@ -53,7 +53,7 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </header>
 
-      <main className="flex-grow flex flex-col items-center pt-32 pb-16 px-4 sm:px-8 md:px-12 relative z-10">
+      <main className="flex-grow flex items-center justify-center py-10 px-4 sm:px-8 md:px-12 relative z-10">
         <div className="w-full max-w-4xl flex flex-col gap-8">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
