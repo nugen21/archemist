@@ -449,6 +449,10 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 </>
               )}
 
+              {formData.category === 'dripbag' && (
+                <InputField label="분쇄 배전도" name="roastGround" value={formData.roastGround} onChange={handleChange} placeholder="예: 77.4" />
+              )}
+
               <div className="lg:col-span-3">
                  <InputField 
                     label={formData.category === 'bean' ? "컵 노트" : "상품 설명 요약"} 

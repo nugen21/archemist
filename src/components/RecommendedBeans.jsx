@@ -118,10 +118,18 @@ export default function RecommendedBeans({ isAdmin }) {
               <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm mb-4 flex-grow">
                 {bean.category !== 'beverage' ? (
                   <>
-                    <div className="col-span-2">
-                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Agtron (WB / G)</p>
-                      <p className="text-copper font-black text-xl font-serif">{bean.roastWb || '-'} / {bean.roastGround || '-'}</p>
-                    </div>
+                    {(bean.category === 'bean' || !bean.category || bean.category === 'dripbag') && (
+                      <div className="col-span-2">
+                        <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">
+                          {bean.category === 'dripbag' ? 'Agtron (Grind)' : 'Agtron (WB / G)'}
+                        </p>
+                        <p className="text-copper font-black text-xl font-serif">
+                          {bean.category === 'dripbag' 
+                            ? (bean.roastGround || '-') 
+                            : `${bean.roastWb || '-'} / ${bean.roastGround || '-'}`}
+                        </p>
+                      </div>
+                    )}
                     <div className="col-span-2">
                       <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Roast Date</p>
                       <p className="text-gray-200 font-medium text-sm">{bean.roastDate || '-'}</p>
