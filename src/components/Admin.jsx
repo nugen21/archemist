@@ -226,6 +226,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     }
     setBeans(updated);
     window.dispatchEvent(new Event('beansUpdated'));
+    
+    // Auto-Sync to GitHub
+    syncWithGitHub(updated);
   };
 
   const handleDelete = (id) => {
@@ -523,6 +526,16 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
           </div>
         )}
       </div>
+
+      {/* Sync Status Overlay */}
+      {isPushing && (
+        <div className="fixed bottom-6 right-6 z-[100] animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="bg-copper/90 backdrop-blur-md text-black px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/20">
+            <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-xs font-black uppercase tracking-widest">GitHub 동기화 중...</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
