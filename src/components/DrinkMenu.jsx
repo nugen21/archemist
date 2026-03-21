@@ -121,20 +121,13 @@ export default function DrinkMenu({ onBack }) {
           {handDripMenu.length > 0 && (
             <section>
               <div className="flex flex-col mb-12 relative">
-                <div className="flex items-baseline justify-between gap-6 mb-3">
-                  <div className="flex items-baseline gap-6">
-                    <h2 className="text-5xl sm:text-7xl font-serif font-black tracking-tighter text-white/50">
-                      HAND DRIP
-                    </h2>
-                    <span className="text-copper/40 font-bold tracking-[0.3em] text-lg sm:text-xl uppercase">핸드 드립</span>
-                  </div>
-                  <div className="bg-copper/5 border border-copper/10 px-2 py-0.5 rounded-full hidden sm:block">
-                    <span className="text-[8px] font-black text-copper/60 uppercase tracking-[0.12em]">
-                      March 2026 Selection
-                    </span>
-                  </div>
+                <div className="flex items-baseline gap-6 mb-3">
+                  <h2 className="text-5xl sm:text-7xl font-serif font-black tracking-tighter text-white/50">
+                    HAND DRIP
+                  </h2>
+                  <span className="text-copper/40 font-bold tracking-[0.3em] text-lg sm:text-xl uppercase">핸드 드립</span>
                 </div>
-                <div className="h-[1px] w-full bg-gradient-to-r from-copper/20 via-transparent to-transparent"></div>
+                <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
 
               <div className="grid gap-2.5">
