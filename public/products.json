@@ -34,7 +34,8 @@
     "visible": true,
     "recommended": true,
     "image": "/images/dripbag.png",
-    "roastDate": "2026.03.20"
+    "roastDate": "2026.03.20",
+    "roastGround": "77"
   },
   {
     "id": 1710850000003,
