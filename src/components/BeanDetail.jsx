@@ -4,17 +4,16 @@ import { Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft } 
 export default function BeanDetail({ bean, onBack }) {
   if (!bean) return null;
 
-  // Fallback for fields that might not be in older data
-  const roastWb = bean.roastWb || '64.6';
-  const roastGround = bean.roastGround || '77.4';
-  const roastTime = bean.roastTime || "9' 15\"";
+  // Use registered data with neutral fallbacks
+  const roastWb = bean.roastWb || '-';
+  const roastGround = bean.roastGround || '-';
+  const roastTime = bean.roastTime || "-";
   const cupNotes = bean.cupNotes || '다채롭고 우아한 플레이버';
   
-  // Alchemy specific defaults (will be linked to Admin later)
-  const dripper = bean.dripper || 'Hario V60';
-  const coffeeWeight = bean.coffeeAmount || '18g';
-  const grind = bean.grind || 'Comandante 25 clicks';
-  const waterTemp = bean.temp || '94°C';
+  const dripper = bean.dripper || '-';
+  const coffeeWeight = bean.coffeeAmount || '-';
+  const grind = bean.grind || '-';
+  const waterTemp = bean.temp || '-';
 
   return (
     <section className="min-h-screen py-12 px-4 sm:px-8 bg-[#111211] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">

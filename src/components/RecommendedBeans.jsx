@@ -102,28 +102,44 @@ export default function RecommendedBeans({ isAdmin }) {
               )}
 
               <div className="mb-4 border-b border-copper/10 pb-4">
-                <p className="text-[10px] text-copper/80 tracking-[0.2em] uppercase mb-1 font-bold">{bean.country} {bean.region && `| ${bean.region}`}</p>
+                <div className="flex justify-between items-start mb-1">
+                  <p className="text-[10px] text-copper/80 tracking-[0.2em] uppercase font-bold">
+                    {bean.category === 'beverage' ? 'Cafe Beverage' : bean.category === 'dripbag' ? 'Dripbag' : bean.country} 
+                    {bean.region && ` | ${bean.region}`}
+                  </p>
+                  <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
+                </div>
                 <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-20 line-clamp-2 italic">{bean.name}</h3>
-                <p className="text-sm text-gray-500 font-serif italic">{bean.variety} / {bean.process}</p>
+                <p className="text-sm text-gray-500 font-serif italic">
+                  {bean.category === 'beverage' ? 'Signature Recipe' : `${bean.variety || 'Specialty'} / ${bean.process || 'Handcrafted'}`}
+                </p>
               </div>
 
               <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm mb-4 flex-grow">
-                <div>
-                  <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Roaster</p>
-                  <p className="text-gray-200 font-medium text-sm">{bean.roaster || '-'}</p>
-                </div>
-                <div>
-                  <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Altitude</p>
-                  <p className="text-gray-200 font-medium text-sm">{bean.altitude || '-'}</p>
-                </div>
-                <div>
-                  <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Agtron (WB / G)</p>
-                  <p className="text-copper font-black text-xl font-serif">{bean.roastWb || '-'} / {bean.roastGround || '-'}</p>
-                </div>
-                <div>
-                  <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Roast Date</p>
-                  <p className="text-gray-200 font-medium text-sm">{bean.roastDate || '-'}</p>
-                </div>
+                {bean.category !== 'beverage' ? (
+                  <>
+                    <div>
+                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Roaster</p>
+                      <p className="text-gray-200 font-medium text-sm">{bean.roaster || '-'}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Altitude</p>
+                      <p className="text-gray-200 font-medium text-sm">{bean.altitude || '-'}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Agtron (WB / G)</p>
+                      <p className="text-copper font-black text-xl font-serif">{bean.roastWb || '-'} / {bean.roastGround || '-'}</p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">Roast Date</p>
+                      <p className="text-gray-200 font-medium text-sm">{bean.roastDate || '-'}</p>
+                    </div>
+                  </>
+                ) : (
+                  <div className="col-span-2 italic text-gray-500 text-xs">
+                    매일 아침 가장 신선한 재료로 준비하는 아키미스트의 시그니처 메뉴입니다.
+                  </div>
+                )}
               </div>
 
               <div className="mb-4 bg-copper/5 p-4 rounded-xl border border-copper/10 shadow-inner">
