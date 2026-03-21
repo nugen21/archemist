@@ -44,7 +44,8 @@
     "cupNotes": "부드러운 목넘김, 와인 같은 산미, 깔끔한 끝맛",
     "visible": true,
     "recommended": false,
-    "image": "/images/coldbrew.png"
+    "image": "/images/coldbrew.png",
+    "roastDate": "2026.03.20"
   },
   {
     "id": 1710850000004,
