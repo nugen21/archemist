@@ -78,7 +78,7 @@ export default function RecommendedBeans({ isAdmin }) {
 
         <div className="flex overflow-x-auto gap-4 pb-6 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 group/scroll relative">
           {visibleBeans.map((bean) => (
-            <div key={bean.id} className="bg-[#111211]/80 backdrop-blur-sm border border-copper/30 rounded-3xl p-5 flex flex-col hover:border-copper/60 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group h-full relative w-[300px] sm:w-[420px] shrink-0 snap-start mt-4 hover:-translate-y-2">
+            <div key={bean.id} className="bg-[#111211]/80 backdrop-blur-sm border border-copper/30 rounded-3xl p-5 flex flex-col hover:border-copper/60 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group h-full relative w-[300px] sm:w-[420px] shrink-0 snap-start mt-4 hover:-translate-y-2 after:content-[''] after:absolute after:right-[-8px] sm:after:right-[-12px] after:top-1/4 after:bottom-1/4 after:w-[1px] after:bg-copper/20 last:after:hidden">
               
               <div className="absolute -top-3 left-8 px-4 py-1 bg-copper rounded-full shadow-lg z-10">
                 <p className="text-[9px] text-black font-black tracking-widest uppercase">추천 상품</p>

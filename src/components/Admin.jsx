@@ -512,7 +512,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">관리</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-800/50">
+                <tbody className="divide-y divide-gray-800">
                   {filteredBeans.length === 0 ? (
                     <tr><td colSpan="4" className="py-12 text-center text-gray-600 italic">표시할 품목이 없습니다.</td></tr>
                   ) : (
