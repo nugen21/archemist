@@ -17,7 +17,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
     roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-    recommended: false, image: ''
+    recommended: false, image: '',
+    englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
   });
   const loadBeans = async (forceFetch = true) => {
     try {
@@ -205,7 +206,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
       roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-      recommended: false, image: ''
+      recommended: false, image: '',
+      englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
     });
     setEditingId(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -369,10 +371,38 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="md:col-span-2 lg:col-span-3">
-                <InputField label="상품명" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
+            {formData.category === 'beverage' && (
+              <div className="bg-[#0b0c0b] p-6 rounded-2xl border border-gray-800">
+                <label className="block text-xs font-bold text-copper tracking-widest uppercase mb-4">메뉴 구분 (Type)</label>
+                <div className="flex gap-2">
+                  {[
+                    { id: 'espresso', label: '에스프레소 메뉴', emoji: '☕' },
+                    { id: 'handdrip', label: '핸드 드립 메뉴', emoji: '💧' }
+                  ].map((sub) => (
+                    <button
+                      key={sub.id}
+                      type="button"
+                      onClick={() => setFormData(prev => ({ ...prev, subCategory: sub.id }))}
+                      className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all border ${formData.subCategory === sub.id ? 'bg-copper border-copper text-black' : 'bg-black/40 border-gray-800 text-gray-500 hover:border-copper/40'}`}
+                    >
+                      {sub.emoji} {sub.label}
+                    </button>
+                  ))}
+                </div>
               </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className={formData.category === 'beverage' ? "md:col-span-2 lg:col-span-2" : "md:col-span-2 lg:col-span-3"}>
+                <InputField label="상품명 (Name)" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
+              </div>
+
+              {formData.category === 'beverage' && (
+                <div className="md:col-span-2 lg:col-span-1">
+                  <InputField label="영문명 (English Name)" name="englishName" value={formData.englishName} onChange={handleChange} placeholder="예: Americano" />
+                </div>
+              )}
+
               
               <div className="md:col-span-2 lg:col-span-2">
                 <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">상품 이미지 업로드 (Recommended: Square, Max 2MB)</label>
@@ -418,8 +448,14 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               </div>
 
               <div className="flex flex-col justify-end">
-                <InputField label="가격" name="price" value={formData.price} onChange={handleChange} placeholder="예: 18,000원" />
+                <InputField label={formData.category === 'beverage' ? "가격 (Price)" : "가격"} name="price" value={formData.price} onChange={handleChange} placeholder="예: 3.5 또는 18,000" />
               </div>
+
+              {formData.category === 'beverage' && (
+                <div className="flex flex-col justify-end">
+                  <InputField label="사이즈 (Size)" name="size" value={formData.size} onChange={handleChange} placeholder="예: 16oz" />
+                </div>
+              )}
 
               <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
                 <input 
@@ -430,8 +466,24 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                   onChange={handleChange}
                   className="w-5 h-5 rounded border-gray-800 bg-black text-copper focus:ring-copper cursor-pointer"
                 />
-                <label htmlFor="recommended-check" className="text-xs font-bold text-gray-400 cursor-pointer uppercase tracking-widest">추천 상품으로 설정</label>
+                <label htmlFor="recommended-check" className="text-xs font-bold text-gray-400 cursor-pointer uppercase tracking-widest">
+                  {formData.category === 'beverage' ? '인기 메뉴로 설정 (Best)' : '추천 상품으로 설정'}
+                </label>
               </div>
+
+              {formData.category === 'beverage' && (
+                <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
+                  <input 
+                    type="checkbox" 
+                    id="isSpecial-check"
+                    name="isSpecial" 
+                    checked={formData.isSpecial} 
+                    onChange={handleChange}
+                    className="w-5 h-5 rounded border-gray-100 bg-black text-blue-500 focus:ring-blue-500 cursor-pointer"
+                  />
+                  <label htmlFor="isSpecial-check" className="text-xs font-bold text-gray-400 cursor-pointer uppercase tracking-widest">특별 시그니처 (Alchemy Effect)</label>
+                </div>
+              )}
 
               {formData.category !== 'beverage' && (
                 <InputField label="로스팅/제조 날짜" name="roastDate" value={formData.roastDate} onChange={handleChange} placeholder="예: 2024.03.21" />
