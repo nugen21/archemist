@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function Events() {
   return (
-    <section id="events" className="py-24 px-4 sm:px-8 bg-[#111211] border-t border-gray-800">
+    <section id="events" className="py-3 px-4 sm:px-8 bg-[#111211] border-t border-gray-800">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-4">
           <h2 className="text-sm font-bold tracking-widest text-copper uppercase mb-3 text-center w-full block">Special Experience</h2>
           <h3 className="text-4xl sm:text-5xl font-bold text-gray-100 mb-6 text-center w-full block">스페셜 이벤트 & 예약</h3>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed font-light break-keep text-center w-full block mt-2">

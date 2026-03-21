@@ -63,7 +63,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-matte-black text-white selection:bg-copper/30 font-sans overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-matte-black text-white selection:bg-copper font-sans overflow-x-hidden">
       {/* Landing Page Content */}
       <main className="flex-grow">
         <Header />

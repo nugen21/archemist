@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function Brand() {
   return (
-    <section id="brand" className="py-24 px-4 sm:px-8 bg-matte-black border-t border-gray-800">
+    <section id="brand" className="py-3 px-4 sm:px-8 bg-matte-black border-t border-gray-800">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-16 items-center mb-24">
+        <div className="flex flex-col lg:flex-row gap-8 items-center mb-6">
           <div className="lg:w-1/2">
             <h2 className="text-sm font-bold tracking-widest text-copper uppercase mb-3">About Us</h2>
             <h3 className="text-4xl sm:text-5xl font-bold text-gray-100 mb-6 leading-tight break-keep">
@@ -27,7 +27,7 @@ export default function Brand() {
         </div>
 
         {/* Space Gallery */}
-        <div className="mb-24">
+        <div className="mb-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-100 mb-12">로스터리 공간</h2>
           <div className="w-full relative group overflow-hidden rounded-2xl shadow-2xl bg-gray-900/50 min-h-[300px] flex items-center justify-center">
             <img 

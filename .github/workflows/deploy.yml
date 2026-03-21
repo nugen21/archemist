@@ -46,4 +46,5 @@ jobs:
             --endpoint-url https://kr.object.ncloudstorage.com \
             --region kr-standard \
             --delete \
-            --no-progress
+            --no-progress \
+            --cache-control "no-cache, no-store, must-revalidate"

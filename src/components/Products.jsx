@@ -4,9 +4,9 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
   if (items.length === 0) return null;
 
   return (
-    <section id={category} className={`py-24 sm:py-32 relative overflow-hidden ${bgColor}`}>
+    <section id={category} className={`py-2 sm:py-4 relative overflow-hidden ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 gap-6">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-4">
               <span className="text-3xl">{emoji}</span>
@@ -21,19 +21,19 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
           </p>
         </div>
 
-        <div className="flex overflow-x-auto gap-6 sm:gap-10 pb-12 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 group/scroll relative">
+        <div className="flex overflow-x-auto gap-3 sm:gap-4 pb-4 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 group/scroll relative">
           {items.map((product) => (
             <div 
               key={product.id} 
-              className="group bg-[#111211]/50 border border-white/5 rounded-3xl p-8 hover:border-copper/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col h-full w-[280px] sm:w-[360px] md:w-[400px] shrink-0 snap-start"
+              className="group bg-[#111211]/50 border border-white/5 rounded-3xl p-5 hover:border-copper/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col h-full w-[280px] sm:w-[360px] md:w-[400px] shrink-0 snap-start"
             >
               {product.image && (
-                <div className="relative w-full h-48 mb-8 rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div className="relative w-full h-48 mb-4 rounded-2xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
                   <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111]/80 to-transparent"></div>
                 </div>
               )}
-              <div className="flex justify-between items-start mb-6">
+              <div className="flex justify-between items-start mb-4">
                 <div className="bg-copper/10 p-4 rounded-2xl group-hover:bg-copper/20 transition-colors relative">
                   <span className="text-3xl opacity-80 group-hover:opacity-100 transition-opacity">{emoji}</span>
                   {product.recommended && (
@@ -51,10 +51,10 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
                   )}
                 </div>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-white mb-4 group-hover:text-copper transition-colors h-16 line-clamp-2">
+              <h3 className="text-2xl font-serif font-bold text-white mb-2 group-hover:text-copper transition-colors h-16 line-clamp-2">
                 {product.name}
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow line-clamp-3">
+              <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
                 {product.cupNotes || "상세 정보는 매장에 문의해 주세요."}
               </p>
               <button 

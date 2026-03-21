@@ -228,11 +228,11 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   }
 
   return (
-    <div className="min-h-screen bg-[#111211] text-gray-200 py-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-copper selection:text-white">
-      <div className="max-w-5xl mx-auto bg-[#181a19] border border-copper/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen bg-[#111211] text-gray-200 py-4 px-4 sm:px-6 lg:px-8 font-sans selection:bg-copper selection:text-white">
+      <div className="max-w-5xl mx-auto bg-[#181a19] border border-copper/30 rounded-3xl p-4 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-copper/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-copper/20 pb-4 relative z-10 gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 border-b border-copper/20 pb-4 relative z-10 gap-4">
            <div className="flex items-center gap-4">
              <h2 className="text-3xl font-bold text-copper font-serif tracking-wide">관리자 패널</h2>
              <span className="bg-copper/10 text-copper text-[10px] font-bold px-3 py-1 rounded-full border border-copper/20 uppercase tracking-widest">
@@ -265,7 +265,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
             <form onSubmit={handleSubmit} className="space-y-8">
             <div className="bg-[#0b0c0b] p-6 rounded-2xl border border-gray-800">
               <label className="block text-xs font-bold text-copper tracking-widest uppercase mb-4">카테고리 선택 (Category)</label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1">
                 {[
                   { id: 'bean', label: '원두 (Bean)', emoji: '🫘' },
                   { id: 'dripbag', label: '드립백 (Drip)', emoji: '📦' },
@@ -284,7 +284,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="md:col-span-2 lg:col-span-3">
                 <InputField label="상품명" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
               </div>
@@ -336,7 +336,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <InputField label="가격" name="price" value={formData.price} onChange={handleChange} placeholder="예: 18,000원" />
               </div>
 
-              <div className="flex items-center space-x-3 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
+              <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
                 <input 
                   type="checkbox" 
                   id="recommended-check"
@@ -393,8 +393,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         </div>
       ) : (
           <div className="relative z-10">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10">
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-4">
+            <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
                {['all', 'bean', 'dripbag', 'coldbrew', 'beverage'].map(cat => (
                  <button key={cat} onClick={() => setCategoryFilter(cat)} className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all ${categoryFilter === cat ? 'bg-copper text-black border-copper' : 'bg-[#0b0c0b] text-gray-500 border-gray-800'}`}>
                    {cat === 'all' ? 'All Items' : cat}
@@ -447,7 +447,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                         </td>
                         <td className="py-5 px-4 text-xs text-gray-400">{item.price || item.roastDate || '-'}</td>
                         <td className="py-5 px-4 text-right">
-                          <div className="flex justify-end gap-2">
+                          <div className="flex justify-end gap-1">
                             <button onClick={() => handleToggleRecommended(item.id)} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.recommended ? 'bg-copper text-black' : 'bg-gray-800 text-gray-500 hover:text-white'}`}>{item.recommended ? '추천됨' : '추천하기'}</button>
                             <button onClick={() => handleToggleVisibility(item.id)} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.visible ? 'bg-gray-800 text-gray-400 hover:text-white' : 'bg-copper/40 text-white hover:bg-copper'}`}>{item.visible ? '숨기기' : '보이기'}</button>
                             <button onClick={() => handleEdit(item)} className="bg-blue-900/20 text-blue-400 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all">수정</button>

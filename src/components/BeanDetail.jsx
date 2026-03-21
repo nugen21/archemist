@@ -43,7 +43,7 @@ export default function BeanDetail({ bean, onBack }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
           {/* Card 1: Roast Data Profile */}
           <div className="bg-gradient-to-b from-[#181a19] to-[#111211] border border-copper/20 rounded-3xl p-8 flex flex-col items-center relative overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] group hover:border-copper/40 transition-colors duration-500">
@@ -127,7 +127,7 @@ export default function BeanDetail({ bean, onBack }) {
                 <div className="absolute inset-0 flex items-center justify-center text-copper/30 text-[10px] font-bold uppercase tracking-[0.3em]">Alchemy Profile</div>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 w-full px-2 mb-8">
+            <div className="flex flex-wrap justify-center gap-2 w-full px-2 mb-8">
                {cupNotes.split(',').map((note, idx) => (
                  <div key={idx} className="flex flex-col items-center gap-1.5 min-w-[60px]">
                     <span className="text-xl">✨</span>
