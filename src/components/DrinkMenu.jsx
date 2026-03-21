@@ -54,7 +54,6 @@ export default function DrinkMenu({ onBack }) {
       </header>
 
       <main className="flex-grow flex items-center justify-center py-24 px-4 sm:px-8 md:px-12 relative z-10">
-        {/* ... existing main content ... */}
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-8 md:grid md:grid-cols-2 md:items-start md:gap-12 lg:gap-16">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
