@@ -42,7 +42,7 @@
     "price": "18,000원",
     "cupNotes": "부드러운 목넘김, 와인 같은 산미, 깔끔한 끝맛",
     "visible": true,
-    "recommended": true,
+    "recommended": false,
     "image": "/images/coldbrew.png"
   },
   {
@@ -52,7 +52,7 @@
     "price": "6,500원",
     "cupNotes": "고소한 우유와 진한 에스프레소의 조화",
     "visible": true,
-    "recommended": true,
+    "recommended": false,
     "image": "/images/beverage.png"
   }
 ]
