@@ -58,12 +58,12 @@ export default function DrinkMenu({ onBack }) {
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-10 relative">
-                <div className="flex items-baseline gap-5 mb-2.5">
-                  <h2 className="text-4xl sm:text-6xl font-serif font-black tracking-normal text-white/50">
+              <div className="flex flex-col mb-8 relative">
+                <div className="flex items-baseline gap-4 mb-2">
+                  <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-normal text-white/50">
                     ESPRESSO
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.4em] text-base sm:text-lg uppercase">에스프레소</span>
+                  <span className="text-copper/40 font-bold tracking-[0.4em] text-sm sm:text-base uppercase">에스프레소</span>
                 </div>
                 <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
@@ -113,12 +113,12 @@ export default function DrinkMenu({ onBack }) {
           {/* Hand Drip Menu Section */}
           {handDripMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-10 relative">
-                <div className="flex items-baseline gap-5 mb-2.5">
-                  <h2 className="text-4xl sm:text-6xl font-serif font-black tracking-normal text-white/50">
+              <div className="flex flex-col mb-8 relative">
+                <div className="flex items-baseline gap-4 mb-2">
+                  <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-normal text-white/50">
                     HAND DRIP
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.4em] text-base sm:text-lg uppercase">핸드 드립</span>
+                  <span className="text-copper/40 font-bold tracking-[0.4em] text-sm sm:text-base uppercase">핸드 드립</span>
                 </div>
                 <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
