@@ -97,7 +97,7 @@
     "size": "16oz",
     "cupNotes": "자체 블랜드 원두, 우유, 붉은/파란 큐라소 얼음으로 제조한 달달한 아이스 라떼",
     "visible": true,
-    "recommended": true,
+    "recommended": false,
     "isSpecial": true,
     "image": "/images/icons/beverage.jpg"
   },
