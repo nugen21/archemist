@@ -181,7 +181,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     
     if (editingId) {
       updated = existing.map(bean => 
-        bean.id === editingId ? { ...formData, id: editingId } : bean
+        String(bean.id) === String(editingId) ? { ...formData, id: editingId } : bean
       );
       alert('정보가 성공적으로 수정되었습니다.');
     } else {
@@ -226,8 +226,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
   const handleToggleVisibility = (id) => {
     const updated = beans.map(bean => 
-      bean.id === id ? { ...bean, visible: !bean.visible } : bean
+      String(bean.id) === String(id) ? { ...bean, visible: !bean.visible } : bean
     );
+    
+    // Sync with formData if editing the same item
+    if (editingId && String(editingId) === String(id)) {
+      setFormData(prev => ({ ...prev, visible: !prev.visible }));
+    }
     localStorage.setItem('archemist_beans', JSON.stringify(updated));
     setBeans(updated);
     window.dispatchEvent(new Event('beansUpdated'));
@@ -241,6 +246,11 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     const updated = beans.map(bean => 
       String(bean.id) === String(id) ? { ...bean, recommended: !bean.recommended } : bean
     );
+    
+    // Sync with formData if editing the same item
+    if (editingId && String(editingId) === String(id)) {
+      setFormData(prev => ({ ...prev, recommended: !prev.recommended }));
+    }
     try {
       localStorage.setItem('archemist_beans', JSON.stringify(updated));
       console.log('Admin: Saved updated state to localStorage');
@@ -258,7 +268,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const handleDelete = (id) => {
     if (window.confirm('품목을 목록에서 영구적으로 삭제하시겠습니까? (숨기기 기능을 권장합니다)')) {
       const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
-      const updated = saved.filter(b => b.id !== id);
+      const updated = saved.filter(b => String(b.id) !== String(id));
       localStorage.setItem('archemist_beans', JSON.stringify(updated));
       setBeans(updated);
       window.dispatchEvent(new Event('beansUpdated'));
@@ -582,7 +592,12 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                                />
                              </div>
                            )}
-                           <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-tighter border ${item.category === 'bean' ? 'bg-copper/20 text-copper border-copper/30' : item.category === 'dripbag' ? 'bg-blue-900/20 text-blue-400 border-blue-900/30' : 'bg-green-900/20 text-green-400 border-green-900/30'}`}>
+                           <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-tighter border ${
+                             item.category === 'bean' ? 'bg-copper/20 text-copper border-copper/30' : 
+                             item.category === 'dripbag' ? 'bg-blue-900/20 text-blue-400 border-blue-900/30' : 
+                             item.category === 'beverage' ? 'bg-orange-900/20 text-orange-400 border-orange-900/30' : 
+                             'bg-green-900/20 text-green-400 border-green-900/30'
+                           }`}>
                              {item.category || 'bean'}
                            </span>
                         </td>
