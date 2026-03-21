@@ -43,11 +43,11 @@ export default function Brand() {
         <div className="bg-[#121312] rounded-lg p-8 sm:p-12 border border-gray-800 shadow-2xl flex flex-col md:flex-row gap-8 items-center justify-between">
           <div>
             <h3 className="text-2xl font-bold text-gray-100 mb-4">아키미스트 로스터스 오시는 길</h3>
-            <p className="text-gray-300 text-lg mb-2 font-medium">대구시 수성구 범어동 마크팰리스 1층</p>
+            <p className="text-gray-300 text-lg mb-2 font-medium">대구시 수성구 범어동 범어역</p>
             <p className="text-gray-500 text-sm">운영 시간: 평일 08:00 - 20:00 (주말 휴무)</p>
           </div>
           <a 
-            href="https://map.naver.com/p/search/%EB%8C%80%EA%B5%AC%EC%8B%9C%20%EC%88%98%EC%84%B1%EA%B5%AC%20%EB%B2%94%EC%96%B4%EB%8F%99%20%EB%A7%88%ED%81%AC%ED%8C%B0%EB%A6%AC%EC%8A%A4" 
+            href="https://map.naver.com/p/search/%EB%8C%80%EA%B5%AC%EC%8B%9C%20%EC%88%98%EC%84%B1%EA%B5%AC%20%EB%B2%94%EC%96%B4%EB%8F%99%20%EB%B2%94%EC%96%B4%EC%97%AD" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="bg-transparent border border-copper text-copper px-8 py-4 rounded hover:bg-copper hover:text-matte-black transition-colors duration-300 font-bold whitespace-nowrap text-lg"

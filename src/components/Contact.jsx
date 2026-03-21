@@ -41,12 +41,12 @@ export default function Contact() {
               <div>
                 <p className="text-sm text-gray-400 mb-1">로스터리 위치</p>
                 <a 
-                  href="https://map.naver.com/p/search/%EB%8C%80%EA%B5%AC%EC%8B%9C%20%EC%88%98%EC%84%B1%EA%B5%AC%20%EB%B2%94%EC%96%B4%EB%8F%99%20%EB%A7%88%ED%81%AC%ED%8C%B0%EB%A6%AC%EC%8A%A4" 
+                  href="https://map.naver.com/p/search/%EB%8C%80%EA%B5%AC%EC%8B%9C%20%EC%88%98%EC%84%B1%EA%B5%AC%20%EB%B2%94%EC%96%B4%EB%8F%99%20%EB%B2%94%EC%96%B4%EC%97%AD" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-base sm:text-lg text-gray-200 font-medium break-keep hover:text-copper transition-colors underline-offset-4 hover:underline"
                 >
-                  대구시 수성구 범어동 마크팰리스 1층
+                  대구시 수성구 범어동 범어역
                 </a>
               </div>
             </div>
