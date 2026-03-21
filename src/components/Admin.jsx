@@ -73,8 +73,12 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       const path = 'public/products.json';
 
       try {
-        const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-          headers: { 'Authorization': `token ${token}`, 'Cache-Control': 'no-cache' }
+        // Use URL param for cache busting instead of header to avoid preflight CORS issues
+        const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?t=${Date.now()}`, {
+          headers: { 
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
         });
         
         if (!getRes.ok) throw new Error('GitHub 인증 실패 또는 파일 정보 로드 실패');
@@ -92,7 +96,8 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
           method: 'PUT',
           headers: {
-            'Authorization': `token ${token}`,
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
