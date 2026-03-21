@@ -17,49 +17,27 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: ''
   });
-  const loadBeans = async (forceFetch = false) => {
-    const localSaved = localStorage.getItem('archemist_beans');
-    
-    // Priority 1: If we have local state and aren't forcing a fetch, trust it.
-    if (localSaved && !forceFetch) {
-      const data = JSON.parse(localSaved);
-      if (beans.length === 0 || forceFetch) setBeans(data);
-      return;
-    }
-
+  const loadBeans = async (forceFetch = true) => {
     try {
+      // Always fetch fresh data from server to ensure global sync
       const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
-        let finalData = serverData;
         
-        if (localSaved) {
-          const localData = JSON.parse(localSaved);
-          const mergedServerData = serverData.map(serverItem => {
-            const localItem = localData.find(l => String(l.id) === String(serverItem.id));
-            if (localItem) {
-              return { 
-                ...serverItem, 
-                visible: localItem.visible !== undefined ? localItem.visible : serverItem.visible,
-                recommended: localItem.recommended !== undefined ? localItem.recommended : serverItem.recommended
-              };
-            }
-            return serverItem;
-          });
-
-          const serverIds = new Set(serverData.map(s => String(s.id)));
-          const localOnlyData = localData.filter(l => !serverIds.has(String(l.id)));
-          finalData = [...mergedServerData, ...localOnlyData];
-        } else {
-          // First time initialization: seed localStorage with server data
-          localStorage.setItem('archemist_beans', JSON.stringify(serverData));
-        }
-        
-        setBeans(finalData);
+        // Update local state and storage
+        setBeans(serverData);
+        localStorage.setItem('archemist_beans', JSON.stringify(serverData));
+        console.log('Admin: Successfully synced with server data');
+      } else {
+        throw new Error('Server data not found');
       }
     } catch (error) {
-      console.error('Admin: Failed to load products:', error);
-      if (localSaved) setBeans(JSON.parse(localSaved));
+      console.error('Admin: Failed to load products from server:', error);
+      const localSaved = localStorage.getItem('archemist_beans');
+      if (localSaved) {
+        setBeans(JSON.parse(localSaved));
+        console.log('Admin: Falling back to local storage');
+      }
     }
   };
 
