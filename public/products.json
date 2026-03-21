@@ -32,7 +32,7 @@
     "price": "15,000원",
     "cupNotes": "다크 초콜릿, 견과류, 묵직한 바디감",
     "visible": true,
-    "recommended": true,
+    "recommended": false,
     "image": "/images/dripbag.png"
   },
   {
