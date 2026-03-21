@@ -143,13 +143,6 @@ export default function Products() {
         items={coldBrew} 
         bgColor="bg-[#181a19]" 
       />
-      <ProductSection 
-        title="카페 베버리지" 
-        category="beverage" 
-        icon="/images/icons/beverage.jpg" 
-        items={beverages} 
-        bgColor="bg-gradient-to-t from-[#0b0c0b] to-[#181a19]" 
-      />
       
       {showFallback && (
         <div className="py-20 text-center">
