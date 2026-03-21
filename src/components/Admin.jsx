@@ -6,8 +6,9 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const [loginForm, setLoginForm] = useState({ id: '', password: '' });
   const [beans, setBeans] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('all');
-  const [githubToken, setGithubToken] = useState('');
+  const [githubToken, setGithubToken] = useState(() => sessionStorage.getItem('archemist_gh_token') || '');
   const [isPushing, setIsPushing] = useState(false);
+  const [syncStatus, setSyncStatus] = useState('idle'); // 'idle', 'syncing', 'success', 'error'
   const syncTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
   
@@ -59,11 +60,13 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     syncTimeoutRef.current = setTimeout(async () => {
       let token = githubToken;
       if (!token) {
-        token = window.prompt('관리자 권한: GitHub Personal Access Token을 입력해주세요 (세션당 1회):');
+        token = window.prompt('관리자 권한: GitHub Personal Access Token을 입력해주세요 (세션 유지):');
         if (!token) return;
         setGithubToken(token);
+        sessionStorage.setItem('archemist_gh_token', token);
       }
 
+      setSyncStatus('syncing');
       setIsPushing(true);
       const owner = 'nugen21';
       const repo = 'archemist';
@@ -104,16 +107,21 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
           const errorData = await putRes.json();
           if (putRes.status === 409) {
              console.warn('Admin: SHA Conflict during sync, retrying...');
-             // Automatically retry once on conflict
              return syncWithGitHub(latestBeans);
           }
+          setSyncStatus('error');
           throw new Error(errorData.message || 'GitHub 업데이트 실패');
         }
+        setSyncStatus('success');
         console.log('Admin: Successfully auto-synced with GitHub');
+        // Clear success message after 3 seconds
+        setTimeout(() => setSyncStatus('idle'), 3000);
       } catch (error) {
+        setSyncStatus('error');
         console.error('GitHub Auto-Sync Error:', error);
         alert(`자동 업데이트 실패: ${error.message}\n토큰을 다시 확인해주세요.`);
         setGithubToken(''); 
+        sessionStorage.removeItem('archemist_gh_token');
       } finally {
         setIsPushing(false);
       }
@@ -537,11 +545,27 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       </div>
 
       {/* Sync Status Overlay */}
-      {isPushing && (
+      {(syncStatus !== 'idle' || githubToken) && (
         <div className="fixed bottom-6 right-6 z-[100] animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="bg-copper/90 backdrop-blur-md text-black px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/20">
-            <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-xs font-black uppercase tracking-widest">GitHub 동기화 중...</span>
+          <div className={`backdrop-blur-md text-black px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/20 transition-all ${
+            syncStatus === 'syncing' ? 'bg-copper/90' : 
+            syncStatus === 'success' ? 'bg-green-500/90' : 
+            syncStatus === 'error' ? 'bg-red-500/90' : 'bg-gray-800/80 text-white'
+          }`}>
+            {syncStatus === 'syncing' ? (
+              <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+            ) : syncStatus === 'success' ? (
+              <span className="text-lg">✓</span>
+            ) : syncStatus === 'error' ? (
+              <span className="text-lg">✕</span>
+            ) : (
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+            )}
+            <span className="text-[10px] font-black uppercase tracking-widest">
+              {syncStatus === 'syncing' ? 'GitHub 동기화 중...' : 
+               syncStatus === 'success' ? '서버 반영 성공!' : 
+               syncStatus === 'error' ? '동기화 실패' : 'GitHub 연결됨'}
+            </span>
           </div>
         </div>
       )}
