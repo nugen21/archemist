@@ -76,8 +76,17 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
       const fileData = await getRes.json();
       const sha = fileData.sha;
 
-      // 2. Update file
+      // Update file
       const updatedContent = JSON.stringify(beans, null, 2);
+      
+      // Standard robust way to handle UTF-8 to Base64 in browser
+      const bytes = new TextEncoder().encode(updatedContent);
+      let binary = "";
+      for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      const base64Content = btoa(binary);
+
       const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
         method: 'PUT',
         headers: {
@@ -86,7 +95,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         },
         body: JSON.stringify({
           message: 'Admin: Update products.json from Web Panel',
-          content: btoa(unescape(encodeURIComponent(updatedContent))), // Support UTF-8
+          content: base64Content,
           sha: sha,
           branch: 'main'
         })

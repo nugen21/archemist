@@ -75,28 +75,30 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   const loadProducts = async () => {
-    const localSaved = localStorage.getItem('archemist_beans');
-    
-    // Priority 1: Local Storage
-    if (localSaved) {
-      setProducts(JSON.parse(localSaved).filter(p => p.visible !== false));
-      return;
-    }
-
-    // Priority 2: Server Fallback
     try {
+      // Priority 1: Server Data (Always fetch fresh to ensure sync)
       const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
         setProducts(serverData.filter(p => p.visible !== false));
+        
+        // Sync to local storage for persistence/fallback
         try {
           localStorage.setItem('archemist_beans', JSON.stringify(serverData));
         } catch (e) {
           console.warn('Storage quota exceeded:', e);
         }
+      } else {
+        throw new Error('Server response not OK');
       }
     } catch (error) {
-      console.error('Products: Server load failed:', error);
+      console.error('Products: Server load failed, using local fallback:', error);
+      
+      // Fallback: Local Storage
+      const localSaved = localStorage.getItem('archemist_beans');
+      if (localSaved) {
+        setProducts(JSON.parse(localSaved).filter(p => p.visible !== false));
+      }
     }
   };
 
