@@ -6,21 +6,17 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
   return (
     <section id={category} className={`py-4 sm:py-8 scroll-mt-24 relative overflow-hidden border-b border-white/5 last:border-b-0 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 gap-6">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-copper/10 flex items-center justify-center p-1.5 border border-copper/20 shadow-[0_0_15px_rgba(161,118,76,0.2)]">
-                <img src={icon} alt={category} className="w-full h-full object-contain" />
-              </div>
-              <span className="text-copper font-serif font-bold tracking-[0.3em] text-xs uppercase">{category === 'bean' ? '싱글 오리진' : category === 'dripbag' ? '드립백' : category === 'coldbrew' ? '콜드브루' : '카페'} 컬렉션</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight italic">
-              {title}
+        <div className="flex items-center gap-4 mb-10">
+          <div className="w-12 h-12 rounded-full bg-copper/10 flex items-center justify-center p-2 border border-copper/20 shadow-[0_0_20px_rgba(161,118,76,0.2)] grow-0 shrink-0">
+            <img src={icon} alt={category} className="w-full h-full object-contain" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-copper/60 font-serif font-bold tracking-[0.4em] text-[9px] uppercase mb-1">The Archemist's Selection</span>
+            <h2 className="text-2xl sm:text-3xl font-serif font-extrabold text-white tracking-widest italic uppercase">
+              {category === 'bean' ? '싱글 오리진' : category === 'dripbag' ? '드립백' : category === 'coldbrew' ? '콜드브루' : '카페'} 컬렉션
             </h2>
           </div>
-          <p className="text-gray-500 text-sm tracking-widest uppercase font-bold border-b border-copper/30 pb-2">
-            아키미스트의 연구
-          </p>
+          <div className="hidden md:block h-[1px] flex-grow ml-8 bg-gradient-to-r from-copper/20 to-transparent"></div>
         </div>
 
         <div className="flex overflow-x-auto gap-3 sm:gap-4 pb-4 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 group/scroll relative">
