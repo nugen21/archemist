@@ -104,13 +104,6 @@ export default function DrinkMenu({ onBack }) {
                         {item.cupNotes || item.description || ''}
                       </p>
                     </div>
-
-                    {item.isSpecial && (
-                      <div className="absolute top-5 right-8 flex gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-red-400/80 animate-pulse"></div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400/80 animate-pulse delay-300"></div>
-                      </div>
-                    )}
                   </div>
                 ))}
               </div>
