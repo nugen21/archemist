@@ -71,7 +71,7 @@
     "size": "16oz",
     "cupNotes": "카페인 걱정 없는 커피를 원한다면 탁월한 선택",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/beverage.jpg"
   },
   {
