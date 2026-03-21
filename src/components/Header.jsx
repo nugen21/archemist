@@ -7,10 +7,10 @@ export default function Header() {
   const navLinks = [
     { name: '브랜드', href: '#brand' },
     { name: '이벤트', href: '#events' },
-    { name: '원두', href: '#recommended', icon: '/images/icons/bean.png' },
-    { name: '드립팩', href: '#dripbag', icon: '/images/icons/dripbag.png' },
-    { name: '콜드브루', href: '#coldbrew', icon: '/images/icons/coldbrew.png' },
-    { name: '매장음료', href: '#beverage', icon: '/images/icons/beverage.png' },
+    { name: '원두', href: '#recommended', icon: '/images/icons/bean.jpg' },
+    { name: '드립팩', href: '#dripbag', icon: '/images/icons/dripbag.jpg' },
+    { name: '콜드브루', href: '#coldbrew', icon: '/images/icons/coldbrew.jpg' },
+    { name: '매장음료', href: '#beverage', icon: '/images/icons/beverage.jpg' },
     { name: '문의', href: '#contact', bold: true },
   ];
 
