@@ -54,6 +54,12 @@ const ProductSection = ({ title, category, emoji, items, bgColor }) => {
               <h3 className="text-2xl font-serif font-bold text-white mb-2 group-hover:text-copper transition-colors h-16 line-clamp-2">
                 {product.name}
               </h3>
+              {product.roastDate && (
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-copper/40"></span>
+                  Roast Date: {product.roastDate}
+                </p>
+              )}
               <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
                 {product.cupNotes || "상세 정보는 매장에 문의해 주세요."}
               </p>
