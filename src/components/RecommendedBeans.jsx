@@ -99,7 +99,7 @@ export default function RecommendedBeans({ isAdmin }) {
                 ) : (
                   <div className="w-full h-full flex items-center justify-center p-12">
                      <img 
-                        src={bean.category === 'dripbag' ? '/images/icons/dripbag.png' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.png' : bean.category === 'beverage' ? '/images/icons/beverage.png' : '/images/icons/bean.png'} 
+                        src={bean.category === 'dripbag' ? '/images/icons/dripbag.jpg' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.jpg' : bean.category === 'beverage' ? '/images/icons/beverage.jpg' : '/images/icons/bean.jpg'} 
                         className="w-full h-full object-contain opacity-10 grayscale" 
                         alt="icon fallback"
                      />
@@ -110,7 +110,7 @@ export default function RecommendedBeans({ isAdmin }) {
                 {/* Category Icon Badge */}
                 <div className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-copper/30 p-2 z-10 shadow-xl group-hover:border-copper transition-colors">
                   <img 
-                    src={bean.category === 'dripbag' ? '/images/icons/dripbag.png' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.png' : bean.category === 'beverage' ? '/images/icons/beverage.png' : '/images/icons/bean.png'} 
+                    src={bean.category === 'dripbag' ? '/images/icons/dripbag.jpg' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.jpg' : bean.category === 'beverage' ? '/images/icons/beverage.jpg' : '/images/icons/bean.jpg'} 
                     alt="icon" 
                     className="w-full h-full object-contain"
                   />

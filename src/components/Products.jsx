@@ -129,28 +129,28 @@ export default function Products() {
       <ProductSection 
         title="Single Origin Beans" 
         category="bean" 
-        emoji="🫘" 
+        icon="/images/icons/bean.jpg" 
         items={beans} 
         bgColor="bg-[#111211]" 
       />
       <ProductSection 
         title="Dripbag Selection" 
         category="dripbag" 
-        emoji="📦" 
+        icon="/images/icons/dripbag.jpg" 
         items={dripBags} 
         bgColor="bg-gradient-to-b from-[#111211] to-[#181a19]" 
       />
       <ProductSection 
         title="Coldbrew Essence" 
         category="coldbrew" 
-        emoji="🧪" 
+        icon="/images/icons/coldbrew.jpg" 
         items={coldBrew} 
         bgColor="bg-[#181a19]" 
       />
       <ProductSection 
         title="Cafe Beverages" 
         category="beverage" 
-        emoji="☕" 
+        icon="/images/icons/beverage.jpg" 
         items={beverages} 
         bgColor="bg-gradient-to-t from-[#0b0c0b] to-[#181a19]" 
       />
