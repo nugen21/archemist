@@ -84,7 +84,7 @@ export default function DrinkMenu({ onBack }) {
                           {item.name}
                         </h3>
                         {item.englishName && (
-                          <span className="text-[9px] text-gray-600 font-bold tracking-[0.1em] uppercase opacity-40 hidden lg:inline">
+                          <span className="text-base sm:text-lg text-gray-600 font-bold tracking-[0.1em] uppercase opacity-40 hidden lg:inline">
                             {item.englishName}
                           </span>
                         )}
@@ -131,9 +131,16 @@ export default function DrinkMenu({ onBack }) {
                   >
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div className="flex-grow">
-                        <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-copper transition-colors tracking-tight uppercase leading-tight">
-                          {item.name}
-                        </h3>
+                        <div className="flex items-baseline gap-4 mb-2">
+                          <h3 className="text-xl sm:text-2xl font-bold group-hover:text-copper transition-colors tracking-tight uppercase leading-tight">
+                            {item.name}
+                          </h3>
+                          {item.englishName && (
+                            <span className="text-base sm:text-lg text-gray-600 font-bold tracking-[0.1em] uppercase opacity-40 hidden lg:inline">
+                              {item.englishName}
+                            </span>
+                          )}
+                        </div>
                         <div className="flex items-center gap-4">
                            <div className="h-3 w-[1px] bg-copper/30"></div>
                            <p className="text-gray-400 text-xs sm:text-sm font-bold tracking-wide leading-relaxed break-keep uppercase">
