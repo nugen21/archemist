@@ -6,7 +6,7 @@ export default function Brand() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 items-center mb-6">
           <div className="lg:w-1/2">
-            <h2 className="text-sm font-bold tracking-widest text-copper uppercase mb-3">About Us</h2>
+            <h2 className="text-sm font-bold tracking-widest text-copper uppercase mb-3">브랜드 스토리</h2>
             <h3 className="text-4xl sm:text-5xl font-bold text-gray-100 mb-6 leading-tight break-keep">
               완벽한 한 잔을 향한 <br className="hidden sm:block" />끝없는 실험
             </h3>

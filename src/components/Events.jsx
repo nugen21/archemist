@@ -5,7 +5,7 @@ export default function Events() {
     <section id="events" className="py-3 px-4 sm:px-8 scroll-mt-24 bg-[#111211] border-t border-gray-800">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-4">
-          <h2 className="text-sm font-bold tracking-widest text-copper uppercase mb-3 text-center w-full block">Special Experience</h2>
+          <h2 className="text-sm font-bold tracking-widest text-copper uppercase mb-3 text-center w-full block">특별한 경험</h2>
           <h3 className="text-4xl sm:text-5xl font-bold text-gray-100 mb-6 text-center w-full block">스페셜 이벤트 & 예약</h3>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed font-light break-keep text-center w-full block mt-2">
             오직 아키미스트 로스터스에서만 경험할 수 있는 특별한 시음과 커핑 세션에 당신을 초대합니다.
