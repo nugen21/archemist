@@ -58,12 +58,12 @@ export default function DrinkMenu({ onBack }) {
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-5 relative">
-                <div className="flex items-baseline gap-3 mb-1">
-                  <h2 className="text-lg sm:text-xl font-serif font-black tracking-tighter text-white/50">
+              <div className="flex flex-col mb-8 relative">
+                <div className="flex items-baseline gap-4 mb-2">
+                  <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tighter text-white/50">
                     ESPRESSO
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.3em] text-[7px] uppercase">에스프레소</span>
+                  <span className="text-copper/40 font-bold tracking-[0.3em] text-[10px] uppercase">에스프레소</span>
                 </div>
                 <div className="h-[1px] w-full bg-gradient-to-r from-copper/20 via-transparent to-transparent"></div>
               </div>
@@ -120,13 +120,13 @@ export default function DrinkMenu({ onBack }) {
           {/* Hand Drip Menu Section */}
           {handDripMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-5 relative">
-                <div className="flex items-baseline justify-between gap-4 mb-1">
-                  <div className="flex items-baseline gap-3">
-                    <h2 className="text-lg sm:text-xl font-serif font-black tracking-tighter text-white/50">
+              <div className="flex flex-col mb-8 relative">
+                <div className="flex items-baseline justify-between gap-4 mb-2">
+                  <div className="flex items-baseline gap-4">
+                    <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tighter text-white/50">
                       HAND DRIP
                     </h2>
-                    <span className="text-copper/40 font-bold tracking-[0.3em] text-[7px] uppercase">핸드 드립</span>
+                    <span className="text-copper/40 font-bold tracking-[0.3em] text-[10px] uppercase">핸드 드립</span>
                   </div>
                   <div className="bg-copper/5 border border-copper/10 px-2 py-0.5 rounded-full hidden sm:block">
                     <span className="text-[8px] font-black text-copper/60 uppercase tracking-[0.12em]">
