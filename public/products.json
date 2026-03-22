@@ -23,7 +23,11 @@
     "temp": "94",
     "visible": true,
     "recommended": true,
-    "image": "/images/bean.png"
+    "image": "/images/bean.png",
+    "agtronWb": "77",
+    "roastPointWb": "Moderately Light",
+    "agtronGround": "65",
+    "roastPointGround": "Medium Light"
   },
   {
     "id": 1710850000002,
