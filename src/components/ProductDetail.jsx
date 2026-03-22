@@ -120,12 +120,12 @@ export default function ProductDetail({ product, onBack }) {
               key={idx} 
               className="flex flex-col items-center gap-4 transition-all group/note min-w-[100px] flex-shrink-0"
             >
-              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden p-2.5 shadow-xl group-hover/note:scale-110 transition-transform duration-500 border border-white/10 group-hover/note:border-copper/40">
+              <div className="w-20 h-20 rounded-full bg-[#1a1c1a] flex items-center justify-center overflow-hidden p-2.5 shadow-xl group-hover/note:scale-110 transition-transform duration-500 border border-white/5 group-hover/note:border-copper/40">
                 {imageUrl ? (
                   <img 
                     src={imageUrl} 
                     alt={note} 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain mix-blend-multiply brightness-110 contrast-110"
                     style={{ 
                       filter: config?.filter || 'none',
                       objectPosition: config?.objectPosition || 'center',
@@ -136,7 +136,7 @@ export default function ProductDetail({ product, onBack }) {
                   <div className="w-4 h-4 rounded-full bg-copper/40" />
                 )}
               </div>
-              <span className="text-sm font-bold text-gray-200 tracking-wider text-center group-hover/note:text-copper transition-colors">{note}</span>
+              <span className="text-sm font-bold text-gray-400 tracking-wider text-center group-hover/note:text-white transition-colors uppercase">{note}</span>
             </div>
           );
         })}
