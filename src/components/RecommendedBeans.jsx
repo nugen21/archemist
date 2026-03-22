@@ -159,11 +159,6 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     </p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <span className="text-copper font-bold text-sm tracking-widest">
-                      {bean.category === 'beverage' 
-                        ? (Number(bean.price) / 1000).toFixed(1)
-                        : (Number(bean.price) || 0).toLocaleString()}
-                    </span>
                     {isAdmin && (
                       <button 
                         onClick={(e) => {
@@ -177,7 +172,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     )}
                   </div>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-24 line-clamp-2 italic">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-16 line-clamp-2 italic">
                   {bean.name}
                   {bean.process && (
                     <span className="text-sm sm:text-base text-copper/60 ml-2 not-italic font-sans font-bold align-middle">
@@ -185,6 +180,14 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     </span>
                   )}
                 </h3>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-copper font-bold text-xl tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
+                    {bean.category === 'beverage' 
+                      ? (Number(bean.price) / 1000).toFixed(1)
+                      : (Number(bean.price) || 0).toLocaleString()}
+                    <span className="text-[10px] text-gray-500 font-bold ml-1">KRW</span>
+                  </span>
+                </div>
                 <p className="text-3xl text-gray-400 font-serif italic mb-3">
                   {bean.category === 'beverage' ? '시그니처 레시피' : (bean.variety || '스페셜티')}
                 </p>

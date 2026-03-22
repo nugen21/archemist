@@ -6,10 +6,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
   return (
     <section id={category} className={`py-4 sm:py-8 scroll-mt-24 relative overflow-hidden border-b border-white/5 last:border-b-0 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
-        <div className="flex items-center gap-4 mb-10">
-          <div className="w-12 h-12 rounded-full bg-copper/10 flex items-center justify-center p-2 border border-copper/20 shadow-[0_0_20px_rgba(161,118,76,0.2)] grow-0 shrink-0">
-            <img src={icon} alt={category} className="w-full h-full object-contain" />
-          </div>
+        <div className="flex items-center gap-4 mb-8">
           <div className="flex flex-col">
             <h2 className="text-2xl sm:text-3xl font-serif font-extrabold text-white tracking-widest italic uppercase">
               {category === 'bean' ? '원두' : category === 'dripbag' ? '드립팩' : category === 'coldbrew' ? '콜드브루' : '카페'}
@@ -40,24 +37,21 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                   )}
                 </div>
               )}
-              <div className="flex justify-between items-start mb-4">
-                <div className="bg-copper/5 p-3 rounded-2xl group-hover:bg-copper/15 transition-all duration-500 relative border border-white/5 group-hover:border-copper/20 w-16 h-16 flex items-center justify-center">
-                  <img src={icon} alt={category} className="w-10 h-10 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_10px_rgba(161,118,76,0.3)]" />
-                </div>
-                <div className="flex flex-col items-end">
-                  <span className="text-copper font-bold tracking-widest text-sm drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
+              <div className="flex flex-col mb-4">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 group-hover:text-copper transition-colors line-clamp-2 h-16">
+                  {product.name}
+                </h3>
+                <div className="flex justify-between items-baseline border-b border-copper/10 pb-2">
+                  <span className="text-copper font-bold tracking-widest text-lg drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
                     {product.category === 'beverage' 
                       ? (Number(product.price) / 1000).toFixed(1)
                       : (Number(product.price) || 0).toLocaleString()}
                   </span>
                   {product.recommended && (
-                    <span className="text-[9px] text-copper/60 font-bold tracking-widest uppercase mt-1">아키미스트 추천 셀렉션</span>
+                    <span className="text-[9px] text-copper/60 font-bold tracking-widest uppercase">아키미스트 추천</span>
                   )}
                 </div>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-white mb-2 group-hover:text-copper transition-colors h-16 line-clamp-2">
-                {product.name}
-              </h3>
               {product.roastDate && (
                 <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-copper/40"></span>
