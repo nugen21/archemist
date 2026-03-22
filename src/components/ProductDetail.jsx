@@ -372,7 +372,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                                   })()}
                                 </span>
                               </div>
-                              <div className="w-1 h-5 bg-white shadow-sm rounded-full -translate-y-5"></div>
+                              <div className="w-2.5 h-2.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] rounded-full -translate-y-3 border-2 border-black/50 overflow-hidden"></div>
                             </div>
                           </div>
                         )}
@@ -388,11 +388,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       </div>
                       <div className="relative h-12 flex items-center px-4">
                         <div className="absolute inset-x-4 h-1 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-30 blur-[1px]"></div>
-                        <div className="flex justify-between w-full relative z-10">
+                        <div className="flex justify-between w-full relative z-10 px-0">
                           {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
                             const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
                             return (
-                              <div key={val} className="w-6 h-0.5 rounded-full opacity-20" style={{ backgroundColor: colors[val] }} />
+                              <div key={val} className="w-2 h-2 rounded-full border border-white/5 opacity-40" style={{ backgroundColor: colors[val] }} />
                             );
                           })}
                         </div>
@@ -420,7 +420,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                                   })()}
                                 </span>
                               </div>
-                              <div className="w-1 h-5 bg-copper shadow-sm rounded-full -translate-y-5"></div>
+                              <div className="w-2.5 h-2.5 bg-copper shadow-[0_0_10px_rgba(161,118,76,0.8)] rounded-full -translate-y-3 border-2 border-black/50 overflow-hidden"></div>
                             </div>
                           </div>
                         )}
