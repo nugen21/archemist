@@ -104,7 +104,8 @@
     "process": "블랜드",
     "agtronGround": "65",
     "roastPointGround": "Medium Light",
-    "order": 4
+    "order": 4,
+    "beanType": "blend"
   },
   {
     "id": 1711023000001,
