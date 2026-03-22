@@ -12,7 +12,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
           </div>
           <div className="flex flex-col">
             <h2 className="text-2xl sm:text-3xl font-serif font-extrabold text-white tracking-widest italic uppercase">
-              {category === 'bean' ? '싱글 오리진' : category === 'dripbag' ? '드립백' : category === 'coldbrew' ? '콜드브루' : '카페'} 컬렉션
+              {category === 'bean' ? '원두' : category === 'dripbag' ? '드립팩' : category === 'coldbrew' ? '콜드브루' : '카페'}
             </h2>
           </div>
           <div className="hidden md:block h-[1px] flex-grow ml-8 bg-gradient-to-r from-copper/20 to-transparent"></div>
@@ -43,11 +43,6 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
               <div className="flex justify-between items-start mb-4">
                 <div className="bg-copper/5 p-3 rounded-2xl group-hover:bg-copper/15 transition-all duration-500 relative border border-white/5 group-hover:border-copper/20 w-16 h-16 flex items-center justify-center">
                   <img src={icon} alt={category} className="w-10 h-10 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_10px_rgba(161,118,76,0.3)]" />
-                  {product.recommended && (
-                    <span className="absolute -top-1 -right-1 bg-copper text-[#111] text-[7px] font-black px-1.5 py-0.5 rounded-full shadow-lg border border-[#111]/20 animate-pulse z-20">
-                      BEST
-                    </span>
-                  )}
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="text-copper font-bold tracking-widest text-sm drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
