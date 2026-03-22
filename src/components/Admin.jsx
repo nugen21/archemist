@@ -720,6 +720,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
 
               <div className="lg:col-span-3">
+                { (formData.category !== 'beverage' || formData.subCategory === 'handdrip') && (
                   <div className="bg-[#0b0c0b] border border-gray-800 p-6 rounded-2xl">
                     <div 
                       className="flex justify-between items-center cursor-pointer group mb-1" 
@@ -768,6 +769,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                       <p className="text-copper font-bold text-sm leading-relaxed">{formData.cupNotes || '선택된 항목이 없습니다.'}</p>
                     </div>
                   </div>
+                )}
               </div>
 
               {formData.category === 'beverage' && (
