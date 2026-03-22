@@ -192,17 +192,18 @@ export default function ProductDetail({ product, onBack }) {
         </div>
 
         {/* Detail Information Sections */}
-        <div className="mt-20 border-t border-white/5 pt-20 space-y-24">
+        <div className="mt-20 border-t border-white/5 pt-20 space-y-32">
           
           {/* 1. Shipping & Shelf Life Policy */}
           {!isCafe && (
-            <div className="max-w-4xl">
-              <h3 className="text-3xl font-serif font-black text-white mb-8 flex items-center gap-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
+                <div className="h-[1px] w-12 bg-copper/30"></div>
                 배송 및 소비기한 안내
-                <div className="h-[1px] flex-grow bg-white/10"></div>
+                <div className="h-[1px] w-12 bg-copper/30"></div>
               </h3>
-              <div className="bg-copper/5 border border-copper/20 p-10 rounded-[2.5rem] shadow-2xl">
-                <p className="text-gray-300 text-lg leading-[2] break-keep">
+              <div className="bg-copper/5 border border-copper/20 p-12 rounded-[3rem] shadow-2xl backdrop-blur-sm">
+                <p className="text-gray-300 text-lg sm:text-xl leading-[2.2] break-keep font-medium">
                   원두의 소비기한은 생산일로부터 1년이며, 로스팅 일자는 원두 뒷면에 별도 표기됩니다. 주문하신 상품은 주문일 기준 1~4일 이내에 로스팅 된 원두로 출고됩니다.
                 </p>
               </div>
@@ -210,29 +211,31 @@ export default function ProductDetail({ product, onBack }) {
           )}
 
           {/* 2. Green Bean Story */}
-          <div className="max-w-4xl">
-            <h3 className="text-3xl font-serif font-black text-white mb-8 flex items-center gap-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
+              <div className="h-[1px] w-12 bg-white/10"></div>
               생두 정보
-              <div className="h-[1px] flex-grow bg-white/10"></div>
+              <div className="h-[1px] w-12 bg-white/10"></div>
             </h3>
-            <div className="bg-[#111211] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl">
-              <p className="text-gray-400 text-lg leading-[2] font-medium break-keep">
+            <div className="bg-[#111211] p-12 rounded-[3rem] border border-white/5 shadow-2xl">
+              <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep italic">
                 {product.story || "아키미스트가 엄선한 생두의 상세 정보와 로스터의 정성이 담긴 이야기가 곧 업데이트됩니다."}
               </p>
             </div>
           </div>
 
           {/* 3. Recommended Extraction Recipe */}
-          <div className="max-w-4xl">
-            <h3 className="text-3xl font-serif font-black text-white mb-8 flex items-center gap-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
+              <div className="h-[1px] w-12 bg-copper/30"></div>
               추천 추출 방식
-              <div className="h-[1px] flex-grow bg-white/10"></div>
+              <div className="h-[1px] w-12 bg-copper/30"></div>
             </h3>
-            <div className="bg-[#111211] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Droplet size={80} className="text-copper" />
+            <div className="bg-[#111211] p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+              <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
+                <Droplet size={200} className="text-copper" />
               </div>
-              <p className="text-gray-400 text-lg leading-[2] font-medium break-keep relative z-10">
+              <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
                 {product.recipe || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
               </p>
             </div>
