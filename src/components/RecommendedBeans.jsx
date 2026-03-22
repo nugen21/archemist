@@ -173,7 +173,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     </span>
                   )}
                 </h3>
-                <p className="text-sm text-gray-500 font-serif italic">
+                <p className="text-2xl text-gray-400 font-serif italic mb-4">
                   {bean.category === 'beverage' ? '시그니처 레시피' : (bean.variety || '스페셜티')}
                 </p>
               </div>
