@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 const countryToCode = {
-  '에티오피아': 'et', '콜롬비아': 'co', '과테말라': 'gt', '브라질': 'br', 
-  '케냐': 'ke', '코스타리카': 'cr', '파나마': 'pa', '인도네시아': 'id',
-  '엘살바도르': 'sv', '온두라스': 'hn', '베트남': 'vn', '태국': 'th',
-  '멕시코': 'mx', '페루': 'pe', '르완다': 'rw', '부룬디': 'bi', '니카라과': 'ni'
+  // South & Central America
+  '브라질': 'br', '콜롬비아': 'co', '파나마': 'pa', '과테말라': 'gt', 
+  '코스타리카': 'cr', '온두라스': 'hn', '에콰도르': 'ec', '엘살바도르': 'sv', 
+  '니카라과': 'ni', '멕시코': 'mx', '페루': 'pe', '볼리비아': 'bo', 
+  '도미니카 공화국': 'do', '자메이카': 'jm',
+  // Africa
+  '에티오피아': 'et', '케냐': 'ke', '탄자니아': 'tz', '르완다': 'rw', 
+  '부룬디': 'bi', '우간다': 'ug', '콩고민주공화국': 'cd', '말라위': 'mw', '잠비아': 'zm',
+  // Asia & Middle East
+  '예멘': 'ye', '베트남': 'vn', '인도네시아': 'id', '인도': 'in', 
+  '태국': 'th', '라오스': 'la', '파푸아뉴기니': 'pg', '필리핀': 'ph', 
+  '동티모르': 'tl', '미얀마': 'mm', '중국': 'cn',
+  // Others
+  '미국': 'us', '한국': 'kr'
 };
 
 export default function RecommendedBeans({ isAdmin, onEdit }) {
