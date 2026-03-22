@@ -38,10 +38,10 @@ const FLAVOR_CONFIG = {
   '건포도': { image: '/assets/flavors/stone_fruit.png', color: '#5a189a' }, 
   '무화과': { image: '/assets/flavors/stone_fruit.png', color: '#ae2012' },
   // Floral
-  '자스민': { image: '/assets/flavors/floral.png', color: '#f8edeb' }, 
-  '오렌지 블로썸': { image: '/assets/flavors/floral.png', color: '#ffb5a7' }, 
-  '아카시아': { image: '/assets/flavors/floral.png', color: '#fcd5ce' }, 
-  '국화': { image: '/assets/flavors/floral.png', color: '#f9dcc4' }, 
+  '자스민': { image: '/assets/flavors/floral.png', color: '#f8edeb', filter: 'grayscale(1) brightness(1.8) contrast(1.1)' }, 
+  '오렌지 블로썸': { image: '/assets/flavors/floral.png', color: '#ffb5a7', filter: 'grayscale(0.5) brightness(1.5)' }, 
+  '아카시아': { image: '/assets/flavors/floral.png', color: '#fcd5ce', filter: 'grayscale(1) brightness(1.8)' }, 
+  '국화': { image: '/assets/flavors/floral.png', color: '#f9dcc4', filter: 'grayscale(0.3) brightness(1.3)' }, 
   '장미': { image: '/assets/flavors/floral.png', color: '#ff4d6d' }, 
   '히비스커스': { image: '/assets/flavors/floral.png', color: '#e01e37' },
   // Herbal
@@ -127,6 +127,7 @@ export default function ProductDetail({ product, onBack }) {
                     src={imageUrl} 
                     alt={note} 
                     className="w-full h-full object-cover"
+                    style={{ filter: config?.filter || 'none' }}
                   />
                 ) : (
                   <div className="w-6 h-6 rounded-full bg-copper/40" />
