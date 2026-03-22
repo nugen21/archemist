@@ -27,7 +27,7 @@ export default function Hero({ id }) {
           우리는 그저 당신의 감각이 찾아낸 그 기분 좋은 마주침이 매일 아침 당신을 깨우도록 돕습니다.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-2 w-full px-2">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 w-full px-2 mb-12">
           <a 
             href="#subscribe"
             className="bg-copper text-matte-black px-8 py-3.5 sm:px-10 sm:py-4 rounded-sm font-bold text-base sm:text-lg hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(161,118,76,0.5)] transition-all duration-300 w-full md:w-auto max-w-sm text-center"
