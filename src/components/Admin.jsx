@@ -540,28 +540,30 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
               )}
 
               {(formData.category === 'bean' || formData.category === 'dripbag') && (
-                <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4">
-                  <div className="flex flex-col gap-4">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">홀빈 분석 (Whole Bean Analysis)</h4>
-                    <div className="grid grid-cols-2 gap-4">
-                      <InputField 
-                        label="아그트론 (홀빈)" 
-                        name="agtronWb" 
-                        value={formData.agtronWb} 
-                        onChange={handleChange} 
-                        placeholder="70.0" 
-                        type="number"
-                        step="0.1"
-                      />
-                      <InputField 
-                        label="SCA 포인트 (홀빈)" 
-                        name="roastPointWb" 
-                        value={formData.roastPointWb} 
-                        onChange={handleChange} 
-                        placeholder="자동 계산" 
-                      />
+                <div className={`md:col-span-2 lg:col-span-3 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4`}>
+                  {formData.category === 'bean' && (
+                    <div className="flex flex-col gap-4">
+                      <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">홀빈 분석 (Whole Bean Analysis)</h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        <InputField 
+                          label="아그트론 (홀빈)" 
+                          name="agtronWb" 
+                          value={formData.agtronWb} 
+                          onChange={handleChange} 
+                          placeholder="70.0" 
+                          type="number"
+                          step="0.1"
+                        />
+                        <InputField 
+                          label="SCA 포인트 (홀빈)" 
+                          name="roastPointWb" 
+                          value={formData.roastPointWb} 
+                          onChange={handleChange} 
+                          placeholder="자동 계산" 
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="flex flex-col gap-4">
                     <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">분쇄 분석 (Ground Analysis)</h4>
