@@ -146,7 +146,8 @@ export default function RecommendedBeans({ isAdmin }) {
                           )}
                           <p className="text-copper/80 font-bold text-xs font-sans flex items-center gap-2">
                             <span className="w-1 h-1 rounded-full bg-copper/40"></span>
-                            분쇄: <span className="text-copper text-base font-serif font-black">{bean.roastPointGround} ({bean.agtronGround || '-'})</span>
+                            {bean.category !== 'dripbag' && "분쇄: "}
+                            <span className="text-copper text-base font-serif font-black">{bean.roastPointGround} ({bean.agtronGround || '-'})</span>
                           </p>
                         </div>
                       </div>
