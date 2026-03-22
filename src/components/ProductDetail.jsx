@@ -97,7 +97,7 @@ export default function ProductDetail({ product, onBack }) {
                 <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">아키미스트 아카이브 No.{product.id % 999}</h2>
                 <div className="h-[1px] flex-grow bg-gradient-to-r from-copper/30 to-transparent"></div>
               </div>
-              <h1 className="text-4xl sm:text-6xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
+              <h1 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
                 {product.name}
               </h1>
               <div className="mb-10">
