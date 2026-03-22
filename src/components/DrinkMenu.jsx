@@ -99,11 +99,20 @@ export default function DrinkMenu({ onBack }) {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-5">
-                      <div className="h-[1px] w-10 bg-copper/30 hidden sm:block"></div>
-                      <p className="text-gray-400 text-sm sm:text-base font-medium leading-relaxed break-keep">
-                        {item.cupNotes || item.description || ''}
-                      </p>
+                    <div className="flex items-start gap-4 flex-wrap">
+                      <div className="h-[1px] w-6 bg-copper/30 mt-3 hidden sm:block"></div>
+                      <div className="flex flex-wrap gap-2">
+                        {item.cupNotes && item.cupNotes.split(/[,/|]+/).filter(Boolean).map((note, nIdx) => (
+                          <span key={nIdx} className="px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/10 text-xs font-bold text-copper/80 tracking-widest uppercase">
+                            {note.trim()}
+                          </span>
+                        ))}
+                        {!item.cupNotes && (item.description || item.story) && (
+                          <p className="text-gray-400 text-sm sm:text-base font-medium leading-relaxed break-keep">
+                            {item.description || item.story}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}

@@ -720,7 +720,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
 
               <div className="lg:col-span-3">
-                {['bean', 'dripbag', 'coldbrew'].includes(formData.category) ? (
                   <div className="bg-[#0b0c0b] border border-gray-800 p-6 rounded-2xl">
                     <div 
                       className="flex justify-between items-center cursor-pointer group mb-1" 
@@ -769,16 +768,19 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                       <p className="text-copper font-bold text-sm leading-relaxed">{formData.cupNotes || '선택된 항목이 없습니다.'}</p>
                     </div>
                   </div>
-                ) : (
+              </div>
+
+              {formData.category === 'beverage' && (
+                <div className="lg:col-span-3">
                   <InputField 
                     label="상품 설명" 
-                    name="cupNotes" 
-                    value={formData.cupNotes} 
+                    name="story" 
+                    value={formData.story} 
                     onChange={handleChange} 
-                    placeholder="상품 설명을 입력하세요" 
+                    placeholder="상품 상세 설명을 입력하세요" 
                   />
-                )}
-              </div>
+                </div>
+              )}
 
               {formData.category === 'bean' && (
                 <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4 border-t border-gray-800 pt-6">
