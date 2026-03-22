@@ -325,16 +325,16 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 </div>
                 
                 <div className="relative z-10">
-                  <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-[10px] uppercase mb-6 flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-copper animate-pulse"></span>
-                    로스팅 레벨 가이드
+                  <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-sm uppercase mb-6 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
+                    로스팅 포인트 가이드
                   </h4>
                   
                   <div className="space-y-8">
                     {/* Whole Bean Scale */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-3 mb-1">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest pl-1">홀빈 (Whole Bean)</span>
+                        <span className="text-xs font-black text-gray-400 uppercase tracking-widest pl-1">홀빈 (Whole Bean)</span>
                         <div className="h-[1px] w-4 bg-white/10"></div>
                         <span className="text-lg font-serif font-black text-white">{product.agtronWb || '-'}</span>
                       </div>
@@ -357,8 +357,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="px-2.5 py-1 rounded-full border border-white/30 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-9 scale-90 group-hover:scale-100 transition-transform whitespace-nowrap">
-                                <span className="text-[8px] font-black text-white uppercase tracking-wider">
+                              <div className="px-3 py-1.5 rounded-full border border-white/30 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-10 scale-90 group-hover:scale-110 transition-transform whitespace-nowrap">
+                                <span className="text-[10px] font-black text-white uppercase tracking-wider">
                                   {(() => {
                                     const v = parseFloat(product.agtronWb);
                                     if (v >= 90) return 'Very Light';
@@ -382,7 +382,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     {/* Ground Scale */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-3 mb-1">
-                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest pl-1">분쇄 (Ground)</span>
+                        <span className="text-xs font-black text-gray-400 uppercase tracking-widest pl-1">분쇄 (Ground)</span>
                         <div className="h-[1px] w-4 bg-white/10"></div>
                         <span className="text-lg font-serif font-black text-copper">{product.agtronGround || '-'}</span>
                       </div>
@@ -405,8 +405,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="px-2.5 py-1 rounded-full border border-copper/40 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-9 scale-90 group-hover:scale-100 transition-transform whitespace-nowrap">
-                                <span className="text-[8px] font-black text-copper uppercase tracking-wider">
+                              <div className="px-3 py-1.5 rounded-full border border-copper/40 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-10 scale-90 group-hover:scale-110 transition-transform whitespace-nowrap">
+                                <span className="text-[10px] font-black text-copper uppercase tracking-wider">
                                   {(() => {
                                     const v = parseFloat(product.agtronGround);
                                     if (v >= 90) return 'Very Light';
@@ -428,9 +428,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     </div>
                   </div>
                   
-                  <div className="mt-6 flex justify-between px-1">
-                    <span className="text-[8px] font-black text-gray-600 uppercase tracking-tighter italic">Very Dark (25)</span>
-                    <span className="text-[8px] font-black text-gray-600 uppercase tracking-tighter italic">Very Light (95)</span>
+                  <div className="mt-8 flex justify-between px-1">
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-tighter italic">Very Dark (25)</span>
+                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-tighter italic">Very Light (95)</span>
                   </div>
                 </div>
               </div>
