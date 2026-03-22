@@ -84,7 +84,8 @@
     "roastPointWb": "Moderately Light",
     "agtronGround": "65",
     "roastPointGround": "Medium Light",
-    "order": 3
+    "order": 3,
+    "agingDays": "7"
   },
   {
     "id": 1710850000003,
