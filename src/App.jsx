@@ -66,6 +66,10 @@ function App() {
 
   // Route: Drink Menu
   if (currentPath === '#menu') {
+    if (!isAdmin) {
+      window.location.hash = '#home';
+      return null;
+    }
     return <DrinkMenu onBack={handleBack} />;
   }
 
@@ -88,7 +92,7 @@ function App() {
     <div className="min-h-screen flex flex-col bg-matte-black text-white selection:bg-copper font-sans overflow-x-hidden">
       {/* Landing Page Content */}
       <main className="flex-grow">
-        <Header />
+        <Header isAdmin={isAdmin} />
         <Hero id="home" />
         <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} />
         <Products />

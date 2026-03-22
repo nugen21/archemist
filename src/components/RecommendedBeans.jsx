@@ -26,7 +26,12 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
       const response = await fetch(`/products.json?t=${Date.now()}`);
       if (response.ok) {
         const serverData = await response.json();
-        setBeans(serverData.filter(p => p.recommended === true));
+        setBeans(serverData.filter(p => {
+          const isRec = p.recommended === true;
+          const isBeev = p.category === 'beverage';
+          if (!isAdmin && isBeev) return false;
+          return isRec;
+        }));
         
         // Sync to local storage for persistence/fallback
         try {
@@ -44,7 +49,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
       const localSaved = localStorage.getItem('archemist_beans');
       if (localSaved) {
         const all = JSON.parse(localSaved);
-        setBeans(all.filter(p => p.recommended === true));
+        setBeans(all.filter(p => p.recommended === true && (isAdmin || p.category !== 'beverage')));
       }
     }
   };
@@ -61,7 +66,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('beansUpdated', handleStorageChange);
     };
-  }, []);
+  }, [isAdmin]);
 
   const handleHide = (id) => {
     if (window.confirm('이 원두를 메인 페이지에서 숨기시겠습니까? (관리자 메뉴에서 다시 보이게 할 수 있습니다)')) {

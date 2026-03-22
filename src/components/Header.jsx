@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export default function Header() {
+export default function Header({ isAdmin }) {
   const [user, setUser] = useState(null);
   
   const navLinks = [
@@ -10,7 +10,7 @@ export default function Header() {
     { name: '원두', href: '#recommended' },
     { name: '드립팩', href: '#dripbag' },
     { name: '콜드브루', href: '#coldbrew' },
-    { name: '매장음료', href: '#menu' },
+    ...(isAdmin ? [{ name: '매장음료', href: '#menu' }] : []),
     { name: '문의', href: '#contact', bold: true },
   ];
 
