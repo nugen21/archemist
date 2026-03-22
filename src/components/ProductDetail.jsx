@@ -191,53 +191,53 @@ export default function ProductDetail({ product, onBack }) {
           </div>
         </div>
 
-        {/* Split Recipe & Story Section */}
-        <div className="mt-20 border-t border-white/5 pt-20 space-y-20">
-          <div className="flex flex-col lg:flex-row gap-16">
-            <div className="lg:w-2/3">
-              <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center gap-4">
-                <span className="text-copper italic">Extraction</span> Recipe
+        {/* Detail Information Sections */}
+        <div className="mt-20 border-t border-white/5 pt-20 space-y-24">
+          
+          {/* 1. Shipping & Shelf Life Policy */}
+          {!isCafe && (
+            <div className="max-w-4xl">
+              <h3 className="text-3xl font-serif font-black text-white mb-8 flex items-center gap-4">
+                배송 및 소비기한 안내
                 <div className="h-[1px] flex-grow bg-white/10"></div>
               </h3>
-              <p className="text-copper/60 font-bold text-xs tracking-widest uppercase mb-4 pl-1">추천 추출 방법</p>
-              <div className="bg-[#111211] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-                  <Droplet size={64} className="text-copper" />
-                </div>
-                <p className="text-gray-400 text-lg leading-[2] font-medium break-keep relative z-10">
-                  {product.recipe || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
+              <div className="bg-copper/5 border border-copper/20 p-10 rounded-[2.5rem] shadow-2xl">
+                <p className="text-gray-300 text-lg leading-[2] break-keep">
+                  원두의 소비기한은 생산일로부터 1년이며, 로스팅 일자는 원두 뒷면에 별도 표기됩니다. 주문하신 상품은 주문일 기준 1~4일 이내에 로스팅 된 원두로 출고됩니다.
                 </p>
               </div>
             </div>
+          )}
 
-            {/* Shipping & Shelf Life Policy */}
-            {!isCafe && (
-              <div className="lg:w-1/3">
-                <div className="bg-copper/5 border border-copper/20 p-8 rounded-[2rem] h-full flex flex-col justify-center">
-                  <h4 className="text-copper font-bold text-sm uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-copper"></div>
-                    배송 및 소비기한 안내
-                  </h4>
-                  <p className="text-gray-400 text-sm leading-[1.8] break-keep">
-                    원두의 소비기한은 생산일로부터 1년이며, 로스팅 일자는 원두 뒷면에 별도 표기됩니다. 주문하신 상품은 주문일 기준 1~4일 이내에 로스팅 된 원두로 출고됩니다.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-
+          {/* 2. Green Bean Story */}
           <div className="max-w-4xl">
-            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center gap-4">
-              <span className="text-copper italic">Green Bean</span> Story
+            <h3 className="text-3xl font-serif font-black text-white mb-8 flex items-center gap-4">
+              생두 정보
               <div className="h-[1px] flex-grow bg-white/10"></div>
             </h3>
-            <p className="text-copper/60 font-bold text-xs tracking-widest uppercase mb-4 pl-1">생두 정보</p>
             <div className="bg-[#111211] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl">
               <p className="text-gray-400 text-lg leading-[2] font-medium break-keep">
                 {product.story || "아키미스트가 엄선한 생두의 상세 정보와 로스터의 정성이 담긴 이야기가 곧 업데이트됩니다."}
               </p>
             </div>
           </div>
+
+          {/* 3. Recommended Extraction Recipe */}
+          <div className="max-w-4xl">
+            <h3 className="text-3xl font-serif font-black text-white mb-8 flex items-center gap-4">
+              추천 추출 방식
+              <div className="h-[1px] flex-grow bg-white/10"></div>
+            </h3>
+            <div className="bg-[#111211] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                <Droplet size={80} className="text-copper" />
+              </div>
+              <p className="text-gray-400 text-lg leading-[2] font-medium break-keep relative z-10">
+                {product.recipe || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
+              </p>
+            </div>
+          </div>
+
         </div>
 
       </div>
