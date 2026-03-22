@@ -602,7 +602,12 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
 
               {formData.category !== 'beverage' && (
-                <InputField label="로스팅/제조 날짜" name="roastDate" value={formData.roastDate} onChange={handleChange} placeholder="예: 2024.03.21" />
+                <div className={`md:col-span-2 lg:col-span-1 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-4`}>
+                  <InputField label="로스팅/제조 날짜" name="roastDate" value={formData.roastDate} onChange={handleChange} placeholder="예: 2024.03.21" />
+                  {formData.category === 'bean' && (
+                    <InputField label="에이징 (Aging Date)" name="agingDate" value={formData.agingDate} onChange={handleChange} type="date" />
+                  )}
+                </div>
               )}
 
               {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
