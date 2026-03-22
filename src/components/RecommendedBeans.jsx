@@ -134,9 +134,9 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                   <div className="flex items-center gap-2">
                     {bean.country && countryToCode[bean.country] && (
                       <img 
-                        src={`https://flagcdn.com/w40/${countryToCode[bean.country]}.png`} 
+                        src={`https://flagcdn.com/w80/${countryToCode[bean.country]}.png`} 
                         alt={bean.country} 
-                        className="w-4 h-3 object-cover rounded-sm shadow-sm opacity-80" 
+                        className="w-8 h-6 object-cover rounded-md shadow-sm opacity-90 border border-white/10" 
                       />
                     )}
                     <p className="text-[10px] text-copper/80 tracking-[0.2em] uppercase font-bold">
