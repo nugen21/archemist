@@ -533,6 +533,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <>
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
                   <InputField label="생산 지역" name="region" value={formData.region} onChange={handleChange} placeholder="예: 보케테" />
+                  <InputField label="재배 고도" name="altitude" value={formData.altitude} onChange={handleChange} placeholder="예: 1,800m" />
                   <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
                   <InputField label="가공방식" name="process" value={formData.process} onChange={handleChange} placeholder="예: 워시드" />
                   <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />

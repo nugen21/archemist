@@ -170,9 +170,15 @@ export default function RecommendedBeans({ isAdmin }) {
                         </div>
                       </div>
                     )}
-                    <div className="col-span-2">
-                      <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">로스팅 날짜</p>
-                      <p className="text-gray-200 font-medium text-sm">{bean.roastDate || '-'}</p>
+                    <div className="col-span-2 flex justify-between items-end border-t border-copper/5 pt-3">
+                      <div>
+                        <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">재배 고도</p>
+                        <p className="text-gray-200 font-medium text-sm">{bean.altitude || '-'}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">로스팅 날짜</p>
+                        <p className="text-gray-200 font-medium text-sm">{bean.roastDate || '-'}</p>
+                      </div>
                     </div>
                   </>
                 ) : (
