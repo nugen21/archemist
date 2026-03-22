@@ -126,7 +126,17 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                      />
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111211] to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-80"></div>
+                
+                {/* BeanType Badge */}
+                {['bean', 'dripbag', 'coldbrew'].includes(bean.category) && (
+                  <div className="absolute bottom-4 left-4 z-20">
+                    <span className="bg-black/70 backdrop-blur-md border border-white/10 text-white text-[9px] font-black px-3 py-1.5 rounded-full tracking-widest uppercase shadow-[0_5px_15px_rgba(0,0,0,0.5)] flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse pointer-events-none"></span>
+                      {bean.beanType === 'blend' ? '블렌드' : '싱글 오리진'}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="mb-4 border-b border-copper/10 pb-4">

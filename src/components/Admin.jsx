@@ -36,7 +36,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
-    englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
+    englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single' // beverage specific
   });
 
   const handleCupNoteToggle = (note) => {
@@ -262,7 +262,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
       recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
-      englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
+      englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single'
     });
     setEditingId(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -645,6 +645,19 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
 
               {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
                 <>
+                  <div className="md:col-span-2 lg:col-span-1 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl flex flex-col justify-center">
+                    <label className="text-[10px] font-black text-copper uppercase tracking-widest mb-3">블렌드 여부</label>
+                    <div className="flex gap-6">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="beanType" value="single" checked={formData.beanType === 'single' || !formData.beanType} onChange={handleChange} className="text-copper focus:ring-copper bg-black border-gray-700" />
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">싱글 오리진</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="beanType" value="blend" checked={formData.beanType === 'blend'} onChange={handleChange} className="text-copper focus:ring-copper bg-black border-gray-700" />
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">블렌드</span>
+                      </label>
+                    </div>
+                  </div>
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
                   <InputField label="생산 지역" name="region" value={formData.region} onChange={handleChange} placeholder="예: 보케테" />
                   <InputField label="농장 (Farm)" name="farm" value={formData.farm} onChange={handleChange} placeholder="예: 엘리다 농장" />

@@ -192,6 +192,15 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 
+                {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
+                  <div className="absolute bottom-6 left-6 flex flex-col gap-2 z-20">
+                    <span className="bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] font-black px-4 py-2 rounded-full tracking-[0.2em] uppercase shadow-xl flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.8)]"></span>
+                      {product.beanType === 'blend' ? '블렌드' : '싱글 오리진'}
+                    </span>
+                  </div>
+                )}
+                
                 {/* Product Badge */}
                 <div className="absolute top-6 left-6 flex flex-col gap-2">
                   <span className="bg-copper text-black text-[10px] font-black px-4 py-1.5 rounded-full tracking-[0.2em] uppercase shadow-xl">

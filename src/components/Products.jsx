@@ -29,7 +29,16 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
               {product.image && (
                 <div className="relative w-full h-48 mb-4 rounded-2xl overflow-hidden transition-all duration-700">
                   <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111]/80 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111]/80 via-transparent to-transparent"></div>
+                  
+                  {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
+                    <div className="absolute bottom-3 left-3 z-20">
+                      <span className="bg-black/60 backdrop-blur-md border border-white/10 text-white text-[9px] font-black px-3 py-1.5 rounded-full tracking-widest uppercase shadow-md flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-copper"></span>
+                        {product.beanType === 'blend' ? '블렌드' : '싱글 오리진'}
+                      </span>
+                    </div>
+                  )}
                 </div>
               )}
               <div className="flex justify-between items-start mb-4">
