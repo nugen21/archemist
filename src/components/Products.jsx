@@ -62,7 +62,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                 </p>
               )}
               <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow line-clamp-3">
-                {product.cupNotes || "상세 정보는 매장에 문의해 주세요."}
+                {product.cupNotes}
               </p>
               <button 
                 className="w-full py-4 rounded-xl border border-white/10 text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"

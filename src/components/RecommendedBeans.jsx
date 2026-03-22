@@ -213,10 +213,12 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                 )}
               </div>
 
-              <div className="mb-4 bg-copper/5 p-4 rounded-xl border border-copper/10 shadow-inner">
-                <p className="text-[10px] text-copper uppercase tracking-widest mb-2 font-bold">컵 노트</p>
-                <p className="text-sm text-gray-300 font-medium leading-relaxed line-clamp-2">{bean.cupNotes || '다채롭고 우아한 플레이버'}</p>
-              </div>
+              {bean.cupNotes && (
+                <div className="mb-4 bg-copper/5 p-4 rounded-xl border border-copper/10 shadow-inner">
+                  <p className="text-[10px] text-copper uppercase tracking-widest mb-2 font-bold">컵 노트</p>
+                  <p className="text-sm text-gray-300 font-medium leading-relaxed line-clamp-2">{bean.cupNotes}</p>
+                </div>
+              )}
               
               <div className="mt-auto pt-4">
                 <a 

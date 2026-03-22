@@ -285,26 +285,23 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               </div>
             </div>
 
-            <div className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 mb-12 backdrop-blur-sm shadow-inner overflow-hidden relative group">
-              <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
-                <img src="/logo-alchemist.png" alt="Logo" className="w-32 h-32 object-contain" />
-              </div>
-              <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-lg uppercase mb-6 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
-                컵 노트
-              </h4>
-              <div className="flex flex-col gap-6">
-                <p className="text-gray-400 text-sm font-medium tracking-wide mb-2 italic">
-                  아키미스트 로스터스가 선별한 최상의 테루아를 경험하세요.
-                </p>
-                {renderCupNotes(product.cupNotes)}
-                {!product.cupNotes && (
-                  <p className="text-lg text-gray-500 italic">
-                    {isCafe ? '도심 속에서 즐기는 우아한 연금술 한 잔.' : '테이스팅 노트 준비 중입니다.'}
+            {product.cupNotes && (
+              <div className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 mb-12 backdrop-blur-sm shadow-inner overflow-hidden relative group">
+                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+                  <img src="/logo-alchemist.png" alt="Logo" className="w-32 h-32 object-contain" />
+                </div>
+                <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-lg uppercase mb-6 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
+                  컵 노트
+                </h4>
+                <div className="flex flex-col gap-6">
+                  <p className="text-gray-400 text-sm font-medium tracking-wide mb-2 italic">
+                    아키미스트 로스터스가 선별한 최상의 테루아를 경험하세요.
                   </p>
-                )}
+                  {renderCupNotes(product.cupNotes)}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Technical Context Section */}
             {isBean ? (
