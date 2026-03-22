@@ -9,15 +9,16 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   const [githubToken, setGithubToken] = useState(() => sessionStorage.getItem('archemist_gh_token') || '');
   const [isPushing, setIsPushing] = useState(false);
   const [syncStatus, setSyncStatus] = useState('idle'); // 'idle', 'syncing', 'success', 'error'
+  const [draggedIndex, setDraggedIndex] = useState(null);
   const syncTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
   
   const [formData, setFormData] = useState({
     category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
-    roaster: '', agtronWb: '', agtronGround: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
+    roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-    recommended: false, image: '',
+    recommended: false, image: '', order: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
   });
   const loadBeans = async (forceFetch = true) => {
@@ -231,7 +232,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
       roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-      recommended: false, image: '',
+      recommended: false, image: '', order: '',
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
     });
     setEditingId(null);
@@ -325,9 +326,55 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     }
   }, [initialEditingId, beans, clearEditingId]);
 
-  const filteredBeans = categoryFilter === 'all' 
+  // --- Drag and Drop Handlers ---
+  const handleDragStart = (e, index) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+    // Visual feedback for dragging
+    e.currentTarget.classList.add('opacity-50');
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDrop = async (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      return;
+    }
+
+    const currentSort = categoryFilter === 'all' 
+      ? [...beans].sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999))
+      : [...beans].filter(b => (b.category || 'bean') === categoryFilter).sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999));
+    
+    const reordered = [...currentSort];
+    const item = reordered[draggedIndex];
+    reordered.splice(draggedIndex, 1);
+    reordered.splice(dropIndex, 0, item);
+
+    // Apply new order to the global beans list
+    const updatedGlobal = beans.map(b => {
+      const newPos = reordered.findIndex(f => f.id === b.id);
+      if (newPos !== -1) {
+        return { ...b, order: newPos + 1 };
+      }
+      return b;
+    });
+
+    setBeans(updatedGlobal);
+    localStorage.setItem('archemist_beans', JSON.stringify(updatedGlobal));
+    syncWithGitHub(updatedGlobal);
+    setDraggedIndex(null);
+  };
+  // -----------------------------
+
+  const filteredBeans = (categoryFilter === 'all' 
     ? beans 
-    : beans.filter(b => (b.category || 'bean') === categoryFilter);
+    : beans.filter(b => (b.category || 'bean') === categoryFilter))
+    .sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999));
 
   if (!isAdmin) {
     return (
@@ -529,6 +576,12 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   {formData.category === 'beverage' ? '인기 메뉴로 설정 (Best)' : '추천 상품으로 설정'}
                 </label>
               </div>
+
+              {formData.recommended && (
+                <div className="md:col-span-2 lg:col-span-1">
+                  <InputField label="노출 순서 (낮을수록 먼저)" name="order" value={formData.order} onChange={handleChange} placeholder="예: 1, 2, 3" type="number" />
+                </div>
+              )}
 
               {formData.category === 'beverage' && (
                 <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
