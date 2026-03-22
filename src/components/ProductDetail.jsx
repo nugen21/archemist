@@ -110,7 +110,7 @@ export default function ProductDetail({ product, onBack }) {
     const notes = notesString.split(/[,\s/|]+/).filter(n => n.trim().length > 0);
     
     return (
-      <div className="flex flex-nowrap gap-12 justify-start sm:justify-center overflow-x-auto pb-8 px-4 custom-scrollbar">
+      <div className="flex flex-nowrap gap-6 justify-start sm:justify-center overflow-x-auto pb-8 px-4 custom-scrollbar">
         {notes.map((note, idx) => {
           const config = FLAVOR_CONFIG[note.trim()];
           const imageUrl = config?.image;
@@ -118,25 +118,25 @@ export default function ProductDetail({ product, onBack }) {
           return (
             <div 
               key={idx} 
-              className="flex flex-col items-center gap-5 transition-all group/note min-w-[120px] flex-shrink-0"
+              className="flex flex-col items-center gap-4 transition-all group/note min-w-[90px] flex-shrink-0"
             >
-              <div className="w-28 h-28 rounded-full bg-white flex items-center justify-center overflow-hidden p-3 shadow-[0_15px_35px_rgba(0,0,0,0.3)] group-hover/note:scale-110 transition-transform duration-500 ring-4 ring-white/10 group-hover/note:ring-copper/40">
+              <div className="w-24 h-24 rounded-full bg-[#131513] flex items-center justify-center overflow-hidden p-2 shadow-2xl group-hover/note:scale-110 transition-transform duration-500 border border-white/5 group-hover/note:border-copper/40">
                 {imageUrl ? (
                   <img 
                     src={imageUrl} 
                     alt={note} 
-                    className="w-full h-full object-contain contrast-[1.1] saturate-[1.1]"
+                    className="w-full h-full object-contain contrast-[1.25] saturate-[1.1] scale-110"
                     style={{ 
-                      filter: config?.filter || 'none',
+                      filter: `url(#remove-white) ${config?.filter || ''}`,
                       objectPosition: config?.objectPosition || 'center',
                       transform: config?.scale ? `scale(${config.scale})` : 'none'
                     }}
                   />
                 ) : (
-                  <div className="w-6 h-6 rounded-full bg-copper/40" />
+                  <div className="w-5 h-5 rounded-full bg-copper/40" />
                 )}
               </div>
-              <span className="text-[15px] font-black text-white tracking-widest text-center group-hover/note:text-copper transition-colors uppercase drop-shadow-md">{note}</span>
+              <span className="text-[13px] font-black text-white tracking-widest text-center group-hover/note:text-copper transition-all uppercase drop-shadow-md">{note}</span>
             </div>
           );
         })}
