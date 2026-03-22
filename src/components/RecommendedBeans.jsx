@@ -173,9 +173,14 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     </span>
                   )}
                 </h3>
-                <p className="text-3xl text-gray-400 font-serif italic mb-6">
+                <p className="text-3xl text-gray-400 font-serif italic mb-3">
                   {bean.category === 'beverage' ? '시그니처 레시피' : (bean.variety || '스페셜티')}
                 </p>
+                {bean.cupNotes && (
+                  <p className="text-sm text-copper/90 font-medium leading-relaxed line-clamp-2 mb-6">
+                    {bean.cupNotes}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm mb-4 flex-grow">
@@ -213,12 +218,6 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                 )}
               </div>
 
-              {bean.cupNotes && (
-                <div className="mb-4 bg-copper/5 p-4 rounded-xl border border-copper/10 shadow-inner">
-                  <p className="text-[10px] text-copper uppercase tracking-widest mb-2 font-bold">컵 노트</p>
-                  <p className="text-sm text-gray-300 font-medium leading-relaxed line-clamp-2">{bean.cupNotes}</p>
-                </div>
-              )}
               
               <div className="mt-auto pt-4">
                 <a 
