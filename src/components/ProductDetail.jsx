@@ -1,0 +1,199 @@
+import React from 'react';
+import { Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink } from 'lucide-react';
+
+export default function ProductDetail({ product, onBack }) {
+  if (!product) return null;
+
+  // Formatting logic for display
+  const formattedPrice = product.category === 'beverage' 
+    ? (Number(product.price) / 1000).toFixed(1)
+    : (Number(product.price) || 0).toLocaleString();
+
+  const isBean = product.category === 'bean' || !product.category;
+  const isCafe = product.category === 'beverage';
+
+  return (
+    <section className="min-h-screen py-12 px-4 sm:px-8 bg-[#0b0c0b] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">
+      {/* Back Button */}
+      <button 
+        onClick={onBack}
+        className="fixed top-8 left-8 z-[110] flex items-center gap-2 text-[10px] font-bold text-gray-400 hover:text-copper uppercase tracking-[0.2em] transition-all bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/5 group shadow-2xl"
+      >
+        <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+        BACK TO HOME
+      </button>
+
+      {/* Naver Purchase Sticky Bar (Mobile Only) */}
+      {product.storeUrl && (
+        <div className="lg:hidden fixed bottom-0 left-0 w-full z-[120] p-4 bg-gradient-to-t from-black to-transparent">
+          <a 
+            href={product.storeUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="w-full bg-[#03C75A] text-white py-4 rounded-2xl flex items-center justify-center gap-3 font-black text-sm tracking-widest shadow-[0_10px_30px_rgba(3,199,90,0.3)] animate-bounce-subtle"
+          >
+            <span className="bg-white text-[#03C75A] w-6 h-6 rounded-md flex items-center justify-center font-black text-xs">N</span>
+            NAVER SMART STORE PURCHASE
+          </a>
+        </div>
+      )}
+
+      {/* Decorative background alchemy elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-30"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-20"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10 pt-16">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+          
+          {/* Left: Product Image & Quick Info */}
+          <div className="lg:w-1/2">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-copper/20 to-yellow-600/20 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+              <div className="relative aspect-square rounded-[2rem] overflow-hidden border border-white/5 bg-[#111211] shadow-2xl">
+                {product.image ? (
+                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center p-20 opacity-10 grayscale brightness-200">
+                    <img src={`/images/icons/${product.category || 'bean'}.jpg`} alt="icon" className="w-full h-full object-contain" />
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                
+                {/* Product Badge */}
+                <div className="absolute top-6 left-6 flex flex-col gap-2">
+                  <span className="bg-copper text-black text-[10px] font-black px-4 py-1.5 rounded-full tracking-[0.2em] uppercase shadow-xl">
+                    {product.category || 'Specialty'}
+                  </span>
+                  {product.isSpecial && (
+                    <span className="bg-white/10 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
+                      Seasonal Selection
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            {/* Direct Purchase Button (Desktop Only) */}
+            {product.storeUrl && (
+              <div className="hidden lg:block mt-8">
+                <a 
+                  href={product.storeUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-[#03C75A] hover:bg-[#02b351] text-white py-5 rounded-2xl flex items-center justify-center gap-4 font-black text-lg tracking-widest transition-all shadow-[0_15px_30px_rgba(3,199,90,0.2)] hover:shadow-[0_20px_40px_rgba(3,199,90,0.4)] hover:-translate-y-1"
+                >
+                  <div className="bg-white text-[#03C75A] w-8 h-8 rounded-lg flex items-center justify-center font-black text-base shadow-sm">N</div>
+                  NAVER SMART STORE PURCHASE
+                  <ExternalLink size={18} className="opacity-50" />
+                </a>
+              </div>
+            )}
+          </div>
+
+          {/* Right: Detailed Specifications */}
+          <div className="lg:w-1/2 flex flex-col justify-center">
+            <div className="mb-8">
+              <div className="flex items-center gap-4 mb-4">
+                <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">Alchemist Archive No.{product.id % 999}</h2>
+                <div className="h-[1px] flex-grow bg-gradient-to-r from-copper/30 to-transparent"></div>
+              </div>
+              <h1 className="text-4xl sm:text-6xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
+                {product.name}
+              </h1>
+              <div className="flex items-center gap-6">
+                <p className="text-3xl sm:text-4xl font-serif font-bold text-copper tracking-wider tabular-nums">
+                  {formattedPrice}
+                  <span className="text-xs ml-2 text-gray-500 font-sans uppercase tracking-[0.3em] font-black">{isCafe ? 'K' : 'KRW'}</span>
+                </p>
+                {product.roastDate && (
+                  <div className="h-8 w-[1px] bg-white/10"></div>
+                )}
+                {product.roastDate && (
+                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">Roasted: {product.roastDate}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 mb-12 border-t border-white/5 pt-10">
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">Origin / Country</span>
+                <p className="text-lg font-bold text-white tracking-wide">{product.country || 'Blend'} {product.region && <span className="text-copper opacity-80 mx-1">/</span>} {product.region || ''}</p>
+              </div>
+              <div className="flex flex-col gap-1 text-right">
+                <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">Variety / Process</span>
+                <p className="text-lg font-bold text-white tracking-wide">{product.variety || 'Heirloom'} <span className="text-copper opacity-80 mx-1">/</span> {product.process || 'Washed'}</p>
+              </div>
+            </div>
+
+            <div className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 mb-12 backdrop-blur-sm shadow-inner overflow-hidden relative group">
+              <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+                <img src="/logo-alchemist.png" alt="Logo" className="w-32 h-32 object-contain" />
+              </div>
+              <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-[10px] uppercase mb-6 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
+                Cup Profile
+              </h4>
+              <p className="text-[15px] sm:text-lg text-gray-300 leading-relaxed font-medium break-keep italic">
+                "{product.cupNotes || (isCafe ? '도심 속에서 즐기는 우아한 연금술 한 잔.' : '아키미스트 로스터스가 선별한 최상의 테루아를 경험하세요.')}"
+              </p>
+            </div>
+
+            {/* Technical Context Section */}
+            {isBean ? (
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
+                  <div className="text-copper/60"><Scale size={18} /></div>
+                  <span className="text-[8px] text-gray-600 font-black uppercase tracking-widest text-center">Agtron WB</span>
+                  <span className="text-xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
+                </div>
+                <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
+                  <div className="text-copper/60"><Timer size={18} /></div>
+                  <span className="text-[8px] text-gray-600 font-black uppercase tracking-widest text-center">Roast Time</span>
+                  <span className="text-xl font-serif font-bold text-white">{product.roastTime || '-'}</span>
+                </div>
+                <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
+                  <div className="text-copper/60"><Thermometer size={18} /></div>
+                  <span className="text-[8px] text-gray-600 font-black uppercase tracking-widest text-center">Temp</span>
+                  <span className="text-xl font-serif font-bold text-white">{product.temp || '-'}</span>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-4">
+                 <div className="bg-[#181a19] border border-white/5 py-6 px-4 rounded-2xl flex flex-col items-center gap-1">
+                   <span className="text-[9px] text-gray-600 font-black uppercase tracking-widest">Configuration</span>
+                   <span className="text-lg font-bold text-copper">{product.size || 'Standard'}</span>
+                 </div>
+                 <div className="bg-[#181a19] border border-white/5 py-6 px-4 rounded-2xl flex flex-col items-center gap-1">
+                   <span className="text-[9px] text-gray-600 font-black uppercase tracking-widest">Collection</span>
+                   <span className="text-lg font-bold text-copper uppercase">{product.category}</span>
+                 </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Recipe / Story Section */}
+        <div className="mt-20 border-t border-white/5 pt-20">
+          <div className="max-w-3xl">
+            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center gap-4">
+              <span className="text-copper italic">Recipe</span> & Story
+              <div className="h-[1px] flex-grow bg-white/10"></div>
+            </h3>
+            <div className="space-y-8">
+               <div className="bg-[#111211] p-10 rounded-[2.5rem] border border-white/5 shadow-2xl">
+                 <p className="text-gray-400 text-lg leading-[2] font-medium break-keep">
+                   {product.recipe || "정밀한 추출 가이드와 연금술사의 코멘트가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
+                 </p>
+               </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      {/* Visual Alchemy - Floating Particles */}
+      <div className="absolute top-1/4 left-10 w-1 h-1 bg-copper rounded-full blur-[2px] animate-pulse opacity-40"></div>
+      <div className="absolute bottom-1/4 right-20 w-1.5 h-1.5 bg-copper rounded-full blur-[3px] animate-pulse delay-700 opacity-30"></div>
+    </section>
+  );
+}

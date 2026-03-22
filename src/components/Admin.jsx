@@ -18,7 +18,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
     roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-    recommended: false, image: '', order: '',
+    recommended: false, image: '', order: '', storeUrl: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
   });
   const loadBeans = async (forceFetch = true) => {
@@ -232,7 +232,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
       roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-      recommended: false, image: '', order: '',
+      recommended: false, image: '', order: '', storeUrl: '',
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
     });
     setEditingId(null);
@@ -582,6 +582,10 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   <InputField label="노출 순서 (낮을수록 먼저)" name="order" value={formData.order} onChange={handleChange} placeholder="예: 1, 2, 3" type="number" />
                 </div>
               )}
+
+              <div className="md:col-span-2 lg:col-span-1">
+                <InputField label="네이버 스마트 스토어 URL (선택)" name="storeUrl" value={formData.storeUrl} onChange={handleChange} placeholder="https://smartstore.naver.com/..." />
+              </div>
 
               {formData.category === 'beverage' && (
                 <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
