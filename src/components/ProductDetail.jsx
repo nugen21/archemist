@@ -110,7 +110,7 @@ export default function ProductDetail({ product, onBack }) {
     const notes = notesString.split(/[,\s/|]+/).filter(n => n.trim().length > 0);
     
     return (
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex flex-wrap gap-8 justify-center">
         {notes.map((note, idx) => {
           const config = FLAVOR_CONFIG[note.trim()];
           const imageUrl = config?.image;
@@ -119,13 +119,13 @@ export default function ProductDetail({ product, onBack }) {
           return (
             <div 
               key={idx} 
-              className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full border border-white/5 transition-all group/note shadow-xl"
+              className="flex flex-col items-center gap-5 p-6 rounded-[2.5rem] border border-white/5 transition-all group/note shadow-2xl min-w-[140px]"
               style={{ 
                 backgroundColor: config ? `${categoryColor}08` : 'rgba(255,255,255,0.03)',
                 borderColor: config ? `${categoryColor}20` : 'rgba(255,255,255,0.1)'
               }}
             >
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden p-1.5 shadow-md group-hover/note:scale-110 transition-transform duration-500">
+              <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden p-3 shadow-xl group-hover/note:scale-110 transition-transform duration-500 ring-4 ring-white/5">
                 {imageUrl ? (
                   <img 
                     src={imageUrl} 
@@ -133,10 +133,10 @@ export default function ProductDetail({ product, onBack }) {
                     className="w-full h-full object-contain"
                   />
                 ) : (
-                  <div className="w-2 h-2 rounded-full bg-copper/40" />
+                  <div className="w-4 h-4 rounded-full bg-copper/40" />
                 )}
               </div>
-              <span className="text-base font-bold text-gray-200 tracking-tight">{note}</span>
+              <span className="text-xl font-black text-white tracking-tight text-center">{note}</span>
             </div>
           );
         })}
@@ -290,7 +290,7 @@ export default function ProductDetail({ product, onBack }) {
               </div>
               <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-lg uppercase mb-6 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
-                컵 프로파일
+                컵 노트
               </h4>
               <div className="flex flex-col gap-6">
                 <p className="text-gray-400 text-sm font-medium tracking-wide mb-2 italic">
