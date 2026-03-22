@@ -107,7 +107,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
     if (!notesString) return null;
     
     // Split by comma, space, or slash, then clean up
-    const notes = notesString.split(/[,\s/|]+/).filter(n => n.trim().length > 0);
+    const notes = notesString.split(/[,/|]+/).filter(n => n.trim().length > 0);
     
     return (
       <div className="flex flex-wrap gap-4 justify-center px-4">

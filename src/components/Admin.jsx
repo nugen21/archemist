@@ -39,7 +39,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   });
 
   const handleCupNoteToggle = (note) => {
-    const currentNotes = formData.cupNotes.split(/[,\s]+/).map(n => n.trim()).filter(Boolean);
+    const currentNotes = formData.cupNotes.split(/[,/|]+/).map(n => n.trim()).filter(Boolean);
     const index = currentNotes.indexOf(note);
     let newNotes;
     if (index > -1) {
@@ -715,7 +715,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                           <h5 className="text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 pb-2">{cat.label}</h5>
                           <div className="grid grid-cols-2 gap-2">
                             {cat.items.map((item, itemIdx) => {
-                              const isSelected = formData.cupNotes.split(/[,\s]+/).map(n => n.trim()).includes(item);
+                              const isSelected = formData.cupNotes.split(/[,/|]+/).map(n => n.trim()).includes(item);
                               return (
                                 <button
                                   key={itemIdx}
