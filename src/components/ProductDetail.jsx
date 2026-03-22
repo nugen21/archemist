@@ -77,19 +77,19 @@ const FLAVOR_CONFIG = {
   '시리얼': { image: '/assets/flavors/grains.png', color: '#e76f51' }, 
   '호밀': { image: '/assets/flavors/grains.png', color: '#264653' }, 
   '맥아': { image: '/assets/flavors/grains.png', color: '#2a9d8f' },
-  // Spices / Others (Fallback to grains/earthy icons)
-  '시나몬': { image: '/assets/flavors/grains.png', color: '#bc6c25' }, 
-  '정향': { image: '/assets/flavors/grains.png', color: '#603808' }, 
-  '육두구': { image: '/assets/flavors/grains.png', color: '#8b5e34' }, 
-  '블랙 페퍼': { image: '/assets/flavors/grains.png', color: '#212529' }, 
-  '생강': { image: '/assets/flavors/grains.png', color: '#dda15e' },
-  '버터': { image: '/assets/flavors/sweet.png', color: '#fefae0' }, 
-  '크림': { image: '/assets/flavors/sweet.png', color: '#ffffff' }, 
-  '치즈': { image: '/assets/flavors/sweet.png', color: '#fee440' },
-  '가죽': { image: '/assets/flavors/nuts.png', color: '#4e342e' }, 
-  '흙내음': { image: '/assets/flavors/nuts.png', color: '#582f0e' }, 
-  '담뱃잎': { image: '/assets/flavors/nuts.png', color: '#333d29' }, 
-  '파이프 담배': { image: '/assets/flavors/nuts.png', color: '#000000' }
+  // Spices / Others (Cinnamon Focus)
+  '시나몬': { image: '/assets/flavors/batch_others.png', color: '#bc6c25', objectPosition: '90% 10%', scale: '2' }, 
+  '정향': { image: '/assets/flavors/batch_others.png', color: '#603808', objectPosition: '90% 10%', scale: '2' }, 
+  '육두구': { image: '/assets/flavors/batch_others.png', color: '#8b5e34', objectPosition: '90% 10%', scale: '2' }, 
+  '블랙 페퍼': { image: '/assets/flavors/batch_others.png', color: '#212529', objectPosition: '90% 10%', scale: '2' }, 
+  '생강': { image: '/assets/flavors/batch_others.png', color: '#dda15e', objectPosition: '90% 10%', scale: '2' },
+  '버터': { image: '/assets/flavors/batch_others.png', color: '#fefae0', objectPosition: '10% 90%', scale: '2' }, 
+  '크림': { image: '/assets/flavors/batch_others.png', color: '#ffffff', objectPosition: '10% 90%', scale: '2' }, 
+  '치즈': { image: '/assets/flavors/batch_others.png', color: '#fee440', objectPosition: '10% 90%', scale: '2' },
+  '가죽': { image: '/assets/flavors/batch_others.png', color: '#4e342e', objectPosition: '90% 90%', scale: '2' }, 
+  '흙내음': { image: '/assets/flavors/batch_others.png', color: '#582f0e', objectPosition: '90% 90%', scale: '2' }, 
+  '담뱃잎': { image: '/assets/flavors/batch_others.png', color: '#333d29', objectPosition: '90% 90%', scale: '2' }, 
+  '파이프 담배': { image: '/assets/flavors/batch_others.png', color: '#000000', objectPosition: '90% 90%', scale: '2' }
 };
 
 export default function ProductDetail({ product, onBack }) {
@@ -126,8 +126,12 @@ export default function ProductDetail({ product, onBack }) {
                   <img 
                     src={imageUrl} 
                     alt={note} 
-                    className="w-full h-full object-cover"
-                    style={{ filter: config?.filter || 'none' }}
+                    className="w-full h-full object-cover origin-center"
+                    style={{ 
+                      filter: config?.filter || 'none',
+                      objectPosition: config?.objectPosition || 'center',
+                      transform: config?.scale ? `scale(${config.scale})` : 'none'
+                    }}
                   />
                 ) : (
                   <div className="w-6 h-6 rounded-full bg-copper/40" />
