@@ -529,7 +529,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <InputField label="로스팅/제조 날짜" name="roastDate" value={formData.roastDate} onChange={handleChange} placeholder="예: 2024.03.21" />
               )}
 
-              {formData.category === 'bean' && (
+              {(formData.category === 'bean' || formData.category === 'dripbag') && (
                 <>
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
                   <InputField label="생산 지역" name="region" value={formData.region} onChange={handleChange} placeholder="예: 보케테" />

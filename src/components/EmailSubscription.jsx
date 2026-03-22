@@ -97,7 +97,5 @@ const EmailSubscription = () => {
     </div>
   );
 };
-  );
-};
 
 export default EmailSubscription;
