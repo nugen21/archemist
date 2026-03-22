@@ -7,58 +7,89 @@ import {
 
 const FLAVOR_CONFIG = {
   // Berries
-  '딸기': { icon: Cherry, color: '#ff4d6d' }, '라즈베리': { icon: Cherry, color: '#ff4d6d' }, 
-  '블루베리': { icon: Cherry, color: '#4361ee' }, '블랙베리': { icon: Cherry, color: '#7209b7' },
+  '딸기': { image: '/assets/flavors/berries.png', color: '#ff4d6d' }, 
+  '라즈베리': { image: '/assets/flavors/berries.png', color: '#ff4d6d' }, 
+  '블루베리': { image: '/assets/flavors/berries.png', color: '#4361ee' }, 
+  '블랙베리': { image: '/assets/flavors/berries.png', color: '#7209b7' },
   // Citrus
-  '레몬': { icon: Citrus, color: '#fee440' }, '라임': { icon: Citrus, color: '#aacc00' }, 
-  '오렌지': { icon: Citrus, color: '#fb8500' }, '자몽': { icon: Citrus, color: '#ff7b00' }, 
-  '베르가못': { icon: Citrus, color: '#9ef01a' }, '귤': { icon: Citrus, color: '#ff9100' },
+  '레몬': { image: '/assets/flavors/citrus.png', color: '#fee440' }, 
+  '라임': { image: '/assets/flavors/citrus.png', color: '#aacc00' }, 
+  '오렌지': { image: '/assets/flavors/citrus.png', color: '#fb8500' }, 
+  '자몽': { image: '/assets/flavors/citrus.png', color: '#ff7b00' }, 
+  '베르가못': { image: '/assets/flavors/citrus.png', color: '#9ef01a' }, 
+  '귤': { image: '/assets/flavors/citrus.png', color: '#ff9100' },
   // Stone Fruit
-  '복숭아': { icon: Cherry, color: '#ff9b54' }, '자두': { icon: Cherry, color: '#e01e37' }, 
-  '살구': { icon: Cherry, color: '#ffb38a' }, '체리': { icon: Cherry, color: '#c9184a' },
+  '복숭아': { image: '/assets/flavors/stone_fruit.png', color: '#ff9b54' }, 
+  '자두': { image: '/assets/flavors/stone_fruit.png', color: '#e01e37' }, 
+  '살구': { image: '/assets/flavors/stone_fruit.png', color: '#ffb38a' }, 
+  '체리': { image: '/assets/flavors/stone_fruit.png', color: '#c9184a' },
   // Tropical
-  '망고': { icon: Sun, color: '#ffbe0b' }, '파인애플': { icon: Sun, color: '#ffd60a' }, 
-  '패션후르츠': { icon: Sun, color: '#fb5607' }, '리치': { icon: Sun, color: '#ff006e' }, 
-  '파파야': { icon: Sun, color: '#ff9f1c' },
-  // Nuts/Coconut
-  '코코넛': { icon: TreePalm, color: '#fefae0' }, '구운 아몬드': { icon: Nut, color: '#9c6644' }, 
-  '헤이즐넛': { icon: Nut, color: '#7f5539' }, '피넛': { icon: Nut, color: '#b08968' }, 
-  '호두': { icon: Nut, color: '#7b4b3a' }, '캐슈넛': { icon: Nut, color: '#ede0d4' },
+  '망고': { image: '/assets/flavors/tropical.png', color: '#ffbe0b' }, 
+  '파인애플': { image: '/assets/flavors/tropical.png', color: '#ffd60a' }, 
+  '패션후르츠': { image: '/assets/flavors/tropical.png', color: '#fb5607' }, 
+  '리치': { image: '/assets/flavors/tropical.png', color: '#ff006e' }, 
+  '파파야': { image: '/assets/flavors/tropical.png', color: '#ff9f1c' },
+  '코코넛': { image: '/assets/flavors/tropical.png', color: '#fefae0' },
   // Orchard
-  '사과': { icon: Apple, color: '#ef233c' }, '배': { icon: Apple, color: '#d9ed92' }, 
-  '청포도': { icon: Grape, color: '#b5e48c' }, '적포도': { icon: Grape, color: '#9d4edd' }, 
-  '건포도': { icon: Grape, color: '#5a189a' }, '무화과': { icon: Grape, color: '#ae2012' },
+  '사과': { image: '/assets/flavors/citrus.png', color: '#ef233c' }, // Fallback to citrus
+  '배': { image: '/assets/flavors/stone_fruit.png', color: '#d9ed92' }, // Fallback to stone fruit
+  '청포도': { image: '/assets/flavors/stone_fruit.png', color: '#b5e48c' }, 
+  '적포도': { image: '/assets/flavors/stone_fruit.png', color: '#9d4edd' }, 
+  '건포도': { image: '/assets/flavors/stone_fruit.png', color: '#5a189a' }, 
+  '무화과': { image: '/assets/flavors/stone_fruit.png', color: '#ae2012' },
   // Floral
-  '자스민': { icon: Flower2, color: '#f8edeb' }, '오렌지 블로썸': { icon: Flower2, color: '#ffb5a7' }, 
-  '아카시아': { icon: Flower2, color: '#fcd5ce' }, '국화': { icon: Flower2, color: '#f9dcc4' }, 
-  '장미': { icon: Flower2, color: '#ff4d6d' }, '히비스커스': { icon: Flower2, color: '#e01e37' },
+  '자스민': { image: '/assets/flavors/floral.png', color: '#f8edeb' }, 
+  '오렌지 블로썸': { image: '/assets/flavors/floral.png', color: '#ffb5a7' }, 
+  '아카시아': { image: '/assets/flavors/floral.png', color: '#fcd5ce' }, 
+  '국화': { image: '/assets/flavors/floral.png', color: '#f9dcc4' }, 
+  '장미': { image: '/assets/flavors/floral.png', color: '#ff4d6d' }, 
+  '히비스커스': { image: '/assets/flavors/floral.png', color: '#e01e37' },
   // Herbal
-  '허브': { icon: Sprout, color: '#52b788' }, '라벤더': { icon: Sprout, color: '#b79ced' }, 
-  '카모마일': { icon: Sprout, color: '#f9f9f9' }, '민트': { icon: Leaf, color: '#2d6a4f' }, 
-  '세이지': { icon: Leaf, color: '#74c69d' }, '로즈마리': { icon: Leaf, color: '#1b4332' }, 
-  '딜': { icon: Leaf, color: '#95d5b2' },
+  '허브': { image: '/assets/flavors/herbal.png', color: '#52b788' }, 
+  '라벤더': { image: '/assets/flavors/herbal.png', color: '#b79ced' }, 
+  '카모마일': { image: '/assets/flavors/herbal.png', color: '#f9f9f9' }, 
+  '민트': { image: '/assets/flavors/herbal.png', color: '#2d6a4f' }, 
+  '세이지': { image: '/assets/flavors/herbal.png', color: '#74c69d' }, 
+  '로즈마리': { image: '/assets/flavors/herbal.png', color: '#1b4332' }, 
+  '딜': { image: '/assets/flavors/herbal.png', color: '#95d5b2' },
   // Sweet
-  '흑설탕': { icon: Candy, color: '#6f4e37' }, '백설탕': { icon: Candy, color: '#ffffff' }, 
-  '시럽': { icon: Candy, color: '#e85d04' }, '캐러멜': { icon: Candy, color: '#9d4203' }, 
-  '당밀': { icon: Candy, color: '#3d2b1f' }, '아카시아 꿀': { icon: Candy, color: '#ffd60a' }, 
-  '잡화 꿀': { icon: Candy, color: '#ffbe0b' },
-  // Chocolate/Bean
-  '다크 초콜릿': { icon: Bean, color: '#2b1b17' }, '밀크 초콜릿': { icon: Bean, color: '#7b3f00' }, 
-  '카카오': { icon: Bean, color: '#4e342e' }, '화이트 초콜릿': { icon: Bean, color: '#fefae0' },
+  '흑설탕': { image: '/assets/flavors/sweet.png', color: '#6f4e37' }, 
+  '백설탕': { image: '/assets/flavors/sweet.png', color: '#ffffff' }, 
+  '시럽': { image: '/assets/flavors/sweet.png', color: '#e85d04' }, 
+  '캐러멜': { image: '/assets/flavors/sweet.png', color: '#9d4203' }, 
+  '당밀': { image: '/assets/flavors/sweet.png', color: '#3d2b1f' }, 
+  '아카시아 꿀': { image: '/assets/flavors/sweet.png', color: '#ffd60a' }, 
+  '잡화 꿀': { image: '/assets/flavors/sweet.png', color: '#ffbe0b' },
+  // Chocolate
+  '다크 초콜릿': { image: '/assets/flavors/chocolate.png', color: '#2b1b17' }, 
+  '밀크 초콜릿': { image: '/assets/flavors/chocolate.png', color: '#7b3f00' }, 
+  '카카오': { image: '/assets/flavors/chocolate.png', color: '#4e342e' }, 
+  '화이트 초콜릿': { image: '/assets/flavors/chocolate.png', color: '#fefae0' },
+  // Nuts
+  '구운 아몬드': { image: '/assets/flavors/nuts.png', color: '#9c6644' }, 
+  '헤이즐넛': { image: '/assets/flavors/nuts.png', color: '#7f5539' }, 
+  '피넛': { image: '/assets/flavors/nuts.png', color: '#b08968' }, 
+  '호두': { image: '/assets/flavors/nuts.png', color: '#7b4b3a' }, 
+  '캐슈넛': { image: '/assets/flavors/nuts.png', color: '#ede0d4' },
   // Grains
-  '보리': { icon: Wheat, color: '#e9c46a' }, '구운 빵': { icon: Wheat, color: '#f4a261' }, 
-  '시리얼': { icon: Wheat, color: '#e76f51' }, '호밀': { icon: Wheat, color: '#264653' }, 
-  '맥아': { icon: Wheat, color: '#2a9d8f' },
-  // Spices
-  '시나몬': { icon: Sparkles, color: '#bc6c25' }, '정향': { icon: Sparkles, color: '#603808' }, 
-  '육두구': { icon: Sparkles, color: '#8b5e34' }, '블랙 페퍼': { icon: Sparkles, color: '#212529' }, 
-  '생강': { icon: Sparkles, color: '#dda15e' },
-  // Dairy
-  '버터': { icon: Milk, color: '#fefae0' }, '크림': { icon: Milk, color: '#ffffff' }, 
-  '치즈': { icon: Milk, color: '#fee440' },
-  // Other
-  '가죽': { icon: Wind, color: '#4e342e' }, '흙내음': { icon: Wind, color: '#582f0e' }, 
-  '담뱃잎': { icon: Wind, color: '#333d29' }, '파이프 담배': { icon: Wind, color: '#000000' }
+  '보리': { image: '/assets/flavors/grains.png', color: '#e9c46a' }, 
+  '구운 빵': { image: '/assets/flavors/grains.png', color: '#f4a261' }, 
+  '시리얼': { image: '/assets/flavors/grains.png', color: '#e76f51' }, 
+  '호밀': { image: '/assets/flavors/grains.png', color: '#264653' }, 
+  '맥아': { image: '/assets/flavors/grains.png', color: '#2a9d8f' },
+  // Spices / Others (Fallback to grains/earthy icons)
+  '시나몬': { image: '/assets/flavors/grains.png', color: '#bc6c25' }, 
+  '정향': { image: '/assets/flavors/grains.png', color: '#603808' }, 
+  '육두구': { image: '/assets/flavors/grains.png', color: '#8b5e34' }, 
+  '블랙 페퍼': { image: '/assets/flavors/grains.png', color: '#212529' }, 
+  '생강': { image: '/assets/flavors/grains.png', color: '#dda15e' },
+  '버터': { image: '/assets/flavors/sweet.png', color: '#fefae0' }, 
+  '크림': { image: '/assets/flavors/sweet.png', color: '#ffffff' }, 
+  '치즈': { image: '/assets/flavors/sweet.png', color: '#fee440' },
+  '가죽': { image: '/assets/flavors/nuts.png', color: '#4e342e' }, 
+  '흙내음': { image: '/assets/flavors/nuts.png', color: '#582f0e' }, 
+  '담뱃잎': { image: '/assets/flavors/nuts.png', color: '#333d29' }, 
+  '파이프 담배': { image: '/assets/flavors/nuts.png', color: '#000000' }
 };
 
 export default function ProductDetail({ product, onBack }) {
@@ -82,26 +113,30 @@ export default function ProductDetail({ product, onBack }) {
       <div className="flex flex-wrap gap-3 justify-center">
         {notes.map((note, idx) => {
           const config = FLAVOR_CONFIG[note.trim()];
-          const IconComponent = config?.icon;
-          const iconColor = config?.color || '#ffffff';
+          const imageUrl = config?.image;
+          const categoryColor = config?.color || '#ffffff';
           
           return (
             <div 
               key={idx} 
-              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-white/5 transition-all group/note shadow-lg"
+              className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full border border-white/5 transition-all group/note shadow-xl"
               style={{ 
-                backgroundColor: config ? `${iconColor}15` : 'rgba(255,255,255,0.05)',
-                borderColor: config ? `${iconColor}30` : 'rgba(255,255,255,0.1)'
+                backgroundColor: config ? `${categoryColor}08` : 'rgba(255,255,255,0.03)',
+                borderColor: config ? `${categoryColor}20` : 'rgba(255,255,255,0.1)'
               }}
             >
-              {IconComponent && (
-                <IconComponent 
-                  size={18} 
-                  style={{ color: iconColor }}
-                  className="group-hover/note:scale-125 transition-transform duration-300" 
-                />
-              )}
-              <span className="text-lg font-bold text-gray-200 tracking-tight">{note}</span>
+              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden p-1.5 shadow-md group-hover/note:scale-110 transition-transform duration-500">
+                {imageUrl ? (
+                  <img 
+                    src={imageUrl} 
+                    alt={note} 
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <div className="w-2 h-2 rounded-full bg-copper/40" />
+                )}
+              </div>
+              <span className="text-base font-bold text-gray-200 tracking-tight">{note}</span>
             </div>
           );
         })}
