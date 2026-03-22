@@ -111,12 +111,20 @@ export default function ProductDetail({ product, onBack }) {
                     {formattedPrice}
                     <span className="text-lg ml-3 text-gray-500 font-sans font-black">원</span>
                   </p>
-                  {product.roastDate && (
-                    <div className="flex flex-col items-end gap-1">
-                      <span className="text-sm text-gray-600 font-black uppercase tracking-[0.2em]">로스팅 날짜</span>
-                      <span className="text-lg text-gray-400 font-bold tabular-nums">{product.roastDate}</span>
-                    </div>
-                  )}
+                  <div className="flex gap-8">
+                    {product.roastDate && (
+                      <div className="flex flex-col items-end gap-1">
+                        <span className="text-sm text-gray-600 font-black uppercase tracking-[0.2em]">로스팅 날짜</span>
+                        <span className="text-lg text-gray-400 font-bold tabular-nums">{product.roastDate}</span>
+                      </div>
+                    )}
+                    {product.category === 'bean' && product.agingDate && (
+                      <div className="flex flex-col items-end gap-1">
+                        <span className="text-sm text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
+                        <span className="text-lg text-copper font-bold tabular-nums">{product.agingDate}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

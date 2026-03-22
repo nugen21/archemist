@@ -18,7 +18,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
     roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-    recommended: false, image: '', order: '', storeUrl: '',
+    recommended: false, image: '', order: '', storeUrl: '', agingDate: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
   });
   const loadBeans = async (forceFetch = true) => {
@@ -232,7 +232,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
       roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-      recommended: false, image: '', order: '', storeUrl: '',
+      recommended: false, image: '', order: '', storeUrl: '', agingDate: '',
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
     });
     setEditingId(null);
