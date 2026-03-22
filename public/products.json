@@ -53,7 +53,9 @@
     "subCategory": "espresso",
     "id": 1774158540680,
     "order": 2,
-    "agingDays": "7"
+    "agingDays": "7",
+    "farm": "에스메랄다",
+    "micromill": "엘벨로"
   },
   {
     "id": 1710850000001,
