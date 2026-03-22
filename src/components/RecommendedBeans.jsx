@@ -116,10 +116,10 @@ export default function RecommendedBeans({ isAdmin }) {
                   </p>
                   <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-24 line-clamp-2 italic">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-24 line-clamp-2 italic">
                   {bean.name}
                   {bean.process && (
-                    <span className="text-base sm:text-lg text-copper/60 ml-2 not-italic font-sans font-bold align-middle">
+                    <span className="text-sm sm:text-base text-copper/60 ml-2 not-italic font-sans font-bold align-middle">
                       ({bean.process})
                     </span>
                   )}
