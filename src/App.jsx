@@ -80,7 +80,7 @@ function App() {
     const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
     const product = saved.find(p => p.id === id);
     if (product) {
-      return <ProductDetail product={product} onBack={handleBack} />;
+      return <ProductDetail product={product} onBack={handleBack} isAdmin={isAdmin} onEdit={handleEdit} />;
     }
   }
 

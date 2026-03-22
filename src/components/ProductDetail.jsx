@@ -2,7 +2,7 @@ import {
   Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
   Flower2, Sprout, Leaf, Candy, Bean, Nut, Wheat, 
-  Sparkles, Milk, Wind
+  Sparkles, Milk, Wind, Edit
 } from 'lucide-react';
 
 const FLAVOR_CONFIG = {
@@ -92,7 +92,7 @@ const FLAVOR_CONFIG = {
   '파이프 담배': { image: '/assets/flavors/batch_others.png', color: '#000000', objectPosition: '90% 90%', scale: '2' }
 };
 
-export default function ProductDetail({ product, onBack }) {
+export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
   if (!product) return null;
 
   // Formatting logic for display
@@ -154,6 +154,17 @@ export default function ProductDetail({ product, onBack }) {
         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
         홈으로 돌아가기
       </button>
+
+      {/* Admin Edit Button */}
+      {isAdmin && onEdit && (
+        <button 
+          onClick={() => onEdit(product.id)}
+          className="fixed top-8 right-8 z-[110] flex items-center gap-2 text-[10px] font-bold text-copper/80 hover:text-copper uppercase tracking-[0.2em] transition-all bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-copper/30 hover:border-copper/60 hover:bg-black/60 group shadow-[0_0_15px_rgba(161,118,76,0.15)] hover:shadow-[0_0_20px_rgba(161,118,76,0.3)]"
+        >
+          <Edit size={14} className="group-hover:scale-110 transition-transform" />
+          해당 상품 편집
+        </button>
+      )}
 
       {/* Naver Purchase Sticky Bar (Mobile Only) */}
       {product.storeUrl && (
