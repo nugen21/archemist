@@ -139,7 +139,8 @@ export default function ProductDetail({ product, onBack }) {
                       { label: '마이크로밀', value: product.micromill || '정보 없음' },
                       { label: '재배 고도', value: product.altitude || '정보 없음' },
                       { label: '품종', value: product.variety || '정보 없음' },
-                      { label: '가공방식', value: product.process || '정보 없음' }
+                      { label: '가공방식', value: product.process || '정보 없음' },
+                      { label: '용량', value: product.size || '200g' }
                     ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
                         <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">{item.label}</span>
