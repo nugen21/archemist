@@ -1,5 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+const FLAVOR_CATEGORIES = [
+  { label: '베리류 (Berries)', items: ['딸기', '라즈베리', '블루베리', '블랙베리'] },
+  { label: '시트러스 (Citrus)', items: ['레몬', '라임', '오렌지', '자몽', '베르가못', '귤'] },
+  { label: '핵과류 (Stone Fruit)', items: ['복숭아', '자두', '살구', '체리'] },
+  { label: '열대과일 (Tropical)', items: ['망고', '파인애플', '패션후르츠', '리치', '파파야', '코코넛'] },
+  { label: '과일 (Orchard)', items: ['사과', '배', '청포도', '적포도', '건포도', '무화과'] },
+  { label: '플로럴 (Floral)', items: ['장미', '자스민', '히비스커스', '오렌지 블로썸', '아카시아', '국화'] },
+  { label: '허브 (Herbal)', items: ['허브', '라벤더', '카모마일', '민트', '세이지', '로즈마리', '딜'] },
+  { label: '달콤함 (Sweet)', items: ['흑설탕', '백설탕', '시럽', '캐러멜', '당밀', '아카시아 꿀', '잡화 꿀'] },
+  { label: '초콜릿 (Chocolate)', items: ['다크 초콜릿', '밀크 초콜릿', '카카오', '화이트 초콜릿'] },
+  { label: '견과류 (Nuts)', items: ['구운 아몬드', '헤이즐넛', '피넛', '호두', '캐슈넛'] },
+  { label: '곡물 (Grains)', items: ['보리', '구운 빵', '시리얼', '호밀', '맥아'] },
+  { label: '향신료 (Spices)', items: ['시나몬', '정향', '육두구', '블랙 페퍼', '생강'] },
+  { label: '기타 (Others)', items: ['버터', '크림', '치즈', '가죽', '흙내음', '담뱃잎', '파이프 담배'] }
+];
+
 const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   const [activeTab, setActiveTab] = useState('manage'); // 'register' or 'manage'
   const [editingId, setEditingId] = useState(null);
@@ -21,6 +37,18 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
   });
+
+  const handleCupNoteToggle = (note) => {
+    const currentNotes = formData.cupNotes.split(/[,\s]+/).map(n => n.trim()).filter(Boolean);
+    const index = currentNotes.indexOf(note);
+    let newNotes;
+    if (index > -1) {
+      newNotes = currentNotes.filter(n => n !== note);
+    } else {
+      newNotes = [...currentNotes, note];
+    }
+    setFormData(prev => ({ ...prev, cupNotes: newNotes.join(', ') }));
+  };
   const loadBeans = async (forceFetch = true) => {
     try {
       // Always fetch fresh data from server to ensure global sync
@@ -678,13 +706,49 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
 
               <div className="lg:col-span-3">
-                 <InputField 
-                    label={formData.category === 'bean' ? "컵 노트" : "상품 설명"} 
+                {formData.category === 'bean' ? (
+                  <div className="bg-[#0b0c0b] border border-gray-800 p-6 rounded-2xl">
+                    <label className="block text-[11px] font-black text-copper uppercase tracking-widest mb-6">컵 노트 선택 (Multi-select)</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {FLAVOR_CATEGORIES.map((cat, catIdx) => (
+                        <div key={catIdx} className="space-y-3">
+                          <h5 className="text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 pb-2">{cat.label}</h5>
+                          <div className="grid grid-cols-2 gap-2">
+                            {cat.items.map((item, itemIdx) => {
+                              const isSelected = formData.cupNotes.split(/[,\s]+/).map(n => n.trim()).includes(item);
+                              return (
+                                <button
+                                  key={itemIdx}
+                                  type="button"
+                                  onClick={() => handleCupNoteToggle(item)}
+                                  className={`px-3 py-2 rounded-lg text-[10px] font-bold text-left transition-all border ${
+                                    isSelected 
+                                      ? 'bg-copper/20 border-copper text-copper shadow-[0_0_15px_rgba(161,118,76,0.2)]' 
+                                      : 'bg-black/40 border-gray-800 text-gray-500 hover:border-gray-600'
+                                  }`}
+                                >
+                                  {item}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-6 pt-4 border-t border-gray-800">
+                      <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2">선택된 컵 노트:</p>
+                      <p className="text-copper font-bold text-sm leading-relaxed">{formData.cupNotes || '품목을 선택해 주세요.'}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <InputField 
+                    label="상품 설명" 
                     name="cupNotes" 
                     value={formData.cupNotes} 
                     onChange={handleChange} 
-                    placeholder={formData.category === 'bean' ? "예: 쟈스민, 복숭아, 베르가못, 꿀" : "상품 설명을 입력하세요"} 
+                    placeholder="상품 설명을 입력하세요" 
                   />
+                )}
               </div>
 
               {formData.category === 'bean' && (
