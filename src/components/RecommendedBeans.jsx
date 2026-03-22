@@ -88,10 +88,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-copper/5 blur-[120px] rounded-full"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-4 relative">
-          <div className="inline-block px-4 py-1 rounded-full border border-copper/20 bg-copper/5 mb-6">
-             <p className="text-[10px] text-copper tracking-[0.4em] uppercase font-bold">연금술사의 셀렉션</p>
-          </div>
+        <div className="text-center mb-8 relative">
           <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white mb-4 tracking-tight italic drop-shadow-[0_0_20px_rgba(161,118,76,0.2)]">
             로스터의 선택
           </h2>

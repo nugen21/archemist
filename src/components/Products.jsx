@@ -11,7 +11,6 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
             <img src={icon} alt={category} className="w-full h-full object-contain" />
           </div>
           <div className="flex flex-col">
-            <span className="text-copper/60 font-serif font-bold tracking-[0.4em] text-[9px] uppercase mb-1">The Archemist's Selection</span>
             <h2 className="text-2xl sm:text-3xl font-serif font-extrabold text-white tracking-widest italic uppercase">
               {category === 'bean' ? '싱글 오리진' : category === 'dripbag' ? '드립백' : category === 'coldbrew' ? '콜드브루' : '카페'} 컬렉션
             </h2>
