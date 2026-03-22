@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Admin = ({ isAdmin, setAdminAuth }) => {
+const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   const [activeTab, setActiveTab] = useState('manage'); // 'register' or 'manage'
   const [editingId, setEditingId] = useState(null);
   const [loginForm, setLoginForm] = useState({ id: '', password: '' });

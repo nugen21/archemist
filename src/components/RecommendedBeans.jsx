@@ -7,7 +7,7 @@ const countryToCode = {
   '멕시코': 'mx', '페루': 'pe', '르완다': 'rw', '부룬디': 'bi', '니카라과': 'ni'
 };
 
-export default function RecommendedBeans({ isAdmin }) {
+export default function RecommendedBeans({ isAdmin, onEdit }) {
   const [beans, setBeans] = useState([]);
 
   const loadBeans = async () => {
@@ -132,7 +132,20 @@ export default function RecommendedBeans({ isAdmin }) {
                       {bean.region && ` | ${bean.region}`}
                     </p>
                   </div>
-                  <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
+                    {isAdmin && (
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onEdit(bean.id);
+                        }}
+                        className="text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-2 py-0.5 rounded-md transition-all uppercase tracking-tighter"
+                      >
+                        Edit 수정
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-24 line-clamp-2 italic">
                   {bean.name}
