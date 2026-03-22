@@ -72,7 +72,8 @@ export default function DrinkMenu({ onBack }) {
                 {espressoMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
-                    className={`group relative py-2 px-6 sm:px-8 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 ${item.isSpecial ? 'shadow-[0_0_20px_rgba(161,118,76,0.06)]' : ''}`}
+                    onClick={() => window.location.hash = `#product/${item.id}`}
+                    className={`group relative py-2 px-6 sm:px-8 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 cursor-pointer ${item.isSpecial ? 'shadow-[0_0_20px_rgba(161,118,76,0.06)]' : ''}`}
                   >
                     {item.isSpecial && (
                       <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-blue-500/5 pointer-events-none"></div>
@@ -127,7 +128,8 @@ export default function DrinkMenu({ onBack }) {
                 {handDripMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
-                    className="group relative py-2.5 px-6 sm:px-8 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500"
+                    onClick={() => window.location.hash = `#product/${item.id}`}
+                    className="group relative py-2.5 px-6 sm:px-8 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 cursor-pointer"
                   >
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div className="flex-grow">

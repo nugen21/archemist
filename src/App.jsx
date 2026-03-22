@@ -5,7 +5,7 @@ import RecommendedBeans from './components/RecommendedBeans';
 import Events from './components/Events';
 import Brand from './components/Brand';
 import Contact from './components/Contact';
-import BeanDetail from './components/BeanDetail';
+import ProductDetail from './components/ProductDetail';
 import Admin from './components/Admin';
 import DrinkMenu from './components/DrinkMenu';
 import EmailSubscription from './components/EmailSubscription';
@@ -74,13 +74,13 @@ function App() {
     return <EmailSubscription />;
   }
 
-  // Route: Bean Detail
-  if (currentPath.startsWith('#bean/')) {
+  // Route: Product Detail
+  if (currentPath.startsWith('#product/')) {
     const id = parseInt(currentPath.split('/')[1]);
     const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
-    const bean = saved.find(b => b.id === id);
-    if (bean) {
-      return <BeanDetail bean={bean} onBack={handleBack} />;
+    const product = saved.find(p => p.id === id);
+    if (product) {
+      return <ProductDetail product={product} onBack={handleBack} />;
     }
   }
 
