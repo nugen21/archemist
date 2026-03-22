@@ -15,7 +15,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   
   const [formData, setFormData] = useState({
     category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
-    name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
+    name: '', price: '', country: '', region: '', farm: '', micromill: '', variety: '', altitude: '', process: '', 
     roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
@@ -229,7 +229,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   const resetForm = () => {
     setFormData({
       category: 'bean',
-      name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
+      name: '', price: '', country: '', region: '', farm: '', micromill: '', variety: '', altitude: '', process: '', 
       roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
       recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
@@ -614,6 +614,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                 <>
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
                   <InputField label="생산 지역" name="region" value={formData.region} onChange={handleChange} placeholder="예: 보케테" />
+                  <InputField label="농장 (Farm)" name="farm" value={formData.farm} onChange={handleChange} placeholder="예: 엘리다 농장" />
+                  <InputField label="마이크로밀 (Micro-mill)" name="micromill" value={formData.micromill} onChange={handleChange} placeholder="예: 엘리다 밀" />
                   <InputField label="재배 고도" name="altitude" value={formData.altitude} onChange={handleChange} placeholder="예: 1,800m" />
                   <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
                   <InputField label="가공방식" name="process" value={formData.process} onChange={handleChange} placeholder="예: 워시드" />
