@@ -110,7 +110,7 @@ export default function ProductDetail({ product, onBack }) {
     const notes = notesString.split(/[,\s/|]+/).filter(n => n.trim().length > 0);
     
     return (
-      <div className="flex flex-wrap gap-8 justify-center">
+      <div className="flex flex-wrap gap-12 justify-center">
         {notes.map((note, idx) => {
           const config = FLAVOR_CONFIG[note.trim()];
           const imageUrl = config?.image;
@@ -119,24 +119,20 @@ export default function ProductDetail({ product, onBack }) {
           return (
             <div 
               key={idx} 
-              className="flex flex-col items-center gap-5 p-6 rounded-[2.5rem] border border-white/5 transition-all group/note shadow-2xl min-w-[140px]"
-              style={{ 
-                backgroundColor: config ? `${categoryColor}08` : 'rgba(255,255,255,0.03)',
-                borderColor: config ? `${categoryColor}20` : 'rgba(255,255,255,0.1)'
-              }}
+              className="flex flex-col items-center gap-6 p-4 rounded-[2.5rem] transition-all group/note min-w-[160px]"
             >
-              <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden p-3 shadow-xl group-hover/note:scale-110 transition-transform duration-500 ring-4 ring-white/5">
+              <div className="w-36 h-36 rounded-full flex items-center justify-center overflow-hidden shadow-2xl group-hover/note:scale-110 transition-transform duration-500 ring-2 ring-white/10 group-hover/note:ring-copper/40">
                 {imageUrl ? (
                   <img 
                     src={imageUrl} 
                     alt={note} 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-4 h-4 rounded-full bg-copper/40" />
+                  <div className="w-6 h-6 rounded-full bg-copper/40" />
                 )}
               </div>
-              <span className="text-xl font-black text-white tracking-tight text-center">{note}</span>
+              <span className="text-xl font-black text-white tracking-widest text-center uppercase">{note}</span>
             </div>
           );
         })}
