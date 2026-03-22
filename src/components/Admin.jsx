@@ -157,9 +157,10 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
 
-    if (name === 'agtronGround') {
+    if (name === 'agtronGround' || name === 'agtronWb') {
       const agtronVal = parseFloat(value);
-      let autoRoastPoint = formData.roastPoint;
+      const isGround = name === 'agtronGround';
+      let autoRoastPoint = '';
       
       if (!isNaN(agtronVal)) {
         if (agtronVal >= 95) autoRoastPoint = 'Very Light';
@@ -170,14 +171,12 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
         else if (agtronVal >= 45) autoRoastPoint = 'Medium Dark';
         else if (agtronVal >= 35) autoRoastPoint = 'Dark';
         else autoRoastPoint = 'Very Dark';
-      } else if (value === '') {
-        autoRoastPoint = '';
       }
 
       setFormData(prev => ({
         ...prev,
         [name]: newValue,
-        roastPoint: autoRoastPoint
+        [isGround ? 'roastPointGround' : 'roastPointWb']: autoRoastPoint
       }));
     } else {
       setFormData(prev => ({ ...prev, [name]: newValue }));
@@ -230,7 +229,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     setFormData({
       category: 'bean',
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
-      roaster: '', agtronWb: '', agtronGround: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
+      roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
       recommended: false, image: '',
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
@@ -562,6 +561,15 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                       step="0.1"
                     />
                   </div>
+                  <div className="lg:col-span-1">
+                    <InputField 
+                      label="SCA 포인트 (홀빈)" 
+                      name="roastPointWb" 
+                      value={formData.roastPointWb} 
+                      onChange={handleChange} 
+                      placeholder="점수 입력 시 자동 계산" 
+                    />
+                  </div>
 
                   <div className="lg:col-span-1">
                     <InputField 
@@ -572,6 +580,15 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                       placeholder="예: 65" 
                       type="number"
                       step="0.1"
+                    />
+                  </div>
+                  <div className="lg:col-span-1">
+                    <InputField 
+                      label="SCA 포인트 (분쇄)" 
+                      name="roastPointGround" 
+                      value={formData.roastPointGround} 
+                      onChange={handleChange} 
+                      placeholder="점수 입력 시 자동 계산" 
                     />
                   </div>
                 </>
