@@ -15,7 +15,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const [formData, setFormData] = useState({
     category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
-    roaster: '', roastWb: '', roastGround: '', agtron: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
+    roaster: '', agtronWb: '', agtronGround: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
@@ -157,7 +157,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
 
-    if (name === 'agtron') {
+    if (name === 'agtronGround') {
       const agtronVal = parseFloat(value);
       let autoRoastPoint = formData.roastPoint;
       
@@ -230,7 +230,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     setFormData({
       category: 'bean',
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
-      roaster: '', roastWb: '', roastGround: '', agtron: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
+      roaster: '', agtronWb: '', agtronGround: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
       recommended: false, image: '',
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
@@ -497,23 +497,11 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <>
                   <div className="lg:col-span-1">
                     <InputField 
-                      label="아그트론 (Agtron)" 
-                      name="agtron" 
-                      value={formData.agtron} 
-                      onChange={handleChange} 
-                      placeholder="예: 65" 
-                      type="number"
-                      step="0.1"
-                    />
-                  </div>
-
-                  <div className="lg:col-span-1">
-                    <InputField 
-                      label="로스팅 포인트 (SCA)" 
+                      label="SCA 로스팅 포인트" 
                       name="roastPoint" 
                       value={formData.roastPoint} 
                       onChange={handleChange} 
-                      placeholder="아그트론 입력 시 자동 계산" 
+                      placeholder="분쇄 점수 입력 시 자동 계산" 
                     />
                   </div>
                 </>
@@ -557,14 +545,36 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                   <InputField label="생산 지역" name="region" value={formData.region} onChange={handleChange} placeholder="예: 보케테" />
                   <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
                   <InputField label="가공방식" name="process" value={formData.process} onChange={handleChange} placeholder="예: 워시드" />
-                  <InputField label="홀빈 배전도" name="roastWb" value={formData.roastWb} onChange={handleChange} placeholder="예: 64.6" />
-                  <InputField label="분쇄 배전도" name="roastGround" value={formData.roastGround} onChange={handleChange} placeholder="예: 77.4" />
                   <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
                 </>
               )}
 
-              {formData.category === 'dripbag' && (
-                <InputField label="분쇄 배전도" name="roastGround" value={formData.roastGround} onChange={handleChange} placeholder="예: 77.4" />
+              {(formData.category === 'bean' || formData.category === 'dripbag') && (
+                <>
+                  <div className="lg:col-span-1">
+                    <InputField 
+                      label="아그트론 (홀빈)" 
+                      name="agtronWb" 
+                      value={formData.agtronWb} 
+                      onChange={handleChange} 
+                      placeholder="예: 70" 
+                      type="number"
+                      step="0.1"
+                    />
+                  </div>
+
+                  <div className="lg:col-span-1">
+                    <InputField 
+                      label="아그트론 (분쇄)" 
+                      name="agtronGround" 
+                      value={formData.agtronGround} 
+                      onChange={handleChange} 
+                      placeholder="예: 65" 
+                      type="number"
+                      step="0.1"
+                    />
+                  </div>
+                </>
               )}
 
               <div className="lg:col-span-3">
