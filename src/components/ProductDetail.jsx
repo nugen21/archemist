@@ -159,33 +159,32 @@ export default function ProductDetail({ product, onBack }) {
 
             {/* Technical Context Section */}
             {isBean ? (
-              <div className="space-y-8 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-2xl overflow-hidden relative group">
-                <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
-                  <Scale size={120} className="text-copper" />
+              <div className="space-y-6 bg-[#181a19] border border-white/5 p-6 rounded-[2rem] hover:border-copper/20 transition-all duration-500 shadow-xl overflow-hidden relative group">
+                <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
+                  <Scale size={100} className="text-copper" />
                 </div>
                 
                 <div className="relative z-10">
-                  <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-sm uppercase mb-8 flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
+                  <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-[10px] uppercase mb-6 flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-copper animate-pulse"></span>
                     로스팅 레벨 가이드
                   </h4>
                   
-                  <div className="space-y-12">
+                  <div className="space-y-8">
                     {/* Whole Bean Scale */}
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">홀빈 (Whole Bean)</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-2xl font-serif font-black text-white">{product.agtronWb || '-'}</span>
-                        </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest pl-1">홀빈 (Whole Bean)</span>
+                        <div className="h-[1px] w-4 bg-white/10"></div>
+                        <span className="text-lg font-serif font-black text-white">{product.agtronWb || '-'}</span>
                       </div>
-                      <div className="relative h-16 flex items-center px-4">
-                        <div className="absolute inset-x-4 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-40 blur-[1px]"></div>
+                      <div className="relative h-12 flex items-center px-4">
+                        <div className="absolute inset-x-4 h-1 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-30 blur-[1px]"></div>
                         <div className="flex justify-between w-full relative z-10 px-0">
                           {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
                             const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
                             return (
-                              <div key={val} className="w-2.5 h-2.5 rounded-full border border-white/10" style={{ backgroundColor: colors[val] }} />
+                              <div key={val} className="w-2 h-2 rounded-full border border-white/5" style={{ backgroundColor: colors[val] }} />
                             );
                           })}
                         </div>
@@ -198,8 +197,8 @@ export default function ProductDetail({ product, onBack }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="px-3 h-8 rounded-full border-2 border-white bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform whitespace-nowrap">
-                                <span className="text-[10px] font-black text-white uppercase tracking-wider">
+                              <div className="px-2.5 py-1 rounded-full border border-white/30 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-9 scale-90 group-hover:scale-100 transition-transform whitespace-nowrap">
+                                <span className="text-[8px] font-black text-white uppercase tracking-wider">
                                   {(() => {
                                     const v = parseFloat(product.agtronWb);
                                     if (v >= 90) return 'Very Light';
@@ -213,7 +212,7 @@ export default function ProductDetail({ product, onBack }) {
                                   })()}
                                 </span>
                               </div>
-                              <div className="w-1.5 h-6 bg-white shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-full -translate-y-6"></div>
+                              <div className="w-1 h-5 bg-white shadow-sm rounded-full -translate-y-5"></div>
                             </div>
                           </div>
                         )}
@@ -221,20 +220,19 @@ export default function ProductDetail({ product, onBack }) {
                     </div>
 
                     {/* Ground Scale */}
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">분쇄 (Ground)</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-2xl font-serif font-black text-white">{product.agtronGround || '-'}</span>
-                        </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest pl-1">분쇄 (Ground)</span>
+                        <div className="h-[1px] w-4 bg-white/10"></div>
+                        <span className="text-lg font-serif font-black text-copper">{product.agtronGround || '-'}</span>
                       </div>
-                      <div className="relative h-16 flex items-center px-4">
-                        <div className="absolute inset-x-4 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-40 blur-[1px]"></div>
+                      <div className="relative h-12 flex items-center px-4">
+                        <div className="absolute inset-x-4 h-1 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-30 blur-[1px]"></div>
                         <div className="flex justify-between w-full relative z-10">
                           {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
                             const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
                             return (
-                              <div key={val} className="w-8 h-1 rounded-sm opacity-30" style={{ backgroundColor: colors[val] }} />
+                              <div key={val} className="w-6 h-0.5 rounded-full opacity-20" style={{ backgroundColor: colors[val] }} />
                             );
                           })}
                         </div>
@@ -247,8 +245,8 @@ export default function ProductDetail({ product, onBack }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="px-3 h-8 rounded-full border-2 border-copper bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(255,100,0,0.2)] flex items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform whitespace-nowrap">
-                                <span className="text-[10px] font-black text-copper uppercase tracking-wider">
+                              <div className="px-2.5 py-1 rounded-full border border-copper/40 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-9 scale-90 group-hover:scale-100 transition-transform whitespace-nowrap">
+                                <span className="text-[8px] font-black text-copper uppercase tracking-wider">
                                   {(() => {
                                     const v = parseFloat(product.agtronGround);
                                     if (v >= 90) return 'Very Light';
@@ -262,7 +260,7 @@ export default function ProductDetail({ product, onBack }) {
                                   })()}
                                 </span>
                               </div>
-                              <div className="w-1.5 h-6 bg-copper shadow-[0_0_15px_rgba(255,100,0,0.3)] rounded-full -translate-y-6"></div>
+                              <div className="w-1 h-5 bg-copper shadow-sm rounded-full -translate-y-5"></div>
                             </div>
                           </div>
                         )}
@@ -270,9 +268,9 @@ export default function ProductDetail({ product, onBack }) {
                     </div>
                   </div>
                   
-                  <div className="mt-8 flex justify-between px-1">
-                    <span className="text-[9px] font-black text-gray-600 uppercase tracking-tighter italic">Very Dark (25)</span>
-                    <span className="text-[9px] font-black text-gray-600 uppercase tracking-tighter italic">Very Light (95)</span>
+                  <div className="mt-6 flex justify-between px-1">
+                    <span className="text-[8px] font-black text-gray-600 uppercase tracking-tighter italic">Very Dark (25)</span>
+                    <span className="text-[8px] font-black text-gray-600 uppercase tracking-tighter italic">Very Light (95)</span>
                   </div>
                 </div>
               </div>
