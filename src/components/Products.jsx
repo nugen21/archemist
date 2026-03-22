@@ -47,9 +47,6 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                       ? (Number(product.price) / 1000).toFixed(1)
                       : (Number(product.price) || 0).toLocaleString()}
                   </span>
-                  {product.recommended && (
-                    <span className="text-[9px] text-copper/60 font-bold tracking-widest uppercase">아키미스트 추천</span>
-                  )}
                 </div>
               </div>
               {product.roastDate && (
