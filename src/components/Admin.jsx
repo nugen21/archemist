@@ -549,7 +549,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag' || formData.category === 'bean') && (
                 <div className="flex flex-col justify-end">
                   <InputField 
-                    label={formData.category === 'beverage' ? "사이즈 (Size)" : formData.category === 'bean' ? "중량 (Weight)" : "용량/구성"} 
+                    label={formData.category === 'beverage' ? "사이즈 (Size)" : formData.category === 'bean' ? "중량 (Weight)" : "중량/구성"} 
                     name="size" 
                     value={formData.size} 
                     onChange={handleChange} 
