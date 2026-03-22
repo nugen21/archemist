@@ -26,6 +26,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   const [isPushing, setIsPushing] = useState(false);
   const [syncStatus, setSyncStatus] = useState('idle'); // 'idle', 'syncing', 'success', 'error'
   const [draggedIndex, setDraggedIndex] = useState(null);
+  const [isCupNoteExpanded, setIsCupNoteExpanded] = useState(false);
   const syncTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
   
@@ -708,36 +709,51 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               <div className="lg:col-span-3">
                 {formData.category === 'bean' ? (
                   <div className="bg-[#0b0c0b] border border-gray-800 p-6 rounded-2xl">
-                    <label className="block text-[11px] font-black text-copper uppercase tracking-widest mb-6">컵 노트 선택 (Multi-select)</label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {FLAVOR_CATEGORIES.map((cat, catIdx) => (
-                        <div key={catIdx} className="space-y-3">
-                          <h5 className="text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 pb-2">{cat.label}</h5>
-                          <div className="grid grid-cols-2 gap-2">
-                            {cat.items.map((item, itemIdx) => {
-                              const isSelected = formData.cupNotes.split(/[,/|]+/).map(n => n.trim()).includes(item);
-                              return (
-                                <button
-                                  key={itemIdx}
-                                  type="button"
-                                  onClick={() => handleCupNoteToggle(item)}
-                                  className={`px-3 py-2 rounded-lg text-[10px] font-bold text-left transition-all border ${
-                                    isSelected 
-                                      ? 'bg-copper/20 border-copper text-copper shadow-[0_0_15px_rgba(161,118,76,0.2)]' 
-                                      : 'bg-black/40 border-gray-800 text-gray-500 hover:border-gray-600'
-                                  }`}
-                                >
-                                  {item}
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ))}
+                    <div 
+                      className="flex justify-between items-center cursor-pointer group mb-1" 
+                      onClick={() => setIsCupNoteExpanded(!isCupNoteExpanded)}
+                    >
+                      <label className="block text-[11px] font-black text-copper uppercase tracking-widest cursor-pointer group-hover:text-yellow-500 transition-colors">컵 노트 선택 (Multi-select)</label>
+                      <button type="button" className="text-xs font-bold text-gray-500 group-hover:text-copper transition-colors">
+                        {isCupNoteExpanded ? '▲ 접기' : '▼ 펼치기'}
+                      </button>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-gray-800">
-                      <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2">선택된 컵 노트:</p>
-                      <p className="text-copper font-bold text-sm leading-relaxed">{formData.cupNotes || '품목을 선택해 주세요.'}</p>
+                    
+                    {isCupNoteExpanded && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+                        {FLAVOR_CATEGORIES.map((cat, catIdx) => (
+                          <div key={catIdx} className="space-y-3">
+                            <h5 className="text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 pb-2">{cat.label}</h5>
+                            <div className="grid grid-cols-2 gap-2">
+                              {cat.items.map((item, itemIdx) => {
+                                const isSelected = formData.cupNotes.split(/[,/|]+/).map(n => n.trim()).includes(item);
+                                return (
+                                  <button
+                                    key={itemIdx}
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleCupNoteToggle(item);
+                                    }}
+                                    className={`px-3 py-2 rounded-lg text-[10px] font-bold text-left transition-all border ${
+                                      isSelected 
+                                        ? 'bg-copper/20 border-copper text-copper shadow-[0_0_15px_rgba(161,118,76,0.2)]' 
+                                        : 'bg-black/40 border-gray-800 text-gray-500 hover:border-gray-600'
+                                    }`}
+                                  >
+                                    {item}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className={`mt-4 pt-4 border-t border-gray-800 transition-all ${!isCupNoteExpanded ? 'mt-2 pt-2 border-t-0' : ''}`}>
+                      <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">선택된 컵 노트:</p>
+                      <p className="text-copper font-bold text-sm leading-relaxed">{formData.cupNotes || '선택된 항목이 없습니다.'}</p>
                     </div>
                   </div>
                 ) : (
