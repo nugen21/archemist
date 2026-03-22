@@ -159,16 +159,89 @@ export default function ProductDetail({ product, onBack }) {
 
             {/* Technical Context Section */}
             {isBean ? (
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#181a19] border border-white/5 p-6 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
-                  <div className="text-copper/60"><Scale size={20} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 레벨 (홀빈)</span>
-                  <span className="text-3xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
+              <div className="space-y-8 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-2xl overflow-hidden relative group">
+                <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
+                  <Scale size={120} className="text-copper" />
                 </div>
-                <div className="bg-[#181a19] border border-white/5 p-6 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
-                  <div className="text-copper/60"><Scale size={20} className="opacity-50" /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 레벨 (분쇄)</span>
-                  <span className="text-3xl font-serif font-bold text-white">{product.agtronGround || '-'}</span>
+                
+                <div className="relative z-10">
+                  <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-sm uppercase mb-8 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
+                    SCA 로스팅 레벨 가이드
+                  </h4>
+                  
+                  <div className="space-y-12">
+                    {/* Whole Bean Scale */}
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">홀빈 (Whole Bean)</span>
+                        <span className="text-xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
+                      </div>
+                      <div className="relative h-12 flex items-center px-2">
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#D4B483] via-[#8B6242] to-[#2B1B17] opacity-20 blur-xl rounded-full"></div>
+                        <div className="flex justify-between w-full relative z-10">
+                          {[95, 85, 75, 65, 55, 45, 35, 25].map((val) => {
+                            const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
+                            const isActive = product.agtronWb && Math.abs(parseFloat(product.agtronWb) - val) < 5;
+                            return (
+                              <div key={val} className="relative flex flex-col items-center group/item">
+                                <div 
+                                  className={`w-4 h-4 rounded-full transition-all duration-500 ${isActive ? 'scale-150 ring-4 ring-white/20 shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'scale-100 opacity-40 hover:opacity-100 hover:scale-110'}`}
+                                  style={{ backgroundColor: colors[val] }}
+                                />
+                                {isActive && (
+                                  <div className="absolute -top-10 animate-bounce-subtle">
+                                    <div className="w-8 h-8 rounded-full border-2 border-copper flex items-center justify-center bg-black/80 backdrop-blur-sm shadow-xl">
+                                      <div className="w-4 h-4 rounded-sm rotate-45" style={{ backgroundColor: colors[val] }}></div>
+                                    </div>
+                                    <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-copper mx-auto"></div>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Ground Scale */}
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">분쇄 (Ground)</span>
+                        <span className="text-xl font-serif font-bold text-white">{product.agtronGround || '-'}</span>
+                      </div>
+                      <div className="relative h-12 flex items-center px-2">
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#D4B483] via-[#8B6242] to-[#2B1B17] opacity-20 blur-xl rounded-full"></div>
+                        <div className="flex justify-between w-full relative z-10">
+                          {[95, 85, 75, 65, 55, 45, 35, 25].map((val) => {
+                            const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
+                            const isActive = product.agtronGround && Math.abs(parseFloat(product.agtronGround) - val) < 5;
+                            return (
+                              <div key={val} className="relative flex flex-col items-center group/item">
+                                <div 
+                                  className={`w-8 h-2 rounded-sm transition-all duration-500 ${isActive ? 'scale-150 ring-2 ring-white/10 shadow-[0_0_10px_rgba(255,255,255,0.2)]' : 'scale-100 opacity-30 hover:opacity-100 hover:scale-110'}`}
+                                  style={{ backgroundColor: colors[val] }}
+                                />
+                                {isActive && (
+                                  <div className="absolute -top-10 animate-pulse">
+                                    <div className="w-8 h-8 rounded-lg border-2 border-white/20 flex items-center justify-center bg-black/80 backdrop-blur-sm shadow-xl">
+                                      <div className="w-4 h-2 rounded-sm" style={{ backgroundColor: colors[val] }}></div>
+                                    </div>
+                                    <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white/20 mx-auto"></div>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8 flex justify-between px-1">
+                    <span className="text-[9px] font-black text-gray-600 uppercase tracking-tighter italic">Very Light (95)</span>
+                    <span className="text-[9px] font-black text-gray-600 uppercase tracking-tighter italic">Very Dark (25)</span>
+                  </div>
                 </div>
               </div>
             ) : (
