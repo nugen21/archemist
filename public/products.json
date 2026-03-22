@@ -202,7 +202,7 @@
     "order": 11
   },
   {
-    "category": "coldbrew",
+    "category": "bean",
     "name": "Los Angeles El Vendaval Catuai",
     "price": "25000",
     "country": "코스타리카",
@@ -241,7 +241,7 @@
     "id": 1774220602392
   },
   {
-    "category": "bean",
+    "category": "dripbag",
     "name": "Puente San Antonia Geisha - 드립백 (10ea)",
     "price": "25000",
     "country": "코스타리카",
