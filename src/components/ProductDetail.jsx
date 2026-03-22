@@ -162,7 +162,7 @@ export default function ProductDetail({ product, onBack }) {
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
                   <div className="text-copper/60"><Scale size={18} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">아그트론 (홀빈)</span>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 레벨</span>
                   <span className="text-2xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
                 </div>
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
