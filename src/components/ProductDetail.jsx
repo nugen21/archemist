@@ -102,7 +102,7 @@ export default function ProductDetail({ product, onBack }) {
               </h1>
               <div className="mb-10">
                 <div className="flex flex-col gap-2 mb-6 border-b border-white/5 pb-6">
-                  <span className="text-base text-gray-500 font-black uppercase tracking-[0.3em]">원산지 / 국가</span>
+                  <span className="text-base text-gray-500 font-black uppercase tracking-[0.3em]">지역</span>
                   <p className="text-3xl font-bold text-white tracking-wide">{product.country || '블렌드'} {product.region && <span className="text-copper opacity-80 mx-1">/</span>} {product.region || ''}</p>
                 </div>
 
