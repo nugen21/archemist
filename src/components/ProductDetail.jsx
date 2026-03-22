@@ -139,8 +139,8 @@ export default function ProductDetail({ product, onBack }) {
 
             <div className="grid grid-cols-1 gap-8 mb-12 border-t border-white/5 pt-10">
               <div className="flex flex-col gap-2">
-                <span className="text-base text-gray-600 font-black uppercase tracking-[0.2em]">Variety / Process</span>
-                <p className="text-xl font-bold text-white tracking-wide">{product.variety || 'Heirloom'} <span className="text-copper opacity-80 mx-1">/</span> {product.process || 'Washed'}</p>
+                <span className="text-xl text-gray-600 font-black uppercase tracking-[0.2em]">품종 / 가공 방식</span>
+                <p className="text-2xl font-bold text-white tracking-wide">{product.variety || 'Heirloom'} <span className="text-copper opacity-80 mx-1">/</span> {product.process || 'Washed'}</p>
               </div>
             </div>
 
