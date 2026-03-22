@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+const countryToCode = {
+  '에티오피아': 'et', '콜롬비아': 'co', '과테말라': 'gt', '브라질': 'br', 
+  '케냐': 'ke', '코스타리카': 'cr', '파나마': 'pa', '인도네시아': 'id',
+  '엘살바도르': 'sv', '온두라스': 'hn', '베트남': 'vn', '태국': 'th',
+  '멕시코': 'mx', '페루': 'pe', '르완다': 'rw', '부룬디': 'bi', '니카라과': 'ni'
+};
+
 export default function RecommendedBeans({ isAdmin }) {
   const [beans, setBeans] = useState([]);
 
@@ -110,10 +117,21 @@ export default function RecommendedBeans({ isAdmin }) {
 
               <div className="mb-4 border-b border-copper/10 pb-4">
                 <div className="flex justify-between items-start mb-1">
-                  <p className="text-[10px] text-copper/80 tracking-[0.2em] uppercase font-bold">
-                    {bean.category === 'beverage' ? '매장 음료' : bean.category === 'dripbag' ? '드립백' : bean.country} 
-                    {bean.region && ` | ${bean.region}`}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    {bean.country && countryToCode[bean.country] && (
+                      <img 
+                        src={`https://flagcdn.com/w40/${countryToCode[bean.country]}.png`} 
+                        alt={bean.country} 
+                        className="w-4 h-3 object-cover rounded-sm shadow-sm opacity-80" 
+                      />
+                    )}
+                    <p className="text-[10px] text-copper/80 tracking-[0.2em] uppercase font-bold">
+                      {bean.category === 'beverage' 
+                        ? '매장 음료' 
+                        : `${bean.category === 'dripbag' ? '드립백 | ' : ''}${bean.country || '스페셜티'}`} 
+                      {bean.region && ` | ${bean.region}`}
+                    </p>
+                  </div>
                   <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-24 line-clamp-2 italic">
