@@ -5,35 +5,60 @@ import {
   Sparkles, Milk, Wind
 } from 'lucide-react';
 
-const CUP_NOTE_ICONS = {
+const FLAVOR_CONFIG = {
   // Berries
-  '딸기': Cherry, '라즈베리': Cherry, '블루베리': Cherry, '블랙베리': Cherry,
+  '딸기': { icon: Cherry, color: '#ff4d6d' }, '라즈베리': { icon: Cherry, color: '#ff4d6d' }, 
+  '블루베리': { icon: Cherry, color: '#4361ee' }, '블랙베리': { icon: Cherry, color: '#7209b7' },
   // Citrus
-  '레몬': Citrus, '라임': Citrus, '오렌지': Citrus, '자몽': Citrus, '베르가못': Citrus, '귤': Citrus,
+  '레몬': { icon: Citrus, color: '#fee440' }, '라임': { icon: Citrus, color: '#aacc00' }, 
+  '오렌지': { icon: Citrus, color: '#fb8500' }, '자몽': { icon: Citrus, color: '#ff7b00' }, 
+  '베르가못': { icon: Citrus, color: '#9ef01a' }, '귤': { icon: Citrus, color: '#ff9100' },
   // Stone Fruit
-  '복숭아': Cherry, '자두': Cherry, '살구': Cherry, '체리': Cherry,
+  '복숭아': { icon: Cherry, color: '#ff9b54' }, '자두': { icon: Cherry, color: '#e01e37' }, 
+  '살구': { icon: Cherry, color: '#ffb38a' }, '체리': { icon: Cherry, color: '#c9184a' },
   // Tropical
-  '망고': Sun, '파인애플': Sun, '패션후르츠': Sun, '리치': Sun, '파파야': Sun,
+  '망고': { icon: Sun, color: '#ffbe0b' }, '파인애플': { icon: Sun, color: '#ffd60a' }, 
+  '패션후르츠': { icon: Sun, color: '#fb5607' }, '리치': { icon: Sun, color: '#ff006e' }, 
+  '파파야': { icon: Sun, color: '#ff9f1c' },
   // Nuts/Coconut
-  '코코넛': TreePalm, '구운 아몬드': Nut, '헤이즐넛': Nut, '피넛': Nut, '호두': Nut, '캐슈넛': Nut,
+  '코코넛': { icon: TreePalm, color: '#fefae0' }, '구운 아몬드': { icon: Nut, color: '#9c6644' }, 
+  '헤이즐넛': { icon: Nut, color: '#7f5539' }, '피넛': { icon: Nut, color: '#b08968' }, 
+  '호두': { icon: Nut, color: '#7b4b3a' }, '캐슈넛': { icon: Nut, color: '#ede0d4' },
   // Orchard
-  '사과': Apple, '배': Apple, '청포도': Grape, '적포도': Grape, '건포도': Grape, '무화과': Grape,
+  '사과': { icon: Apple, color: '#ef233c' }, '배': { icon: Apple, color: '#d9ed92' }, 
+  '청포도': { icon: Grape, color: '#b5e48c' }, '적포도': { icon: Grape, color: '#9d4edd' }, 
+  '건포도': { icon: Grape, color: '#5a189a' }, '무화과': { icon: Grape, color: '#ae2012' },
   // Floral
-  '자스민': Flower2, '오렌지 블로썸': Flower2, '아카시아': Flower2, '국화': Flower2, '장미': Flower2, '히비스커스': Flower2,
+  '자스민': { icon: Flower2, color: '#f8edeb' }, '오렌지 블로썸': { icon: Flower2, color: '#ffb5a7' }, 
+  '아카시아': { icon: Flower2, color: '#fcd5ce' }, '국화': { icon: Flower2, color: '#f9dcc4' }, 
+  '장미': { icon: Flower2, color: '#ff4d6d' }, '히비스커스': { icon: Flower2, color: '#e01e37' },
   // Herbal
-  '허브': Sprout, '라벤더': Sprout, '카모마일': Sprout, '민트': Leaf, '세이지': Leaf, '로즈마리': Leaf, '딜': Leaf,
+  '허브': { icon: Sprout, color: '#52b788' }, '라벤더': { icon: Sprout, color: '#b79ced' }, 
+  '카모마일': { icon: Sprout, color: '#f9f9f9' }, '민트': { icon: Leaf, color: '#2d6a4f' }, 
+  '세이지': { icon: Leaf, color: '#74c69d' }, '로즈마리': { icon: Leaf, color: '#1b4332' }, 
+  '딜': { icon: Leaf, color: '#95d5b2' },
   // Sweet
-  '흑설탕': Candy, '백설탕': Candy, '시럽': Candy, '캐러멜': Candy, '당밀': Candy, '아카시아 꿀': Candy, '잡화 꿀': Candy,
+  '흑설탕': { icon: Candy, color: '#6f4e37' }, '백설탕': { icon: Candy, color: '#ffffff' }, 
+  '시럽': { icon: Candy, color: '#e85d04' }, '캐러멜': { icon: Candy, color: '#9d4203' }, 
+  '당밀': { icon: Candy, color: '#3d2b1f' }, '아카시아 꿀': { icon: Candy, color: '#ffd60a' }, 
+  '잡화 꿀': { icon: Candy, color: '#ffbe0b' },
   // Chocolate/Bean
-  '다크 초콜릿': Bean, '밀크 초콜릿': Bean, '카카오': Bean, '화이트 초콜릿': Bean,
+  '다크 초콜릿': { icon: Bean, color: '#2b1b17' }, '밀크 초콜릿': { icon: Bean, color: '#7b3f00' }, 
+  '카카오': { icon: Bean, color: '#4e342e' }, '화이트 초콜릿': { icon: Bean, color: '#fefae0' },
   // Grains
-  '보리': Wheat, '구운 빵': Wheat, '시리얼': Wheat, '호밀': Wheat, '맥아': Wheat,
+  '보리': { icon: Wheat, color: '#e9c46a' }, '구운 빵': { icon: Wheat, color: '#f4a261' }, 
+  '시리얼': { icon: Wheat, color: '#e76f51' }, '호밀': { icon: Wheat, color: '#264653' }, 
+  '맥아': { icon: Wheat, color: '#2a9d8f' },
   // Spices
-  '시나몬': Sparkles, '정향': Sparkles, '육두구': Sparkles, '블랙 페퍼': Sparkles, '생강': Sparkles,
+  '시나몬': { icon: Sparkles, color: '#bc6c25' }, '정향': { icon: Sparkles, color: '#603808' }, 
+  '육두구': { icon: Sparkles, color: '#8b5e34' }, '블랙 페퍼': { icon: Sparkles, color: '#212529' }, 
+  '생강': { icon: Sparkles, color: '#dda15e' },
   // Dairy
-  '버버': Milk, '크림': Milk, '치즈': Milk,
+  '버터': { icon: Milk, color: '#fefae0' }, '크림': { icon: Milk, color: '#ffffff' }, 
+  '치즈': { icon: Milk, color: '#fee440' },
   // Other
-  '가죽': Wind, '흙내음': Wind, '담뱃잎': Wind, '파이프 담배': Wind
+  '가죽': { icon: Wind, color: '#4e342e' }, '흙내음': { icon: Wind, color: '#582f0e' }, 
+  '담뱃잎': { icon: Wind, color: '#333d29' }, '파이프 담배': { icon: Wind, color: '#000000' }
 };
 
 export default function ProductDetail({ product, onBack }) {
@@ -56,13 +81,26 @@ export default function ProductDetail({ product, onBack }) {
     return (
       <div className="flex flex-wrap gap-3 justify-center">
         {notes.map((note, idx) => {
-          const IconComponent = CUP_NOTE_ICONS[note.trim()];
+          const config = FLAVOR_CONFIG[note.trim()];
+          const IconComponent = config?.icon;
+          const iconColor = config?.color || '#ffffff';
+          
           return (
             <div 
               key={idx} 
-              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.05] border border-white/10 hover:border-copper/40 transition-all group/note"
+              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-white/5 transition-all group/note shadow-lg"
+              style={{ 
+                backgroundColor: config ? `${iconColor}15` : 'rgba(255,255,255,0.05)',
+                borderColor: config ? `${iconColor}30` : 'rgba(255,255,255,0.1)'
+              }}
             >
-              {IconComponent && <IconComponent size={18} className="text-copper group-hover/note:scale-110 transition-transform" />}
+              {IconComponent && (
+                <IconComponent 
+                  size={18} 
+                  style={{ color: iconColor }}
+                  className="group-hover/note:scale-125 transition-transform duration-300" 
+                />
+              )}
               <span className="text-lg font-bold text-gray-200 tracking-tight">{note}</span>
             </div>
           );
