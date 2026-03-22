@@ -1,6 +1,6 @@
 import { 
   Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
-  Cherry, Citrus, Apple, Grape, Sun, PalmTree, 
+  Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
   Flower2, Sprout, Leaf, Candy, Bean, Nut, Wheat, 
   Sparkles, Milk, Wind
 } from 'lucide-react';
@@ -15,7 +15,7 @@ const CUP_NOTE_ICONS = {
   // Tropical
   '망고': Sun, '파인애플': Sun, '패션후르츠': Sun, '리치': Sun, '파파야': Sun,
   // Nuts/Coconut
-  '코코넛': PalmTree, '구운 아몬드': Nut, '헤이즐넛': Nut, '피넛': Nut, '호두': Nut, '캐슈넛': Nut,
+  '코코넛': TreePalm, '구운 아몬드': Nut, '헤이즐넛': Nut, '피넛': Nut, '호두': Nut, '캐슈넛': Nut,
   // Orchard
   '사과': Apple, '배': Apple, '청포도': Grape, '적포도': Grape, '건포도': Grape, '무화과': Grape,
   // Floral
