@@ -42,7 +42,9 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                 </div>
                 <div className="flex flex-col items-end">
                   <span className="text-copper font-bold tracking-widest text-sm drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
-                    {product.price || "Contact"}
+                    {product.category === 'beverage' 
+                      ? (Number(product.price) / 1000).toFixed(1)
+                      : (Number(product.price) || 0).toLocaleString()}
                   </span>
                   {product.recommended && (
                     <span className="text-[9px] text-copper/60 font-bold tracking-widest uppercase mt-1">아키미스트 추천 셀렉션</span>

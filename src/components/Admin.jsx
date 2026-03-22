@@ -715,6 +715,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-gray-800">
+                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest w-10 text-center">순서</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">이미지 / 종류</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">상품명</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">가격 / 로스팅 날짜</th>
@@ -725,49 +726,70 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   {filteredBeans.length === 0 ? (
                     <tr><td colSpan="4" className="py-12 text-center text-gray-600 italic">표시할 품목이 없습니다.</td></tr>
                   ) : (
-                    filteredBeans.map((item) => (
-                      <tr key={item.id} className={`hover:bg-white/[0.02] transition-colors group ${!item.visible ? 'opacity-50' : ''}`}>
-                        <td className="py-5 px-4 flex items-center gap-3">
-                           {item.image ? (
-                             <img src={item.image} alt={item.name} className="w-10 h-10 rounded-lg object-cover border border-gray-800" />
-                           ) : (
-                             <div className="w-10 h-10 rounded-lg bg-[#0b0c0b] flex items-center justify-center p-1.5 border border-gray-800">
-                               <img 
-                                 src={`/images/icons/${item.category || 'bean'}.jpg`} 
-                                 className="w-full h-full object-contain opacity-50" 
-                                 alt="category"
-                               />
-                             </div>
-                           )}
-                           <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-tighter border ${
-                             item.category === 'bean' ? 'bg-copper/20 text-copper border-copper/30' : 
-                             item.category === 'dripbag' ? 'bg-blue-900/20 text-blue-400 border-blue-900/30' : 
-                             item.category === 'beverage' ? 'bg-orange-900/20 text-orange-400 border-orange-900/30' : 
-                             'bg-green-900/20 text-green-400 border-green-900/30'
-                           }`}>
-                             {item.category || 'bean'}
-                           </span>
-                        </td>
-                        <td className="py-5 px-4">
-                          <p className="font-bold text-gray-200 group-hover:text-copper transition-colors">{item.name}</p>
-                          <div className="flex gap-2 items-center mt-1">
-                            <span className={`text-[10px] ${item.visible ? 'text-gray-500' : 'text-red-900'}`}>{item.visible ? '공개됨' : '숨김'}</span>
-                            {item.recommended && (
-                              <span className="bg-copper/10 text-copper text-[8px] font-bold px-1.5 py-0.5 rounded border border-copper/20 uppercase tracking-tighter">추천 상품</span>
-                            )}
-                          </div>
-                        </td>
-                        <td className="py-5 px-4 text-xs text-gray-400">{item.price || item.roastDate || '-'}</td>
-                        <td className="py-5 px-4 text-right">
-                          <div className="flex justify-end gap-1">
-                            <button onClick={() => handleToggleRecommended(item.id)} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.recommended ? 'bg-copper text-black' : 'bg-gray-800 text-gray-500 hover:text-white'}`}>{item.recommended ? '추천됨' : '추천하기'}</button>
-                            <button onClick={() => handleToggleVisibility(item.id)} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.visible ? 'bg-gray-800 text-gray-400 hover:text-white' : 'bg-copper/40 text-white hover:bg-copper'}`}>{item.visible ? '숨기기' : '보이기'}</button>
-                            <button onClick={() => handleEdit(item)} className="bg-blue-900/20 text-blue-400 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all">수정</button>
-                            <button onClick={() => handleDelete(item.id)} className="text-gray-600 hover:text-red-500 px-2 py-1.5 transition-colors"><TrashIcon /></button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
+                    filteredBeans.map((item, index) => {
+                      const formattedPrice = item.category === 'beverage' 
+                        ? (Number(item.price) / 1000).toFixed(1)
+                        : (Number(item.price) || 0).toLocaleString();
+                      
+                      return (
+                        <tr 
+                          key={item.id} 
+                          draggable="true"
+                          onDragStart={(e) => handleDragStart(e, index)}
+                          onDragOver={handleDragOver}
+                          onDrop={(e) => handleDrop(e, index)}
+                          className={`hover:bg-white/[0.02] transition-colors group cursor-move ${!item.visible ? 'opacity-50' : ''} ${draggedIndex === index ? 'opacity-20 border-2 border-copper/50 border-dashed rounded-xl' : ''}`}
+                        >
+                          <td className="py-5 px-4 text-center">
+                            <div className="flex flex-col items-center gap-1">
+                              <GripIcon />
+                              <span className="text-[9px] font-black text-gray-600 tabular-nums">#{item.order || index + 1}</span>
+                            </div>
+                          </td>
+                          <td className="py-5 px-4 flex items-center gap-3">
+                             {item.image ? (
+                               <img src={item.image} alt={item.name} className="w-10 h-10 rounded-lg object-cover border border-gray-800" />
+                             ) : (
+                               <div className="w-10 h-10 rounded-lg bg-[#0b0c0b] flex items-center justify-center p-1.5 border border-gray-800">
+                                 <img 
+                                   src={`/images/icons/${item.category || 'bean'}.jpg`} 
+                                   className="w-full h-full object-contain opacity-50" 
+                                   alt="category"
+                                 />
+                               </div>
+                             )}
+                             <span className={`px-2 py-1 rounded text-[9px] font-bold uppercase tracking-tighter border ${
+                               item.category === 'bean' ? 'bg-copper/20 text-copper border-copper/30' : 
+                               item.category === 'dripbag' ? 'bg-blue-900/20 text-blue-400 border-blue-900/30' : 
+                               item.category === 'beverage' ? 'bg-orange-900/20 text-orange-400 border-orange-900/30' : 
+                               'bg-green-900/20 text-green-400 border-green-900/30'
+                             }`}>
+                               {item.category || 'bean'}
+                             </span>
+                          </td>
+                          <td className="py-5 px-4">
+                            <p className="font-bold text-gray-200 group-hover:text-copper transition-colors">{item.name}</p>
+                            <div className="flex gap-2 items-center mt-1">
+                              <span className={`text-[10px] ${item.visible ? 'text-gray-500' : 'text-red-900'}`}>{item.visible ? '공개됨' : '숨김'}</span>
+                              {item.recommended && (
+                                <span className="bg-copper/10 text-copper text-[8px] font-bold px-1.5 py-0.5 rounded border border-copper/20 uppercase tracking-tighter">추천 상품</span>
+                              )}
+                            </div>
+                          </td>
+                          <td className="py-5 px-4 text-xs text-gray-400">
+                            {formattedPrice} {item.roastDate && <span className="opacity-40 mx-1">|</span>} {item.roastDate || ''}
+                          </td>
+                          <td className="py-5 px-4 text-right">
+                            <div className="flex justify-end gap-1">
+                              <button onClick={(e) => { e.stopPropagation(); handleToggleRecommended(item.id); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.recommended ? 'bg-copper text-black' : 'bg-gray-800 text-gray-500 hover:text-white'}`}>{item.recommended ? '추천됨' : '추천하기'}</button>
+                              <button onClick={(e) => { e.stopPropagation(); handleToggleVisibility(item.id); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.visible ? 'bg-gray-800 text-gray-400 hover:text-white' : 'bg-copper/40 text-white hover:bg-copper'}`}>{item.visible ? '숨기기' : '보이기'}</button>
+                              <button onClick={(e) => { e.stopPropagation(); handleEdit(item); }} className="bg-blue-900/20 text-blue-400 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all">수정</button>
+                              <button onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }} className="text-gray-600 hover:text-red-500 px-2 py-1.5 transition-colors"><TrashIcon /></button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
                   )}
                 </tbody>
               </table>

@@ -143,7 +143,11 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     </p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
+                    <span className="text-copper font-bold text-sm tracking-widest">
+                      {bean.category === 'beverage' 
+                        ? (Number(bean.price) / 1000).toFixed(1)
+                        : (Number(bean.price) || 0).toLocaleString()}
+                    </span>
                     {isAdmin && (
                       <button 
                         onClick={(e) => {
