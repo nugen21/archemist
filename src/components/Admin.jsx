@@ -486,9 +486,15 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <InputField label={formData.category === 'beverage' ? "가격 (Price)" : "가격"} name="price" value={formData.price} onChange={handleChange} placeholder="예: 3.5 또는 18,000" />
               </div>
 
-              {formData.category === 'beverage' && (
+              {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag') && (
                 <div className="flex flex-col justify-end">
-                  <InputField label="사이즈 (Size)" name="size" value={formData.size} onChange={handleChange} placeholder="예: 16oz" />
+                  <InputField 
+                    label={formData.category === 'beverage' ? "사이즈 (Size)" : "용량/구성"} 
+                    name="size" 
+                    value={formData.size} 
+                    onChange={handleChange} 
+                    placeholder={formData.category === 'beverage' ? "예: 16oz" : formData.category === 'coldbrew' ? "예: 500ml" : "예: 10ea"} 
+                  />
                 </div>
               )}
 
@@ -529,7 +535,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <InputField label="로스팅/제조 날짜" name="roastDate" value={formData.roastDate} onChange={handleChange} placeholder="예: 2024.03.21" />
               )}
 
-              {(formData.category === 'bean' || formData.category === 'dripbag') && (
+              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
                 <>
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
                   <InputField label="생산 지역" name="region" value={formData.region} onChange={handleChange} placeholder="예: 보케테" />
@@ -540,7 +546,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 </>
               )}
 
-              {(formData.category === 'bean' || formData.category === 'dripbag') && (
+              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
                 <div className={`md:col-span-2 lg:col-span-3 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4`}>
                   {formData.category === 'bean' && (
                     <div className="flex flex-col gap-4">
