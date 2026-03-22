@@ -172,68 +172,80 @@ export default function ProductDetail({ product, onBack }) {
                   
                   <div className="space-y-12">
                     {/* Whole Bean Scale */}
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">홀빈 (Whole Bean)</span>
-                        <span className="text-xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-copper/60 uppercase tracking-tighter">SCA</span>
+                          <span className="text-2xl font-serif font-black text-white">{product.agtronWb || '-'}</span>
+                        </div>
                       </div>
-                      <div className="relative h-12 flex items-center px-2">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] opacity-20 blur-xl rounded-full"></div>
-                        <div className="flex justify-between w-full relative z-10">
+                      <div className="relative h-16 flex items-center px-4">
+                        <div className="absolute inset-x-4 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-40 blur-[1px]"></div>
+                        <div className="flex justify-between w-full relative z-10 px-0">
                           {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
                             const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
-                            const isActive = product.agtronWb && Math.abs(parseFloat(product.agtronWb) - val) < 5;
                             return (
-                              <div key={val} className="relative flex flex-col items-center group/item">
-                                <div 
-                                  className={`w-4 h-4 rounded-full transition-all duration-500 ${isActive ? 'scale-150 ring-4 ring-white/20 shadow-[0_0_15px_rgba(255,255,255,0.3)]' : 'scale-100 opacity-40 hover:opacity-100 hover:scale-110'}`}
-                                  style={{ backgroundColor: colors[val] }}
-                                />
-                                {isActive && (
-                                  <div className="absolute -top-10 animate-bounce-subtle">
-                                    <div className="w-8 h-8 rounded-full border-2 border-copper flex items-center justify-center bg-black/80 backdrop-blur-sm shadow-xl">
-                                      <div className="w-4 h-4 rounded-sm rotate-45" style={{ backgroundColor: colors[val] }}></div>
-                                    </div>
-                                    <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-copper mx-auto"></div>
-                                  </div>
-                                )}
-                              </div>
+                              <div key={val} className="w-2.5 h-2.5 rounded-full border border-white/10" style={{ backgroundColor: colors[val] }} />
                             );
                           })}
                         </div>
+                        {/* Floating Marker (WB) */}
+                        {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
+                          <div 
+                            className="absolute top-1/2 -translate-y-1/2 transition-all duration-1000 ease-out z-20"
+                            style={{ 
+                              left: `calc(1rem + ${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}% - 1rem)` 
+                            }}
+                          >
+                            <div className="relative flex flex-col items-center">
+                              <div className="w-10 h-10 rounded-2xl border-2 border-white bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform">
+                                <span className="text-[9px] font-black text-copper uppercase leading-none mb-1">SCA</span>
+                                <span className="text-sm font-black text-white leading-none">{product.agtronWb}</span>
+                              </div>
+                              <div className="w-1.5 h-6 bg-white shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-full -translate-y-6"></div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
 
                     {/* Ground Scale */}
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">분쇄 (Ground)</span>
-                        <span className="text-xl font-serif font-bold text-white">{product.agtronGround || '-'}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-gray-600 uppercase tracking-tighter">SCA</span>
+                          <span className="text-2xl font-serif font-black text-white">{product.agtronGround || '-'}</span>
+                        </div>
                       </div>
-                      <div className="relative h-12 flex items-center px-2">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] opacity-20 blur-xl rounded-full"></div>
+                      <div className="relative h-16 flex items-center px-4">
+                        <div className="absolute inset-x-4 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-40 blur-[1px]"></div>
                         <div className="flex justify-between w-full relative z-10">
                           {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
                             const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
-                            const isActive = product.agtronGround && Math.abs(parseFloat(product.agtronGround) - val) < 5;
                             return (
-                              <div key={val} className="relative flex flex-col items-center group/item">
-                                <div 
-                                  className={`w-8 h-2 rounded-sm transition-all duration-500 ${isActive ? 'scale-150 ring-2 ring-white/10 shadow-[0_0_10px_rgba(255,255,255,0.2)]' : 'scale-100 opacity-30 hover:opacity-100 hover:scale-110'}`}
-                                  style={{ backgroundColor: colors[val] }}
-                                />
-                                {isActive && (
-                                  <div className="absolute -top-10 animate-pulse">
-                                    <div className="w-8 h-8 rounded-lg border-2 border-white/20 flex items-center justify-center bg-black/80 backdrop-blur-sm shadow-xl">
-                                      <div className="w-4 h-2 rounded-sm" style={{ backgroundColor: colors[val] }}></div>
-                                    </div>
-                                    <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white/20 mx-auto"></div>
-                                  </div>
-                                )}
-                              </div>
+                              <div key={val} className="w-8 h-1 rounded-sm opacity-30" style={{ backgroundColor: colors[val] }} />
                             );
                           })}
                         </div>
+                        {/* Floating Marker (Ground) */}
+                        {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
+                          <div 
+                            className="absolute top-1/2 -translate-y-1/2 transition-all duration-1000 ease-out z-20"
+                            style={{ 
+                              left: `calc(1rem + ${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}% - 1rem)` 
+                            }}
+                          >
+                            <div className="relative flex flex-col items-center">
+                              <div className="w-10 h-10 rounded-2xl border-2 border-copper bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(255,100,0,0.2)] flex flex-col items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform">
+                                <span className="text-[9px] font-black text-white/60 uppercase leading-none mb-1">SCA</span>
+                                <span className="text-sm font-black text-copper leading-none">{product.agtronGround}</span>
+                              </div>
+                              <div className="w-1.5 h-6 bg-copper shadow-[0_0_15px_rgba(255,100,0,0.3)] rounded-full -translate-y-6"></div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
