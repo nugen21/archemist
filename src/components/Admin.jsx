@@ -707,7 +707,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
 
               <div className="lg:col-span-3">
-                {formData.category === 'bean' ? (
+                {['bean', 'dripbag', 'coldbrew'].includes(formData.category) ? (
                   <div className="bg-[#0b0c0b] border border-gray-800 p-6 rounded-2xl">
                     <div 
                       className="flex justify-between items-center cursor-pointer group mb-1" 
