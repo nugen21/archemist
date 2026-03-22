@@ -30,7 +30,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const onHashChange = () => setCurrentPath(window.location.hash);
+    const onHashChange = () => {
+      setCurrentPath(window.location.hash);
+      // Auto-scroll to top when navigating to major pages or returning home
+      if (window.location.hash === '' || window.location.hash === '#' || window.location.hash === '#home' || window.location.hash === '#menu') {
+        window.scrollTo(0, 0);
+      }
+    };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
