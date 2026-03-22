@@ -116,9 +116,16 @@ export default function RecommendedBeans({ isAdmin }) {
                   </p>
                   <span className="text-copper font-bold text-sm tracking-widest">{bean.price || 'Contact'}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-20 line-clamp-2 italic">{bean.name}</h3>
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-24 line-clamp-2 italic">
+                  {bean.name}
+                  {bean.process && (
+                    <span className="text-base sm:text-lg text-copper/60 ml-2 not-italic font-sans font-bold align-middle">
+                      [{bean.process}]
+                    </span>
+                  )}
+                </h3>
                 <p className="text-sm text-gray-500 font-serif italic">
-                  {bean.category === 'beverage' ? '시그니처 레시피' : `${bean.variety || '스페셜티'} / ${bean.process || '핸드크래프트'}`}
+                  {bean.category === 'beverage' ? '시그니처 레시피' : (bean.variety || '스페셜티')}
                 </p>
               </div>
 
@@ -128,12 +135,14 @@ export default function RecommendedBeans({ isAdmin }) {
                     {(bean.category === 'bean' || !bean.category || bean.category === 'dripbag') && (
                       <div className="col-span-2">
                         <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">
-                          {bean.category === 'dripbag' ? 'Agtron (분쇄)' : 'Agtron (홀빈 / 분쇄)'}
+                          로스팅 포인트 (Agtron)
                         </p>
-                        <p className="text-copper font-black text-xl font-serif">
+                        <p className="text-copper font-black text-lg font-serif">
                           {bean.category === 'dripbag' 
-                            ? (bean.roastGround || '-') 
-                            : `${bean.roastWb || '-'} / ${bean.roastGround || '-'}`}
+                            ? (bean.roastPointGround ? `${bean.roastPointGround} (${bean.agtronGround || '-'})` : '-')
+                            : (bean.roastPointWb || bean.roastPointGround 
+                                ? `${bean.roastPointGround || '-'} (${bean.agtronGround || '-'})` 
+                                : '-')}
                         </p>
                       </div>
                     )}
