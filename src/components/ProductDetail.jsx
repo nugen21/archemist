@@ -100,28 +100,31 @@ export default function ProductDetail({ product, onBack }) {
               <h1 className="text-4xl sm:text-6xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
                 {product.name}
               </h1>
-              <div className="flex items-center gap-6">
-                <p className="text-3xl sm:text-4xl font-serif font-bold text-copper tracking-wider tabular-nums">
-                  {formattedPrice}
-                  <span className="text-xs ml-2 text-gray-500 font-sans uppercase tracking-[0.3em] font-black">{isCafe ? 'K' : 'KRW'}</span>
-                </p>
-                {product.roastDate && (
-                  <div className="h-8 w-[1px] bg-white/10"></div>
-                )}
-                {product.roastDate && (
-                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">Roasted: {product.roastDate}</span>
-                )}
+              <div className="mb-10">
+                <div className="flex flex-col gap-2 mb-6 border-b border-white/5 pb-6">
+                  <span className="text-base text-gray-500 font-black uppercase tracking-[0.3em]">Origin / Country</span>
+                  <p className="text-3xl font-bold text-white tracking-wide">{product.country || 'Blend'} {product.region && <span className="text-copper opacity-80 mx-1">/</span>} {product.region || ''}</p>
+                </div>
+
+                <div className="flex items-center justify-between gap-6 mb-4">
+                  <p className="text-4xl sm:text-5xl font-serif font-black text-copper tracking-wider tabular-nums">
+                    {formattedPrice}
+                    <span className="text-lg ml-3 text-gray-500 font-sans font-black">원</span>
+                  </p>
+                  {product.roastDate && (
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="text-sm text-gray-600 font-black uppercase tracking-[0.2em]">로스팅 날짜</span>
+                      <span className="text-lg text-gray-400 font-bold tabular-nums">{product.roastDate}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 mb-12 border-t border-white/5 pt-10">
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">Origin / Country</span>
-                <p className="text-lg font-bold text-white tracking-wide">{product.country || 'Blend'} {product.region && <span className="text-copper opacity-80 mx-1">/</span>} {product.region || ''}</p>
-              </div>
-              <div className="flex flex-col gap-1 text-right">
-                <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">Variety / Process</span>
-                <p className="text-lg font-bold text-white tracking-wide">{product.variety || 'Heirloom'} <span className="text-copper opacity-80 mx-1">/</span> {product.process || 'Washed'}</p>
+            <div className="grid grid-cols-1 gap-8 mb-12 border-t border-white/5 pt-10">
+              <div className="flex flex-col gap-2">
+                <span className="text-base text-gray-600 font-black uppercase tracking-[0.2em]">Variety / Process</span>
+                <p className="text-xl font-bold text-white tracking-wide">{product.variety || 'Heirloom'} <span className="text-copper opacity-80 mx-1">/</span> {product.process || 'Washed'}</p>
               </div>
             </div>
 
@@ -129,11 +132,11 @@ export default function ProductDetail({ product, onBack }) {
               <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                 <img src="/logo-alchemist.png" alt="Logo" className="w-32 h-32 object-contain" />
               </div>
-              <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-[10px] uppercase mb-6 flex items-center gap-2">
+              <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-lg uppercase mb-6 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
                 Cup Profile
               </h4>
-              <p className="text-[15px] sm:text-lg text-gray-300 leading-relaxed font-medium break-keep italic">
+              <p className="text-lg sm:text-2xl text-gray-300 leading-relaxed font-medium break-keep italic">
                 "{product.cupNotes || (isCafe ? '도심 속에서 즐기는 우아한 연금술 한 잔.' : '아키미스트 로스터스가 선별한 최상의 테루아를 경험하세요.')}"
               </p>
             </div>
@@ -143,29 +146,29 @@ export default function ProductDetail({ product, onBack }) {
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
                   <div className="text-copper/60"><Scale size={18} /></div>
-                  <span className="text-[8px] text-gray-600 font-black uppercase tracking-widest text-center">Agtron WB</span>
-                  <span className="text-xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">Agtron WB</span>
+                  <span className="text-2xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
                 </div>
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
                   <div className="text-copper/60"><Timer size={18} /></div>
-                  <span className="text-[8px] text-gray-600 font-black uppercase tracking-widest text-center">Roast Time</span>
-                  <span className="text-xl font-serif font-bold text-white">{product.roastTime || '-'}</span>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">Roast Time</span>
+                  <span className="text-2xl font-serif font-bold text-white">{product.roastTime || '-'}</span>
                 </div>
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
                   <div className="text-copper/60"><Thermometer size={18} /></div>
-                  <span className="text-[8px] text-gray-600 font-black uppercase tracking-widest text-center">Temp</span>
-                  <span className="text-xl font-serif font-bold text-white">{product.temp || '-'}</span>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">Temp</span>
+                  <span className="text-2xl font-serif font-bold text-white">{product.temp || '-'}</span>
                 </div>
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-4">
-                 <div className="bg-[#181a19] border border-white/5 py-6 px-4 rounded-2xl flex flex-col items-center gap-1">
-                   <span className="text-[9px] text-gray-600 font-black uppercase tracking-widest">Configuration</span>
-                   <span className="text-lg font-bold text-copper">{product.size || 'Standard'}</span>
+                 <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">
+                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">Configuration</span>
+                   <span className="text-xl font-bold text-copper">{product.size || 'Standard'}</span>
                  </div>
-                 <div className="bg-[#181a19] border border-white/5 py-6 px-4 rounded-2xl flex flex-col items-center gap-1">
-                   <span className="text-[9px] text-gray-600 font-black uppercase tracking-widest">Collection</span>
-                   <span className="text-lg font-bold text-copper uppercase">{product.category}</span>
+                 <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">
+                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">Collection</span>
+                   <span className="text-xl font-bold text-copper uppercase">{product.category}</span>
                  </div>
               </div>
             )}
