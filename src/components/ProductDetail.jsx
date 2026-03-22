@@ -110,33 +110,23 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
     const notes = notesString.split(/[,\s/|]+/).filter(n => n.trim().length > 0);
     
     return (
-      <div className="flex flex-nowrap gap-6 justify-start sm:justify-center overflow-x-auto pb-8 px-4 custom-scrollbar">
+      <div className="flex flex-wrap gap-4 justify-center px-4">
         {notes.map((note, idx) => {
           const config = FLAVOR_CONFIG[note.trim()];
-          const imageUrl = config?.image;
+          const categoryColor = config?.color || '#a1764c';
           
           return (
             <div 
               key={idx} 
-              className="flex flex-col items-center gap-4 transition-all group/note min-w-[90px] flex-shrink-0"
+              className="px-6 py-3 rounded-full border border-white/10 bg-[#131513] shadow-lg transition-all hover:-translate-y-1"
+              style={{ borderColor: `${categoryColor}40` }}
             >
-              <div className="w-24 h-24 rounded-full bg-[#131513] flex items-center justify-center overflow-hidden p-2 shadow-2xl group-hover/note:scale-110 transition-transform duration-500 border border-white/5 group-hover/note:border-copper/40">
-                {imageUrl ? (
-                  <img 
-                    src={imageUrl} 
-                    alt={note} 
-                    className="w-full h-full object-contain contrast-[1.25] saturate-[1.1] scale-110"
-                    style={{ 
-                      filter: `url(#remove-white) ${config?.filter || ''}`,
-                      objectPosition: config?.objectPosition || 'center',
-                      transform: config?.scale ? `scale(${config.scale})` : 'none'
-                    }}
-                  />
-                ) : (
-                  <div className="w-5 h-5 rounded-full bg-copper/40" />
-                )}
-              </div>
-              <span className="text-[13px] font-black text-white tracking-widest text-center group-hover/note:text-copper transition-all uppercase drop-shadow-md">{note}</span>
+              <span 
+                className="text-[13px] font-black tracking-widest text-center uppercase"
+                style={{ color: categoryColor }}
+              >
+                {note}
+              </span>
             </div>
           );
         })}
