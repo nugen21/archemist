@@ -138,15 +138,15 @@ export default function RecommendedBeans({ isAdmin }) {
                           로스팅 포인트 (Agtron)
                         </p>
                         <div className="space-y-1">
-                          {(bean.category === 'bean' || !bean.category) && bean.roastPointWb && (
+                          {bean.category !== 'dripbag' && bean.roastPointWb && (
                             <p className="text-copper/80 font-bold text-xs font-sans flex items-center gap-2">
                               <span className="w-1 h-1 rounded-full bg-copper/40"></span>
-                              WB: <span className="text-copper text-base font-serif font-black">{bean.roastPointWb} ({bean.agtronWb || '-'})</span>
+                              홀빈: <span className="text-copper text-base font-serif font-black">{bean.roastPointWb} ({bean.agtronWb || '-'})</span>
                             </p>
                           )}
                           <p className="text-copper/80 font-bold text-xs font-sans flex items-center gap-2">
                             <span className="w-1 h-1 rounded-full bg-copper/40"></span>
-                            GR: <span className="text-copper text-base font-serif font-black">{bean.roastPointGround} ({bean.agtronGround || '-'})</span>
+                            분쇄: <span className="text-copper text-base font-serif font-black">{bean.roastPointGround} ({bean.agtronGround || '-'})</span>
                           </p>
                         </div>
                       </div>
