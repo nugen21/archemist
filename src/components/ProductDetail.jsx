@@ -110,7 +110,7 @@ export default function ProductDetail({ product, onBack }) {
     const notes = notesString.split(/[,\s/|]+/).filter(n => n.trim().length > 0);
     
     return (
-      <div className="flex flex-wrap gap-12 justify-center px-4">
+      <div className="flex flex-nowrap gap-10 justify-start sm:justify-center overflow-x-auto pb-6 px-4 custom-scrollbar">
         {notes.map((note, idx) => {
           const config = FLAVOR_CONFIG[note.trim()];
           const imageUrl = config?.image;
@@ -118,25 +118,25 @@ export default function ProductDetail({ product, onBack }) {
           return (
             <div 
               key={idx} 
-              className="flex flex-col items-center gap-4 transition-all group/note min-w-[160px]"
+              className="flex flex-col items-center gap-4 transition-all group/note min-w-[100px] flex-shrink-0"
             >
-              <div className="w-40 h-40 flex items-center justify-center pointer-events-none">
+              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden p-2.5 shadow-xl group-hover/note:scale-110 transition-transform duration-500 border border-white/10 group-hover/note:border-copper/40">
                 {imageUrl ? (
                   <img 
                     src={imageUrl} 
                     alt={note} 
-                    className="w-full h-full object-contain group-hover/note:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-contain"
                     style={{ 
-                      filter: `url(#remove-white) ${config?.filter || ''}`,
+                      filter: config?.filter || 'none',
                       objectPosition: config?.objectPosition || 'center',
                       transform: config?.scale ? `scale(${config.scale})` : 'none'
                     }}
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-copper/20 blur-sm" />
+                  <div className="w-4 h-4 rounded-full bg-copper/40" />
                 )}
               </div>
-              <span className="text-xl font-black text-gray-100 tracking-[0.2em] text-center uppercase group-hover/note:text-copper transition-colors duration-300">{note}</span>
+              <span className="text-sm font-bold text-gray-200 tracking-wider text-center group-hover/note:text-copper transition-colors">{note}</span>
             </div>
           );
         })}

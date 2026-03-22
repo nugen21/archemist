@@ -11,17 +11,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- Global SVG Filter to remove white backgrounds from flavor icons -->
-    <svg width="0" height="0" style="position:absolute; visibility:hidden; pointer-events:none;">
-      <defs>
-        <filter id="remove-white" color-interpolation-filters="sRGB">
-          <feColorMatrix type="matrix" values="1 0 0 0 0
-                                               0 1 0 0 0
-                                               0 0 1 0 0
-                                               -1.1 -1.1 -1.1 3.3 0" />
-        </filter>
-      </defs>
-    </svg>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
