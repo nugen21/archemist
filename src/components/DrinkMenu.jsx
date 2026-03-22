@@ -5,6 +5,7 @@ export default function DrinkMenu({ onBack }) {
   const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const loadDrinks = async () => {
       try {
         const response = await fetch(`/products.json?t=${Date.now()}`);

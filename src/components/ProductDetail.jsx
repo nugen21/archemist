@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { 
   Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
@@ -93,6 +94,10 @@ const FLAVOR_CONFIG = {
 };
 
 export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product?.id]);
+
   if (!product) return null;
 
   // Formatting logic for display
