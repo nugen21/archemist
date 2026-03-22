@@ -546,14 +546,18 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                 <InputField label={formData.category === 'beverage' ? "가격 (Price)" : "가격"} name="price" value={formData.price} onChange={handleChange} placeholder="예: 3.5 또는 18,000" />
               </div>
 
-              {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag') && (
+              {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag' || formData.category === 'bean') && (
                 <div className="flex flex-col justify-end">
                   <InputField 
-                    label={formData.category === 'beverage' ? "사이즈 (Size)" : "용량/구성"} 
+                    label={formData.category === 'beverage' ? "사이즈 (Size)" : formData.category === 'bean' ? "중량 (Weight)" : "용량/구성"} 
                     name="size" 
                     value={formData.size} 
                     onChange={handleChange} 
-                    placeholder={formData.category === 'beverage' ? "예: 16oz" : formData.category === 'coldbrew' ? "예: 500ml" : "예: 10ea"} 
+                    placeholder={
+                      formData.category === 'beverage' ? "예: 16oz" : 
+                      formData.category === 'bean' ? "예: 200g, 500g" :
+                      formData.category === 'coldbrew' ? "예: 500ml" : "예: 10ea"
+                    } 
                   />
                 </div>
               )}
