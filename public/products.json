@@ -52,7 +52,8 @@
     "isSpecial": false,
     "subCategory": "espresso",
     "id": 1774158540680,
-    "order": 2
+    "order": 2,
+    "agingDays": "7"
   },
   {
     "id": 1710850000001,
