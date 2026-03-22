@@ -1,5 +1,40 @@
-import React from 'react';
-import { Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink } from 'lucide-react';
+import { 
+  Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
+  Cherry, Citrus, Apple, Grape, Sun, PalmTree, 
+  Flower2, Sprout, Leaf, Candy, Bean, Nut, Wheat, 
+  Sparkles, Milk, Wind
+} from 'lucide-react';
+
+const CUP_NOTE_ICONS = {
+  // Berries
+  '딸기': Cherry, '라즈베리': Cherry, '블루베리': Cherry, '블랙베리': Cherry,
+  // Citrus
+  '레몬': Citrus, '라임': Citrus, '오렌지': Citrus, '자몽': Citrus, '베르가못': Citrus, '귤': Citrus,
+  // Stone Fruit
+  '복숭아': Cherry, '자두': Cherry, '살구': Cherry, '체리': Cherry,
+  // Tropical
+  '망고': Sun, '파인애플': Sun, '패션후르츠': Sun, '리치': Sun, '파파야': Sun,
+  // Nuts/Coconut
+  '코코넛': PalmTree, '구운 아몬드': Nut, '헤이즐넛': Nut, '피넛': Nut, '호두': Nut, '캐슈넛': Nut,
+  // Orchard
+  '사과': Apple, '배': Apple, '청포도': Grape, '적포도': Grape, '건포도': Grape, '무화과': Grape,
+  // Floral
+  '자스민': Flower2, '오렌지 블로썸': Flower2, '아카시아': Flower2, '국화': Flower2, '장미': Flower2, '히비스커스': Flower2,
+  // Herbal
+  '허브': Sprout, '라벤더': Sprout, '카모마일': Sprout, '민트': Leaf, '세이지': Leaf, '로즈마리': Leaf, '딜': Leaf,
+  // Sweet
+  '흑설탕': Candy, '백설탕': Candy, '시럽': Candy, '캐러멜': Candy, '당밀': Candy, '아카시아 꿀': Candy, '잡화 꿀': Candy,
+  // Chocolate/Bean
+  '다크 초콜릿': Bean, '밀크 초콜릿': Bean, '카카오': Bean, '화이트 초콜릿': Bean,
+  // Grains
+  '보리': Wheat, '구운 빵': Wheat, '시리얼': Wheat, '호밀': Wheat, '맥아': Wheat,
+  // Spices
+  '시나몬': Sparkles, '정향': Sparkles, '육두구': Sparkles, '블랙 페퍼': Sparkles, '생강': Sparkles,
+  // Dairy
+  '버버': Milk, '크림': Milk, '치즈': Milk,
+  // Other
+  '가죽': Wind, '흙내음': Wind, '담뱃잎': Wind, '파이프 담배': Wind
+};
 
 export default function ProductDetail({ product, onBack }) {
   if (!product) return null;
@@ -11,6 +46,30 @@ export default function ProductDetail({ product, onBack }) {
 
   const isBean = product.category === 'bean' || !product.category;
   const isCafe = product.category === 'beverage';
+
+  const renderCupNotes = (notesString) => {
+    if (!notesString) return null;
+    
+    // Split by comma, space, or slash, then clean up
+    const notes = notesString.split(/[,\s/|]+/).filter(n => n.trim().length > 0);
+    
+    return (
+      <div className="flex flex-wrap gap-3 justify-center">
+        {notes.map((note, idx) => {
+          const IconComponent = CUP_NOTE_ICONS[note.trim()];
+          return (
+            <div 
+              key={idx} 
+              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.05] border border-white/10 hover:border-copper/40 transition-all group/note"
+            >
+              {IconComponent && <IconComponent size={18} className="text-copper group-hover/note:scale-110 transition-transform" />}
+              <span className="text-lg font-bold text-gray-200 tracking-tight">{note}</span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <section className="min-h-screen py-12 px-4 sm:px-8 bg-[#0b0c0b] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">
@@ -143,8 +202,8 @@ export default function ProductDetail({ product, onBack }) {
                       { label: '중량', value: product.size ? (String(product.size).endsWith('g') ? product.size : `${product.size}g`) : '200g' }
                     ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
-                        <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">{item.label}</span>
-                        <span className="text-lg text-white font-bold tracking-tight">{item.value}</span>
+                        <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em]">{item.label}</span>
+                        <span className="text-xl text-white font-bold tracking-tight">{item.value}</span>
                       </div>
                     ))}
                   </div>
@@ -160,9 +219,17 @@ export default function ProductDetail({ product, onBack }) {
                 <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
                 컵 프로파일
               </h4>
-              <p className="text-lg sm:text-2xl text-gray-300 leading-relaxed font-medium break-keep italic">
-                "{product.cupNotes || (isCafe ? '도심 속에서 즐기는 우아한 연금술 한 잔.' : '아키미스트 로스터스가 선별한 최상의 테루아를 경험하세요.')}"
-              </p>
+              <div className="flex flex-col gap-6">
+                <p className="text-gray-400 text-sm font-medium tracking-wide mb-2 italic">
+                  아키미스트 로스터스가 선별한 최상의 테루아를 경험하세요.
+                </p>
+                {renderCupNotes(product.cupNotes)}
+                {!product.cupNotes && (
+                  <p className="text-lg text-gray-500 italic">
+                    {isCafe ? '도심 속에서 즐기는 우아한 연금술 한 잔.' : '테이스팅 노트 준비 중입니다.'}
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* Technical Context Section */}
