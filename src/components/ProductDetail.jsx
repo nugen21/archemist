@@ -20,7 +20,7 @@ export default function ProductDetail({ product, onBack }) {
         className="fixed top-8 left-8 z-[110] flex items-center gap-2 text-[10px] font-bold text-gray-400 hover:text-copper uppercase tracking-[0.2em] transition-all bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/5 group shadow-2xl"
       >
         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-        BACK TO HOME
+        홈으로 돌아가기
       </button>
 
       {/* Naver Purchase Sticky Bar (Mobile Only) */}
@@ -33,7 +33,7 @@ export default function ProductDetail({ product, onBack }) {
             className="w-full bg-[#03C75A] text-white py-4 rounded-2xl flex items-center justify-center gap-3 font-black text-sm tracking-widest shadow-[0_10px_30px_rgba(3,199,90,0.3)] animate-bounce-subtle"
           >
             <span className="bg-white text-[#03C75A] w-6 h-6 rounded-md flex items-center justify-center font-black text-xs">N</span>
-            NAVER SMART STORE PURCHASE
+            네이버 스마트 스토어 구매하기
           </a>
         </div>
       )}
@@ -62,11 +62,11 @@ export default function ProductDetail({ product, onBack }) {
                 {/* Product Badge */}
                 <div className="absolute top-6 left-6 flex flex-col gap-2">
                   <span className="bg-copper text-black text-[10px] font-black px-4 py-1.5 rounded-full tracking-[0.2em] uppercase shadow-xl">
-                    {product.category || 'Specialty'}
+                    {product.category === 'bean' ? '스페셜티 원두' : product.category === 'dripbag' ? '드립백' : product.category === 'coldbrew' ? '콜드브루' : '매장 음료'}
                   </span>
                   {product.isSpecial && (
                     <span className="bg-white/10 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
-                      Seasonal Selection
+                      시즌 한정 에디션
                     </span>
                   )}
                 </div>
@@ -83,7 +83,7 @@ export default function ProductDetail({ product, onBack }) {
                   className="w-full bg-[#03C75A] hover:bg-[#02b351] text-white py-5 rounded-2xl flex items-center justify-center gap-4 font-black text-lg tracking-widest transition-all shadow-[0_15px_30px_rgba(3,199,90,0.2)] hover:shadow-[0_20px_40px_rgba(3,199,90,0.4)] hover:-translate-y-1"
                 >
                   <div className="bg-white text-[#03C75A] w-8 h-8 rounded-lg flex items-center justify-center font-black text-base shadow-sm">N</div>
-                  NAVER SMART STORE PURCHASE
+                  네이버 스마트 스토어 구매하기
                   <ExternalLink size={18} className="opacity-50" />
                 </a>
               </div>
@@ -94,7 +94,7 @@ export default function ProductDetail({ product, onBack }) {
           <div className="lg:w-1/2 flex flex-col justify-center">
             <div className="mb-8">
               <div className="flex items-center gap-4 mb-4">
-                <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">Alchemist Archive No.{product.id % 999}</h2>
+                <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">아키미스트 아카이브 No.{product.id % 999}</h2>
                 <div className="h-[1px] flex-grow bg-gradient-to-r from-copper/30 to-transparent"></div>
               </div>
               <h1 className="text-4xl sm:text-6xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
@@ -102,8 +102,8 @@ export default function ProductDetail({ product, onBack }) {
               </h1>
               <div className="mb-10">
                 <div className="flex flex-col gap-2 mb-6 border-b border-white/5 pb-6">
-                  <span className="text-base text-gray-500 font-black uppercase tracking-[0.3em]">Origin / Country</span>
-                  <p className="text-3xl font-bold text-white tracking-wide">{product.country || 'Blend'} {product.region && <span className="text-copper opacity-80 mx-1">/</span>} {product.region || ''}</p>
+                  <span className="text-base text-gray-500 font-black uppercase tracking-[0.3em]">원산지 / 국가</span>
+                  <p className="text-3xl font-bold text-white tracking-wide">{product.country || '블렌드'} {product.region && <span className="text-copper opacity-80 mx-1">/</span>} {product.region || ''}</p>
                 </div>
 
                 <div className="flex items-center justify-between gap-6 mb-4">
@@ -140,7 +140,7 @@ export default function ProductDetail({ product, onBack }) {
             <div className="grid grid-cols-1 gap-8 mb-12 border-t border-white/5 pt-10">
               <div className="flex flex-col gap-2">
                 <span className="text-xl text-gray-600 font-black uppercase tracking-[0.2em]">품종 / 가공 방식</span>
-                <p className="text-2xl font-bold text-white tracking-wide">{product.variety || 'Heirloom'} <span className="text-copper opacity-80 mx-1">/</span> {product.process || 'Washed'}</p>
+                <p className="text-2xl font-bold text-white tracking-wide">{product.variety || '토착종'} <span className="text-copper opacity-80 mx-1">/</span> {product.process || '워시드'}</p>
               </div>
             </div>
 
@@ -150,7 +150,7 @@ export default function ProductDetail({ product, onBack }) {
               </div>
               <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-lg uppercase mb-6 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
-                Cup Profile
+                컵 프로파일
               </h4>
               <p className="text-lg sm:text-2xl text-gray-300 leading-relaxed font-medium break-keep italic">
                 "{product.cupNotes || (isCafe ? '도심 속에서 즐기는 우아한 연금술 한 잔.' : '아키미스트 로스터스가 선별한 최상의 테루아를 경험하세요.')}"
@@ -162,29 +162,31 @@ export default function ProductDetail({ product, onBack }) {
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
                   <div className="text-copper/60"><Scale size={18} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">Agtron WB</span>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">아그트론 (홀빈)</span>
                   <span className="text-2xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
                 </div>
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
                   <div className="text-copper/60"><Timer size={18} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">Roast Time</span>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 시간</span>
                   <span className="text-2xl font-serif font-bold text-white">{product.roastTime || '-'}</span>
                 </div>
                 <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
                   <div className="text-copper/60"><Thermometer size={18} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">Temp</span>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">배출 온도</span>
                   <span className="text-2xl font-serif font-bold text-white">{product.temp || '-'}</span>
                 </div>
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-4">
                  <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">
-                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">Configuration</span>
-                   <span className="text-xl font-bold text-copper">{product.size || 'Standard'}</span>
+                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">용량 및 구성</span>
+                   <span className="text-xl font-bold text-copper">{product.size || '기본'}</span>
                  </div>
                  <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">
-                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">Collection</span>
-                   <span className="text-xl font-bold text-copper uppercase">{product.category}</span>
+                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">컬렉션</span>
+                   <span className="text-xl font-bold text-copper uppercase">
+                     {product.category === 'bean' ? '원두' : product.category === 'dripbag' ? '드립백' : product.category === 'coldbrew' ? '콜드브루' : '매장 음료'}
+                   </span>
                  </div>
               </div>
             )}
