@@ -159,21 +159,16 @@ export default function ProductDetail({ product, onBack }) {
 
             {/* Technical Context Section */}
             {isBean ? (
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
-                  <div className="text-copper/60"><Scale size={18} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 레벨</span>
-                  <span className="text-2xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-[#181a19] border border-white/5 p-6 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
+                  <div className="text-copper/60"><Scale size={20} /></div>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 레벨 (홀빈)</span>
+                  <span className="text-3xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
                 </div>
-                <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
-                  <div className="text-copper/60"><Timer size={18} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 시간</span>
-                  <span className="text-2xl font-serif font-bold text-white">{product.roastTime || '-'}</span>
-                </div>
-                <div className="bg-[#181a19] border border-white/5 p-5 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
-                  <div className="text-copper/60"><Thermometer size={18} /></div>
-                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">배출 온도</span>
-                  <span className="text-2xl font-serif font-bold text-white">{product.temp || '-'}</span>
+                <div className="bg-[#181a19] border border-white/5 p-6 rounded-2xl flex flex-col items-center gap-2 hover:border-copper/20 transition-colors">
+                  <div className="text-copper/60"><Scale size={20} className="opacity-50" /></div>
+                  <span className="text-sm text-gray-600 font-black uppercase tracking-widest text-center leading-tight">로스팅 레벨 (분쇄)</span>
+                  <span className="text-3xl font-serif font-bold text-white">{product.agtronGround || '-'}</span>
                 </div>
               </div>
             ) : (
