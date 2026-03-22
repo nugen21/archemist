@@ -118,10 +118,18 @@ export default function ProductDetail({ product, onBack }) {
                         <span className="text-lg text-gray-400 font-bold tabular-nums">{product.roastDate}</span>
                       </div>
                     )}
-                    {product.category === 'bean' && product.agingDate && (
+                    {product.category === 'bean' && product.agingDays && (
                       <div className="flex flex-col items-end gap-1">
                         <span className="text-sm text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
-                        <span className="text-lg text-copper font-bold tabular-nums">{product.agingDate}</span>
+                        <span className="text-lg text-copper font-bold tabular-nums">
+                          {(() => {
+                            const roastStr = (product.roastDate || '').replace(/\./g, '-');
+                            const date = new Date(roastStr);
+                            if (isNaN(date.getTime())) return `${product.agingDays}일 후`;
+                            date.setDate(date.getDate() + parseInt(product.agingDays));
+                            return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                          })()}
+                        </span>
                       </div>
                     )}
                   </div>
