@@ -167,7 +167,7 @@ export default function ProductDetail({ product, onBack }) {
                 <div className="relative z-10">
                   <h4 className="text-copper font-serif font-bold tracking-[0.3em] text-sm uppercase mb-8 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse"></span>
-                    SCA 로스팅 레벨 가이드
+                    로스팅 레벨 가이드
                   </h4>
                   
                   <div className="space-y-12">
@@ -176,7 +176,6 @@ export default function ProductDetail({ product, onBack }) {
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">홀빈 (Whole Bean)</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-copper/60 uppercase tracking-tighter">SCA</span>
                           <span className="text-2xl font-serif font-black text-white">{product.agtronWb || '-'}</span>
                         </div>
                       </div>
@@ -199,9 +198,20 @@ export default function ProductDetail({ product, onBack }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="w-10 h-10 rounded-2xl border-2 border-white bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform">
-                                <span className="text-[9px] font-black text-copper uppercase leading-none mb-1">SCA</span>
-                                <span className="text-sm font-black text-white leading-none">{product.agtronWb}</span>
+                              <div className="px-3 h-8 rounded-full border-2 border-white bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform whitespace-nowrap">
+                                <span className="text-[10px] font-black text-white uppercase tracking-wider">
+                                  {(() => {
+                                    const v = parseFloat(product.agtronWb);
+                                    if (v >= 90) return 'Very Light';
+                                    if (v >= 80) return 'Light';
+                                    if (v >= 70) return 'Medium-Light';
+                                    if (v >= 60) return 'Medium';
+                                    if (v >= 50) return 'Medium-Dark';
+                                    if (v >= 40) return 'Dark';
+                                    if (v >= 30) return 'Very Dark';
+                                    return 'Extreme Dark';
+                                  })()}
+                                </span>
                               </div>
                               <div className="w-1.5 h-6 bg-white shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-full -translate-y-6"></div>
                             </div>
@@ -215,7 +225,6 @@ export default function ProductDetail({ product, onBack }) {
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest pl-1">분쇄 (Ground)</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-gray-600 uppercase tracking-tighter">SCA</span>
                           <span className="text-2xl font-serif font-black text-white">{product.agtronGround || '-'}</span>
                         </div>
                       </div>
@@ -238,9 +247,20 @@ export default function ProductDetail({ product, onBack }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="w-10 h-10 rounded-2xl border-2 border-copper bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(255,100,0,0.2)] flex flex-col items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform">
-                                <span className="text-[9px] font-black text-white/60 uppercase leading-none mb-1">SCA</span>
-                                <span className="text-sm font-black text-copper leading-none">{product.agtronGround}</span>
+                              <div className="px-3 h-8 rounded-full border-2 border-copper bg-black/80 backdrop-blur-md shadow-[0_10px_30px_rgba(255,100,0,0.2)] flex items-center justify-center -translate-y-10 group-hover:scale-110 transition-transform whitespace-nowrap">
+                                <span className="text-[10px] font-black text-copper uppercase tracking-wider">
+                                  {(() => {
+                                    const v = parseFloat(product.agtronGround);
+                                    if (v >= 90) return 'Very Light';
+                                    if (v >= 80) return 'Light';
+                                    if (v >= 70) return 'Medium-Light';
+                                    if (v >= 60) return 'Medium';
+                                    if (v >= 50) return 'Medium-Dark';
+                                    if (v >= 40) return 'Dark';
+                                    if (v >= 30) return 'Very Dark';
+                                    return 'Extreme Dark';
+                                  })()}
+                                </span>
                               </div>
                               <div className="w-1.5 h-6 bg-copper shadow-[0_0_15px_rgba(255,100,0,0.3)] rounded-full -translate-y-6"></div>
                             </div>
