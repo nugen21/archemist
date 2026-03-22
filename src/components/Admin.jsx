@@ -15,7 +15,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
   const [formData, setFormData] = useState({
     category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
     name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
-    roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
+    roaster: '', roastWb: '', roastGround: '', agtron: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso' // beverage specific
@@ -155,7 +155,33 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    const newValue = type === 'checkbox' ? checked : value;
+
+    if (name === 'agtron') {
+      const agtronVal = parseFloat(value);
+      let autoRoastPoint = formData.roastPoint;
+      
+      if (!isNaN(agtronVal)) {
+        if (agtronVal >= 95) autoRoastPoint = 'Very Light';
+        else if (agtronVal >= 85) autoRoastPoint = 'Light';
+        else if (agtronVal >= 75) autoRoastPoint = 'Moderately Light';
+        else if (agtronVal >= 65) autoRoastPoint = 'Medium Light';
+        else if (agtronVal >= 55) autoRoastPoint = 'Medium';
+        else if (agtronVal >= 45) autoRoastPoint = 'Medium Dark';
+        else if (agtronVal >= 35) autoRoastPoint = 'Dark';
+        else autoRoastPoint = 'Very Dark';
+      } else if (value === '') {
+        autoRoastPoint = '';
+      }
+
+      setFormData(prev => ({
+        ...prev,
+        [name]: newValue,
+        roastPoint: autoRoastPoint
+      }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: newValue }));
+    }
   };
 
   const handleImageUpload = (e) => {
@@ -204,7 +230,7 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
     setFormData({
       category: 'bean',
       name: '', price: '', country: '', region: '', variety: '', altitude: '', process: '', 
-      roaster: '', roastWb: '', roastGround: '', roastTime: '', roastDate: '', degassing: '', 
+      roaster: '', roastWb: '', roastGround: '', agtron: '', roastPoint: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
       recommended: false, image: '',
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso'
@@ -465,6 +491,32 @@ const Admin = ({ isAdmin, setAdminAuth }) => {
                 <div className="flex flex-col justify-end">
                   <InputField label="사이즈 (Size)" name="size" value={formData.size} onChange={handleChange} placeholder="예: 16oz" />
                 </div>
+              )}
+
+              {(formData.category === 'bean' || formData.category === 'dripbag') && (
+                <>
+                  <div className="lg:col-span-1">
+                    <InputField 
+                      label="아그트론 (Agtron)" 
+                      name="agtron" 
+                      value={formData.agtron} 
+                      onChange={handleChange} 
+                      placeholder="예: 65" 
+                      type="number"
+                      step="0.1"
+                    />
+                  </div>
+
+                  <div className="lg:col-span-1">
+                    <InputField 
+                      label="로스팅 포인트 (SCA)" 
+                      name="roastPoint" 
+                      value={formData.roastPoint} 
+                      onChange={handleChange} 
+                      placeholder="아그트론 입력 시 자동 계산" 
+                    />
+                  </div>
+                </>
               )}
 
               <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
