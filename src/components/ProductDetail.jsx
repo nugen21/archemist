@@ -178,9 +178,9 @@ export default function ProductDetail({ product, onBack }) {
                         <span className="text-xl font-serif font-bold text-white">{product.agtronWb || '-'}</span>
                       </div>
                       <div className="relative h-12 flex items-center px-2">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#D4B483] via-[#8B6242] to-[#2B1B17] opacity-20 blur-xl rounded-full"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] opacity-20 blur-xl rounded-full"></div>
                         <div className="flex justify-between w-full relative z-10">
-                          {[95, 85, 75, 65, 55, 45, 35, 25].map((val) => {
+                          {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
                             const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
                             const isActive = product.agtronWb && Math.abs(parseFloat(product.agtronWb) - val) < 5;
                             return (
@@ -211,9 +211,9 @@ export default function ProductDetail({ product, onBack }) {
                         <span className="text-xl font-serif font-bold text-white">{product.agtronGround || '-'}</span>
                       </div>
                       <div className="relative h-12 flex items-center px-2">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#D4B483] via-[#8B6242] to-[#2B1B17] opacity-20 blur-xl rounded-full"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] opacity-20 blur-xl rounded-full"></div>
                         <div className="flex justify-between w-full relative z-10">
-                          {[95, 85, 75, 65, 55, 45, 35, 25].map((val) => {
+                          {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
                             const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
                             const isActive = product.agtronGround && Math.abs(parseFloat(product.agtronGround) - val) < 5;
                             return (
@@ -239,8 +239,8 @@ export default function ProductDetail({ product, onBack }) {
                   </div>
                   
                   <div className="mt-8 flex justify-between px-1">
-                    <span className="text-[9px] font-black text-gray-600 uppercase tracking-tighter italic">Very Light (95)</span>
                     <span className="text-[9px] font-black text-gray-600 uppercase tracking-tighter italic">Very Dark (25)</span>
+                    <span className="text-[9px] font-black text-gray-600 uppercase tracking-tighter italic">Very Light (95)</span>
                   </div>
                 </div>
               </div>
