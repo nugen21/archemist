@@ -16,7 +16,14 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem('archemist_is_admin') === 'true');
   const [editingId, setEditingId] = useState(null);
 
-  // Diagnostic Patch to catch clobbering writes
+  // Reset scroll on refresh/load
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
