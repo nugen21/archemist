@@ -14,6 +14,7 @@ import Products from './components/Products';
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash);
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem('archemist_is_admin') === 'true');
+  const [editingId, setEditingId] = useState(null);
 
   // Diagnostic Patch to catch clobbering writes
   useEffect(() => {
@@ -39,6 +40,12 @@ function App() {
     localStorage.setItem('archemist_is_admin', state ? 'true' : 'false');
   };
 
+  const handleEdit = (id) => {
+    setEditingId(id);
+    window.location.hash = '#admin';
+    setCurrentPath('#admin');
+  };
+
   const handleBack = () => {
     window.location.hash = '#home';
     setCurrentPath('#home');
@@ -47,7 +54,14 @@ function App() {
 
   // Route: Admin
   if (currentPath === '#admin') {
-    return <Admin isAdmin={isAdmin} setAdminAuth={handleAdminAuth} />;
+    return (
+      <Admin 
+        isAdmin={isAdmin} 
+        setAdminAuth={handleAdminAuth} 
+        initialEditingId={editingId} 
+        clearEditingId={() => setEditingId(null)} 
+      />
+    );
   }
 
   // Route: Drink Menu
@@ -76,7 +90,7 @@ function App() {
       <main className="flex-grow">
         <Header />
         <Hero id="home" />
-        <RecommendedBeans isAdmin={isAdmin} />
+        <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} />
         <Products />
         <Events />
         <Brand />

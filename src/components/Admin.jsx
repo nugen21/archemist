@@ -309,8 +309,21 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
 
   useEffect(() => {
     if (isAdmin) loadBeans();
-    // Removed storage listener to prevent recursive loops in Admin
   }, [isAdmin]);
+
+  // Handle direct edit requests from other components
+  useEffect(() => {
+    if (initialEditingId && beans.length > 0) {
+      const beanToEdit = beans.find(b => b.id === initialEditingId);
+      if (beanToEdit) {
+        setFormData(beanToEdit);
+        setEditingId(initialEditingId);
+        setActiveTab('register');
+        clearEditingId(); // Reset global state in App
+        window.scrollTo(0, 0);
+      }
+    }
+  }, [initialEditingId, beans, clearEditingId]);
 
   const filteredBeans = categoryFilter === 'all' 
     ? beans 
