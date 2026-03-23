@@ -96,17 +96,19 @@ export default function DrinkMenu({ onBack }) {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-copper/5 rounded-full blur-[120px] animate-pulse delay-1000"></div>
       </div>
 
-      <header className="fixed top-0 w-full z-50 bg-[#0b0c0b]/40 backdrop-blur-xl border-b border-white/5 py-4 px-6 flex justify-between items-center transition-all duration-500 hover:bg-[#0b0c0b]/60">
+      <header className="fixed top-0 w-full z-50 bg-[#0b0c0b]/40 backdrop-blur-xl border-b border-white/5 py-4 px-6 flex items-center transition-all duration-500 hover:bg-[#0b0c0b]/60">
         <button 
           onClick={onBack}
-          className="group flex items-center gap-2 text-gray-500 hover:text-copper transition-all font-bold uppercase tracking-[0.2em] text-[9px]"
+          className="relative z-10 group flex items-center gap-2 text-gray-500 hover:text-copper transition-all font-bold uppercase tracking-[0.2em] text-[9px]"
         >
           <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
           <span>HOME</span>
         </button>
-        <div className="flex items-center gap-4 flex-grow justify-center -ml-16">
-          <img src="/logo-alchemist.png" alt="Logo" className="w-10 h-10 object-contain" />
-          <span className="text-2xl sm:text-4xl font-serif font-black tracking-[-0.02em] text-white">ARCHEMIST ROASTERS</span>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="flex items-center gap-4 pointer-events-auto">
+            <img src="/logo-alchemist.png" alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
+            <span className="text-xl sm:text-4xl font-serif font-black tracking-[-0.02em] text-white">ARCHEMIST ROASTERS</span>
+          </div>
         </div>
       </header>
 
