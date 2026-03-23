@@ -188,7 +188,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     <span className="text-[10px] text-gray-500 font-bold ml-1">KRW</span>
                   </span>
                 </div>
-                <p className="text-3xl text-gray-400 font-serif italic mb-3">
+                <p className="text-xl sm:text-2xl text-gray-400 font-serif italic mb-3">
                   {bean.category === 'beverage' ? '시그니처 레시피' : (bean.variety || '스페셜티')}
                 </p>
                 {bean.cupNotes && (
