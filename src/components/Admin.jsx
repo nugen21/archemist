@@ -36,7 +36,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
-    englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single' // beverage specific
+    englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', // beverage specific
+    blend1: '', blend2: '', blend3: '', blend4: ''
   });
 
   const handleCupNoteToggle = (note) => {
@@ -668,7 +669,17 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   <InputField label="농장 (Farm)" name="farm" value={formData.farm} onChange={handleChange} placeholder="예: 엘리다 농장" />
                   <InputField label="마이크로밀 (Micro-mill)" name="micromill" value={formData.micromill} onChange={handleChange} placeholder="예: 엘리다 밀" />
                   <InputField label="재배 고도" name="altitude" value={formData.altitude} onChange={handleChange} placeholder="예: 1,800m" />
-                  <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
+                  {formData.beanType === 'blend' ? (
+                    <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4 bg-copper/5 p-4 rounded-xl border border-copper/10 my-2">
+                       <p className="col-span-2 md:col-span-4 text-[10px] font-black text-copper uppercase tracking-widest mb-1">블렌딩 구성 (최대 4개)</p>
+                       <InputField label="구성 1" name="blend1" value={formData.blend1} onChange={handleChange} placeholder="예: 브라질 50%" />
+                       <InputField label="구성 2" name="blend2" value={formData.blend2} onChange={handleChange} placeholder="예: 에티오피아 30%" />
+                       <InputField label="구성 3" name="blend3" value={formData.blend3} onChange={handleChange} placeholder="예: 콜롬비아 20%" />
+                       <InputField label="구성 4" name="blend4" value={formData.blend4} onChange={handleChange} placeholder="추가 구성" />
+                    </div>
+                  ) : (
+                    <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
+                  )}
                   <InputField label="가공방식" name="process" value={formData.process} onChange={handleChange} placeholder="예: 워시드" />
                   <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
                 </>

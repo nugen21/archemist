@@ -194,10 +194,25 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     )}
                   </div>
                 </div>
-                {(bean.category === 'beverage' || bean.variety) && (
-                  <p className="text-xl sm:text-2xl text-gray-400 font-serif italic mb-3">
-                    {bean.category === 'beverage' ? '시그니처 레시피' : bean.variety}
-                  </p>
+                {(bean.category === 'beverage' || bean.variety || (bean.beanType === 'blend' && (bean.blend1 || bean.blend2 || bean.blend3 || bean.blend4))) && (
+                  <div className="mb-4">
+                    {bean.beanType === 'blend' ? (
+                      <div className="flex flex-col gap-1">
+                        <p className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-1">Blend Composition</p>
+                        <div className="flex flex-wrap gap-x-3 gap-y-1">
+                          {[bean.blend1, bean.blend2, bean.blend3, bean.blend4].filter(Boolean).map((comp, idx) => (
+                            <span key={idx} className="text-sm sm:text-base text-gray-400 font-serif italic">
+                              {comp}{idx < [bean.blend1, bean.blend2, bean.blend3, bean.blend4].filter(Boolean).length - 1 ? " |" : ""}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-xl sm:text-2xl text-gray-400 font-serif italic">
+                        {bean.category === 'beverage' ? '시그니처 레시피' : bean.variety}
+                      </p>
+                    )}
+                  </div>
                 )}
                 {bean.cupNotes && (
                   <p className="text-sm text-copper/90 font-medium leading-relaxed line-clamp-2 mb-6">
