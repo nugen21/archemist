@@ -649,7 +649,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                 </div>
               )}
 
-              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
+              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew' || (formData.category === 'beverage' && formData.subCategory === 'handdrip')) && (
                 <>
                   <div className="md:col-span-2 lg:col-span-1 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl flex flex-col justify-center">
                     <label className="text-[10px] font-black text-copper uppercase tracking-widest mb-3">블렌드 여부</label>
@@ -683,7 +683,9 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                     <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
                   )}
                   <InputField label="가공방식" name="process" value={formData.process} onChange={handleChange} placeholder="예: 워시드" />
-                  <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
+                  {formData.category !== 'beverage' && (
+                    <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
+                  )}
                 </>
               )}
 
