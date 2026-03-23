@@ -87,7 +87,8 @@
     "agtronGround": "78",
     "roastPointGround": "Moderately Light",
     "order": 3,
-    "agingDays": "7"
+    "agingDays": "7",
+    "size": "200"
   },
   {
     "id": 1710850000003,
