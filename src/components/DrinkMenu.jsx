@@ -44,7 +44,7 @@ export default function DrinkMenu({ onBack }) {
       onClick={() => window.location.hash = `#product/${item.id}`}
       className="flex justify-between items-center py-2 px-4 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 cursor-pointer group"
     >
-      <div className="flex items-center gap-4 flex-grow">
+      <div className="flex items-center gap-4">
         <div className="w-12 h-12 shrink-0 rounded-lg overflow-hidden border border-white/5 bg-black/40 shadow-inner group-hover:border-copper/30 transition-all duration-500">
           {item.image ? (
             <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -56,17 +56,33 @@ export default function DrinkMenu({ onBack }) {
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-sm font-black group-hover:text-copper transition-all tracking-tight leading-none">{item.name}</span>
-          {item.variety && <span className="text-[10px] text-gray-600 italic font-serif leading-none mt-0.5">{item.variety}</span>}
           {item.size && (
              <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest mt-1">
-               / {item.category === 'dripbag' && !String(item.size).includes('개') ? `${item.size}개` : item.size}
+               {item.category === 'dripbag' && !String(item.size).includes('개') ? `${item.size}개` : item.size}
              </span>
           )}
         </div>
       </div>
-      <span className="text-lg font-serif font-black text-copper/80 ml-4 group-hover:scale-105 transition-transform">
-        {(Number(item.price) / 1000).toFixed(1)}
-      </span>
+      
+      <div className="flex items-center gap-4 shrink-0">
+        {(item.variety || item.process) && (
+          <div className="flex flex-col items-end gap-0.5 max-w-[120px]">
+            {item.variety && (
+              <span className="text-[11px] sm:text-[12px] text-copper font-serif font-black italic tracking-wide text-right leading-none truncate">
+                {item.variety}
+              </span>
+            )}
+            {item.process && (
+              <span className="text-[9px] text-copper/40 font-bold uppercase tracking-widest text-right leading-none">
+                {item.process}
+              </span>
+            )}
+          </div>
+        )}
+        <span className="text-lg sm:text-xl font-serif font-black text-white/90 group-hover:text-copper transition-colors">
+          {(Number(item.price) / 1000).toFixed(1)}
+        </span>
+      </div>
     </div>
   );
 
