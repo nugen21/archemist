@@ -552,9 +552,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                         { 
                           step: '02', 
                           title: '뜸 들이기', 
-                          desc: '30g 물 붓기', 
+                          desc: '36g~40g 물 붓기', 
                           img: '/images/guide/step_brew.png',
-                          detail: '94~96°C의 물 30g을 골고루 붓고 약 30초간 가스가 빠지도록 기다립니다.'
+                          detail: '94~96°C의 물 36g~40g을 부어 가루를 충분히 적셔줍니다. 약 30초간 가스가 빠지도록 기다립니다.'
                         },
                         { 
                           step: '03', 
