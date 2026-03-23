@@ -815,8 +815,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-copper tracking-widest mb-2 uppercase">상세 설명 / 추출 레시피</label>
-              <textarea name="recipe" value={formData.recipe} onChange={handleChange} rows="5" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="상세한 제품 설명이나 레시피를 입력하세요."></textarea>
+              <label className="block text-sm font-medium text-copper tracking-widest mb-2 uppercase">상세 설명</label>
+              <textarea name="recipe" value={formData.recipe} onChange={handleChange} rows="5" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="상세한 제품 설명을 입력하세요."></textarea>
             </div>
 
             <button type="submit" className="w-full bg-gradient-to-r from-yellow-700 via-copper to-yellow-600 text-[#111] font-bold py-5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.5)] hover:scale-[1.01] transition-all duration-300 text-lg tracking-widest uppercase">
