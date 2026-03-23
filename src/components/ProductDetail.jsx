@@ -547,27 +547,44 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           title: '분쇄', 
                           desc: '18g 원두 분쇄', 
                           img: '/images/guide/bean_grind.png',
-                          detail: '굵은 소금 정도의 굵기로 분쇄합니다. 코만단테 기준 25~28 클릭을 추천합니다.'
+                          detail: '굵은 소금 정도의 굵기로 분쇄합니다. (코만단테 25~28 클릭 추천)'
                         },
                         { 
                           step: '02', 
                           title: '뜸 들이기', 
-                          desc: '36g~40g 물 붓기', 
+                          desc: '36~40g 물 붓기', 
                           img: '/images/guide/step_brew.png',
-                          detail: '94~96°C의 물 36g~40g을 부어 가루를 충분히 적셔줍니다. 약 30초간 가스가 빠지도록 기다립니다.'
+                          detail: '94~96°C의 물 36~40g을 부어 가루를 충분히 적셔준 뒤 30초간 기다립니다.'
                         },
                         { 
                           step: '03', 
                           title: '추출', 
                           desc: '단계별 푸어링', 
                           img: '/images/guide/step_brew.png',
-                          detail: '30~40초마다 70g씩 총 4회 부어줍니다. 물이 완전히 빠질 때까지 기다려 마무리합니다.'
+                          detail: '30~40초 간격으로 70g씩 총 4회(280g) 부어줍니다. 물이 완전히 빠지면 추출을 마무리합니다.'
                         }
                       ].map((step, idx) => (
                         <StepCard key={idx} step={step} />
                       ))
                     )}
                   </div>
+                  
+                  {/* Additional Metrics for Bean */}
+                  {product.category === 'bean' && (
+                    <div className="pt-12 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                      {[
+                        { label: '추천 도구', value: 'Hario V60' },
+                        { label: '물 온도', value: '94~96°C' },
+                        { label: '원두 중량', value: '18g' },
+                        { label: '최종 추출량', value: '약 310ml' }
+                      ].map((stat, sIdx) => (
+                        <div key={sIdx} className="bg-white/[0.02] border border-white/5 py-4 rounded-2xl flex flex-col items-center">
+                          <span className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-1">{stat.label}</span>
+                          <span className="text-sm font-black text-copper tabular-nums">{stat.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   
                   <div className="pt-10 border-t border-white/5">
                     <div className="flex items-center justify-center gap-4 mb-6">
@@ -578,7 +595,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-medium break-keep italic">
                       "{product.recipe || (product.category === 'dripbag' 
                         ? "뜸 들이는 30초가 커피의 단맛과 바디감을 결정하는 가장 중요한 시간입니다. 천천히 기다려주세요."
-                        : "신선한 원두일수록 뜸 들이기 과정에서 기포가 많이 발생합니다. 향긋한 커피 향을 즐겨보세요.")}"
+                        : "신선한 원두일수록 뜸 들이기 과정에서 기포가 많이 발생합니다. 원두가 가진 고유의 향미를 온전히 즐겨보세요.")}"
                     </p>
                   </div>
                 </div>
