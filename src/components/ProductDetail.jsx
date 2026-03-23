@@ -506,34 +506,34 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     {[
                       { 
                         step: '01', 
-                        title: 'CUT', 
-                        desc: '상단 절취선 개봉', 
+                        title: '개봉', 
+                        desc: '절취선을 뜯어주세요', 
                         img: '/images/guide/step_cut.png',
-                        detail: '필터가 찢어지지 않게 주의하며 라인을 따라 뜯어주세요.'
+                        detail: '필터 가장자리가 깊게 찢어지지 않도록 끝부분을 유의하며 수평으로 개봉해 주세요.'
                       },
                       { 
                         step: '02', 
-                        title: 'FIX', 
-                        desc: '드립백 컵에 고정', 
+                        title: '고정', 
+                        desc: '컵에 드립백 고정', 
                         img: '/images/guide/step_pull.png',
-                        detail: '양쪽 날개를 당겨 컵에 고정하고 PUSH 부분을 눌러 밀착시킵니다.'
+                        detail: '양쪽 날개를 당겨 컵에 걸고 앞코 부분을 눌러 단단히 고정합니다.'
                       },
                       { 
                         step: '03', 
-                        title: 'BREW', 
+                        title: '추출', 
                         desc: '뜸 들이기 & 추출', 
                         img: '/images/guide/step_brew.png',
-                        detail: '95°C 물로 30초간 뜸을 들인 후 150-180ml를 나누어 붓습니다.'
+                        detail: '95°C 물로 30초간 뜸을 들인 후 150-180ml를 2-3회 나누어 붓습니다.'
                       }
                     ].map((step, idx) => (
                       <div key={idx} className="flex flex-col items-center group/step">
-                        <div className="relative mb-6 w-full aspect-square max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors">
+                        <div className="relative mb-6 w-full aspect-square max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors shadow-2xl">
                           <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
                           <div className="absolute top-4 left-4 text-copper font-serif font-black text-xl opacity-40">{step.step}</div>
                         </div>
-                        <h4 className="text-lg font-black text-white mb-2 tracking-widest uppercase">{step.title}</h4>
-                        <p className="text-copper text-sm font-bold mb-3">{step.desc}</p>
-                        <p className="text-gray-500 text-xs leading-relaxed max-w-[200px] break-keep">{step.detail}</p>
+                        <h4 className="text-xl font-serif font-black text-white mb-2 tracking-[0.2em]">{step.title}</h4>
+                        <p className="text-copper text-xs font-black mb-3 tracking-widest uppercase">{step.desc}</p>
+                        <p className="text-gray-500 text-xs leading-relaxed max-w-[180px] break-keep font-medium">{step.detail}</p>
                       </div>
                     ))}
                   </div>
