@@ -124,9 +124,6 @@ function App() {
              )}
            </div>
            <div className="flex gap-6 items-center">
-             <a href="#admin" className="text-gray-600 hover:text-copper text-[10px] sm:text-xs tracking-widest font-bold uppercase transition-colors flex items-center gap-1">
-               <span className="opacity-50">🔒</span> Admin {isAdmin ? 'Panel' : 'Login'}
-             </a>
              {isAdmin && (
                <button 
                  onClick={() => handleAdminAuth(false)}

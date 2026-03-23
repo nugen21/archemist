@@ -12,6 +12,7 @@ export default function Header({ isAdmin }) {
     { name: '콜드브루', href: '#coldbrew' },
     ...(isAdmin ? [{ name: '매장음료', href: '#menu' }] : []),
     { name: '문의', href: '#contact', bold: true },
+    { name: 'ADMIN', href: '#admin', isAdminLink: true },
   ];
 
   useEffect(() => {
@@ -108,8 +109,12 @@ export default function Header({ isAdmin }) {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`whitespace-nowrap px-3 sm:px-0 py-1 text-[11px] sm:text-[12px] transition-all duration-300 tracking-widest uppercase font-bold sm:font-medium ${link.bold ? 'text-copper sm:text-gray-200 sm:border-l sm:border-gray-800 sm:pl-8 sm:ml-2' : 'text-gray-500 sm:text-gray-400 hover:text-copper'}`}
+                className={`whitespace-nowrap px-3 sm:px-0 py-1 text-[11px] sm:text-[12px] transition-all duration-300 tracking-[0.2em] uppercase font-bold sm:font-medium 
+                  ${link.isAdminLink ? 'text-gray-600 hover:text-copper border-l border-white/10 pl-4 ml-2' : 
+                    link.bold ? 'text-copper sm:text-gray-200 sm:border-l sm:border-gray-800' : 
+                    'text-gray-500 sm:text-gray-400 hover:text-copper'}`}
               >
+                {link.isAdminLink && <span className="opacity-50 mr-1">🔒</span>}
                 {link.name}
               </a>
             ))}
