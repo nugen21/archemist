@@ -56,29 +56,27 @@ export default function DrinkMenu({ onBack }) {
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-sm font-black group-hover:text-copper transition-all tracking-tight leading-none">{item.name}</span>
-          {item.size && (
-             <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest mt-1">
-               {item.category === 'dripbag' && !String(item.size).includes('개') ? `${item.size}개` : item.size}
-             </span>
-          )}
         </div>
       </div>
       
       <div className="flex items-center gap-4 shrink-0">
-        {(item.variety || item.process) && (
-          <div className="flex flex-col items-end gap-0.5 max-w-[120px]">
-            {item.variety && (
-              <span className="text-[11px] sm:text-[12px] text-copper font-serif font-black italic tracking-wide text-right leading-none truncate">
-                {item.variety}
-              </span>
-            )}
-            {item.process && (
-              <span className="text-[9px] text-copper/40 font-bold uppercase tracking-widest text-right leading-none">
-                {item.process}
-              </span>
-            )}
-          </div>
-        )}
+        <div className="flex flex-col items-end gap-0.5 max-w-[140px]">
+          {item.variety && (
+            <span className="text-[11px] sm:text-[12px] text-copper font-serif font-black italic tracking-wide text-right leading-none truncate">
+              {item.variety}
+            </span>
+          )}
+          {item.process && (
+            <span className="text-[9px] text-copper/40 font-bold uppercase tracking-widest text-right leading-none">
+              {item.process}
+            </span>
+          )}
+          {item.size && (
+             <span className="text-[9px] text-white/30 font-black uppercase tracking-[0.2em] text-right mt-0.5 leading-none">
+               {item.category === 'dripbag' && !String(item.size).includes('개') ? `${item.size}개` : item.size}
+             </span>
+          )}
+        </div>
         <span className="text-lg sm:text-xl font-serif font-black text-white/90 group-hover:text-copper transition-colors">
           {(Number(item.price) / 1000).toFixed(1)}
         </span>
