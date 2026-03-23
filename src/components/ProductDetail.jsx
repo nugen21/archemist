@@ -138,6 +138,17 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
       </div>
     );
   };
+  const StepCard = ({ step }) => (
+    <div className="flex flex-col items-center group/step">
+      <div className="relative mb-6 w-full aspect-square max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors shadow-2xl">
+        <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
+        <div className="absolute top-4 left-4 text-copper font-serif font-black text-xl opacity-40">{step.step}</div>
+      </div>
+      <h4 className="text-xl font-serif font-black text-white mb-2 tracking-[0.2em]">{step.title}</h4>
+      <p className="text-copper text-[10px] font-black mb-3 tracking-widest uppercase">{step.desc}</p>
+      <p className="text-gray-500 text-xs leading-relaxed max-w-[180px] break-keep font-medium">{step.detail}</p>
+    </div>
+  );
 
   return (
     <section className="min-h-screen py-12 px-4 sm:px-8 bg-[#0b0c0b] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">
@@ -499,43 +510,63 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               추천 추출 방식
               <div className="h-[1px] w-12 bg-copper/30"></div>
             </h3>
-            <div className={`bg-[#111211] ${product.category === 'dripbag' ? 'p-8 sm:p-16' : 'p-12'} rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group`}>
-              {product.category === 'dripbag' ? (
+            <div className={`bg-[#111211] ${['dripbag', 'bean'].includes(product.category) ? 'p-8 sm:p-16' : 'p-12'} rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group`}>
+              {product.category === 'dripbag' || product.category === 'bean' ? (
                 <div className="relative z-10 space-y-16">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-8">
-                    {[
-                      { 
-                        step: '01', 
-                        title: '개봉', 
-                        desc: '절취선을 뜯어주세요', 
-                        img: '/images/guide/step_cut.png',
-                        detail: '필터 가장자리가 깊게 찢어지지 않도록 끝부분을 유의하며 수평으로 개봉해 주세요.'
-                      },
-                      { 
-                        step: '02', 
-                        title: '고정', 
-                        desc: '컵에 드립백 고정', 
-                        img: '/images/guide/step_pull.png',
-                        detail: '양쪽 날개를 당겨 컵에 걸고 앞코 부분을 눌러 단단히 고정합니다.'
-                      },
-                      { 
-                        step: '03', 
-                        title: '추출', 
-                        desc: '뜸 들이기 & 추출', 
-                        img: '/images/guide/step_brew.png',
-                        detail: '95°C 물로 30초간 뜸을 들인 후 150-180ml를 2-3회 나누어 붓습니다.'
-                      }
-                    ].map((step, idx) => (
-                      <div key={idx} className="flex flex-col items-center group/step">
-                        <div className="relative mb-6 w-full aspect-square max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors shadow-2xl">
-                          <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
-                          <div className="absolute top-4 left-4 text-copper font-serif font-black text-xl opacity-40">{step.step}</div>
-                        </div>
-                        <h4 className="text-xl font-serif font-black text-white mb-2 tracking-[0.2em]">{step.title}</h4>
-                        <p className="text-copper text-xs font-black mb-3 tracking-widest uppercase">{step.desc}</p>
-                        <p className="text-gray-500 text-xs leading-relaxed max-w-[180px] break-keep font-medium">{step.detail}</p>
-                      </div>
-                    ))}
+                    {product.category === 'dripbag' ? (
+                      [
+                        { 
+                          step: '01', 
+                          title: '개봉', 
+                          desc: '절취선을 뜯어주세요', 
+                          img: '/images/guide/step_cut.png',
+                          detail: '필터 가장자리가 깊게 찢어지지 않도록 끝부분을 유의하며 수평으로 개봉해 주세요.'
+                        },
+                        { 
+                          step: '02', 
+                          title: '고정', 
+                          desc: '컵에 드립백 고정', 
+                          img: '/images/guide/step_pull.png',
+                          detail: '양쪽 날개를 당겨 컵에 걸고 앞코 부분을 눌러 단단히 고정합니다.'
+                        },
+                        { 
+                          step: '03', 
+                          title: '추출', 
+                          desc: '뜸 들이기 & 추출', 
+                          img: '/images/guide/step_brew.png',
+                          detail: '95°C 물로 30초간 뜸을 들인 후 150-180ml를 2-3회 나누어 붓습니다.'
+                        }
+                      ].map((step, idx) => (
+                        <StepCard key={idx} step={step} />
+                      ))
+                    ) : (
+                      [
+                        { 
+                          step: '01', 
+                          title: '분쇄', 
+                          desc: '18g 원두 분쇄', 
+                          img: '/images/guide/bean_grind.png',
+                          detail: '굵은 소금 정도의 굵기로 분쇄합니다. 코만단테 기준 25~28 클릭을 추천합니다.'
+                        },
+                        { 
+                          step: '02', 
+                          title: '뜸 들이기', 
+                          desc: '30g 물 붓기', 
+                          img: '/images/guide/step_brew.png',
+                          detail: '94~96°C의 물 30g을 골고루 붓고 약 30초간 가스가 빠지도록 기다립니다.'
+                        },
+                        { 
+                          step: '03', 
+                          title: '추출', 
+                          desc: '단계별 푸어링', 
+                          img: '/images/guide/step_brew.png',
+                          detail: '30~40초마다 70g씩 총 4회 부어줍니다. 물이 완전히 빠질 때까지 기다려 마무리합니다.'
+                        }
+                      ].map((step, idx) => (
+                        <StepCard key={idx} step={step} />
+                      ))
+                    )}
                   </div>
                   
                   <div className="pt-10 border-t border-white/5">
@@ -545,7 +576,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       <div className="w-8 h-[1px] bg-copper/30"></div>
                     </div>
                     <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-medium break-keep italic">
-                      "{product.recipe || "뜸 들이는 30초가 커피의 단맛과 바디감을 결정하는 가장 중요한 시간입니다. 천천히 기다려주세요."}"
+                      "{product.recipe || (product.category === 'dripbag' 
+                        ? "뜸 들이는 30초가 커피의 단맛과 바디감을 결정하는 가장 중요한 시간입니다. 천천히 기다려주세요."
+                        : "신선한 원두일수록 뜸 들이기 과정에서 기포가 많이 발생합니다. 향긋한 커피 향을 즐겨보세요.")}"
                     </p>
                   </div>
                 </div>
