@@ -442,7 +442,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             ) : (
               <div className="grid grid-cols-2 gap-4">
                  <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">
-                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">중량 및 구성</span>
+                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">
+                     {product.category === 'dripbag' ? '수량 및 구성' : '중량 및 구성'}
+                   </span>
                    <span className="text-xl font-bold text-copper">{product.size || '기본'}</span>
                  </div>
                  <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">

@@ -578,14 +578,19 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag' || formData.category === 'bean') && (
                 <div className="flex flex-col justify-end">
                   <InputField 
-                    label={formData.category === 'beverage' ? "사이즈 (Size)" : formData.category === 'bean' ? "중량 (Weight)" : "중량/구성"} 
+                    label={
+                      formData.category === 'beverage' ? "사이즈 (Size)" : 
+                      formData.category === 'dripbag' ? "수량 (Quantity)" : 
+                      formData.category === 'bean' ? "중량 (Weight)" : 
+                      "중량/수량"
+                    } 
                     name="size" 
                     value={formData.size} 
                     onChange={handleChange} 
                     placeholder={
                       formData.category === 'beverage' ? "예: 16oz" : 
                       formData.category === 'bean' ? "예: 200g, 500g" :
-                      formData.category === 'coldbrew' ? "예: 500ml" : "예: 10ea"
+                      formData.category === 'coldbrew' ? "예: 500ml" : "예: 10개"
                     } 
                   />
                 </div>
