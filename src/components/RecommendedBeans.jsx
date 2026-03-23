@@ -2,19 +2,45 @@ import React, { useState, useEffect } from 'react';
 
 const countryToCode = {
   // South & Central America
-  '브라질': 'br', '콜롬비아': 'co', '파나마': 'pa', '과테말라': 'gt', 
-  '코스타리카': 'cr', '온두라스': 'hn', '에콰도르': 'ec', '엘살바도르': 'sv', 
-  '니카라과': 'ni', '멕시코': 'mx', '페루': 'pe', '볼리비아': 'bo', 
-  '도미니카 공화국': 'do', '자메이카': 'jm',
+  '브라질': 'br', 'brazil': 'br', 'Brazil': 'br',
+  '콜롬비아': 'co', 'colombia': 'co', 'Colombia': 'co',
+  '파나마': 'pa', 'panama': 'pa', 'Panama': 'pa',
+  '과테말라': 'gt', 'guatemala': 'gt', 'Guatemala': 'gt',
+  '코스타리카': 'cr', 'costa rica': 'cr', 'Costa Rica': 'cr',
+  '온두라스': 'hn', 'honduras': 'hn', 'Honduras': 'hn',
+  '에콰도르': 'ec', 'ecuador': 'ec', 'Ecuador': 'ec',
+  '엘살바도르': 'sv', 'el salvador': 'sv', 'El Salvador': 'sv',
+  '니카라과': 'ni', 'nicaragua': 'ni', 'Nicaragua': 'ni',
+  '멕시코': 'mx', 'mexico': 'mx', 'Mexico': 'mx',
+  '페루': 'pe', 'peru': 'pe', 'Peru': 'pe',
+  '볼리비아': 'bo', 'bolivia': 'bo', 'Bolivia': 'bo',
+  '도미니카 공화국': 'do', 'dominican republic': 'do', 'Dominican Republic': 'do',
+  '자메이카': 'jm', 'jamaica': 'jm', 'Jamaica': 'jm',
   // Africa
-  '에티오피아': 'et', '케냐': 'ke', '탄자니아': 'tz', '르완다': 'rw', 
-  '부룬디': 'bi', '우간다': 'ug', '콩고민주공화국': 'cd', '말라위': 'mw', '잠비아': 'zm',
+  '에티오피아': 'et', 'ethiopia': 'et', 'Ethiopia': 'et',
+  '케냐': 'ke', 'kenya': 'ke', 'Kenya': 'ke',
+  '탄자니아': 'tz', 'tanzania': 'tz', 'Tanzania': 'tz',
+  '르완다': 'rw', 'rwanda': 'rw', 'Rwanda': 'rw',
+  '부룬디': 'bi', 'burundi': 'bi', 'Burundi': 'bi',
+  '우간다': 'ug', 'uganda': 'ug', 'Uganda': 'ug',
+  '콩고민주공화국': 'cd', 'dr congo': 'cd', 'DR Congo': 'cd', 'congo': 'cd',
+  '말라위': 'mw', 'malawi': 'mw', 'Malawi': 'mw',
+  '잠비아': 'zm', 'zambia': 'zm', 'Zambia': 'zm',
   // Asia & Middle East
-  '예멘': 'ye', '베트남': 'vn', '인도네시아': 'id', '인도': 'in', 
-  '태국': 'th', '라오스': 'la', '파푸아뉴기니': 'pg', '필리핀': 'ph', 
-  '동티모르': 'tl', '미얀마': 'mm', '중국': 'cn',
+  '예멘': 'ye', 'yemen': 'ye', 'Yemen': 'ye',
+  '베트남': 'vn', 'vietnam': 'vn', 'Vietnam': 'vn',
+  '인도네시아': 'id', 'indonesia': 'id', 'Indonesia': 'id',
+  '인도': 'in', 'india': 'in', 'India': 'in',
+  '태국': 'th', 'thailand': 'th', 'Thailand': 'th',
+  '라오스': 'la', 'laos': 'la', 'Laos': 'la',
+  '파푸아뉴기니': 'pg', 'papua new guinea': 'pg', 'Papua New Guinea': 'pg',
+  '필리핀': 'ph', 'philippines': 'ph', 'Philippines': 'ph',
+  '동티모르': 'tl', 'east timor': 'tl', 'East Timor': 'tl',
+  '미얀마': 'mm', 'myanmar': 'mm', 'Myanmar': 'mm',
+  '중국': 'cn', 'china': 'cn', 'China': 'cn',
   // Others
-  '미국': 'us', '한국': 'kr'
+  '미국': 'us', 'usa': 'us', 'USA': 'us', 'United States': 'us',
+  '한국': 'kr', 'korea': 'kr', 'Korea': 'kr', 'South Korea': 'kr'
 };
 
 export default function RecommendedBeans({ isAdmin, onEdit }) {

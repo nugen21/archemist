@@ -90,7 +90,49 @@ const FLAVOR_CONFIG = {
   '가죽': { image: '/assets/flavors/batch_others.png', color: '#4e342e', objectPosition: '90% 90%', scale: '2' }, 
   '흙내음': { image: '/assets/flavors/batch_others.png', color: '#582f0e', objectPosition: '90% 90%', scale: '2' }, 
   '담뱃잎': { image: '/assets/flavors/batch_others.png', color: '#333d29', objectPosition: '90% 90%', scale: '2' }, 
-  '파이프 담배': { image: '/assets/flavors/batch_others.png', color: '#000000', objectPosition: '90% 90%', scale: '2' }
+};
+
+const countryToCode = {
+  // South & Central America
+  '브라질': 'br', 'brazil': 'br', 'Brazil': 'br',
+  '콜롬비아': 'co', 'colombia': 'co', 'Colombia': 'co',
+  '파나마': 'pa', 'panama': 'pa', 'Panama': 'pa',
+  '과테말라': 'gt', 'guatemala': 'gt', 'Guatemala': 'gt',
+  '코스타리카': 'cr', 'costa rica': 'cr', 'Costa Rica': 'cr',
+  '온두라스': 'hn', 'honduras': 'hn', 'Honduras': 'hn',
+  '에콰도르': 'ec', 'ecuador': 'ec', 'Ecuador': 'ec',
+  '엘살바도르': 'sv', 'el salvador': 'sv', 'El Salvador': 'sv',
+  '니카라과': 'ni', 'nicaragua': 'ni', 'Nicaragua': 'ni',
+  '멕시코': 'mx', 'mexico': 'mx', 'Mexico': 'mx',
+  '페루': 'pe', 'peru': 'pe', 'Peru': 'pe',
+  '볼리비아': 'bo', 'bolivia': 'bo', 'Bolivia': 'bo',
+  '도미니카 공화국': 'do', 'dominican republic': 'do', 'Dominican Republic': 'do',
+  '자메이카': 'jm', 'jamaica': 'jm', 'Jamaica': 'jm',
+  // Africa
+  '에티오피아': 'et', 'ethiopia': 'et', 'Ethiopia': 'et',
+  '케냐': 'ke', 'kenya': 'ke', 'Kenya': 'ke',
+  '탄자니아': 'tz', 'tanzania': 'tz', 'Tanzania': 'tz',
+  '르완다': 'rw', 'rwanda': 'rw', 'Rwanda': 'rw',
+  '부룬디': 'bi', 'burundi': 'bi', 'Burundi': 'bi',
+  '우간다': 'ug', 'uganda': 'ug', 'Uganda': 'ug',
+  '콩고민주공화국': 'cd', 'dr congo': 'cd', 'DR Congo': 'cd', 'congo': 'cd',
+  '말라위': 'mw', 'malawi': 'mw', 'Malawi': 'mw',
+  '잠비아': 'zm', 'zambia': 'zm', 'Zambia': 'zm',
+  // Asia & Middle East
+  '예멘': 'ye', 'yemen': 'ye', 'Yemen': 'ye',
+  '베트남': 'vn', 'vietnam': 'vn', 'Vietnam': 'vn',
+  '인도네시아': 'id', 'indonesia': 'id', 'Indonesia': 'id',
+  '인도': 'in', 'india': 'in', 'India': 'in',
+  '태국': 'th', 'thailand': 'th', 'Thailand': 'th',
+  '라오스': 'la', 'laos': 'la', 'Laos': 'la',
+  '파푸아뉴기니': 'pg', 'papua new guinea': 'pg', 'Papua New Guinea': 'pg',
+  '필리핀': 'ph', 'philippines': 'ph', 'Philippines': 'ph',
+  '동티모르': 'tl', 'east timor': 'tl', 'East Timor': 'tl',
+  '미얀마': 'mm', 'myanmar': 'mm', 'Myanmar': 'mm',
+  '중국': 'cn', 'china': 'cn', 'China': 'cn',
+  // Others
+  '미국': 'us', 'usa': 'us', 'USA': 'us', 'United States': 'us',
+  '한국': 'kr', 'korea': 'kr', 'Korea': 'kr', 'South Korea': 'kr'
 };
 
 export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
@@ -297,7 +339,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4 mb-12">
                     {[
-                      { label: '국가', value: product.country || '정보 없음' },
+                      { 
+                        label: '국가', 
+                        value: product.country || '정보 없음',
+                        flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null
+                      },
                       { label: '상세 지역', value: product.region || '정보 없음' },
                       { label: '농장', value: product.farm || '정보 없음' },
                       { label: '마이크로밀', value: product.micromill || '정보 없음' },
@@ -307,8 +353,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g') }
                     ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
-                        <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em]">{item.label}</span>
-                        <span className="text-xl text-white font-bold tracking-tight">{item.value}</span>
+                        <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em] transition-colors hover:text-copper/40">{item.label}</span>
+                        <div className="flex items-center gap-2">
+                          {item.flag && (
+                            <img src={item.flag} alt="flag" className="w-5 h-3.5 object-cover rounded shadow-sm opacity-90 border border-white/10" />
+                          )}
+                          <span className="text-xl text-white font-bold tracking-tight">{item.value}</span>
+                        </div>
                       </div>
                     ))}
                   </div>
