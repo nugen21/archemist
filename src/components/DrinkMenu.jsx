@@ -96,10 +96,10 @@ export default function DrinkMenu({ onBack }) {
             <section>
               <div className="flex flex-col mb-8 relative">
                 <div className="flex items-baseline gap-4 mb-2">
-                  <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-normal text-white/50">
+                  <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-normal text-white/50">
                     ESPRESSO
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.4em] text-sm sm:text-base uppercase">에스프레소</span>
+                  <span className="text-copper/40 font-bold tracking-[0.4em] text-xs sm:text-sm uppercase">에스프레소</span>
                 </div>
                 <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
@@ -161,10 +161,10 @@ export default function DrinkMenu({ onBack }) {
             <section>
               <div className="flex flex-col mb-8 relative">
                 <div className="flex items-baseline gap-4 mb-2">
-                  <h2 className="text-3xl sm:text-5xl font-serif font-black tracking-normal text-white/50">
+                  <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-normal text-white/50">
                     HAND DRIP
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.4em] text-sm sm:text-base uppercase">핸드 드립</span>
+                  <span className="text-copper/40 font-bold tracking-[0.4em] text-xs sm:text-sm uppercase">핸드 드립</span>
                 </div>
                 <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
