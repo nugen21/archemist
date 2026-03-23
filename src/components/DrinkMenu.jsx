@@ -3,34 +3,61 @@ import { ArrowLeft, Coffee, Zap, Droplets } from 'lucide-react';
 
 export default function DrinkMenu({ onBack }) {
   const [drinks, setDrinks] = useState([]);
+  const [beans, setBeans] = useState([]);
+  const [dripBags, setDripBags] = useState([]);
+  const [coldBrews, setColdBrews] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const loadDrinks = async () => {
+    const loadAllProducts = async () => {
       try {
         const response = await fetch(`/products.json?t=${Date.now()}`);
+        let data = [];
         if (response.ok) {
-          const data = await response.json();
-          setDrinks(data.filter(p => p.category === 'beverage' && p.visible !== false));
+          data = await response.json();
         } else {
           const localSaved = localStorage.getItem('archemist_beans');
           if (localSaved) {
-            const data = JSON.parse(localSaved);
-            setDrinks(data.filter(p => p.category === 'beverage' && p.visible !== false));
+            data = JSON.parse(localSaved);
           }
         }
+        
+        setDrinks(data.filter(p => p.category === 'beverage' && p.visible !== false));
+        setBeans(data.filter(p => p.category === 'bean' && p.visible !== false));
+        setDripBags(data.filter(p => p.category === 'dripbag' && p.visible !== false));
+        setColdBrews(data.filter(p => p.category === 'coldbrew' && p.visible !== false));
       } catch (error) {
-        console.error('Failed to load drinks:', error);
+        console.error('Failed to load products:', error);
       }
     };
 
-    loadDrinks();
-    window.addEventListener('beansUpdated', loadDrinks);
-    return () => window.removeEventListener('beansUpdated', loadDrinks);
+    loadAllProducts();
+    window.addEventListener('beansUpdated', loadAllProducts);
+    return () => window.removeEventListener('beansUpdated', loadAllProducts);
   }, []);
 
   const espressoMenu = drinks.filter(d => d.subCategory === 'espresso' || !d.subCategory);
   const handDripMenu = drinks.filter(d => d.subCategory === 'handdrip');
+
+  const ProductItem = ({ item }) => (
+    <div 
+      onClick={() => window.location.hash = `#product/${item.id}`}
+      className="flex justify-between items-center py-4 border-b border-white/5 hover:border-copper/30 transition-all cursor-pointer group"
+    >
+      <div className="flex flex-col gap-0.5">
+        <span className="text-sm font-bold group-hover:text-copper transition-all">{item.name}</span>
+        {item.variety && <span className="text-[10px] text-gray-600 italic font-serif">{item.variety}</span>}
+        {item.size && (
+           <span className="text-[9px] text-gray-700 font-bold uppercase tracking-widest mt-1">
+             {item.category === 'dripbag' && !String(item.size).includes('개') ? `${item.size}개` : item.size}
+           </span>
+        )}
+      </div>
+      <span className="text-lg font-serif font-black text-copper/80">
+        {(Number(item.price) || 0).toLocaleString()}
+      </span>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#0b0c0b] text-white font-sans selection:bg-copper relative overflow-x-hidden flex flex-col">
@@ -54,8 +81,12 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </header>
 
-      <main className="flex-grow flex items-center justify-center py-10 px-4 sm:px-8 md:px-12 relative z-10">
-        <div className="w-full max-w-4xl flex flex-col gap-8">
+      <main className="flex-grow py-28 px-4 sm:px-8 md:px-12 relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          
+          {/* Left: Beverage Menu (7/12) */}
+          <div className="lg:col-span-7 flex flex-col gap-16">
+            <div className="w-full flex flex-col gap-12">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
             <section>
@@ -173,6 +204,51 @@ export default function DrinkMenu({ onBack }) {
               </div>
             </section>
           )}
+          </div>
+        </div>
+          
+        {/* Right Column: Coffee Products (5/12) */}
+          <aside className="lg:col-span-5 flex flex-col gap-12 lg:border-l lg:border-white/5 lg:pl-20 mt-20 lg:mt-0">
+            <div className="flex flex-col gap-10">
+              
+              {/* Beans Section */}
+              {beans.length > 0 && (
+                <section>
+                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
+                    Beans <span className="h-[1px] flex-grow bg-white/10"></span>
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    {beans.map(item => <ProductItem key={item.id} item={item} />)}
+                  </div>
+                </section>
+              )}
+
+              {/* Drip Packs Section */}
+              {dripBags.length > 0 && (
+                <section>
+                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
+                    Drip Packs <span className="h-[1px] flex-grow bg-white/10"></span>
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    {dripBags.map(item => <ProductItem key={item.id} item={item} />)}
+                  </div>
+                </section>
+              )}
+
+              {/* Cold Brew Section */}
+              {coldBrews.length > 0 && (
+                <section>
+                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
+                    Cold Brew <span className="h-[1px] flex-grow bg-white/10"></span>
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    {coldBrews.map(item => <ProductItem key={item.id} item={item} />)}
+                  </div>
+                </section>
+              )}
+            </div>
+          </aside>
+
         </div>
       </main>
 

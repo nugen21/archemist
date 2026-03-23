@@ -79,10 +79,6 @@ function App() {
 
   // Route: Drink Menu
   if (currentPath === '#menu') {
-    if (!isAdmin) {
-      window.location.hash = '#home';
-      return null;
-    }
     return <DrinkMenu onBack={handleBack} />;
   }
 
