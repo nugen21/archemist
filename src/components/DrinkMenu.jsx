@@ -85,7 +85,11 @@ export default function DrinkMenu({ onBack }) {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           
           {/* Left: Beverage Menu (7/12) */}
-          <div className="lg:col-span-7 flex flex-col gap-16">
+          <div className="lg:col-span-7 flex flex-col gap-12">
+            <div className="mb-12 flex items-baseline gap-6 border-b border-white/5 pb-8">
+              <h2 className="text-5xl sm:text-7xl font-serif font-black text-white/90 tracking-tight">음료</h2>
+              <span className="text-copper/40 font-bold tracking-[0.5em] text-lg uppercase italic">Beverage</span>
+            </div>
             <div className="w-full flex flex-col gap-12">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
@@ -209,6 +213,10 @@ export default function DrinkMenu({ onBack }) {
           
         {/* Right Column: Coffee Products (5/12) */}
           <aside className="lg:col-span-5 flex flex-col gap-12 lg:border-l lg:border-white/5 lg:pl-20 mt-20 lg:mt-0">
+            <div className="mb-12 flex items-baseline gap-6 border-b border-white/5 pb-8">
+              <h2 className="text-5xl sm:text-7xl font-serif font-black text-white/90 tracking-tight">상품</h2>
+              <span className="text-copper/40 font-bold tracking-[0.5em] text-lg uppercase italic">Product</span>
+            </div>
             <div className="flex flex-col gap-10">
               
               {/* Beans Section */}
