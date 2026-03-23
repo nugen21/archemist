@@ -200,9 +200,10 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                       <div className="flex flex-col gap-1">
                         <p className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-1">Blend Composition</p>
                         <div className="flex flex-wrap gap-x-3 gap-y-1">
-                          {[bean.blend1, bean.blend2, bean.blend3, bean.blend4].filter(Boolean).map((comp, idx) => (
+                          {[1, 2, 3, 4].map(n => ({ name: bean[`blend${n}`], ratio: bean[`ratio${n}`] })).filter(c => c.name).map((comp, idx, arr) => (
                             <span key={idx} className="text-sm sm:text-base text-gray-400 font-serif italic">
-                              {comp}{idx < [bean.blend1, bean.blend2, bean.blend3, bean.blend4].filter(Boolean).length - 1 ? " |" : ""}
+                              {comp.name} {comp.ratio && <span className="text-[10px] sm:text-xs text-copper/60 align-top ml-0.5">{comp.ratio}%</span>}
+                              {idx < arr.length - 1 ? " |" : ""}
                             </span>
                           ))}
                         </div>

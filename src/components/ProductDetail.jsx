@@ -290,7 +290,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '농장', value: product.farm || '정보 없음' },
                       { label: '마이크로밀', value: product.micromill || '정보 없음' },
                       { label: '재배 고도', value: product.altitude || '정보 없음' },
-                      { label: product.beanType === 'blend' ? '블렌딩 구성' : '품종', value: product.beanType === 'blend' ? [product.blend1, product.blend2, product.blend3, product.blend4].filter(Boolean).join(' | ') || product.variety || '정보 없음' : product.variety || '정보 없음' },
+                      { label: product.beanType === 'blend' ? '블렌딩 구성' : '품종', value: product.beanType === 'blend' ? [1, 2, 3, 4].map(n => ({ name: product[`blend${n}`], ratio: product[`ratio${n}`] })).filter(c => c.name).map(c => `${c.name}${c.ratio ? ` (${c.ratio}%)` : ''}`).join(' | ') || product.variety || '정보 없음' : product.variety || '정보 없음' },
                       { label: '가공방식', value: product.process || '정보 없음' },
                       { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' && !String(product.size).includes('개') ? `${product.size}개` : product.size) : (product.category === 'dripbag' ? '10개' : '200g') }
                     ].map((item, idx) => (

@@ -37,7 +37,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', // beverage specific
-    blend1: '', blend2: '', blend3: '', blend4: ''
+    blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
   });
 
   const handleCupNoteToggle = (note) => {
@@ -670,12 +670,14 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   <InputField label="마이크로밀 (Micro-mill)" name="micromill" value={formData.micromill} onChange={handleChange} placeholder="예: 엘리다 밀" />
                   <InputField label="재배 고도" name="altitude" value={formData.altitude} onChange={handleChange} placeholder="예: 1,800m" />
                   {formData.beanType === 'blend' ? (
-                    <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4 bg-copper/5 p-4 rounded-xl border border-copper/10 my-2">
-                       <p className="col-span-2 md:col-span-4 text-[10px] font-black text-copper uppercase tracking-widest mb-1">블렌딩 구성 (최대 4개)</p>
-                       <InputField label="구성 1" name="blend1" value={formData.blend1} onChange={handleChange} placeholder="예: 브라질 50%" />
-                       <InputField label="구성 2" name="blend2" value={formData.blend2} onChange={handleChange} placeholder="예: 에티오피아 30%" />
-                       <InputField label="구성 3" name="blend3" value={formData.blend3} onChange={handleChange} placeholder="예: 콜롬비아 20%" />
-                       <InputField label="구성 4" name="blend4" value={formData.blend4} onChange={handleChange} placeholder="추가 구성" />
+                    <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 bg-copper/5 p-6 rounded-2xl border border-copper/10 my-4">
+                       <p className="col-span-1 md:col-span-2 lg:col-span-4 text-[10px] font-black text-copper uppercase tracking-[0.2em] mb-2 border-b border-copper/10 pb-2">블렌딩 구성 및 비율 (%)</p>
+                       {[1, 2, 3, 4].map(num => (
+                         <div key={num} className="flex flex-col gap-2 bg-black/20 p-3 rounded-xl border border-white/5">
+                           <InputField label={`품종 ${num}`} name={`blend${num}`} value={formData[`blend${num}`]} onChange={handleChange} placeholder="예: 브라질" />
+                           <InputField label="비율 (%)" name={`ratio${num}`} value={formData[`ratio${num}`]} onChange={handleChange} placeholder="50" type="number" />
+                         </div>
+                       ))}
                     </div>
                   ) : (
                     <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
