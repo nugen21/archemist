@@ -848,13 +848,13 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest w-10 text-center">순서</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">이미지 / 종류</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">상품명</th>
-                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">가격 / 로스팅 날짜</th>
+                    <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">가공 / 로스팅</th>
                     <th className="py-4 px-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">관리</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800">
                   {filteredBeans.length === 0 ? (
-                    <tr><td colSpan="4" className="py-12 text-center text-gray-600 italic">표시할 품목이 없습니다.</td></tr>
+                    <tr><td colSpan="5" className="py-12 text-center text-gray-600 italic">표시할 품목이 없습니다.</td></tr>
                   ) : (
                     filteredBeans.map((item, index) => {
                       const formattedPrice = item.category === 'beverage' 
@@ -904,10 +904,14 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                               {item.recommended && (
                                 <span className="bg-copper/10 text-copper text-[8px] font-bold px-1.5 py-0.5 rounded border border-copper/20 uppercase tracking-tighter">추천 상품</span>
                               )}
+                              <span className="text-copper font-serif font-black text-[13px] tracking-tight">{formattedPrice}</span>
                             </div>
                           </td>
                           <td className="py-5 px-4 text-xs text-gray-400">
-                            {formattedPrice} {item.roastDate && <span className="opacity-40 mx-1">|</span>} {item.roastDate || ''}
+                            <div className="flex flex-col gap-0.5">
+                              <span className="text-gray-200 font-bold">{item.process || '-'}</span>
+                              <span className="text-[10px] opacity-60 tabular-nums">{item.roastDate || '날짜 미지정'}</span>
+                            </div>
                           </td>
                           <td className="py-5 px-4 text-right">
                             <div className="flex justify-end gap-1">
