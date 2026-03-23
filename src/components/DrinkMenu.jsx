@@ -59,8 +59,8 @@ export default function DrinkMenu({ onBack }) {
         </div>
       </div>
       
-      <div className="flex items-center gap-4 shrink-0">
-        <div className="flex flex-col items-end gap-0.5 max-w-[140px]">
+      <div className="flex items-center gap-8 shrink-0 ml-10">
+        <div className="flex flex-col items-end gap-1 max-w-[160px]">
           {item.variety && (
             <span className="text-[11px] sm:text-[12px] text-copper font-serif font-black italic tracking-wide text-right leading-none truncate">
               {item.variety}
@@ -73,11 +73,13 @@ export default function DrinkMenu({ onBack }) {
           )}
           {item.size && (
              <span className="text-[9px] text-white/30 font-black uppercase tracking-[0.2em] text-right mt-0.5 leading-none">
-               {item.category === 'dripbag' && !String(item.size).includes('개') ? `${item.size}개` : item.size}
+               {item.category === 'dripbag' 
+                 ? (!String(item.size).includes('개') ? `${item.size}개` : item.size) 
+                 : (item.category === 'bean' && !String(item.size).includes('g') ? `${item.size}g` : item.size)}
              </span>
           )}
         </div>
-        <span className="text-lg sm:text-xl font-serif font-black text-white/90 group-hover:text-copper transition-colors">
+        <span className="text-lg sm:text-xl font-serif font-black text-white/90 group-hover:text-copper transition-colors w-12 text-right">
           {(Number(item.price) / 1000).toFixed(1)}
         </span>
       </div>
