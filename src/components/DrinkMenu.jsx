@@ -72,10 +72,12 @@ export default function DrinkMenu({ onBack }) {
             </span>
           )}
           {item.size && (
-             <span className="text-[9px] text-white/30 font-black uppercase tracking-[0.2em] text-right mt-0.5 leading-none">
-               {item.category === 'dripbag' 
-                 ? (!String(item.size).includes('개') ? `${item.size}개` : item.size) 
-                 : (item.category === 'bean' && !String(item.size).includes('g') ? `${item.size}g` : item.size)}
+             <span className="text-[11px] text-white/30 font-black uppercase tracking-[0.2em] text-right mt-1 leading-none">
+               {(() => {
+                 const s = String(item.size).toLowerCase();
+                 if (item.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
+                 return s.includes('g') ? s : `${s}g`;
+               })()}
              </span>
           )}
         </div>
