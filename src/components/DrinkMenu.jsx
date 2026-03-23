@@ -53,8 +53,8 @@ export default function DrinkMenu({ onBack }) {
            </span>
         )}
       </div>
-      <span className="text-lg font-serif font-black text-copper/80">
-        {(Number(item.price) || 0).toLocaleString()}
+      <span className="text-xl font-serif font-black text-copper/80">
+        {(Number(item.price) / 1000).toFixed(1)}
       </span>
     </div>
   );
