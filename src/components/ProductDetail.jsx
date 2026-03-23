@@ -235,41 +235,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   </a>
                 </div>
               )}
-              {product.category === 'dripbag' && (
-                <div className="hidden lg:block mt-4">
-                  <button 
-                    onClick={() => window.location.hash = '#guide/dripbag'}
-                    className="w-full bg-white/5 hover:bg-white/10 text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold text-sm tracking-widest transition-all border border-white/10 hover:border-copper/40 group mb-4"
-                  >
-                    <Coffee size={16} className="text-copper group-hover:scale-110 transition-transform" />
-                    드립백 추출 가이드 보기
-                  </button>
-                </div>
-              )}
-            </div>
-            
-            {/* Mobile View Purchase & Guide Buttons */}
-            <div className="lg:hidden mt-4 space-y-4">
-              {product.storeUrl && (
-                <a 
-                  href={product.storeUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#03C75A] text-white py-4 rounded-xl flex items-center justify-center gap-3 font-black text-sm tracking-widest shadow-lg"
-                >
-                  <span className="bg-white text-[#03C75A] w-5 h-5 rounded-md flex items-center justify-center font-black text-[10px]">N</span>
-                  네이버 스마트 스토어 구매
-                </a>
-              )}
-              {product.category === 'dripbag' && (
-                <button 
-                  onClick={() => window.location.hash = '#guide/dripbag'}
-                  className="w-full bg-white/5 text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold text-sm tracking-widest border border-white/10"
-                >
-                  <Coffee size={16} className="text-copper" />
-                  추출 가이드 보기
-                </button>
-              )}
             </div>
 
           {/* Right: Detailed Specifications */}
@@ -534,13 +499,66 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               추천 추출 방식
               <div className="h-[1px] w-12 bg-copper/30"></div>
             </h3>
-            <div className="bg-[#111211] p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
-              <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
-                <Droplet size={200} className="text-copper" />
-              </div>
-              <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
-                {product.recipe || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
-              </p>
+            <div className={`bg-[#111211] ${product.category === 'dripbag' ? 'p-8 sm:p-16' : 'p-12'} rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group`}>
+              {product.category === 'dripbag' ? (
+                <div className="relative z-10 space-y-16">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-8">
+                    {[
+                      { 
+                        step: '01', 
+                        title: 'CUT', 
+                        desc: '상단 절취선 개봉', 
+                        img: '/images/guide/step_cut.png',
+                        detail: '필터가 찢어지지 않게 주의하며 라인을 따라 뜯어주세요.'
+                      },
+                      { 
+                        step: '02', 
+                        title: 'FIX', 
+                        desc: '드립백 컵에 고정', 
+                        img: '/images/guide/step_pull.png',
+                        detail: '양쪽 날개를 당겨 컵에 고정하고 PUSH 부분을 눌러 밀착시킵니다.'
+                      },
+                      { 
+                        step: '03', 
+                        title: 'BREW', 
+                        desc: '뜸 들이기 & 추출', 
+                        img: '/images/guide/step_brew.png',
+                        detail: '95°C 물로 30초간 뜸을 들인 후 150-180ml를 나누어 붓습니다.'
+                      }
+                    ].map((step, idx) => (
+                      <div key={idx} className="flex flex-col items-center group/step">
+                        <div className="relative mb-6 w-full aspect-square max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors">
+                          <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
+                          <div className="absolute top-4 left-4 text-copper font-serif font-black text-xl opacity-40">{step.step}</div>
+                        </div>
+                        <h4 className="text-lg font-black text-white mb-2 tracking-widest uppercase">{step.title}</h4>
+                        <p className="text-copper text-sm font-bold mb-3">{step.desc}</p>
+                        <p className="text-gray-500 text-xs leading-relaxed max-w-[200px] break-keep">{step.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="pt-10 border-t border-white/5">
+                    <div className="flex items-center justify-center gap-4 mb-6">
+                      <div className="w-8 h-[1px] bg-copper/30"></div>
+                      <span className="text-[10px] text-copper font-black uppercase tracking-[0.3em]">Special Recipe Tip</span>
+                      <div className="w-8 h-[1px] bg-copper/30"></div>
+                    </div>
+                    <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-medium break-keep italic">
+                      "{product.recipe || "뜸 들이는 30초가 커피의 단맛과 바디감을 결정하는 가장 중요한 시간입니다. 천천히 기다려주세요."}"
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
+                    <Droplet size={200} className="text-copper" />
+                  </div>
+                  <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
+                    {product.recipe || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
+                  </p>
+                </>
+              )}
             </div>
           </div>
 

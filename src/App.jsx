@@ -10,7 +10,6 @@ import Admin from './components/Admin';
 import DrinkMenu from './components/DrinkMenu';
 import EmailSubscription from './components/EmailSubscription';
 import Products from './components/Products';
-import DripBagGuide from './components/DripBagGuide';
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash);
@@ -98,10 +97,6 @@ function App() {
     }
   }
 
-  // Route: Drip Bag Guide
-  if (currentPath === '#guide/dripbag') {
-    return <DripBagGuide onBack={handleBack} />;
-  }
 
   return (
     <div className="min-h-screen flex flex-col bg-matte-black text-white selection:bg-copper font-sans overflow-x-hidden">
