@@ -80,7 +80,7 @@
     "grind": "25z클릭",
     "temp": "94",
     "visible": true,
-    "recommended": true,
+    "recommended": false,
     "image": "/images/bean.png",
     "agtronWb": "65",
     "roastPointWb": "Medium Light",
@@ -107,9 +107,7 @@
     "order": 4,
     "beanType": "blend",
     "blend1": "BRAZIL CERRADO NAUTRAL",
-    "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)",
-    "ratio1": "70",
-    "ratio2": "30"
+    "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)"
   },
   {
     "id": 1711023000001,
