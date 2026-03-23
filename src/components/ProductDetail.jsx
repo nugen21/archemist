@@ -286,7 +286,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4 mb-12">
                     {[
-                      { label: '지역', value: `${product.country || ''} ${product.region || ''}`.trim() || '정보 없음' },
+                      { label: '국가', value: product.country || '정보 없음' },
+                      { label: '상세 지역', value: product.region || '정보 없음' },
                       { label: '농장', value: product.farm || '정보 없음' },
                       { label: '마이크로밀', value: product.micromill || '정보 없음' },
                       { label: '재배 고도', value: product.altitude || '정보 없음' },
