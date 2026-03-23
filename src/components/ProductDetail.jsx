@@ -445,7 +445,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                    <span className="text-base text-gray-600 font-black uppercase tracking-widest">
                      {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
                    </span>
-                   <span className="text-xl font-bold text-copper">{product.size || '기본'}</span>
+                   <span className="text-xl font-bold text-copper">
+                     {product.size ? (product.category === 'dripbag' && !product.size.includes('개') ? `${product.size}개` : product.size) : '기본'}
+                   </span>
                  </div>
               </div>
             )}

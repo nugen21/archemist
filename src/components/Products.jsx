@@ -50,7 +50,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                     </span>
                     {product.size && (
                       <span className="text-[10px] text-gray-500 font-black tracking-widest uppercase">
-                        / {product.size}
+                        / {product.category === 'dripbag' && !product.size.includes('개') ? `${product.size}개` : product.size}
                       </span>
                     )}
                   </div>

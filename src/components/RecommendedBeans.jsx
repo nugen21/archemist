@@ -189,7 +189,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     </span>
                     {bean.size && (
                       <span className="text-[10px] text-gray-500 font-bold tracking-widest uppercase">
-                        / {bean.size}
+                        / {bean.category === 'dripbag' && !bean.size.includes('개') ? `${bean.size}개` : bean.size}
                       </span>
                     )}
                   </div>
