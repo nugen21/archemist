@@ -201,9 +201,10 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                         <p className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-1">Blend Composition</p>
                         <div className="flex flex-wrap gap-x-3 gap-y-1">
                           {[1, 2, 3, 4].map(n => ({ name: bean[`blend${n}`], ratio: bean[`ratio${n}`] })).filter(c => c.name).map((comp, idx, arr) => (
-                            <span key={idx} className="text-sm sm:text-base text-gray-400 font-serif italic">
-                              {comp.name} {comp.ratio && <span className="text-[10px] sm:text-xs text-copper/60 align-top ml-0.5">{comp.ratio}%</span>}
-                              {idx < arr.length - 1 ? " |" : ""}
+                            <span key={idx} className="text-sm sm:text-lg text-gray-300 font-serif italic flex items-baseline gap-1.5">
+                              {comp.name} 
+                              {comp.ratio && <span className="text-xs sm:text-sm text-copper font-black not-italic opacity-90">{comp.ratio}%</span>}
+                              {idx < arr.length - 1 && <span className="text-gray-700 ml-1">/</span>}
                             </span>
                           ))}
                         </div>
