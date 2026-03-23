@@ -239,7 +239,7 @@ export default function DrinkMenu({ onBack }) {
         </div>
           
         {/* Right Column: Coffee Products (6/12) */}
-          <aside className="lg:col-span-6 flex flex-col gap-8 lg:border-l lg:border-white/5 lg:pl-16 mt-16 lg:mt-0">
+          <aside className="lg:col-span-6 flex flex-col gap-8 mt-16 lg:mt-0">
             <div className="mb-2 flex items-baseline gap-4 border-b border-white/5 pb-3">
               <h2 className="text-3xl sm:text-4xl font-serif font-black text-white/90 tracking-tight">상품</h2>
               <span className="text-copper/40 font-bold tracking-[0.4em] text-xs sm:text-sm uppercase italic">Product</span>
