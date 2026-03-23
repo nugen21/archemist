@@ -105,7 +105,9 @@
     "agtronGround": "65",
     "roastPointGround": "Medium Light",
     "order": 4,
-    "beanType": "blend"
+    "beanType": "blend",
+    "blend1": "BRAZIL CERRADO NAUTRAL",
+    "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)"
   },
   {
     "id": 1711023000001,
