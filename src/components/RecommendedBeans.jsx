@@ -290,14 +290,8 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
               </div>
 
               
-              <div className="mt-auto pt-4">
-                <a 
-                  href={`#bean/${bean.id}`}
-                  className="w-full bg-copper text-black py-4 rounded-xl hover:bg-white transition-all duration-300 uppercase text-[11px] tracking-[0.2em] font-black flex items-center justify-center gap-2 group/btn shadow-[0_10px_20px_rgba(161,118,76,0.3)]"
-                >
-                  연금술 보고서 확인
-                  <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                </a>
+              <div className="mt-auto h-4 items-center justify-center flex">
+                 <div className="w-12 h-[1px] bg-copper/20"></div>
               </div>
             </div>
           ))}
