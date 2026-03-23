@@ -230,12 +230,47 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   className="w-full bg-[#03C75A] hover:bg-[#02b351] text-white py-5 rounded-2xl flex items-center justify-center gap-4 font-black text-lg tracking-widest transition-all shadow-[0_15px_30px_rgba(3,199,90,0.2)] hover:shadow-[0_20px_40px_rgba(3,199,90,0.4)] hover:-translate-y-1"
                 >
                   <div className="bg-white text-[#03C75A] w-8 h-8 rounded-lg flex items-center justify-center font-black text-base shadow-sm">N</div>
-                  네이버 스마트 스토어 구매하기
-                  <ExternalLink size={18} className="opacity-50" />
+                    네이버 스마트 스토어 구매하기
+                    <ExternalLink size={18} className="opacity-50" />
+                  </a>
+                </div>
+              )}
+              {product.category === 'dripbag' && (
+                <div className="hidden lg:block mt-4">
+                  <button 
+                    onClick={() => window.location.hash = '#guide/dripbag'}
+                    className="w-full bg-white/5 hover:bg-white/10 text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold text-sm tracking-widest transition-all border border-white/10 hover:border-copper/40 group mb-4"
+                  >
+                    <Coffee size={16} className="text-copper group-hover:scale-110 transition-transform" />
+                    드립백 추출 가이드 보기
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            {/* Mobile View Purchase & Guide Buttons */}
+            <div className="lg:hidden mt-4 space-y-4">
+              {product.storeUrl && (
+                <a 
+                  href={product.storeUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-[#03C75A] text-white py-4 rounded-xl flex items-center justify-center gap-3 font-black text-sm tracking-widest shadow-lg"
+                >
+                  <span className="bg-white text-[#03C75A] w-5 h-5 rounded-md flex items-center justify-center font-black text-[10px]">N</span>
+                  네이버 스마트 스토어 구매
                 </a>
-              </div>
-            )}
-          </div>
+              )}
+              {product.category === 'dripbag' && (
+                <button 
+                  onClick={() => window.location.hash = '#guide/dripbag'}
+                  className="w-full bg-white/5 text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold text-sm tracking-widest border border-white/10"
+                >
+                  <Coffee size={16} className="text-copper" />
+                  추출 가이드 보기
+                </button>
+              )}
+            </div>
 
           {/* Right: Detailed Specifications */}
           <div className="lg:w-1/2 flex flex-col justify-center">

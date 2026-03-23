@@ -10,6 +10,7 @@ import Admin from './components/Admin';
 import DrinkMenu from './components/DrinkMenu';
 import EmailSubscription from './components/EmailSubscription';
 import Products from './components/Products';
+import DripBagGuide from './components/DripBagGuide';
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash);
@@ -95,6 +96,11 @@ function App() {
     if (product) {
       return <ProductDetail product={product} onBack={handleBack} isAdmin={isAdmin} onEdit={handleEdit} />;
     }
+  }
+
+  // Route: Drip Bag Guide
+  if (currentPath === '#guide/dripbag') {
+    return <DripBagGuide onBack={handleBack} />;
   }
 
   return (
