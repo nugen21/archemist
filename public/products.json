@@ -107,7 +107,9 @@
     "order": 4,
     "beanType": "blend",
     "blend1": "BRAZIL CERRADO NAUTRAL",
-    "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)"
+    "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)",
+    "ratio1": "70",
+    "ratio2": "30"
   },
   {
     "id": 1711023000001,
