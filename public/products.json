@@ -3,11 +3,11 @@
     "category": "bean",
     "name": "La Esmeralda Geisha Private Collection El Velo",
     "price": "50000",
-    "country": "파나마",
-    "region": "보케테",
-    "variety": "게이샤",
+    "country": "PANAMA",
+    "region": "Boquete, Chiriqui",
+    "variety": "Geisha",
     "altitude": "1,750 ~ 1,900",
-    "process": "내추럴",
+    "process": "Nautral",
     "roaster": "",
     "agtronWb": "64",
     "agtronGround": "78",
@@ -32,8 +32,8 @@
     "id": 1774158540680,
     "order": 1,
     "agingDays": "7",
-    "farm": "에스메랄다",
-    "micromill": "엘벨로"
+    "farm": "La Esmeralda",
+    "micromill": "El Velo"
   },
   {
     "id": 1710850000002,
