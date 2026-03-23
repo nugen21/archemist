@@ -42,7 +42,7 @@ export default function DrinkMenu({ onBack }) {
   const ProductItem = ({ item }) => (
     <div 
       onClick={() => window.location.hash = `#product/${item.id}`}
-      className="flex justify-between items-center py-2.5 border-b border-white/5 hover:border-copper/30 transition-all cursor-pointer group"
+      className="flex justify-between items-center py-2 px-4 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 cursor-pointer group"
     >
       <div className="flex items-center gap-4 flex-grow">
         <div className="w-12 h-12 shrink-0 rounded-lg overflow-hidden border border-white/5 bg-black/40 shadow-inner group-hover:border-copper/30 transition-all duration-500">
@@ -236,7 +236,7 @@ export default function DrinkMenu({ onBack }) {
                   <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
                     Beans <span className="h-[1px] flex-grow bg-white/10"></span>
                   </h3>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2.5">
                     {beans.map(item => <ProductItem key={item.id} item={item} />)}
                   </div>
                 </section>
@@ -248,7 +248,7 @@ export default function DrinkMenu({ onBack }) {
                   <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
                     Drip Packs <span className="h-[1px] flex-grow bg-white/10"></span>
                   </h3>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2.5">
                     {dripBags.map(item => <ProductItem key={item.id} item={item} />)}
                   </div>
                 </section>
@@ -260,7 +260,7 @@ export default function DrinkMenu({ onBack }) {
                   <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
                     Cold Brew <span className="h-[1px] flex-grow bg-white/10"></span>
                   </h3>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2.5">
                     {coldBrews.map(item => <ProductItem key={item.id} item={item} />)}
                   </div>
                 </section>
