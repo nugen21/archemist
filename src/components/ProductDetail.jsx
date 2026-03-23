@@ -3,7 +3,7 @@ import {
   Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
   Flower2, Sprout, Leaf, Candy, Bean, Nut, Wheat, 
-  Sparkles, Milk, Wind, Edit
+  Sparkles, Milk, Wind, Edit, Coffee
 } from 'lucide-react';
 
 const FLAVOR_CONFIG = {
