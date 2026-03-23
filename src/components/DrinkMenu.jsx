@@ -42,29 +42,29 @@ export default function DrinkMenu({ onBack }) {
   const ProductItem = ({ item }) => (
     <div 
       onClick={() => window.location.hash = `#product/${item.id}`}
-      className="flex justify-between items-center py-5 border-b border-white/5 hover:border-copper/30 transition-all cursor-pointer group"
+      className="flex justify-between items-center py-2.5 border-b border-white/5 hover:border-copper/30 transition-all cursor-pointer group"
     >
-      <div className="flex items-center gap-5 flex-grow">
-        <div className="w-16 h-16 shrink-0 rounded-[1rem] overflow-hidden border border-white/5 bg-black/40 shadow-inner group-hover:border-copper/30 transition-all duration-500">
+      <div className="flex items-center gap-4 flex-grow">
+        <div className="w-12 h-12 shrink-0 rounded-lg overflow-hidden border border-white/5 bg-black/40 shadow-inner group-hover:border-copper/30 transition-all duration-500">
           {item.image ? (
             <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
           ) : (
-            <div className="w-full h-full flex items-center justify-center p-3 opacity-20 grayscale brightness-[3] group-hover:opacity-40 transition-opacity">
+            <div className="w-full h-full flex items-center justify-center p-2.5 opacity-20 grayscale brightness-200 group-hover:opacity-40 transition-opacity">
               <img src={`/images/icons/${item.category || 'bean'}.jpg`} alt="icon" className="w-full h-full object-contain" />
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-sm font-black group-hover:text-copper transition-all tracking-tight">{item.name}</span>
-          {item.variety && <span className="text-[10px] text-gray-600 italic font-serif leading-none">{item.variety}</span>}
+        <div className="flex flex-col gap-0.5">
+          <span className="text-sm font-black group-hover:text-copper transition-all tracking-tight leading-none">{item.name}</span>
+          {item.variety && <span className="text-[10px] text-gray-600 italic font-serif leading-none mt-0.5">{item.variety}</span>}
           {item.size && (
-             <span className="text-[9px] text-gray-700 font-bold uppercase tracking-widest mt-1">
+             <span className="text-[9px] text-white/20 font-bold uppercase tracking-widest mt-1">
                / {item.category === 'dripbag' && !String(item.size).includes('개') ? `${item.size}개` : item.size}
              </span>
           )}
         </div>
       </div>
-      <span className="text-xl font-serif font-black text-copper/80 ml-4 group-hover:scale-110 transition-transform">
+      <span className="text-lg font-serif font-black text-copper/80 ml-4 group-hover:scale-105 transition-transform">
         {(Number(item.price) / 1000).toFixed(1)}
       </span>
     </div>
