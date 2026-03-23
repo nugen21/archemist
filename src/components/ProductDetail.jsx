@@ -292,7 +292,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '재배 고도', value: product.altitude || '정보 없음' },
                       { label: product.beanType === 'blend' ? '블렌딩 구성' : '품종', value: product.beanType === 'blend' ? [1, 2, 3, 4].map(n => ({ name: product[`blend${n}`], ratio: product[`ratio${n}`] })).filter(c => c.name).map(c => `${c.name}${c.ratio ? ` (${c.ratio}%)` : ''}`).join(' | ') || product.variety || '정보 없음' : product.variety || '정보 없음' },
                       { label: '가공방식', value: product.process || '정보 없음' },
-                      { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' && !String(product.size).includes('개') ? `${String(product.size).toLowerCase()}개` : String(product.size).toLowerCase()) : (product.category === 'dripbag' ? '10개' : '200g') }
+                      { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g') }
                     ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
                         <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em]">{item.label}</span>
@@ -446,7 +446,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                      {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
                    </span>
                    <span className="text-xl font-bold text-copper">
-                     {product.size ? (product.category === 'dripbag' && !String(product.size).includes('개') ? `${String(product.size).toLowerCase()}개` : String(product.size).toLowerCase()) : '정보 없음'}
+                     {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size.toLowerCase())) : '정보 없음'}
                    </span>
                  </div>
               </div>
