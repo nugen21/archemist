@@ -363,7 +363,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="px-3 py-1.5 rounded-full border border-white/30 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-10 scale-90 group-hover:scale-110 transition-transform whitespace-nowrap">
+                              <div className="px-3 py-1.5 rounded-full border border-white/30 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-12 scale-90 group-hover:scale-110 transition-transform whitespace-nowrap">
                                 <span className="text-[10px] font-black text-white uppercase tracking-wider">
                                   {(() => {
                                     const v = parseFloat(product.agtronWb);
@@ -378,7 +378,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                                   })()}
                                 </span>
                               </div>
-                              <div className="w-2.5 h-2.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)] rounded-full -translate-y-3 border-2 border-black/50 overflow-hidden"></div>
+                              <div className="w-4 h-4 bg-white/20 border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-full flex items-center justify-center -mt-[1.125rem]">
+                                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                              </div>
                             </div>
                           </div>
                         )}
@@ -411,7 +413,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             }}
                           >
                             <div className="relative flex flex-col items-center">
-                              <div className="px-3 py-1.5 rounded-full border border-copper/40 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-10 scale-90 group-hover:scale-110 transition-transform whitespace-nowrap">
+                              <div className="px-3 py-1.5 rounded-full border border-copper/40 bg-black/90 backdrop-blur-md shadow-lg flex items-center justify-center -translate-y-12 scale-90 group-hover:scale-110 transition-transform whitespace-nowrap">
                                 <span className="text-[10px] font-black text-copper uppercase tracking-wider">
                                   {(() => {
                                     const v = parseFloat(product.agtronGround);
@@ -426,7 +428,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                                   })()}
                                 </span>
                               </div>
-                              <div className="w-2.5 h-2.5 bg-copper shadow-[0_0_10px_rgba(161,118,76,0.8)] rounded-full -translate-y-3 border-2 border-black/50 overflow-hidden"></div>
+                              <div className="w-4 h-4 bg-copper/20 border-2 border-copper shadow-[0_0_15px_rgba(161,118,76,0.6)] rounded-full flex items-center justify-center -mt-[1.125rem]">
+                                <div className="w-1.5 h-1.5 bg-copper rounded-full"></div>
+                              </div>
                             </div>
                           </div>
                         )}
