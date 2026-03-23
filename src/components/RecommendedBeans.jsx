@@ -187,11 +187,16 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                         ? (Number(bean.price) / 1000).toFixed(1)
                         : (Number(bean.price) || 0).toLocaleString()}
                     </span>
-                    {bean.size && (
-                      <span className="text-lg text-gray-400 font-bold tracking-widest uppercase">
-                        / {bean.category === 'dripbag' && !bean.size.includes('개') ? `${bean.size}개` : bean.size}
-                      </span>
-                    )}
+                        {bean.size && (
+                          <span className="text-xl font-black text-white px-3 py-1 bg-white/5 rounded-lg border border-white/5 whitespace-nowrap">
+                            {(() => {
+                              const s = String(bean.size).toLowerCase();
+                              if (bean.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
+                              if (bean.category === 'bean') return s.includes('g') ? s : `${s}g`;
+                              return s;
+                            })()}
+                          </span>
+                        )}
                   </div>
                 </div>
                 {(bean.category === 'beverage' || bean.variety || (bean.beanType === 'blend' && (bean.blend1 || bean.blend2 || bean.blend3 || bean.blend4))) && (

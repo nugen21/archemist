@@ -49,8 +49,14 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                         : (Number(product.price) || 0).toLocaleString()}
                     </span>
                     {product.size && (
-                      <span className="text-lg text-gray-400 font-bold tracking-widest uppercase">
-                        / {product.category === 'dripbag' && !product.size.includes('개') ? `${product.size}개` : product.size}
+                      <span className="text-lg text-gray-400 font-bold tracking-widest flex items-center">
+                        <span className="opacity-30 mr-2 text-sm">/</span>
+                        {(() => {
+                          const s = String(product.size).toLowerCase();
+                          if (product.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
+                          if (product.category === 'bean') return s.includes('g') ? s : `${s}g`;
+                          return s;
+                        })()}
                       </span>
                     )}
                   </div>

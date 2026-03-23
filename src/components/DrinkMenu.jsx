@@ -157,7 +157,7 @@ export default function DrinkMenu({ onBack }) {
                       </div>
                       
                       <div className="flex items-baseline gap-4 shrink-0">
-                        {item.size && <span className="text-[9px] text-gray-600 font-bold uppercase tracking-widest">{item.size}</span>}
+                        {item.size && <span className="text-[9px] text-gray-600 font-bold tracking-widest lowercase">{item.size}</span>}
                         <span className="text-2xl sm:text-3xl font-serif font-black text-copper">
                           {(Number(item.price) / 1000).toFixed(1)}
                         </span>
