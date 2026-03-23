@@ -49,7 +49,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                         : (Number(product.price) || 0).toLocaleString()}
                     </span>
                     {product.size && (
-                      <span className="text-[10px] text-gray-500 font-black tracking-widest uppercase">
+                      <span className="text-lg text-gray-400 font-bold tracking-widest uppercase">
                         / {product.category === 'dripbag' && !product.size.includes('개') ? `${product.size}개` : product.size}
                       </span>
                     )}

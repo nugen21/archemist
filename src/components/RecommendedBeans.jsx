@@ -188,7 +188,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                         : (Number(bean.price) || 0).toLocaleString()}
                     </span>
                     {bean.size && (
-                      <span className="text-[10px] text-gray-500 font-bold tracking-widest uppercase">
+                      <span className="text-lg text-gray-400 font-bold tracking-widest uppercase">
                         / {bean.category === 'dripbag' && !bean.size.includes('개') ? `${bean.size}개` : bean.size}
                       </span>
                     )}
