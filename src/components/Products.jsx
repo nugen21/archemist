@@ -42,11 +42,18 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                   {product.name}
                 </h3>
                 <div className="flex justify-between items-baseline border-b border-copper/10 pb-2">
-                  <span className="text-copper font-bold tracking-widest text-lg drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
-                    {product.category === 'beverage' 
-                      ? (Number(product.price) / 1000).toFixed(1)
-                      : (Number(product.price) || 0).toLocaleString()}
-                  </span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xl font-black text-copper tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
+                      {product.category === 'beverage' 
+                        ? (Number(product.price) / 1000).toFixed(1)
+                        : (Number(product.price) || 0).toLocaleString()}
+                    </span>
+                    {product.size && (
+                      <span className="text-[10px] text-gray-500 font-black tracking-widest uppercase">
+                        / {product.size}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
               {product.roastDate && (

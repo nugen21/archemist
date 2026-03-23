@@ -180,13 +180,19 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     </span>
                   )}
                 </h3>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-copper font-bold text-xl tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
-                    {bean.category === 'beverage' 
-                      ? (Number(bean.price) / 1000).toFixed(1)
-                      : (Number(bean.price) || 0).toLocaleString()}
-                    <span className="text-[10px] text-gray-500 font-bold ml-1">KRW</span>
-                  </span>
+                <div className="flex justify-between items-center mb-4 border-b border-copper/10 pb-2">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-copper font-bold text-xl tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
+                      {bean.category === 'beverage' 
+                        ? (Number(bean.price) / 1000).toFixed(1)
+                        : (Number(bean.price) || 0).toLocaleString()}
+                    </span>
+                    {bean.size && (
+                      <span className="text-[10px] text-gray-500 font-bold tracking-widest uppercase">
+                        / {bean.size}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <p className="text-xl sm:text-2xl text-gray-400 font-serif italic mb-3">
                   {bean.category === 'beverage' ? '시그니처 레시피' : (bean.variety || '스페셜티')}

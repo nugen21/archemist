@@ -440,18 +440,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-4">
-                 <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">
+              <div className="flex justify-center">
+                 <div className="bg-[#181a19] border border-white/5 py-8 px-12 rounded-2xl flex flex-col items-center gap-2 max-w-xs w-full">
                    <span className="text-base text-gray-600 font-black uppercase tracking-widest">
-                     {product.category === 'dripbag' ? '수량 및 구성' : '중량 및 구성'}
+                     {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
                    </span>
                    <span className="text-xl font-bold text-copper">{product.size || '기본'}</span>
-                 </div>
-                 <div className="bg-[#181a19] border border-white/5 py-8 px-4 rounded-2xl flex flex-col items-center gap-2">
-                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">컬렉션</span>
-                   <span className="text-xl font-bold text-copper uppercase">
-                     {product.category === 'bean' ? '원두' : product.category === 'dripbag' ? '드립백' : product.category === 'coldbrew' ? '콜드브루' : '매장 음료'}
-                   </span>
                  </div>
               </div>
             )}
