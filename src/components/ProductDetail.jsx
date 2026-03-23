@@ -209,7 +209,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 {/* Product Badge */}
                 <div className="absolute top-6 left-6 flex flex-col gap-2">
                   <span className="bg-copper text-black text-[10px] font-black px-4 py-1.5 rounded-full tracking-[0.2em] uppercase shadow-xl">
-                    {product.category === 'bean' ? '스페셜티 원두' : product.category === 'dripbag' ? '드립백' : product.category === 'coldbrew' ? '콜드브루' : '매장 음료'}
+                    {product.category === 'bean' ? '원두' : product.category === 'dripbag' ? '드립팩' : product.category === 'coldbrew' ? '콜드브루' : '매장 음료'}
                   </span>
                   {product.isSpecial && (
                     <span className="bg-white/10 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
@@ -283,7 +283,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 </div>
 
                 {/* Unified Coffee Spec Grid */}
-                {product.category === 'bean' && (
+                {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4 mb-12">
                     {[
                       { label: '지역', value: `${product.country || ''} ${product.region || ''}`.trim() || '정보 없음' },
@@ -292,7 +292,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '재배 고도', value: product.altitude || '정보 없음' },
                       { label: '품종', value: product.variety || '정보 없음' },
                       { label: '가공방식', value: product.process || '정보 없음' },
-                      { label: '중량', value: product.size ? (String(product.size).endsWith('g') ? product.size : `${product.size}g`) : '200g' }
+                      { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' && !String(product.size).includes('개') ? `${product.size}개` : product.size) : (product.category === 'dripbag' ? '10개' : '200g') }
                     ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
                         <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em]">{item.label}</span>

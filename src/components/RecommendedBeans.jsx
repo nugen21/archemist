@@ -154,7 +154,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     <p className="text-[10px] text-copper/80 tracking-[0.2em] uppercase font-bold">
                       {bean.category === 'beverage' 
                         ? '매장 음료' 
-                        : `${bean.category === 'dripbag' ? '드립백 | ' : ''}${bean.country || '스페셜티'}`} 
+                        : `${bean.category === 'dripbag' ? '드립팩 | ' : ''}${bean.country || ''}`} 
                       {bean.region && ` | ${bean.region}`}
                     </p>
                   </div>
@@ -194,9 +194,11 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                     )}
                   </div>
                 </div>
-                <p className="text-xl sm:text-2xl text-gray-400 font-serif italic mb-3">
-                  {bean.category === 'beverage' ? '시그니처 레시피' : (bean.variety || '스페셜티')}
-                </p>
+                {(bean.category === 'beverage' || bean.variety) && (
+                  <p className="text-xl sm:text-2xl text-gray-400 font-serif italic mb-3">
+                    {bean.category === 'beverage' ? '시그니처 레시피' : bean.variety}
+                  </p>
+                )}
                 {bean.cupNotes && (
                   <p className="text-sm text-copper/90 font-medium leading-relaxed line-clamp-2 mb-6">
                     {bean.cupNotes}
