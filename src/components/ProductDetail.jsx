@@ -530,12 +530,14 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   아키미스트 로스터팀이 원두 고유의 잠재력을 끌어낸 감각적 평가 프로파일입니다. 각 항목은 5점 만점으로 평가되었습니다.
                 </p>
                 
-                <div className="space-y-10">
+                <div className="space-y-8">
                   {[
-                    { label: '단맛 (Sweetness)', val: product.sweetness || 3, icon: '🍬' },
-                    { label: '산미 (Acidity)', val: product.acidityRate || 3, icon: '🍋' },
-                    { label: '고소함 (Savory)', val: product.savory || 3, icon: '🥜' },
-                    { label: '바디감 (Body)', val: product.bodyRate || 3, icon: '☕' }
+                    { label: '플레이버 (Flavor)', val: product.flavor || 3 },
+                    { label: '애프터 (Aftertaste)', val: product.aftertaste || 3 },
+                    { label: '단맛 (Sweetness)', val: product.sweetness || 3 },
+                    { label: '산미 (Acidity)', val: product.acidityRate || 3 },
+                    { label: '바디 (Body)', val: product.bodyRate || 3 },
+                    { label: '밸런스 (Balance)', val: product.balance || 3 }
                   ].map((attr) => (
                     <div key={attr.label} className="flex flex-col gap-3">
                       <div className="flex justify-between items-end px-1">
@@ -570,27 +572,39 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                        <div className="w-8 h-[2px] bg-copper/60 mt-2"></div>
                     </div>
 
-                    {/* Sensory Points Visualization */}
-                    <svg className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_15px_rgba(161,118,76,0.2)]" viewBox="0 0 100 100">
+                    {/* Sensory Points Visualization (Hexagon Radar) */}
+                    <svg className="absolute inset-0 w-full h-full drop-shadow-[0_0_15px_rgba(161,118,76,0.3)]" viewBox="0 0 100 100">
                       {(() => {
-                        const s = (product.sweetness || 3) / 5 * 40;
-                        const a = (product.acidityRate || 3) / 5 * 40;
-                        const v = (product.savory || 3) / 5 * 40;
-                        const b = (product.bodyRate || 3) / 5 * 40;
+                        const vals = [
+                          product.flavor || 3,
+                          product.aftertaste || 3,
+                          product.acidityRate || 3,
+                          product.sweetness || 3,
+                          product.bodyRate || 3,
+                          product.balance || 3
+                        ];
                         
-                        // Radar-like shape calculation (0, 90, 180, 270 deg)
-                        // x = 50 + r * cos, y = 50 + r * sin
-                        const points = [
-                          [50 + s, 50],         // Sweet (Right -> 0 deg)
-                          [50, 50 + a],         // Acidity (Bottom -> 90 deg)
-                          [50 - v, 50],         // Savory (Left -> 180 deg)
-                          [50, 50 - b]          // Body (Top -> 270 deg)
-                        ].map(p => p.join(',')).join(' ');
+                        // 6 points at 60 deg increments
+                        const angles = [0, 60, 120, 180, 240, 300];
+                        const points = angles.map((angle, i) => {
+                          const r = (vals[i] / 5) * 42;
+                          const rad = (angle - 90) * (Math.PI / 180);
+                          return [50 + r * Math.cos(rad), 50 + r * Math.sin(rad)];
+                        }).map(p => p.join(',')).join(' ');
                         
                         return (
                           <>
-                            <polygon points={points} fill="rgba(161, 118, 76, 0.4)" stroke="#A1764C" strokeWidth="1.5" className="animate-pulse" />
-                            <circle cx="50" cy="50" r="1.5" fill="#A1764C" />
+                            {/* Grid Lines (Hexagonal) */}
+                            {[1, 2, 3, 4, 5].map(lvl => {
+                               const r = (lvl / 5) * 42;
+                               const gridPoints = angles.map(a => {
+                                 const rd = (a - 90) * (Math.PI / 180);
+                                 return [50 + r * Math.cos(rd), 50 + r * Math.sin(rd)].join(',');
+                               }).join(' ');
+                               return <polygon key={lvl} points={gridPoints} fill="none" stroke="white" strokeWidth="0.1" strokeDasharray="1 1" opacity={0.1 + (lvl * 0.05)} />;
+                            })}
+                            <polygon points={points} fill="rgba(161, 118, 76, 0.45)" stroke="#A1764C" strokeWidth="1.2" className="animate-pulse" />
+                            <circle cx="50" cy="50" r="1" fill="#A1764C" opacity="0.5" />
                           </>
                         );
                       })()}

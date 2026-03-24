@@ -49,7 +49,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', // beverage specific
     moisture: '', density: '', aw: '', cropYear: '',
     greenBeanName: '', importer: '', scaScore: '',
-    sweetness: 3, acidityRate: 3, savory: 3, bodyRate: 3,
+    flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
     showBasicInfo: true, showAnalysisInfo: false,
     blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
   });
@@ -280,7 +280,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', 
       moisture: '', density: '', aw: '', cropYear: '',
       greenBeanName: '', importer: '', scaScore: '',
-      sweetness: 3, acidityRate: 3, savory: 3, bodyRate: 3,
+      flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
       showBasicInfo: true, showAnalysisInfo: false,
       blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
     });
@@ -292,8 +292,10 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     setFormData({
       sweetness: bean.sweetness ?? 3,
       acidityRate: bean.acidityRate ?? 3,
-      savory: bean.savory ?? 3,
+      flavor: bean.flavor ?? 3,
+      aftertaste: bean.aftertaste ?? 3,
       bodyRate: bean.bodyRate ?? 3,
+      balance: bean.balance ?? 3,
       showBasicInfo: bean.showBasicInfo ?? true,
       showAnalysisInfo: bean.showAnalysisInfo ?? false,
     });
@@ -893,11 +895,13 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   감각적 평가 (Sensory Evaluation)
                   <div className="h-[1px] flex-grow bg-white/5"></div>
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
+                  <RatingSlider label="플레이버 (Flavor)" name="flavor" value={formData.flavor} onChange={handleChange} />
+                  <RatingSlider label="애프터 (Aftertaste)" name="aftertaste" value={formData.aftertaste} onChange={handleChange} />
                   <RatingSlider label="단맛 (Sweetness)" name="sweetness" value={formData.sweetness} onChange={handleChange} />
                   <RatingSlider label="산미 (Acidity)" name="acidityRate" value={formData.acidityRate} onChange={handleChange} />
-                  <RatingSlider label="고소함 (Savory)" name="savory" value={formData.savory} onChange={handleChange} />
-                  <RatingSlider label="바디감 (Body)" name="bodyRate" value={formData.bodyRate} onChange={handleChange} />
+                  <RatingSlider label="바디 (Body)" name="bodyRate" value={formData.bodyRate} onChange={handleChange} />
+                  <RatingSlider label="밸런스 (Balance)" name="balance" value={formData.balance} onChange={handleChange} />
                 </div>
               </div>
 
