@@ -300,11 +300,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               <h1 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
                 {product.name}
               </h1>
-              {(product.recipe || product.story || product.description) && (
-                <p className="text-gray-400 text-lg leading-relaxed mb-8 break-keep italic">
-                  "{product.recipe || product.story || product.description}"
-                </p>
-              )}
               <div className="mb-10">
                 <div className="flex items-center justify-between gap-6 mb-10 border-b border-white/5 pb-8">
                   <p className="text-4xl sm:text-5xl font-serif font-black text-copper tracking-wider tabular-nums">
