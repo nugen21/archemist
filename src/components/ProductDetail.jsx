@@ -575,8 +575,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     return (
                       <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         {/* Summary Row */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                           {[
+                            { label: '커피량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
                             { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
                             { label: '물 온도', value: product[`${prefix}temp`], icon: <Thermometer size={14} /> },
                             { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },

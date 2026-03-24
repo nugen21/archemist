@@ -39,7 +39,7 @@ const getInitialFormData = () => ({
   showBasicInfo: true, showAnalysisInfo: false,
   blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: '',
   // Extraction Recipe (Hot)
-  hot_grind: '', hot_temp: '', hot_ratio: '', hot_dripper: '',
+  hot_coffee_amount: '20g', hot_grind: '', hot_temp: '', hot_ratio: '', hot_dripper: '',
   hot_bloom_time: '', hot_bloom_water: '',
   hot_p1_time: '', hot_p1_water: '',
   hot_p2_time: '', hot_p2_water: '',
@@ -47,7 +47,7 @@ const getInitialFormData = () => ({
   hot_p4_time: '', hot_p4_water: '',
   hot_comment: '',
   // Extraction Recipe (Ice)
-  ice_grind: '', ice_temp: '', ice_ratio: '', ice_dripper: '',
+  ice_coffee_amount: '20g', ice_grind: '', ice_temp: '', ice_ratio: '', ice_dripper: '',
   ice_bloom_time: '', ice_bloom_water: '',
   ice_p1_time: '', ice_p1_water: '',
   ice_p2_time: '', ice_p2_water: '',
@@ -984,7 +984,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                        <h5 className="text-xs font-black text-white uppercase tracking-widest">HOT 레시피</h5>
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+                      <InputField label="커피량" name="hot_coffee_amount" value={formData.hot_coffee_amount} onChange={handleChange} placeholder="예: 20g" />
                       <InputField label="분쇄도" name="hot_grind" value={formData.hot_grind} onChange={handleChange} placeholder="예: 25 clicks" />
                       <InputField label="물 온도" name="hot_temp" value={formData.hot_temp} onChange={handleChange} placeholder="예: 94°C" />
                       <InputField label="투입 비율" name="hot_ratio" value={formData.hot_ratio} onChange={handleChange} placeholder="예: 1:15" />
@@ -1046,7 +1047,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                        <h5 className="text-xs font-black text-white uppercase tracking-widest">ICE 레시피</h5>
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div className="grid grid-cols-2 lg:grid-cols-6 gap-6">
+                      <InputField label="커피량" name="ice_coffee_amount" value={formData.ice_coffee_amount} onChange={handleChange} placeholder="예: 20g" />
                       <InputField label="분쇄도" name="ice_grind" value={formData.ice_grind} onChange={handleChange} placeholder="예: 22 clicks" />
                       <InputField label="물 온도" name="ice_temp" value={formData.ice_temp} onChange={handleChange} placeholder="예: 92°C" />
                       <InputField label="투입 비율" name="ice_ratio" value={formData.ice_ratio} onChange={handleChange} placeholder="예: 1:12" />
