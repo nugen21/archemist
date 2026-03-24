@@ -515,6 +515,92 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           </div>
         </div>
 
+        {/* Sensory Profile / Graph Section */}
+        {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
+          <div className="mt-24 max-w-5xl mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-12 bg-[#0b0c0b] border border-white/5 rounded-[3rem] p-12 sm:p-20 shadow-3xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-copper/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+              
+              <div className="w-full md:w-1/2">
+                <h3 className="text-3xl font-serif font-black text-white mb-4 tracking-tight flex items-center gap-4">
+                  SENSORY ANALYSIS
+                  <div className="h-[1px] w-8 bg-copper/30"></div>
+                </h3>
+                <p className="text-gray-500 text-base leading-relaxed mb-12 break-keep">
+                  아키미스트 로스터팀이 원두 고유의 잠재력을 끌어낸 감각적 평가 프로파일입니다. 각 항목은 5점 만점으로 평가되었습니다.
+                </p>
+                
+                <div className="space-y-10">
+                  {[
+                    { label: '단맛 (Sweetness)', val: product.sweetness || 3, icon: '🍬' },
+                    { label: '산미 (Acidity)', val: product.acidityRate || 3, icon: '🍋' },
+                    { label: '고소함 (Savory)', val: product.savory || 3, icon: '🥜' },
+                    { label: '바디감 (Body)', val: product.bodyRate || 3, icon: '☕' }
+                  ].map((attr) => (
+                    <div key={attr.label} className="flex flex-col gap-3">
+                      <div className="flex justify-between items-end px-1">
+                        <span className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">{attr.label}</span>
+                        <span className="text-lg font-black text-copper italic tabular-nums">{attr.val}<span className="text-[10px] text-gray-700 ml-1">/ 5.0</span></span>
+                      </div>
+                      <div className="relative h-2 bg-gray-900 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-yellow-700/60 to-copper rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(161,118,76,0.3)]"
+                          style={{ width: `${(attr.val / 5) * 100}%` }}
+                        ></div>
+                        {/* Markers */}
+                        {[1, 2, 3, 4].map(m => (
+                          <div key={m} className="absolute inset-y-0 w-[1px] bg-black/40" style={{ left: `${m * 20}%` }}></div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Radar/Visual Element */}
+              <div className="w-full md:w-1/3 flex justify-center py-10 relative">
+                 <div className="relative w-64 h-64 flex items-center justify-center">
+                    <div className="absolute inset-0 border-[1px] border-white/5 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                    <div className="absolute inset-4 border-[1px] border-copper/10 rounded-full animate-[spin_15s_linear_inverse_infinite]"></div>
+                    <div className="absolute inset-12 border-[1px] border-white/5 rounded-full"></div>
+                    
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center">
+                       <span className="text-[10px] font-black text-copper/40 uppercase tracking-[0.4em] mb-2 leading-none">Balanced Status</span>
+                       <span className="text-4xl font-serif font-black text-white italic tracking-tighter leading-none mb-1">PRO-FILE</span>
+                       <div className="w-8 h-[2px] bg-copper/60 mt-2"></div>
+                    </div>
+
+                    {/* Sensory Points Visualization */}
+                    <svg className="absolute inset-0 w-full h-full -rotate-90 drop-shadow-[0_0_15px_rgba(161,118,76,0.2)]" viewBox="0 0 100 100">
+                      {(() => {
+                        const s = (product.sweetness || 3) / 5 * 40;
+                        const a = (product.acidityRate || 3) / 5 * 40;
+                        const v = (product.savory || 3) / 5 * 40;
+                        const b = (product.bodyRate || 3) / 5 * 40;
+                        
+                        // Radar-like shape calculation (0, 90, 180, 270 deg)
+                        // x = 50 + r * cos, y = 50 + r * sin
+                        const points = [
+                          [50 + s, 50],         // Sweet (Right -> 0 deg)
+                          [50, 50 + a],         // Acidity (Bottom -> 90 deg)
+                          [50 - v, 50],         // Savory (Left -> 180 deg)
+                          [50, 50 - b]          // Body (Top -> 270 deg)
+                        ].map(p => p.join(',')).join(' ');
+                        
+                        return (
+                          <>
+                            <polygon points={points} fill="rgba(161, 118, 76, 0.4)" stroke="#A1764C" strokeWidth="1.5" className="animate-pulse" />
+                            <circle cx="50" cy="50" r="1.5" fill="#A1764C" />
+                          </>
+                        );
+                      })()}
+                    </svg>
+                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Detail Information Sections */}
         <div className="mt-20 border-t border-white/5 pt-20 space-y-32">
           

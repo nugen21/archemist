@@ -5,19 +5,25 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 
 const FLAVOR_CATEGORIES = [
-  { label: '베리류 (Berries)', items: ['딸기', '라즈베리', '블루베리', '블랙베리'] },
-  { label: '시트러스 (Citrus)', items: ['레몬', '라임', '오렌지', '자몽', '베르가못', '귤'] },
-  { label: '핵과류 (Stone Fruit)', items: ['복숭아', '자두', '살구', '체리'] },
-  { label: '열대과일 (Tropical)', items: ['망고', '파인애플', '패션후르츠', '리치', '파파야', '코코넛'] },
+  { label: '베리류 (Berries)', items: ['딸기', '라즈베리', '블루베리', '블랙베리', '크랜베리'] },
+  { label: '시트러스 (Citrus)', items: ['레몬', '라임', '오렌지', '자몽', '베르가못', '귤', '깔라만시'] },
+  { label: '핵과류 (Stone Fruit)', items: ['복숭아', '자두', '살구', '체리', '넥타린'] },
+  { label: '열대과일 (Tropical)', items: ['망고', '파인애플', '패션후르츠', '리치', '파파야', '코코넛', '멜론', '바나나'] },
   { label: '과일 (Orchard)', items: ['사과', '배', '청포도', '적포도', '건포도', '무화과'] },
-  { label: '플로럴 (Floral)', items: ['장미', '자스민', '히비스커스', '오렌지 블로썸', '아카시아', '국화'] },
-  { label: '허브 (Herbal)', items: ['허브', '라벤더', '카모마일', '민트', '세이지', '로즈마리', '딜'] },
-  { label: '달콤함 (Sweet)', items: ['흑설탕', '백설탕', '시럽', '캐러멜', '당밀', '아카시아 꿀', '잡화 꿀'] },
+  { label: '플로럴 (Floral)', items: ['장미', '자스민', '히비스커스', '오렌지 블로썸', '아카시아', '국화', '라벤더'] },
+  { label: '허브 (Herbal)', items: ['허브', '라벤더', '카모마일', '민트', '세이지', '로즈마리', '딜', '레몬그라스'] },
+  { label: '달콤함 (Sweet)', items: ['흑설탕', '백설탕', '시럽', '캐러멜', '당밀', '아카시아 꿀', '잡화 꿀', '바닐라', '마시멜로'] },
   { label: '초콜릿 (Chocolate)', items: ['다크 초콜릿', '밀크 초콜릿', '카카오', '화이트 초콜릿'] },
-  { label: '견과류 (Nuts)', items: ['구운 아몬드', '헤이즐넛', '피넛', '호두', '캐슈넛'] },
-  { label: '곡물 (Grains)', items: ['보리', '구운 빵', '시리얼', '호밀', '맥아'] },
+  { label: '견과류 (Nuts)', items: ['구운 아몬드', '헤이즐넛', '피넛', '호두', '캐슈넛', '피스타치오'] },
+  { label: '곡물 (Grains)', items: ['보리', '구운 빵', '시리얼', '호밀', '맥아', '볶은 곡물'] },
   { label: '향신료 (Spices)', items: ['시나몬', '정향', '육두구', '블랙 페퍼', '생강'] },
-  { label: '기타 (Others)', items: ['버터', '크림', '치즈', '가죽', '흙내음', '담뱃잎', '파이프 담배'] }
+  { label: '커핑 (Cupping Descriptor)', items: [
+      '긴 여운', '깔끔한 마무리', '달콤한 잔향', '차와 같은', '밝은 산미', '섬세한 산미', '와이니한', 
+      '실키한 바디', '벨벳 같은', '주스 같은', '크리미한', '시리얼 같은', '단맛의 균형', 
+      '뛰어난 균형감', '조화로운', '투명한', '정돈된', '깔끔한 클린컵'
+    ] 
+  },
+  { label: '기타 (Others)', items: ['버터', '크림', '치즈', '요거트'] }
 ];
 
 const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
@@ -43,6 +49,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', // beverage specific
     moisture: '', density: '', aw: '', cropYear: '',
     greenBeanName: '', importer: '', scaScore: '',
+    sweetness: 3, acidityRate: 3, savory: 3, bodyRate: 3,
     blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
   });
 
@@ -272,6 +279,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', 
       moisture: '', density: '', aw: '', cropYear: '',
       greenBeanName: '', importer: '', scaScore: '',
+      sweetness: 3, acidityRate: 3, savory: 3, bodyRate: 3,
+      blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
     });
     setEditingId(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -281,7 +290,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     setFormData({
       ...bean,
       category: bean.category || 'bean',
-      image: bean.image || ''
+      image: bean.image || '',
+      sweetness: bean.sweetness ?? 3,
+      acidityRate: bean.acidityRate ?? 3,
+      savory: bean.savory ?? 3,
+      bodyRate: bean.bodyRate ?? 3,
     });
     setEditingId(bean.id);
     setActiveTab('register');
@@ -853,6 +866,19 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                 )}
               </div>
 
+              <div className="md:col-span-2 lg:col-span-3 pb-6 border-b border-gray-800">
+                <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-[0.3em] pl-1 mb-6 flex items-center gap-4">
+                  감각적 평가 (Sensory Evaluation)
+                  <div className="h-[1px] flex-grow bg-white/5"></div>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-8">
+                  <RatingSlider label="단맛 (Sweetness)" name="sweetness" value={formData.sweetness} onChange={handleChange} />
+                  <RatingSlider label="산미 (Acidity)" name="acidityRate" value={formData.acidityRate} onChange={handleChange} />
+                  <RatingSlider label="고소함 (Savory)" name="savory" value={formData.savory} onChange={handleChange} />
+                  <RatingSlider label="바디감 (Body)" name="bodyRate" value={formData.bodyRate} onChange={handleChange} />
+                </div>
+              </div>
+
               {formData.category === 'beverage' && (
                 <div className="lg:col-span-3">
                   <InputField 
@@ -1080,6 +1106,27 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     </div>
   );
 };
+
+const RatingSlider = ({ label, name, value, onChange }) => (
+  <div className="flex flex-col gap-3">
+    <div className="flex justify-between items-center px-1">
+      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">{label}</span>
+      <span className="text-[14px] font-black text-copper tabular-nums">{value} / 5</span>
+    </div>
+    <div className="relative h-6 flex items-center">
+      <input 
+        type="range" 
+        name={name} 
+        min="0" 
+        max="5" 
+        step="0.5"
+        value={value || 0} 
+        onChange={onChange}
+        className="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-copper transition-all hover:bg-gray-700"
+      />
+    </div>
+  </div>
+);
 
 const UploadIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A1764C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-auto block">
