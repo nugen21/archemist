@@ -50,6 +50,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     moisture: '', density: '', aw: '', cropYear: '',
     greenBeanName: '', importer: '', scaScore: '',
     sweetness: 3, acidityRate: 3, savory: 3, bodyRate: 3,
+    showBasicInfo: true, showAnalysisInfo: false,
     blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
   });
 
@@ -280,6 +281,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       moisture: '', density: '', aw: '', cropYear: '',
       greenBeanName: '', importer: '', scaScore: '',
       sweetness: 3, acidityRate: 3, savory: 3, bodyRate: 3,
+      showBasicInfo: true, showAnalysisInfo: false,
       blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
     });
     setEditingId(null);
@@ -288,13 +290,12 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
 
   const handleEdit = (bean) => {
     setFormData({
-      ...bean,
-      category: bean.category || 'bean',
-      image: bean.image || '',
       sweetness: bean.sweetness ?? 3,
       acidityRate: bean.acidityRate ?? 3,
       savory: bean.savory ?? 3,
       bodyRate: bean.bodyRate ?? 3,
+      showBasicInfo: bean.showBasicInfo ?? true,
+      showAnalysisInfo: bean.showAnalysisInfo ?? false,
     });
     setEditingId(bean.id);
     setActiveTab('register');
@@ -748,6 +749,27 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                       <InputField label="생두 정식 명칭" name="greenBeanName" value={formData.greenBeanName} onChange={handleChange} placeholder="예: Ethiopia Sidamo Hamela G1 Natural" />
                       <InputField label="수입사" name="importer" value={formData.importer} onChange={handleChange} placeholder="예: 그린비알" />
                       <InputField label="SCA 점수" name="scaScore" value={formData.scaScore} onChange={handleChange} placeholder="예: 88.5" />
+                    </div>
+                  </div>
+
+                  {/* Visibility Toggles */}
+                  <div className="flex flex-col gap-4 py-4 border-y border-gray-800">
+                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1">노출 설정 (Display Settings)</h4>
+                    <div className="flex gap-4">
+                      <button 
+                        type="button" 
+                        onClick={() => setFormData(prev => ({ ...prev, showBasicInfo: !prev.showBasicInfo }))}
+                        className={`flex-grow py-3 px-4 rounded-xl text-[11px] font-bold uppercase transition-all tracking-widest border ${formData.showBasicInfo ? 'bg-copper text-[#111] border-copper' : 'bg-[#0b0c0b] text-gray-600 border-gray-800'}`}
+                      >
+                        {formData.showBasicInfo ? '생두 기본 정보 표시 중' : '생두 기본 정보 숨김'}
+                      </button>
+                      <button 
+                        type="button" 
+                        onClick={() => setFormData(prev => ({ ...prev, showAnalysisInfo: !prev.showAnalysisInfo }))}
+                        className={`flex-grow py-3 px-4 rounded-xl text-[11px] font-bold uppercase transition-all tracking-widest border ${formData.showAnalysisInfo ? 'bg-copper text-[#111] border-copper' : 'bg-[#0b0c0b] text-gray-600 border-gray-800'}`}
+                      >
+                        {formData.showAnalysisInfo ? '생두 분석 정보 표시 중' : '생두 분석 정보 숨김'}
+                      </button>
                     </div>
                   </div>
                   

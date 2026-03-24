@@ -334,18 +334,18 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4 mb-12">
                     {[
-                      { label: '국가', value: product.country || '정보 없음', flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null },
-                      { label: '상세 지역', value: product.region || '정보 없음' },
-                      { label: '농장', value: product.farm || '정보 없음' },
-                      { label: '마이크로밀', value: product.micromill || '정보 없음' },
-                      { label: '재배 고도', value: product.altitude || '정보 없음' },
-                      { label: product.beanType === 'blend' ? '블렌딩 구성' : '품종', value: product.beanType === 'blend' ? [1, 2, 3, 4].map(n => ({ name: product[`blend${n}`], ratio: product[`ratio${n}`] })).filter(c => c.name).map(c => `${c.name}${c.ratio ? ` (${c.ratio}%)` : ''}`).join(' | ') || product.variety || '정보 없음' : product.variety || '정보 없음' },
-                      { label: '가공방식', value: product.process || '정보 없음' },
-                      { label: '수입사', value: product.importer || '정보 없음' },
-                      { label: '생두 정식 명칭', value: product.greenBeanName || '정보 없음' },
-                      { label: 'SCA 점수', value: product.scaScore || '정보 없음' },
-                      { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g') }
-                    ].map((item, idx) => (
+                      { label: '국가', value: product.country || '정보 없음', flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null, category: 'basic' },
+                      { label: '상세 지역', value: product.region || '정보 없음', category: 'basic' },
+                      { label: '농장', value: product.farm || '정보 없음', category: 'basic' },
+                      { label: '마이크로밀', value: product.micromill || '정보 없음', category: 'basic' },
+                      { label: '재배 고도', value: product.altitude || '정보 없음', category: 'basic' },
+                      { label: product.beanType === 'blend' ? '블렌딩 구성' : '품종', value: product.beanType === 'blend' ? [1, 2, 3, 4].map(n => ({ name: product[`blend${n}`], ratio: product[`ratio${n}`] })).filter(c => c.name).map(c => `${c.name}${c.ratio ? ` (${c.ratio}%)` : ''}`).join(' | ') || product.variety || '정보 없음' : product.variety || '정보 없음', category: 'basic' },
+                      { label: '가공방식', value: product.process || '정보 없음', category: 'basic' },
+                      { label: '수입사', value: product.importer || '정보 없음', category: 'basic' },
+                      { label: '생두 정식 명칭', value: product.greenBeanName || '정보 없음', category: 'basic' },
+                      { label: 'SCA 점수', value: product.scaScore || '정보 없음', category: 'basic' },
+                      { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g'), category: 'essential' }
+                    ].filter(item => item.category === 'essential' || product.showBasicInfo !== false).map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
                         <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em] transition-colors hover:text-copper/40">{item.label}</span>
                         <div className="flex items-center gap-2">
@@ -755,6 +755,31 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             </div>
           </div>
 
+          {/* 4. Green Bean Analysis (Optional) */}
+          {isBean && product.showAnalysisInfo && (
+            <div className="max-w-4xl mx-auto px-4">
+               <h3 className="text-2xl font-serif font-black text-white mb-8 flex items-center justify-center gap-6">
+                 <div className="h-[1px] w-8 bg-white/10"></div>
+                 생두 분석 정보 (Analysis)
+                 <div className="h-[1px] w-8 bg-white/10"></div>
+               </h3>
+               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    { label: '수분율', value: product.moisture || '-', unit: '%' },
+                    { label: '밀도', value: product.density || '-', unit: 'g/L' },
+                    { label: '수분활성도', value: product.aw || '-', unit: 'aW' },
+                    { label: '수확년도', value: product.cropYear || '-', unit: '' }
+                  ].map(stat => (
+                    <div key={stat.label} className="bg-[#111211] border border-white/5 p-6 rounded-2xl flex flex-col items-center gap-1 group hover:border-copper/30 transition-all">
+                      <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">{stat.label}</span>
+                      <span className="text-xl font-serif font-black text-white group-hover:text-copper transition-colors">
+                        {stat.value}{stat.value !== '-' && stat.unit ? <span className="text-[10px] ml-0.5 opacity-50">{stat.unit}</span> : ''}
+                      </span>
+                    </div>
+                  ))}
+               </div>
+            </div>
+          )}
         </div>
 
       </div>
