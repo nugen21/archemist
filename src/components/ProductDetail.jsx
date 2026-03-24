@@ -567,9 +567,52 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     <div className="absolute inset-12 border-[1px] border-white/5 rounded-full"></div>
                     
                     <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                       <span className="text-[10px] font-black text-copper/40 uppercase tracking-[0.4em] mb-2 leading-none">Balanced Status</span>
-                       <span className="text-4xl font-serif font-black text-white italic tracking-tighter leading-none mb-1">PRO-FILE</span>
-                       <div className="w-8 h-[2px] bg-copper/60 mt-2"></div>
+                       {/* Coffee Bean Icon in Center */}
+                       <div className="w-16 h-16 relative flex items-center justify-center filter drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                         {(() => {
+                           const agtronVal = parseFloat(product.agtronWb || product.agtronGround || 65);
+                           const getRoastColor = (val) => {
+                             if (val >= 90) return '#D4B483'; // Very Light
+                             if (val >= 80) return '#C19A6B'; // Light
+                             if (val >= 70) return '#A67B5B'; // Medium-Light
+                             if (val >= 60) return '#8B6242'; // Medium
+                             if (val >= 50) return '#6D4C3D'; // Medium-Dark
+                             if (val >= 40) return '#4E362A'; // Dark
+                             if (val >= 30) return '#3D2B1F'; // Very Dark
+                             return '#2B1B17'; // Extreme Dark
+                           };
+                           const beanColor = getRoastColor(agtronVal);
+                           return (
+                             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform rotate-[15deg]">
+                               <path 
+                                 d="M12 3C7.5 3 3.5 7 3.5 12C3.5 17 7.5 21 12 21C16.5 21 20.5 17 20.5 12C20.5 7 16.5 3 12 3Z" 
+                                 fill={beanColor} 
+                               />
+                               <path 
+                                 d="M7 11.5C7.5 10 9.5 8 12 8C14.5 8 16.5 10 17 11.5C17.5 12.5 17.5 14 16.5 15.5C15.5 17 14 18 12 18C10 18 8.5 17 7.5 15.5C6.5 14 6.5 13 7 11.5Z" 
+                                 fill="black" 
+                                 fillOpacity="0.15" 
+                               />
+                               <path 
+                                 d="M12 19C10.5 19 9.2 18.5 8.1 17.5C7.6 17 7.3 16.5 7.1 16C7.5 16.2 8 16.2 8.5 16C10 15 11 13 11 11.5C11 10 10 8 8.5 7C8 6.8 7.5 6.8 7.1 7C7.3 6.5 7.6 6 8.1 5.5C9.2 4.5 10.5 4 12 4C13.5 4 14.8 4.5 15.9 5.5C17 6.6 17.5 7.9 17.5 9.4C17.5 10.9 17 12.2 15.9 13.3C14.8 14.4 13.5 14.9 12 14.9V19Z" 
+                                 fill="white" 
+                                 fillOpacity="0.05" 
+                               />
+                               <path 
+                                 d="M8 8C9 8 11.5 10 11.5 12.5C11.5 15 9 17 8 17" 
+                                 stroke="black" 
+                                 strokeWidth="0.8" 
+                                 strokeOpacity="0.2" 
+                                 strokeLinecap="round" 
+                                 fill="none"
+                               />
+                             </svg>
+                           );
+                         })()}
+                         
+                         {/* Subtle Glow based on color */}
+                         <div className="absolute inset-0 bg-white/5 rounded-full blur-xl opacity-20"></div>
+                       </div>
                     </div>
 
                     {/* Sensory Points Visualization (Hexagon Radar) */}
