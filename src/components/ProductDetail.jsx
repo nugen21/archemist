@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
@@ -136,6 +136,8 @@ const countryToCode = {
 };
 
 export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
+  const [recipeTab, setRecipeTab] = useState('hot');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [product?.id]);
@@ -233,11 +235,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-30"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-20"></div>
       
-      <div className="max-w-7xl mx-auto relative z-10 pt-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+      <div className="max-w-7xl mx-auto relative z-10 pt-16 px-4 sm:px-8 lg:px-0">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 lg:gap-y-16 lg:gap-x-8 mb-24 items-start">
           
-          {/* Left: Product Image & Quick Info */}
-          <div className="lg:w-1/2">
+          {/* --- Tier 1: Hero Row (Image & Info) --- */}
+          <div className="lg:col-span-3">
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-copper/20 to-yellow-600/20 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
               <div className="relative aspect-square rounded-[2rem] overflow-hidden border border-white/5 bg-[#111211] shadow-2xl">
@@ -288,11 +290,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   </a>
                 </div>
               )}
-            </div>
+          </div>
 
-          {/* Right: Detailed Specifications */}
-          <div className="lg:w-1/2 flex flex-col justify-center">
-            <div className="mb-8">
+          <div className="lg:col-span-3 flex flex-col justify-center">
+            <div className="mb-0">
               <div className="flex items-center gap-4 mb-4">
                 <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">아키미스트 아카이브 No.{product.id % 999}</h2>
                 <div className="h-[1px] flex-grow bg-gradient-to-r from-copper/30 to-transparent"></div>
@@ -300,8 +301,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               <h1 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
                 {product.name}
               </h1>
-              <div className="mb-10">
-                <div className="flex items-center justify-between gap-6 mb-10 border-b border-white/5 pb-8">
+              <div className="mb-6">
+                <div className="flex items-center justify-between gap-6 mb-8 border-b border-white/5 pb-8">
                   <p className="text-4xl sm:text-5xl font-serif font-black text-copper tracking-wider tabular-nums">
                     {formattedPrice}
                     <span className="text-lg ml-3 text-gray-500 font-sans font-black">원</span>
@@ -330,9 +331,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   </div>
                 </div>
 
-                {/* Unified Coffee Spec Grid */}
                 {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4 mb-12">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4">
                     {[
                       { label: '국가', value: product.country || '정보 없음', flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null, category: 'basic' },
                       { label: '상세 지역', value: product.region || '정보 없음', category: 'basic' },
@@ -359,328 +359,108 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   </div>
                 )}
               </div>
-            </div>
 
-            {/* Analysis Grid: Cup Notes, Roast Guide, Sensory Profile */}
-            {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20 items-stretch">
-                
-                {/* 1. Cup Notes Card */}
-                {product.cupNotes && (
-                  <div className="bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
-                      <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
-                    </div>
-                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                      컵 노트
-                    </h4>
-                    <div className="flex flex-col gap-6 flex-grow">
-                      <p className="text-gray-500 text-[11px] font-bold tracking-widest leading-relaxed uppercase opacity-60">
-                        Selected Terroir & Aromas
-                      </p>
-                      <div className="flex-grow">
-                        {renderCupNotes(product.cupNotes)}
-                      </div>
-                    </div>
+              {isCafe && (
+                <div className="flex justify-center mt-6">
+                  <div className="bg-[#181a19] border border-white/5 py-8 px-12 rounded-2xl flex flex-col items-center gap-2 max-w-xs w-full">
+                    <span className="text-base text-gray-600 font-black uppercase tracking-widest">
+                      {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
+                    </span>
+                    <span className="text-xl font-bold text-copper">
+                      {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size.toLowerCase())) : '정보 없음'}
+                    </span>
                   </div>
-                )}
-
-                {/* 2. Roasting Point Guide Card */}
-                {isBean && (
-                  <div className="bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl flex flex-col h-full relative group">
-                    <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
-                      <Scale size={80} className="text-copper" />
-                    </div>
-                    
-                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-8 flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                      로스팅 포인트 가이드
-                    </h4>
-                    
-                    <div className="space-y-10 flex-grow">
-                      {/* Whole Bean Scale */}
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
-                          <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronWb || '-'}</span>
-                        </div>
-                        <div className="relative h-10 flex items-center px-0">
-                          <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
-                          <div className="flex justify-between w-full relative z-10">
-                            {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
-                              const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
-                              return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
-                            })}
-                          </div>
-                          {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
-                            <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
-                              <div className="w-3.5 h-3.5 bg-white border-2 border-white shadow-[0_0_10px_rgba(255,255,255,0.4)] rounded-full -ml-[7px]"></div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Ground Scale */}
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
-                          <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronGround || '-'}</span>
-                        </div>
-                        <div className="relative h-10 flex items-center px-0">
-                          <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
-                          <div className="flex justify-between w-full relative z-10">
-                            {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
-                              const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
-                              return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
-                            })}
-                          </div>
-                          {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
-                            <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
-                              <div className="w-3.5 h-3.5 bg-copper border-2 border-copper shadow-[0_0_10px_rgba(161,118,76,0.4)] rounded-full -ml-[7px]"></div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* 3. Sensory Analysis Card (Spider Map) */}
-                {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
-                  <div className="bg-[#0b0c0b] border border-white/5 p-8 rounded-[2.5rem] shadow-2xl flex flex-col h-full relative overflow-hidden group">
-                     <div className="absolute top-0 right-0 w-32 h-32 bg-copper/5 rounded-full blur-[60px] -translate-y-1/2 translate-x-1/2"></div>
-                     
-                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-4 flex items-center gap-3">
-                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                       센서리 분석
-                     </h4>
-                     
-                     <div className="flex flex-col items-center justify-center flex-grow pt-4">
-                        <div className="relative w-full aspect-square max-w-[280px] flex items-center justify-center">
-                           <div className="absolute inset-0 border-[1px] border-white/5 rounded-full animate-[spin_30s_linear_infinite]"></div>
-                           <div className="absolute inset-8 border-[1px] border-copper/5 rounded-full"></div>
-                           
-                           {/* Spider Map Core */}
-                           <div className="relative z-10 w-12 h-12 flex items-center justify-center">
-                             {(() => {
-                               const agtronVal = parseFloat(product.agtronWb || product.agtronGround || 65);
-                               const getRoastColor = (val) => {
-                                 if (val >= 90) return '#D4B483'; if (val >= 80) return '#C19A6B';
-                                 if (val >= 70) return '#A67B5B'; if (val >= 60) return '#8B6242';
-                                 if (val >= 50) return '#6D4C3D'; if (val >= 40) return '#4E362A';
-                                 if (val >= 30) return '#3D2B1F'; return '#2B1B17';
-                               };
-                               const beanColor = getRoastColor(agtronVal);
-                               return (
-                                 <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10 drop-shadow-lg transform rotate-[15deg]">
-                                   <path d="M12 3C7.5 3 3.5 7 3.5 12C3.5 17 7.5 21 12 21C16.5 21 20.5 17 20.5 12C20.5 7 16.5 3 12 3Z" fill={beanColor} />
-                                   <path d="M7 11.5C7.5 10 9.5 8 12 8C14.5 8 16.5 10 17 11.5C17.5 12.5 17.5 14 16.5 15.5C15.5 17 14 18 12 18C10 18 8.5 17 7.5 15.5C6.5 14 6.5 13 7 11.5Z" fill="black" fillOpacity="0.15" />
-                                   <path d="M8 8C9 8 11.5 10 11.5 12.5C11.5 15 9 17 8 17" stroke="black" strokeWidth="0.8" strokeOpacity="0.2" fill="none"/>
-                                 </svg>
-                               );
-                             })()}
-                           </div>
-
-                           <svg className="absolute inset-0 w-full h-full p-2 drop-shadow-[0_0_15px_rgba(161,118,76,0.3)]" viewBox="0 0 100 100">
-                             {(() => {
-                               const vals = [product.flavor || 3, product.aftertaste || 3, product.acidityRate || 3, product.sweetness || 3, product.bodyRate || 3, product.balance || 3];
-                               const angles = [0, 60, 120, 180, 240, 300];
-                               const points = angles.map((angle, i) => {
-                                 const r = (vals[i] / 5) * 44;
-                                 const rad = (angle - 90) * (Math.PI / 180);
-                                 return [50 + r * Math.cos(rad), 50 + r * Math.sin(rad)];
-                               }).map(p => p.join(',')).join(' ');
-                               return (
-                                 <>
-                                   {[1, 2, 3, 4, 5].map(lvl => {
-                                      const r = (lvl / 5) * 44;
-                                      const gridPoints = angles.map(a => {
-                                        const rd = (a - 90) * (Math.PI / 180);
-                                        return [50 + r * Math.cos(rd), 50 + r * Math.sin(rd)].join(',');
-                                      }).join(' ');
-                                      return <polygon key={lvl} points={gridPoints} fill="none" stroke="white" strokeWidth="0.1" strokeDasharray="1 1" opacity={0.1 + (lvl * 0.05)} />;
-                                   })}
-                                   <polygon points={points} fill="rgba(161, 118, 76, 0.4)" stroke="#A1764C" strokeWidth="1.2" className="animate-pulse" />
-                                 </>
-                               );
-                             })()}
-                           </svg>
-
-                           {/* Labels inside the map or near it */}
-                           {['플레이버', '애프터', '산미', '단맛', '바디', '밸런스'].map((label, i) => {
-                              const rad = (i * 60 - 90) * (Math.PI / 180);
-                              const x = 50 + 52 * Math.cos(rad);
-                              const y = 50 + 52 * Math.sin(rad);
-                              return (
-                                <span key={label} className="absolute text-[9px] font-black text-gray-500 uppercase tracking-tighter transition-colors group-hover:text-copper/60" style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)' }}>
-                                  {label}
-                                </span>
-                              );
-                           })}
-                        </div>
-                     </div>
-                  </div>
-                )}
-              </div>
-            )}
-            {isCafe && (
-              <div className="flex justify-center">
-                 <div className="bg-[#181a19] border border-white/5 py-8 px-12 rounded-2xl flex flex-col items-center gap-2 max-w-xs w-full">
-                   <span className="text-base text-gray-600 font-black uppercase tracking-widest">
-                     {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
-                   </span>
-                   <span className="text-xl font-bold text-copper">
-                     {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size.toLowerCase())) : '정보 없음'}
-                   </span>
-                 </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Sensory Profile / Graph Section */}
-        {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
-          <div className="mt-24 max-w-5xl mx-auto px-4">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-12 bg-[#0b0c0b] border border-white/5 rounded-[3rem] p-12 sm:p-20 shadow-3xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-copper/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-              
-              <div className="w-full md:w-1/2">
-                <h3 className="text-3xl font-serif font-black text-white mb-4 tracking-tight flex items-center gap-4">
-                  SENSORY ANALYSIS
-                  <div className="h-[1px] w-8 bg-copper/30"></div>
-                </h3>
-                <p className="text-gray-500 text-base leading-relaxed mb-12 break-keep">
-                  아키미스트 로스터팀이 원두 고유의 잠재력을 끌어낸 감각적 평가 프로파일입니다. 각 항목은 5점 만점으로 평가되었습니다.
-                </p>
-                
-                <div className="space-y-8">
-                  {[
-                    { label: '플레이버 (Flavor)', val: product.flavor || 3 },
-                    { label: '애프터 (Aftertaste)', val: product.aftertaste || 3 },
-                    { label: '단맛 (Sweetness)', val: product.sweetness || 3 },
-                    { label: '산미 (Acidity)', val: product.acidityRate || 3 },
-                    { label: '바디 (Body)', val: product.bodyRate || 3 },
-                    { label: '밸런스 (Balance)', val: product.balance || 3 }
-                  ].map((attr) => (
-                    <div key={attr.label} className="flex flex-col gap-3">
-                      <div className="flex justify-between items-end px-1">
-                        <span className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">{attr.label}</span>
-                        <span className="text-lg font-black text-copper italic tabular-nums">{attr.val}<span className="text-[10px] text-gray-700 ml-1">/ 5.0</span></span>
-                      </div>
-                      <div className="relative h-2 bg-gray-900 rounded-full overflow-hidden">
-                        <div 
-                          className="absolute inset-y-0 left-0 bg-gradient-to-r from-yellow-700/60 to-copper rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(161,118,76,0.3)]"
-                          style={{ width: `${(attr.val / 5) * 100}%` }}
-                        ></div>
-                        {/* Markers */}
-                        {[1, 2, 3, 4].map(m => (
-                          <div key={m} className="absolute inset-y-0 w-[1px] bg-black/40" style={{ left: `${m * 20}%` }}></div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
                 </div>
-              </div>
-
-              {/* Radar/Visual Element */}
-              <div className="w-full md:w-1/3 flex justify-center py-10 relative">
-                 <div className="relative w-64 h-64 flex items-center justify-center">
-                    <div className="absolute inset-0 border-[1px] border-white/5 rounded-full animate-[spin_20s_linear_infinite]"></div>
-                    <div className="absolute inset-4 border-[1px] border-copper/10 rounded-full animate-[spin_15s_linear_inverse_infinite]"></div>
-                    <div className="absolute inset-12 border-[1px] border-white/5 rounded-full"></div>
-                    
-                    <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                       {/* Coffee Bean Icon in Center */}
-                       <div className="w-16 h-16 relative flex items-center justify-center filter drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]">
-                         {(() => {
-                           const agtronVal = parseFloat(product.agtronWb || product.agtronGround || 65);
-                           const getRoastColor = (val) => {
-                             if (val >= 90) return '#D4B483'; // Very Light
-                             if (val >= 80) return '#C19A6B'; // Light
-                             if (val >= 70) return '#A67B5B'; // Medium-Light
-                             if (val >= 60) return '#8B6242'; // Medium
-                             if (val >= 50) return '#6D4C3D'; // Medium-Dark
-                             if (val >= 40) return '#4E362A'; // Dark
-                             if (val >= 30) return '#3D2B1F'; // Very Dark
-                             return '#2B1B17'; // Extreme Dark
-                           };
-                           const beanColor = getRoastColor(agtronVal);
-                           return (
-                             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform rotate-[15deg]">
-                               <path 
-                                 d="M12 3C7.5 3 3.5 7 3.5 12C3.5 17 7.5 21 12 21C16.5 21 20.5 17 20.5 12C20.5 7 16.5 3 12 3Z" 
-                                 fill={beanColor} 
-                               />
-                               <path 
-                                 d="M7 11.5C7.5 10 9.5 8 12 8C14.5 8 16.5 10 17 11.5C17.5 12.5 17.5 14 16.5 15.5C15.5 17 14 18 12 18C10 18 8.5 17 7.5 15.5C6.5 14 6.5 13 7 11.5Z" 
-                                 fill="black" 
-                                 fillOpacity="0.15" 
-                               />
-                               <path 
-                                 d="M12 19C10.5 19 9.2 18.5 8.1 17.5C7.6 17 7.3 16.5 7.1 16C7.5 16.2 8 16.2 8.5 16C10 15 11 13 11 11.5C11 10 10 8 8.5 7C8 6.8 7.5 6.8 7.1 7C7.3 6.5 7.6 6 8.1 5.5C9.2 4.5 10.5 4 12 4C13.5 4 14.8 4.5 15.9 5.5C17 6.6 17.5 7.9 17.5 9.4C17.5 10.9 17 12.2 15.9 13.3C14.8 14.4 13.5 14.9 12 14.9V19Z" 
-                                 fill="white" 
-                                 fillOpacity="0.05" 
-                               />
-                               <path 
-                                 d="M8 8C9 8 11.5 10 11.5 12.5C11.5 15 9 17 8 17" 
-                                 stroke="black" 
-                                 strokeWidth="0.8" 
-                                 strokeOpacity="0.2" 
-                                 strokeLinecap="round" 
-                                 fill="none"
-                               />
-                             </svg>
-                           );
-                         })()}
-                         
-                         {/* Subtle Glow based on color */}
-                         <div className="absolute inset-0 bg-white/5 rounded-full blur-xl opacity-20"></div>
-                       </div>
-                    </div>
-
-                    {/* Sensory Points Visualization (Hexagon Radar) */}
-                    <svg className="absolute inset-0 w-full h-full drop-shadow-[0_0_15px_rgba(161,118,76,0.3)]" viewBox="0 0 100 100">
-                      {(() => {
-                        const vals = [
-                          product.flavor || 3,
-                          product.aftertaste || 3,
-                          product.acidityRate || 3,
-                          product.sweetness || 3,
-                          product.bodyRate || 3,
-                          product.balance || 3
-                        ];
-                        
-                        // 6 points at 60 deg increments
-                        const angles = [0, 60, 120, 180, 240, 300];
-                        const points = angles.map((angle, i) => {
-                          const r = (vals[i] / 5) * 42;
-                          const rad = (angle - 90) * (Math.PI / 180);
-                          return [50 + r * Math.cos(rad), 50 + r * Math.sin(rad)];
-                        }).map(p => p.join(',')).join(' ');
-                        
-                        return (
-                          <>
-                            {/* Grid Lines (Hexagonal) */}
-                            {[1, 2, 3, 4, 5].map(lvl => {
-                               const r = (lvl / 5) * 42;
-                               const gridPoints = angles.map(a => {
-                                 const rd = (a - 90) * (Math.PI / 180);
-                                 return [50 + r * Math.cos(rd), 50 + r * Math.sin(rd)].join(',');
-                               }).join(' ');
-                               return <polygon key={lvl} points={gridPoints} fill="none" stroke="white" strokeWidth="0.1" strokeDasharray="1 1" opacity={0.1 + (lvl * 0.05)} />;
-                            })}
-                            <polygon points={points} fill="rgba(161, 118, 76, 0.45)" stroke="#A1764C" strokeWidth="1.2" className="animate-pulse" />
-                            <circle cx="50" cy="50" r="1" fill="#A1764C" opacity="0.5" />
-                          </>
-                        );
-                      })()}
-                    </svg>
-                 </div>
-              </div>
+              )}
             </div>
           </div>
-        )}
+
+          {/* --- Tier 2: Analysis Row (Cup Notes, Roast) --- */}
+          {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
+            <>
+              {/* 1. Cup Notes Card */}
+              {product.cupNotes && (
+                <div className="lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+                    <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
+                  </div>
+                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                    컵 노트
+                  </h4>
+                  <div className="flex flex-col gap-6 flex-grow">
+                    <p className="text-gray-500 text-[11px] font-bold tracking-widest leading-relaxed uppercase opacity-60">
+                      엄선된 테루아와 아로마
+                    </p>
+                    <div className="flex-grow">
+                      {renderCupNotes(product.cupNotes)}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 2. Roasting Point Guide Card */}
+              {isBean && (
+                <div className="lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl flex flex-col h-full relative group">
+                  <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
+                    <Scale size={80} className="text-copper" />
+                  </div>
+                  
+                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-8 flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                    로스팅 포인트 가이드
+                  </h4>
+                  
+                  <div className="space-y-10 flex-grow">
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-end mb-1 px-1">
+                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
+                        <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronWb || '-'}</span>
+                      </div>
+                      <div className="relative h-10 flex items-center px-0">
+                        <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
+                        <div className="flex justify-between w-full relative z-10">
+                          {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
+                            const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
+                            return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
+                          })}
+                        </div>
+                        {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
+                          <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
+                            <div className="w-3.5 h-3.5 bg-white border-2 border-white shadow-[0_0_10px_rgba(255,255,255,0.4)] rounded-full -ml-[7px]"></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-end mb-1 px-1">
+                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
+                        <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronGround || '-'}</span>
+                      </div>
+                      <div className="relative h-10 flex items-center px-0">
+                        <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
+                        <div className="flex justify-between w-full relative z-10">
+                          {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
+                            const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
+                            return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
+                          })}
+                        </div>
+                        {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
+                          <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
+                            <div className="w-3.5 h-3.5 bg-copper border-2 border-copper shadow-[0_0_10px_rgba(161,118,76,0.4)] rounded-full -ml-[7px]"></div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
+          )} 
+        </div>
+      </div>
+
 
         {/* Detail Information Sections */}
         <div className="mt-20 border-t border-white/5 pt-20 space-y-32">
@@ -748,94 +528,120 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               추천 추출 방식
               <div className="h-[1px] w-12 bg-copper/30"></div>
             </h3>
-            <div className={`bg-[#111211] ${['dripbag', 'bean'].includes(product.category) ? 'p-8 sm:p-16' : 'p-12'} rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group`}>
-              {product.category === 'dripbag' || product.category === 'bean' ? (
-                <div className="relative z-10 space-y-16">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-8">
-                    {product.category === 'dripbag' ? (
-                      [
-                        { 
-                          step: '01', 
-                          title: '개봉', 
-                          desc: '절취선을 뜯어주세요', 
-                          img: '/images/guide/step_cut.png',
-                          detail: '필터 가장자리가 깊게 찢어지지 않도록 끝부분을 유의하며 수평으로 개봉해 주세요.'
-                        },
-                        { 
-                          step: '02', 
-                          title: '고정', 
-                          desc: '컵에 드립백 고정', 
-                          img: '/images/guide/step_pull.png',
-                          detail: '양쪽 날개를 당겨 컵에 걸고 앞코 부분을 눌러 단단히 고정합니다.'
-                        },
-                        { 
-                          step: '03', 
-                          title: '추출', 
-                          desc: '뜸 들이기 & 추출', 
-                          img: '/images/guide/step_brew.png',
-                          detail: '95°C 물로 30초간 뜸을 들인 후 150-180ml를 2-3회 나누어 붓습니다.'
-                        }
-                      ].map((step, idx) => (
-                        <StepCard key={idx} step={step} />
-                      ))
-                    ) : (
-                      [
-                        { 
-                          step: '01', 
-                          title: '분쇄', 
-                          desc: '18g 원두 분쇄', 
-                          img: '/images/guide/bean_grind.png',
-                          detail: '굵은 소금 정도의 굵기로 분쇄합니다. (코만단테 25~28 클릭 추천)'
-                        },
-                        { 
-                          step: '02', 
-                          title: '뜸 들이기', 
-                          desc: '36~40g 물 붓기', 
-                          img: '/images/guide/step_brew.png',
-                          detail: '94~96°C의 물 36~40g을 부어 가루를 충분히 적셔준 뒤 30초간 기다립니다.'
-                        },
-                        { 
-                          step: '03', 
-                          title: '추출', 
-                          desc: '단계별 푸어링', 
-                          img: '/images/guide/step_brew.png',
-                          detail: '30~40초 간격으로 70g씩 총 4회(280g) 부어줍니다. 물이 완전히 빠지면 추출을 마무리합니다.'
-                        }
-                      ].map((step, idx) => (
-                        <StepCard key={idx} step={step} />
-                      ))
-                    )}
+            <div className={`bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group`}>
+              {['dripbag', 'bean'].includes(product.category) ? (
+                <div className="relative z-10 space-y-12">
+                  {/* Tab Switcher */}
+                  <div className="flex justify-center gap-4 mb-8">
+                    <button 
+                      onClick={() => setRecipeTab('hot')}
+                      className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'hot' ? 'bg-red-500/10 border-red-500/50 text-red-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
+                    >
+                      <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'hot' ? 'bg-red-500 animate-pulse' : 'bg-gray-700'}`}></div>
+                      HOT RECIPE
+                    </button>
+                    <button 
+                      onClick={() => setRecipeTab('ice')}
+                      className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'ice' ? 'bg-blue-500/10 border-blue-500/50 text-blue-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
+                    >
+                      <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'ice' ? 'bg-blue-500 animate-pulse' : 'bg-gray-700'}`}></div>
+                      ICE RECIPE
+                    </button>
                   </div>
-                  
-                  {/* Additional Metrics for Bean */}
-                  {product.category === 'bean' && (
-                    <div className="pt-12 border-t border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-6">
-                      {[
-                        { label: '추천 도구', value: 'Hario V60' },
-                        { label: '물 온도', value: '94~96°C' },
-                        { label: '원두 중량', value: '18g' },
-                        { label: '최종 추출량', value: '약 310ml' }
-                      ].map((stat, sIdx) => (
-                        <div key={sIdx} className="bg-white/[0.02] border border-white/5 py-4 rounded-2xl flex flex-col items-center">
-                          <span className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-1">{stat.label}</span>
-                          <span className="text-sm font-black text-copper tabular-nums">{stat.value}</span>
+
+                  {/* Recipe Content */}
+                  {(() => {
+                    const prefix = recipeTab === 'hot' ? 'hot_' : 'ice_';
+                    const hasData = product[`${prefix}grind`] || product[`${prefix}bloom_water`];
+                    
+                    if (!hasData) {
+                      return (
+                        <div className="py-12 text-center text-gray-600 italic">
+                          {recipeTab.toUpperCase()} 레시피가 아직 등록되지 않았습니다.
                         </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  <div className="pt-10 border-t border-white/5">
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <div className="w-8 h-[1px] bg-copper/30"></div>
-                      <span className="text-[10px] text-copper font-black uppercase tracking-[0.3em]">Special Recipe Tip</span>
-                      <div className="w-8 h-[1px] bg-copper/30"></div>
-                    </div>
-                    <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-medium break-keep italic">
-                      "{product.story || (product.category === 'dripbag' 
-                        ? "뜸 들이는 30초가 커피의 단맛과 바디감을 결정하는 가장 중요한 시간입니다. 천천히 기다려주세요."
-                        : "신선한 원두일수록 뜸 들이기 과정에서 기포가 많이 발생합니다. 원두가 가진 고유의 향미를 온전히 즐겨보세요.")}"
-                    </p>
-                  </div>
+                      );
+                    }
+
+                    const pours = [
+                      { label: '뜸 (Bloom)', time: product[`${prefix}bloom_time`], water: product[`${prefix}bloom_water`] },
+                      { label: '1차 푸어', time: product[`${prefix}p1_time`], water: product[`${prefix}p1_water`] },
+                      { label: '2차 푸어', time: product[`${prefix}p2_time`], water: product[`${prefix}p2_water`] },
+                      { label: '3차 푸어', time: product[`${prefix}p3_time`], water: product[`${prefix}p3_water`] },
+                      { label: '4차 푸어', time: product[`${prefix}p4_time`], water: product[`${prefix}p4_water`] },
+                    ].filter(p => p.water);
+
+                    const totalWater = pours.reduce((acc, p) => acc + Number(p.water || 0), 0);
+
+                    return (
+                      <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        {/* Summary Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          {[
+                            { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
+                            { label: '물 온도', value: product[`${prefix}temp`], icon: <Thermometer size={14} /> },
+                            { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
+                            { label: recipeTab === 'ice' ? '얼음 중량' : '투입 비율', value: recipeTab === 'ice' ? (product.ice_weight ? `${product.ice_weight}g` : '-') : product.hot_ratio, icon: <Target size={14} /> }
+                          ].map((item, idx) => (
+                            <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
+                              <div className="text-copper/50">{item.icon}</div>
+                              <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{item.label}</span>
+                              <span className="text-sm font-bold text-white uppercase">{item.value || '-'}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Timeline pours */}
+                        <div className="relative pt-4 pb-8">
+                          <div className="absolute top-0 bottom-0 left-[20px] md:left-1/2 w-[1px] bg-gradient-to-b from-copper/50 via-copper/20 to-transparent"></div>
+                          
+                          <div className="space-y-12">
+                            {pours.map((pour, pIdx) => (
+                              <div key={pIdx} className="relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0">
+                                {/* Dot */}
+                                <div className="absolute left-[20px] md:left-1/2 -ml-[4.5px] w-2.5 h-2.5 rounded-full bg-copper border-2 border-[#111211] z-20 shadow-[0_0_10px_rgba(161,118,76,0.6)]"></div>
+                                
+                                <div className={`flex-1 w-full md:pr-12 md:text-right pl-12 md:pl-0 ${pIdx % 2 === 1 ? 'md:order-2 md:text-left md:pl-12 md:pr-0' : ''}`}>
+                                  <h6 className="text-copper font-black text-[10px] uppercase tracking-widest mb-1">{pour.label}</h6>
+                                  <div className="flex items-baseline gap-2 md:justify-end">
+                                    <span className="text-3xl font-serif font-black text-white tabular-nums">{pour.water}</span>
+                                    <span className="text-xs font-bold text-gray-600 uppercase">g</span>
+                                  </div>
+                                </div>
+                                
+                                <div className={`flex-1 w-full md:pl-12 pl-12 md:pl-0 ${pIdx % 2 === 1 ? 'md:order-1 md:text-right md:pr-12 md:pl-0' : ''}`}>
+                                  <div className="flex items-center gap-2 text-gray-500 md:justify-start">
+                                    <Timer size={14} className="opacity-40" />
+                                    <span className="text-lg font-serif font-bold text-gray-400 tabular-nums">{pour.time || '-'}</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">sec</span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                          <div className="flex items-center gap-4">
+                            <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-4xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
+                              <span className="text-sm font-bold text-gray-500 uppercase">ml</span>
+                            </div>
+                          </div>
+                          
+                          {product[`${prefix}comment`] && (
+                            <div className="max-w-md text-center md:text-right">
+                               <div className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
+                               <div 
+                                 className="text-gray-400 text-sm leading-relaxed font-medium break-keep italic html-content"
+                                 dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
+                               />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })()}
                 </div>
               ) : (
                 <>
@@ -855,7 +661,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             <div className="max-w-4xl mx-auto px-4">
                <h3 className="text-2xl font-serif font-black text-white mb-8 flex items-center justify-center gap-6">
                  <div className="h-[1px] w-8 bg-white/10"></div>
-                 생두 분석 정보 (Analysis)
+                 생두 분석 정보
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -876,8 +682,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             </div>
           )}
         </div>
-
-      </div>
       
       {/* Visual Alchemy - Floating Particles */}
       <div className="absolute top-1/4 left-10 w-1 h-1 bg-copper rounded-full blur-[2px] animate-pulse opacity-40"></div>

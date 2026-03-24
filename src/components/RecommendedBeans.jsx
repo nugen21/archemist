@@ -43,64 +43,26 @@ const countryToCode = {
   '한국': 'kr', 'korea': 'kr', 'Korea': 'kr', 'South Korea': 'kr'
 };
 
-export default function RecommendedBeans({ isAdmin, onEdit }) {
+export default function RecommendedBeans({ isAdmin, onEdit, products }) {
   const [beans, setBeans] = useState([]);
 
-  const loadBeans = async () => {
-    try {
-      // Priority 1: Server Data (Always fetch fresh to ensure sync)
-      const response = await fetch(`/products.json?t=${Date.now()}`);
-      if (response.ok) {
-        const serverData = await response.json();
-        setBeans(serverData.filter(p => {
-          const isRec = p.recommended === true;
-          const isBeev = p.category === 'beverage';
-          if (!isAdmin && isBeev) return false;
-          return isRec;
-        }));
-        
-        // Sync to local storage for persistence/fallback
-        try {
-          localStorage.setItem('archemist_beans', JSON.stringify(serverData));
-        } catch (e) {
-          console.warn('Storage quota exceeded:', e);
-        }
-      } else {
-        throw new Error('Server response not OK');
-      }
-    } catch (error) {
-      console.error('RecommendedBeans: Server load failed, fallback to local:', error);
-      
-      // Fallback: Local Storage
-      const localSaved = localStorage.getItem('archemist_beans');
-      if (localSaved) {
-        const all = JSON.parse(localSaved);
-        setBeans(all.filter(p => p.recommended === true && (isAdmin || p.category !== 'beverage')));
-      }
-    }
-  };
-
   useEffect(() => {
-    loadBeans();
-    
-    const handleStorageChange = () => loadBeans();
-    window.addEventListener('storage', handleStorageChange);
-    // Also listen to local changes in the same window
-    window.addEventListener('beansUpdated', handleStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('beansUpdated', handleStorageChange);
-    };
-  }, [isAdmin]);
+    if (products && products.length > 0) {
+      setBeans(products.filter(p => {
+        const isRec = p.recommended === true;
+        const isBeev = p.category === 'beverage';
+        if (!isAdmin && isBeev) return false;
+        return isRec;
+      }));
+    }
+  }, [products, isAdmin]);
 
   const handleHide = (id) => {
     if (window.confirm('이 원두를 메인 페이지에서 숨기시겠습니까? (관리자 메뉴에서 다시 보이게 할 수 있습니다)')) {
       const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
       const updated = saved.map(bean => bean.id === id ? { ...bean, visible: false } : bean);
       localStorage.setItem('archemist_beans', JSON.stringify(updated));
-      loadBeans();
-      window.dispatchEvent(new Event('beansUpdated'));
+      window.dispatchEvent(new CustomEvent('beansUpdated', { detail: updated }));
     }
   };
 
@@ -135,7 +97,10 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
 
               {isAdmin && (
                 <button 
-                  onClick={() => handleHide(bean.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleHide(bean.id);
+                  }}
                   className="absolute top-4 right-4 z-20 text-[10px] font-bold text-gray-400 hover:text-red-400 uppercase tracking-widest transition-colors bg-black/50 px-2 py-1 rounded border border-white/5"
                 >
                   숨기기
@@ -208,7 +173,7 @@ export default function RecommendedBeans({ isAdmin, onEdit }) {
                 </h3>
                 <div className="flex justify-between items-center mb-4 border-b border-copper/10 pb-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-copper font-bold text-xl tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)]">
+                    <span className="text-copper font-bold text-xl tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)] tabular-nums">
                       {bean.category === 'beverage' 
                         ? (Number(bean.price) / 1000).toFixed(1)
                         : (Number(bean.price) || 0).toLocaleString()}

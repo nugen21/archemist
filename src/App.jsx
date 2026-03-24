@@ -15,6 +15,51 @@ function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash);
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem('archemist_is_admin') === 'true');
   const [editingId, setEditingId] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const loadProducts = async () => {
+    // 1. First, quickly load from localStorage if available for instant UI response
+    const localSaved = localStorage.getItem('archemist_beans');
+    if (localSaved) {
+      try {
+        setProducts(JSON.parse(localSaved));
+        setIsLoading(false); // Set to false so deep-links can work instantly
+      } catch (e) {
+        console.error('App: Failed to parse local storage cache:', e);
+      }
+    }
+
+    // 2. Then proceed to fetch fresh data from server
+    try {
+      const response = await fetch(`/products.json?t=${Date.now()}`);
+      if (response.ok) {
+        const serverData = await response.json();
+        setProducts(serverData);
+        localStorage.setItem('archemist_beans', JSON.stringify(serverData));
+      }
+    } catch (error) {
+      console.error('App: Failed to load products from server:', error);
+      // Fallback is already handled by initial load from local storage
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
+    const handleUpdate = (e) => {
+      if (e.detail) {
+        setProducts(e.detail);
+        localStorage.setItem('archemist_beans', JSON.stringify(e.detail));
+        console.log('App: Products state updated via local data');
+      } else {
+        loadProducts();
+      }
+    };
+    window.addEventListener('beansUpdated', handleUpdate);
+    return () => window.removeEventListener('beansUpdated', handleUpdate);
+  }, []);
 
   // Reset scroll on refresh/load
   useEffect(() => {
@@ -25,21 +70,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const originalSetItem = localStorage.setItem;
-    localStorage.setItem = function(key, value) {
-      if (key === 'archemist_beans') {
-        process.env.NODE_ENV !== 'production' && console.log('DEBUG: localStorage.setItem for archemist_beans');
-        // Actually log to production console for this final debug run
-        console.count(`WRITES to archemist_beans:`);
-      }
-      originalSetItem.apply(this, arguments);
-    };
-  }, []);
-
-  useEffect(() => {
     const onHashChange = () => {
       setCurrentPath(window.location.hash);
-      // Auto-scroll to top when navigating to major pages or returning home
       if (window.location.hash === '' || window.location.hash === '#' || window.location.hash === '#home' || window.location.hash === '#menu') {
         window.scrollTo(0, 0);
       }
@@ -73,13 +105,15 @@ function App() {
         setAdminAuth={handleAdminAuth} 
         initialEditingId={editingId} 
         clearEditingId={() => setEditingId(null)} 
+        externalProducts={products}
+        onEditTriggered={handleEdit}
       />
     );
   }
 
   // Route: Drink Menu
   if (currentPath === '#menu') {
-    return <DrinkMenu onBack={handleBack} />;
+    return <DrinkMenu onBack={handleBack} products={products} />;
   }
 
   // Route: Subscribe
@@ -90,28 +124,27 @@ function App() {
   // Route: Product Detail
   if (currentPath.startsWith('#product/')) {
     const id = parseInt(currentPath.split('/')[1]);
-    const saved = JSON.parse(localStorage.getItem('archemist_beans') || '[]');
-    const product = saved.find(p => p.id === id);
+    const product = products.find(p => String(p.id) === String(id));
     if (product) {
       return <ProductDetail product={product} onBack={handleBack} isAdmin={isAdmin} onEdit={handleEdit} />;
+    } else if (!isLoading) {
+      // If not loading and not found, redirect home
+      window.location.hash = '#home';
     }
   }
 
-
   return (
     <div className="min-h-screen flex flex-col bg-matte-black text-white selection:bg-copper font-sans overflow-x-hidden">
-      {/* Landing Page Content */}
       <main className="flex-grow">
         <Header isAdmin={isAdmin} />
         <Hero id="home" />
-        <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} />
-        <Products />
+        <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} products={products} />
+        <Products products={products} />
         <Events />
         <Brand />
         <Contact />
       </main>
 
-      {/* Global Footer with Admin Link */}
       <footer className="py-6 bg-[#0b0c0b] border-t border-gray-900 w-full mt-auto relative z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-4 sm:px-8">
            <div className="flex flex-col gap-1">
@@ -145,4 +178,3 @@ function App() {
 }
 
 export default App;
-// Trigger Build Sat Mar 21 17:26:45 KST 2026

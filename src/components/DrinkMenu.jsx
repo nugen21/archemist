@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Coffee, Zap, Droplets } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
-export default function DrinkMenu({ onBack }) {
+export default function DrinkMenu({ onBack, products }) {
   const [drinks, setDrinks] = useState([]);
   const [beans, setBeans] = useState([]);
   const [dripBags, setDripBags] = useState([]);
@@ -9,32 +9,13 @@ export default function DrinkMenu({ onBack }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const loadAllProducts = async () => {
-      try {
-        const response = await fetch(`/products.json?t=${Date.now()}`);
-        let data = [];
-        if (response.ok) {
-          data = await response.json();
-        } else {
-          const localSaved = localStorage.getItem('archemist_beans');
-          if (localSaved) {
-            data = JSON.parse(localSaved);
-          }
-        }
-        
-        setDrinks(data.filter(p => p.category === 'beverage' && p.visible !== false));
-        setBeans(data.filter(p => p.category === 'bean' && p.visible !== false));
-        setDripBags(data.filter(p => p.category === 'dripbag' && p.visible !== false));
-        setColdBrews(data.filter(p => p.category === 'coldbrew' && p.visible !== false));
-      } catch (error) {
-        console.error('Failed to load products:', error);
-      }
-    };
-
-    loadAllProducts();
-    window.addEventListener('beansUpdated', loadAllProducts);
-    return () => window.removeEventListener('beansUpdated', loadAllProducts);
-  }, []);
+    if (products && products.length > 0) {
+      setDrinks(products.filter(p => p.category === 'beverage' && p.visible !== false));
+      setBeans(products.filter(p => p.category === 'bean' && p.visible !== false));
+      setDripBags(products.filter(p => p.category === 'dripbag' && p.visible !== false));
+      setColdBrews(products.filter(p => p.category === 'coldbrew' && p.visible !== false));
+    }
+  }, [products]);
 
   const espressoMenu = drinks.filter(d => d.subCategory === 'espresso' || !d.subCategory);
   const handDripMenu = drinks.filter(d => d.subCategory === 'handdrip');
@@ -42,7 +23,7 @@ export default function DrinkMenu({ onBack }) {
   const ProductItem = ({ item }) => (
     <div 
       onClick={() => window.location.hash = `#product/${item.id}`}
-      className="flex justify-between items-center py-2 px-4 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 cursor-pointer group"
+      className="flex justify-between items-center py-1.5 px-4 rounded-xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] hover:border-copper/20 transition-all duration-500 cursor-pointer group"
     >
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 shrink-0 rounded-lg overflow-hidden border border-white/5 bg-black/40 shadow-inner group-hover:border-copper/30 transition-all duration-500">
@@ -107,35 +88,35 @@ export default function DrinkMenu({ onBack }) {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="flex items-center gap-4 pointer-events-auto">
             <img src="/logo-alchemist.png" alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-contain" />
-            <span className="text-xl sm:text-4xl font-serif font-black tracking-[-0.02em] text-white">ARCHEMIST ROASTERS</span>
+            <span className="text-xl sm:text-4xl font-serif font-black tracking-[-0.02em] text-white uppercase italic">ARCHEMIST ROASTERS</span>
           </div>
         </div>
       </header>
 
-      <main className="flex-grow py-28 px-4 sm:px-8 md:px-12 relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+      <main className="flex-grow py-8 sm:py-12 px-4 sm:px-8 md:px-12 relative z-10">
+        <div className="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
           
           {/* Left: Beverage Menu (6/12) */}
-          <div className="lg:col-span-6 flex flex-col gap-8">
-            <div className="mb-2 flex items-baseline gap-4 border-b border-white/5 pb-3">
-              <h2 className="text-3xl sm:text-4xl font-serif font-black text-white/90 tracking-tight">음료</h2>
-              <span className="text-copper/40 font-bold tracking-[0.4em] text-xs sm:text-sm uppercase italic">Beverage</span>
+          <div className="lg:col-span-6 flex flex-col gap-4">
+            <div className="mb-1 flex items-baseline gap-4 border-b border-white/5 pb-2">
+              <h2 className="text-2xl sm:text-3xl font-serif font-black text-white/90 tracking-tight italic">음료</h2>
+              <span className="text-copper/40 font-bold tracking-[0.4em] text-[10px] sm:text-xs uppercase italic">Beverage</span>
             </div>
-            <div className="w-full flex flex-col gap-8">
+            <div className="w-full flex flex-col gap-4">
           {/* Espresso Menu Section */}
           {espressoMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-8 relative">
+              <div className="flex flex-col mb-4 relative">
                 <div className="flex items-baseline gap-4 mb-2">
-                  <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-normal text-white/50">
+                  <h2 className="text-xl sm:text-2xl font-serif font-black tracking-normal text-white/50 italic">
                     ESPRESSO
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.4em] text-xs sm:text-sm uppercase">에스프레소</span>
+                  <span className="text-copper/40 font-bold tracking-[0.4em] text-[10px] sm:text-xs uppercase">에스프레소</span>
                 </div>
                 <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
 
-              <div className="grid gap-2.5">
+              <div className="grid gap-1.5">
                 {espressoMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
@@ -148,7 +129,7 @@ export default function DrinkMenu({ onBack }) {
                     
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
                       <div className="flex items-baseline gap-4">
-                        <h3 className="text-xl sm:text-2xl font-bold group-hover:text-copper transition-colors tracking-tight">
+                        <h3 className="text-lg sm:text-xl font-bold group-hover:text-copper transition-colors tracking-tight italic">
                           {item.name}
                         </h3>
                         {item.englishName && (
@@ -160,13 +141,13 @@ export default function DrinkMenu({ onBack }) {
                       
                       <div className="flex items-baseline gap-4 shrink-0">
                         {item.size && <span className="text-[9px] text-gray-600 font-bold tracking-widest lowercase">{item.size}</span>}
-                        <span className="text-2xl sm:text-3xl font-serif font-black text-copper">
+                        <span className="text-2xl sm:text-3xl font-serif font-black text-copper tabular-nums">
                           {(Number(item.price) / 1000).toFixed(1)}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4 flex-wrap">
+                    <div className="flex items-start gap-4 flex-wrap mt-[-4px]">
                       <div className="h-[1px] w-6 bg-copper/30 mt-3 hidden sm:block"></div>
                       <div className="flex flex-wrap gap-2">
                         {item.subCategory === 'handdrip' && item.cupNotes && item.cupNotes.split(/[,/|]+/).filter(Boolean).map((note, nIdx) => (
@@ -190,17 +171,17 @@ export default function DrinkMenu({ onBack }) {
           {/* Hand Drip Menu Section */}
           {handDripMenu.length > 0 && (
             <section>
-              <div className="flex flex-col mb-8 relative">
+              <div className="flex flex-col mb-4 relative">
                 <div className="flex items-baseline gap-4 mb-2">
-                  <h2 className="text-2xl sm:text-4xl font-serif font-black tracking-normal text-white/50">
+                  <h2 className="text-xl sm:text-2xl font-serif font-black tracking-normal text-white/50 italic">
                     HAND DRIP
                   </h2>
-                  <span className="text-copper/40 font-bold tracking-[0.4em] text-xs sm:text-sm uppercase">핸드 드립</span>
+                  <span className="text-copper/40 font-bold tracking-[0.4em] text-[10px] sm:text-xs uppercase">핸드 드립</span>
                 </div>
                 <div className="h-[2px] w-full bg-gradient-to-r from-copper/30 via-transparent to-transparent"></div>
               </div>
 
-              <div className="grid gap-2.5">
+              <div className="grid gap-1.5">
                 {handDripMenu.map((item, idx) => (
                   <div 
                     key={item.id || idx} 
@@ -210,7 +191,7 @@ export default function DrinkMenu({ onBack }) {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div className="flex-grow">
                         <div className="flex items-baseline gap-4 mb-2">
-                          <h3 className="text-xl sm:text-2xl font-bold group-hover:text-copper transition-colors tracking-tight uppercase leading-tight">
+                          <h3 className="text-lg sm:text-xl font-bold group-hover:text-copper transition-colors tracking-tight uppercase leading-tight italic">
                             {item.name}
                           </h3>
                           {item.englishName && (
@@ -229,7 +210,7 @@ export default function DrinkMenu({ onBack }) {
                       
                       <div className="flex items-baseline gap-6 shrink-0">
                         <div className="h-8 w-[1px] border-l border-dotted border-white/20 hidden md:block"></div>
-                        <span className="text-3xl sm:text-4xl font-serif font-black text-copper">
+                        <span className="text-3xl sm:text-4xl font-serif font-black text-copper tabular-nums">
                           {(Number(item.price) / 1000).toFixed(1)}
                         </span>
                       </div>
@@ -243,20 +224,20 @@ export default function DrinkMenu({ onBack }) {
         </div>
           
         {/* Right Column: Coffee Products (6/12) */}
-          <aside className="lg:col-span-6 flex flex-col gap-8 mt-16 lg:mt-0">
-            <div className="mb-2 flex items-baseline gap-4 border-b border-white/5 pb-3">
-              <h2 className="text-3xl sm:text-4xl font-serif font-black text-white/90 tracking-tight">상품</h2>
-              <span className="text-copper/40 font-bold tracking-[0.4em] text-xs sm:text-sm uppercase italic">Product</span>
+          <aside className="lg:col-span-6 flex flex-col gap-4 mt-16 lg:mt-0">
+            <div className="mb-1 flex items-baseline gap-4 border-b border-white/5 pb-2">
+              <h2 className="text-2xl sm:text-3xl font-serif font-black text-white/90 tracking-tight italic">상품</h2>
+              <span className="text-copper/40 font-bold tracking-[0.4em] text-[10px] sm:text-xs uppercase italic">Product</span>
             </div>
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-4">
               
               {/* Beans Section */}
               {beans.length > 0 && (
                 <section>
-                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
+                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-4 flex items-center gap-4">
                     Beans <span className="h-[1px] flex-grow bg-white/10"></span>
                   </h3>
-                  <div className="flex flex-col gap-2.5">
+                  <div className="flex flex-col gap-1.5">
                     {beans.map(item => <ProductItem key={item.id} item={item} />)}
                   </div>
                 </section>
@@ -265,10 +246,10 @@ export default function DrinkMenu({ onBack }) {
               {/* Drip Packs Section */}
               {dripBags.length > 0 && (
                 <section>
-                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
+                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-4 flex items-center gap-4">
                     Drip Packs <span className="h-[1px] flex-grow bg-white/10"></span>
                   </h3>
-                  <div className="flex flex-col gap-2.5">
+                  <div className="flex flex-col gap-1.5">
                     {dripBags.map(item => <ProductItem key={item.id} item={item} />)}
                   </div>
                 </section>
@@ -277,10 +258,10 @@ export default function DrinkMenu({ onBack }) {
               {/* Cold Brew Section */}
               {coldBrews.length > 0 && (
                 <section>
-                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-8 flex items-center gap-4">
+                  <h3 className="text-xl font-black text-white/40 tracking-[0.2em] uppercase mb-4 flex items-center gap-4">
                     Cold Brew <span className="h-[1px] flex-grow bg-white/10"></span>
                   </h3>
-                  <div className="flex flex-col gap-2.5">
+                  <div className="flex flex-col gap-1.5">
                     {coldBrews.map(item => <ProductItem key={item.id} item={item} />)}
                   </div>
                 </section>
@@ -293,7 +274,7 @@ export default function DrinkMenu({ onBack }) {
 
       <footer className="py-16 px-6 flex flex-col items-center gap-5 relative z-10">
         <div className="h-[1px] w-20 bg-gradient-to-r from-transparent via-copper/30 to-transparent"></div>
-        <p className="text-white/40 text-[18px] tracking-[0.6em] uppercase font-black text-center">
+        <p className="text-white/40 text-[18px] tracking-[0.6em] uppercase font-black text-center italic">
           ARCHEMIST ROASTERS
         </p>
       </footer>

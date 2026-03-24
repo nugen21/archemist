@@ -26,11 +26,67 @@ const FLAVOR_CATEGORIES = [
   { label: '기타 (Others)', items: ['버터', '크림', '치즈', '요거트'] }
 ];
 
-const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
+const getInitialFormData = () => ({
+  category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
+  name: '', price: '', country: '', region: '', farm: '', micromill: '', variety: '', altitude: '', process: '', 
+  roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
+  cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
+  recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
+  englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', // beverage specific
+  moisture: '', density: '', aw: '', cropYear: '',
+  greenBeanName: '', importer: '', scaScore: '',
+  flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
+  showBasicInfo: true, showAnalysisInfo: false,
+  blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: '',
+  // Extraction Recipe (Hot)
+  hot_grind: '', hot_temp: '', hot_ratio: '', hot_dripper: '',
+  hot_bloom_time: '', hot_bloom_water: '',
+  hot_p1_time: '', hot_p1_water: '',
+  hot_p2_time: '', hot_p2_water: '',
+  hot_p3_time: '', hot_p3_water: '',
+  hot_p4_time: '', hot_p4_water: '',
+  hot_comment: '',
+  // Extraction Recipe (Ice)
+  ice_grind: '', ice_temp: '', ice_ratio: '', ice_dripper: '',
+  ice_bloom_time: '', ice_bloom_water: '',
+  ice_p1_time: '', ice_p1_water: '',
+  ice_p2_time: '', ice_p2_water: '',
+  ice_p3_time: '', ice_p3_water: '',
+  ice_p4_time: '', ice_p4_water: '',
+  ice_weight: '',
+  ice_comment: ''
+});
+
+const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, externalProducts, onEditTriggered }) => {
   const [activeTab, setActiveTab] = useState('manage'); // 'register' or 'manage'
   const [editingId, setEditingId] = useState(null);
   const [loginForm, setLoginForm] = useState({ id: '', password: '' });
-  const [beans, setBeans] = useState([]);
+  const [beans, setBeans] = useState(externalProducts || []);
+  // 1. Sync local beans with external products prop whenever prop changes
+  useEffect(() => {
+    if (externalProducts && Array.isArray(externalProducts) && externalProducts.length > 0) {
+      setBeans(externalProducts);
+    }
+  }, [externalProducts]);
+
+  const mergeProductData = (bean) => {
+    const freshData = getInitialFormData();
+    if (!bean) return freshData;
+    
+    // Copy all properties from existing bean, ensuring no null/undefined values for controlled inputs
+    Object.keys(freshData).forEach(key => {
+      // Prioritize bean property, but fallback to freshData default (usually empty string)
+      if (bean[key] !== undefined && bean[key] !== null) {
+        freshData[key] = bean[key];
+      }
+    });
+    
+    // Ensure ID and category are preserved even if not in template
+    if (bean.id) freshData.id = bean.id;
+    if (bean.category) freshData.category = bean.category;
+    
+    return freshData;
+  };
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [githubToken, setGithubToken] = useState(() => sessionStorage.getItem('archemist_gh_token') || '');
   const [isPushing, setIsPushing] = useState(false);
@@ -40,22 +96,10 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   const syncTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
   
-  const [formData, setFormData] = useState({
-    category: 'bean', // 'bean', 'dripbag', 'coldbrew', 'beverage'
-    name: '', price: '', country: '', region: '', farm: '', micromill: '', variety: '', altitude: '', process: '', 
-    roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
-    cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-    recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
-    englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', // beverage specific
-    moisture: '', density: '', aw: '', cropYear: '',
-    greenBeanName: '', importer: '', scaScore: '',
-    flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
-    showBasicInfo: true, showAnalysisInfo: false,
-    blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
-  });
+  const [formData, setFormData] = useState(getInitialFormData());
 
   const handleCupNoteToggle = (note) => {
-    const currentNotes = formData.cupNotes.split(/[,/|]+/).map(n => n.trim()).filter(Boolean);
+    const currentNotes = (formData.cupNotes || "").split(/[,/|]+/).map(n => n.trim()).filter(Boolean);
     const index = currentNotes.indexOf(note);
     let newNotes;
     if (index > -1) {
@@ -190,7 +234,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (loginForm.id === 'archemist' && loginForm.password === 'archemist77') {
+    if (loginForm.id === 'archemist' && loginForm.password === 'roasters00!') {
       setAdminAuth(true);
       loadBeans();
     } else {
@@ -263,7 +307,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     localStorage.setItem('archemist_beans', JSON.stringify(updated));
     resetForm();
     setBeans(updated);
-    window.dispatchEvent(new Event('beansUpdated'));
+    window.dispatchEvent(new CustomEvent('beansUpdated', { detail: updated }));
     setActiveTab('manage'); // Automatically go back to list
     
     // Auto-Sync to GitHub
@@ -271,37 +315,29 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
   };
 
   const resetForm = () => {
-    setFormData({
-      category: 'bean',
-      name: '', price: '', country: '', region: '', farm: '', micromill: '', variety: '', altitude: '', process: '', 
-      roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
-      cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
-      recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
-      englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', 
-      moisture: '', density: '', aw: '', cropYear: '',
-      greenBeanName: '', importer: '', scaScore: '',
-      flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
-      showBasicInfo: true, showAnalysisInfo: false,
-      blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
-    });
+    setFormData(getInitialFormData());
     setEditingId(null);
+    if (clearEditingId) clearEditingId();
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  const handleEdit = (bean) => {
-    setFormData({
-      sweetness: bean.sweetness ?? 3,
-      acidityRate: bean.acidityRate ?? 3,
-      flavor: bean.flavor ?? 3,
-      aftertaste: bean.aftertaste ?? 3,
-      bodyRate: bean.bodyRate ?? 3,
-      balance: bean.balance ?? 3,
-      showBasicInfo: bean.showBasicInfo ?? true,
-      showAnalysisInfo: bean.showAnalysisInfo ?? false,
-    });
-    setEditingId(bean.id);
-    setActiveTab('register');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleEdit = (beanOrId) => {
+    if (!beanOrId) return;
+    const id = typeof beanOrId === 'object' ? beanOrId.id : beanOrId;
+    
+    // Just trigger the global state update. 
+    // The useEffect below will handle finding the data and setting the form.
+    if (onEditTriggered) {
+      onEditTriggered(id);
+    } else {
+      // Fallback if not used inside App with direct prop drill
+      setEditingId(id);
+      const bean = beans.find(b => String(b.id) === String(id));
+      if (bean) {
+        setFormData(mergeProductData(bean));
+        setActiveTab('register');
+      }
+    }
   };
 
   const handleToggleVisibility = (id) => {
@@ -315,7 +351,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     }
     localStorage.setItem('archemist_beans', JSON.stringify(updated));
     setBeans(updated);
-    window.dispatchEvent(new Event('beansUpdated'));
+    window.dispatchEvent(new CustomEvent('beansUpdated', { detail: updated }));
     
     // Auto-Sync to GitHub
     syncWithGitHub(updated);
@@ -339,7 +375,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       alert('저장 공간이 부족하여 설정을 저장할 수 없습니다.');
     }
     setBeans(updated);
-    window.dispatchEvent(new Event('beansUpdated'));
+    window.dispatchEvent(new CustomEvent('beansUpdated', { detail: updated }));
     
     // Auto-Sync to GitHub
     syncWithGitHub(updated);
@@ -351,7 +387,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       const updated = saved.filter(b => String(b.id) !== String(id));
       localStorage.setItem('archemist_beans', JSON.stringify(updated));
       setBeans(updated);
-      window.dispatchEvent(new Event('beansUpdated'));
+      window.dispatchEvent(new CustomEvent('beansUpdated', { detail: updated }));
       
       // Auto-Sync to GitHub
       syncWithGitHub(updated);
@@ -396,19 +432,36 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     if (isAdmin) loadBeans();
   }, [isAdmin]);
 
-  // Handle direct edit requests from other components
+  // Handle direct edit requests from other components AND local list edits
   useEffect(() => {
-    if (initialEditingId && beans.length > 0) {
-      const beanToEdit = beans.find(b => b.id === initialEditingId);
-      if (beanToEdit) {
-        setFormData(beanToEdit);
-        setEditingId(initialEditingId);
-        setActiveTab('register');
-        clearEditingId(); // Reset global state in App
-        window.scrollTo(0, 0);
+    // 1. If we have an ID to edit from props
+    if (initialEditingId) {
+      // Only proceed if it's different from what we're already doing 
+      // OR if we are not in the register tab yet
+      if (String(editingId) !== String(initialEditingId) || activeTab !== 'register') {
+        const idToFind = String(initialEditingId);
+        const dataToSearch = (beans && beans.length > 0) ? beans : (externalProducts || []);
+        const beanToEdit = dataToSearch.find(b => String(b.id) === idToFind);
+        
+        if (beanToEdit) {
+          console.log('Admin: Loading product data into form for ID:', idToFind);
+          const mergedData = mergeProductData(beanToEdit);
+          setFormData(mergedData);
+          setEditingId(beanToEdit.id);
+          setActiveTab('register');
+          // Only scroll if we just switched to register tab
+          if (activeTab !== 'register') window.scrollTo(0, 0);
+        }
       }
+    } 
+    // 2. If initialEditingId is cleared from outside but we are still "editing" locally
+    else if (!initialEditingId && editingId && activeTab === 'register') {
+      // This handles cases where App resets the editing state
+      // We don't automatically reset the whole form here to avoid losing unsaved work if possible,
+      // but usually this means we should go back to Manage or Reset.
+      // For stabilization, let's keep it simple: if prop is null, we should probably not be in edit mode.
     }
-  }, [initialEditingId, beans, clearEditingId]);
+  }, [initialEditingId, beans, externalProducts, editingId, activeTab]);
 
   // --- Drag and Drop Handlers ---
   const handleDragStart = (e, index) => {
@@ -494,9 +547,9 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 border-b border-copper/20 pb-4 relative z-10 gap-4">
            <div className="flex items-center gap-4">
              <h2 className="text-3xl font-bold text-copper font-serif tracking-wide">관리자 패널</h2>
-             <span className="bg-copper/10 text-copper text-[10px] font-bold px-3 py-1 rounded-full border border-copper/20 uppercase tracking-widest">
-               {activeTab === 'manage' ? 'List Management' : 'Product Registration'}
-             </span>
+              <span className={`text-[10px] font-bold px-3 py-1 rounded-full border border-copper/20 uppercase tracking-widest ${activeTab === 'manage' ? 'bg-copper/10 text-copper' : (editingId ? 'bg-blue-500/10 text-blue-400 border-blue-500/30' : 'bg-green-500/10 text-green-400 border-green-500/30')}`}>
+                {activeTab === 'manage' ? '품목 리스트 관리' : (editingId ? '기존 상품 정보 수정' : '신규 상품 등록')}
+              </span>
            </div>
            
            <div className="flex gap-4 items-center">
@@ -746,7 +799,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
                 <div className="md:col-span-2 lg:col-span-3 space-y-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-2">
                   <div className="flex flex-col gap-4">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 기본 정보 (Green Bean Info)</h4>
+                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 기본 정보</h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <InputField label="생두 정식 명칭" name="greenBeanName" value={formData.greenBeanName} onChange={handleChange} placeholder="예: Ethiopia Sidamo Hamela G1 Natural" />
                       <InputField label="수입사" name="importer" value={formData.importer} onChange={handleChange} placeholder="예: 그린비알" />
@@ -756,7 +809,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
 
                   {/* Visibility Toggles */}
                   <div className="flex flex-col gap-4 py-4 border-y border-gray-800">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1">노출 설정 (Display Settings)</h4>
+                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1">노출 설정</h4>
                     <div className="flex gap-4">
                       <button 
                         type="button" 
@@ -776,7 +829,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   </div>
                   
                   <div className="flex flex-col gap-4 border-t border-gray-800/50 pt-6">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 분석 (Green Bean Analysis)</h4>
+                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 분석</h4>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <InputField label="수분율 (%)" name="moisture" value={formData.moisture} onChange={handleChange} placeholder="11.2" type="number" step="0.1" />
                       <InputField label="밀도 (g/L)" name="density" value={formData.density} onChange={handleChange} placeholder="840" type="number" />
@@ -791,7 +844,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                 <div className={`md:col-span-2 lg:col-span-3 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4`}>
                   {formData.category === 'bean' && (
                     <div className="flex flex-col gap-4">
-                      <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">홀빈 분석 (Whole Bean Analysis)</h4>
+                      <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">홀빈 분석</h4>
                       <div className="grid grid-cols-2 gap-4">
                         <InputField 
                           label="아그트론 (홀빈)" 
@@ -814,7 +867,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                   )}
 
                   <div className="flex flex-col gap-4">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">분쇄 분석 (Ground Analysis)</h4>
+                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">분쇄 분석</h4>
                     <div className="grid grid-cols-2 gap-4">
                       <InputField 
                         label="아그트론 (분쇄)" 
@@ -892,7 +945,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
 
               <div className="md:col-span-2 lg:col-span-3 pb-6 border-b border-gray-800">
                 <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-[0.3em] pl-1 mb-6 flex items-center gap-4">
-                  감각적 평가 (Sensory Evaluation)
+                  센서리 분석
                   <div className="h-[1px] flex-grow bg-white/5"></div>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
@@ -917,12 +970,137 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                 </div>
               )}
 
-              {formData.category === 'bean' && (
-                <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4 border-t border-gray-800 pt-6">
-                  <InputField label="추출 기구" name="dripper" value={formData.dripper} onChange={handleChange} placeholder="Hario V60" />
-                  <InputField label="원두량" name="coffeeAmount" value={formData.coffeeAmount} onChange={handleChange} placeholder="18g" />
-                  <InputField label="분쇄도" name="grind" value={formData.grind} onChange={handleChange} placeholder="25 clicks" />
-                  <InputField label="추출 온도" name="temp" value={formData.temp} onChange={handleChange} placeholder="94°C" />
+              {(formData.category === 'bean' || formData.category === 'dripbag') && (
+                <div className="md:col-span-2 lg:col-span-3 space-y-12 mt-8 border-t border-gray-800 pt-10">
+                  <h4 className="text-sm font-black text-copper uppercase tracking-[0.3em] flex items-center gap-4">
+                    추출 레시피 설정
+                    <div className="h-[1px] flex-grow bg-white/5"></div>
+                  </h4>
+
+                  {/* HOT Recipe */}
+                  <div className="bg-[#0b0c0b] border border-gray-800 p-8 rounded-[2rem] shadow-xl space-y-8">
+                    <div className="flex items-center gap-3 mb-2">
+                       <div className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
+                       <h5 className="text-xs font-black text-white uppercase tracking-widest">HOT 레시피</h5>
+                    </div>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                      <InputField label="분쇄도" name="hot_grind" value={formData.hot_grind} onChange={handleChange} placeholder="예: 25 clicks" />
+                      <InputField label="물 온도" name="hot_temp" value={formData.hot_temp} onChange={handleChange} placeholder="예: 94°C" />
+                      <InputField label="투입 비율" name="hot_ratio" value={formData.hot_ratio} onChange={handleChange} placeholder="예: 1:15" />
+                      <InputField label="추천 드리퍼" name="hot_dripper" value={formData.hot_dripper} onChange={handleChange} placeholder="예: Hario V60" />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 bg-black/40 p-6 rounded-2xl border border-white/5">
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">뜸 (Bloom)</p>
+                        <InputField label="시간 (초)" name="hot_bloom_time" value={formData.hot_bloom_time} onChange={handleChange} placeholder="30" type="number" />
+                        <InputField label="물량 (g)" name="hot_bloom_water" value={formData.hot_bloom_water} onChange={handleChange} placeholder="40" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">1차 푸어</p>
+                        <InputField label="시간 (초)" name="hot_p1_time" value={formData.hot_p1_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="hot_p1_water" value={formData.hot_p1_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">2차 푸어</p>
+                        <InputField label="시간 (초)" name="hot_p2_time" value={formData.hot_p2_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="hot_p2_water" value={formData.hot_p2_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">3차 푸어</p>
+                        <InputField label="시간 (초)" name="hot_p3_time" value={formData.hot_p3_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="hot_p3_water" value={formData.hot_p3_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">4차 푸어</p>
+                        <InputField label="시간 (초)" name="hot_p4_time" value={formData.hot_p4_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="hot_p4_water" value={formData.hot_p4_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center bg-white/[0.02] p-4 rounded-xl border border-white/5">
+                      <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">예상 최종 추출량 (HOT)</span>
+                      <span className="text-xl font-serif font-black text-copper">
+                        {(Number(formData.hot_bloom_water || 0) + Number(formData.hot_p1_water || 0) + Number(formData.hot_p2_water || 0) + Number(formData.hot_p3_water || 0) + Number(formData.hot_p4_water || 0))} g
+                      </span>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-medium text-gray-400 mb-2 tracking-wider uppercase">HOT 레시피 추가 코멘트</label>
+                      <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
+                        <ReactQuill 
+                          theme="snow" 
+                          value={formData.hot_comment} 
+                          onChange={(content) => setFormData(prev => ({ ...prev, hot_comment: content }))}
+                          style={{ height: '100px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ICE Recipe */}
+                  <div className="bg-[#0b0c0b] border border-gray-800 p-8 rounded-[2rem] shadow-xl space-y-8">
+                    <div className="flex items-center gap-3 mb-2">
+                       <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
+                       <h5 className="text-xs font-black text-white uppercase tracking-widest">ICE 레시피</h5>
+                    </div>
+
+                    <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
+                      <InputField label="분쇄도" name="ice_grind" value={formData.ice_grind} onChange={handleChange} placeholder="예: 22 clicks" />
+                      <InputField label="물 온도" name="ice_temp" value={formData.ice_temp} onChange={handleChange} placeholder="예: 92°C" />
+                      <InputField label="투입 비율" name="ice_ratio" value={formData.ice_ratio} onChange={handleChange} placeholder="예: 1:12" />
+                      <InputField label="추천 드리퍼" name="ice_dripper" value={formData.ice_dripper} onChange={handleChange} placeholder="예: Hario V60" />
+                      <InputField label="얼음 중량 (g)" name="ice_weight" value={formData.ice_weight} onChange={handleChange} placeholder="120" type="number" />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 bg-black/40 p-6 rounded-2xl border border-white/5">
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">뜸 (Bloom)</p>
+                        <InputField label="시간 (초)" name="ice_bloom_time" value={formData.ice_bloom_time} onChange={handleChange} placeholder="30" type="number" />
+                        <InputField label="물량 (g)" name="ice_bloom_water" value={formData.ice_bloom_water} onChange={handleChange} placeholder="40" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">1차 푸어</p>
+                        <InputField label="시간 (초)" name="ice_p1_time" value={formData.ice_p1_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="ice_p1_water" value={formData.ice_p1_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">2차 푸어</p>
+                        <InputField label="시간 (초)" name="ice_p2_time" value={formData.ice_p2_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="ice_p2_water" value={formData.ice_p2_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">3차 푸어</p>
+                        <InputField label="시간 (초)" name="ice_p3_time" value={formData.ice_p3_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="ice_p3_water" value={formData.ice_p3_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                      <div className="space-y-4">
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center border-b border-white/5 pb-2">4차 푸어</p>
+                        <InputField label="시간 (초)" name="ice_p4_time" value={formData.ice_p4_time} onChange={handleChange} placeholder="60" type="number" />
+                        <InputField label="물량 (g)" name="ice_p4_water" value={formData.ice_p4_water} onChange={handleChange} placeholder="60" type="number" />
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center bg-white/[0.02] p-4 rounded-xl border border-white/5">
+                      <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">예상 최종 추출량 (ICE)</span>
+                      <span className="text-xl font-serif font-black text-copper">
+                        {(Number(formData.ice_bloom_water || 0) + Number(formData.ice_p1_water || 0) + Number(formData.ice_p2_water || 0) + Number(formData.ice_p3_water || 0) + Number(formData.ice_p4_water || 0))} g
+                      </span>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-medium text-gray-400 mb-2 tracking-wider uppercase">ICE 레시피 추가 코멘트</label>
+                      <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
+                        <ReactQuill 
+                          theme="snow" 
+                          value={formData.ice_comment} 
+                          onChange={(content) => setFormData(prev => ({ ...prev, ice_comment: content }))}
+                          style={{ height: '100px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -1171,7 +1349,7 @@ const TrashIcon = () => (
 const InputField = ({ label, name, value, onChange, type = "text", required = false, placeholder = "" }) => (
   <div className="w-full">
     <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">{label}</label>
-    <input type={type} name={name} value={value} onChange={onChange} required={required} placeholder={placeholder} className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-colors placeholder:text-gray-600 shadow-inner" />
+    <input type={type} name={name} value={value || ''} onChange={onChange} required={required} placeholder={placeholder} className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-colors placeholder:text-gray-600 shadow-inner" />
   </div>
 );
 
