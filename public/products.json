@@ -144,8 +144,8 @@
     "sweetness": "5",
     "bodyRate": "4",
     "balance": "4",
-    "showBasicInfo": true,
-    "showAnalysisInfo": true,
+    "showBasicInfo": false,
+    "showAnalysisInfo": false,
     "blend1": "",
     "ratio1": "",
     "blend2": "",
@@ -187,8 +187,7 @@
     "ice_p4_water": "",
     "ice_weight": "",
     "ice_comment": "",
-    "id": 1774277734035,
-    "showExtraction": true
+    "id": 1774277734035
   },
   {
     "category": "bean",
