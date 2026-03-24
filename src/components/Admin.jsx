@@ -36,7 +36,7 @@ const getInitialFormData = () => ({
   moisture: '', density: '', aw: '', cropYear: '',
   greenBeanName: '', importer: '', scaScore: '',
   flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
-  showBasicInfo: true, showAnalysisInfo: false,
+  showBasicInfo: true, showAnalysisInfo: true,
   blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: '',
   // Extraction Recipe (Hot)
   hot_coffee_amount: '20g', hot_grind: '', hot_temp: '', hot_ratio: '', hot_dripper: '',
