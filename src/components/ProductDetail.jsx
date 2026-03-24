@@ -369,7 +369,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: 'SCA 점수', value: product.scaScore || '정보 없음', category: 'basic' },
                       { label: '로스팅 소요 시간', value: product.roastTime || '정보 없음', category: 'basic' },
                       { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g'), category: 'essential' }
-                    ].map((item, idx) => (
+                    ].filter(item => 
+                      item.category === 'essential' || product.showBasicInfo !== false
+                    ).map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
                         <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em] transition-colors hover:text-copper/40">{item.label}</span>
                         <div className="flex items-center gap-2">
@@ -539,7 +541,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
 
           {/* 4. Green Bean Analysis (Optional) */}
-          {isBean && (
+          {isBean && product.showAnalysisInfo !== false && (
             <div className="max-w-4xl mx-auto px-4">
                <h3 className="text-2xl font-serif font-black text-white mb-8 flex items-center justify-center gap-6">
                  <div className="h-[1px] w-8 bg-white/10"></div>
