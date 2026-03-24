@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { QRCodeCanvas } from 'qrcode.react';
+import { QrCode, Download, Trash2, Edit2, Star, Eye, EyeOff } from 'lucide-react';
 
 const FLAVOR_CATEGORIES = [
   { label: '베리류 (Berries)', items: ['딸기', '라즈베리', '블루베리', '블랙베리'] },
@@ -37,6 +39,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
     cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
     recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
     englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', // beverage specific
+    moisture: '', density: '', aw: '', cropYear: '',
+    greenBeanName: '', importer: '', scaScore: '',
     blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: ''
   });
 
@@ -263,7 +267,9 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
       roaster: '', agtronWb: '', agtronGround: '', roastPointWb: '', roastPointGround: '', roastTime: '', roastDate: '', degassing: '', 
       cupNotes: '', recipe: '', dripper: '', coffeeAmount: '', grind: '', temp: '', visible: true,
       recommended: false, image: '', order: '', storeUrl: '', agingDays: '', story: '',
-      englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single'
+      englishName: '', size: '', isSpecial: false, subCategory: 'espresso', beanType: 'single', 
+      moisture: '', density: '', aw: '', cropYear: '',
+      greenBeanName: '', importer: '', scaScore: '',
     });
     setEditingId(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -336,6 +342,36 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
 
   const handleReturn = () => {
     window.location.hash = ''; // Back to main
+  };
+
+  const handleDownloadQR = (item) => {
+    const url = `${window.location.origin}${window.location.pathname}#product/${item.id}`;
+    
+    // Create a temporary container for high-res generation
+    const div = document.createElement('div');
+    div.style.display = 'none';
+    document.body.appendChild(div);
+    
+    // We'll manualy trigger a download by creating a canvas and drawing on it
+    // But since we have QRCodeCanvas component, it's easier to just use it once.
+    // However, to do it synchronously or via a hidden element:
+    const canvas = document.getElementById(`qr-hidden-${item.id}`);
+    if (canvas) {
+      const link = document.createElement('a');
+      link.download = `QR_Archemist_${item.name.replace(/\//g, '_')}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+  };
+
+  const handleDownloadAllQRs = () => {
+    if (window.confirm(`${filteredBeans.length}개의 QR 코드를 모두 다운로드하시겠습니까? (브라우저 설정에 따라 여러 개의 다운로드 창이 뜰 수 있습니다)`)) {
+      filteredBeans.forEach((item, index) => {
+        setTimeout(() => {
+          handleDownloadQR(item);
+        }, index * 300);
+      });
+    }
   };
 
   useEffect(() => {
@@ -690,6 +726,29 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
 
               {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
+                <div className="md:col-span-2 lg:col-span-3 space-y-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-2">
+                  <div className="flex flex-col gap-4">
+                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 기본 정보 (Green Bean Info)</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <InputField label="생두 정식 명칭" name="greenBeanName" value={formData.greenBeanName} onChange={handleChange} placeholder="예: Ethiopia Sidamo Hamela G1 Natural" />
+                      <InputField label="수입사" name="importer" value={formData.importer} onChange={handleChange} placeholder="예: 그린비알" />
+                      <InputField label="SCA 점수" name="scaScore" value={formData.scaScore} onChange={handleChange} placeholder="예: 88.5" />
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-col gap-4 border-t border-gray-800/50 pt-6">
+                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 분석 (Green Bean Analysis)</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <InputField label="수분율 (%)" name="moisture" value={formData.moisture} onChange={handleChange} placeholder="11.2" type="number" step="0.1" />
+                      <InputField label="밀도 (g/L)" name="density" value={formData.density} onChange={handleChange} placeholder="840" type="number" />
+                      <InputField label="수분 활성도 (aw)" name="aw" value={formData.aw} onChange={handleChange} placeholder="0.58" type="number" step="0.01" />
+                      <InputField label="수확 연도 (Crop)" name="cropYear" value={formData.cropYear} onChange={handleChange} placeholder="2023/24" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
                 <div className={`md:col-span-2 lg:col-span-3 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4`}>
                   {formData.category === 'bean' && (
                     <div className="flex flex-col gap-4">
@@ -795,11 +854,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               {formData.category === 'beverage' && (
                 <div className="lg:col-span-3">
                   <InputField 
-                    label="상품 설명" 
-                    name="story" 
-                    value={formData.story} 
+                    label="상품 영문 서브타이틀 (선택)" 
+                    name="englishSub" 
+                    value={formData.englishSub || ''} 
                     onChange={handleChange} 
-                    placeholder="상품 상세 설명을 입력하세요" 
+                    placeholder="예: Velvet Smooth Texture" 
                   />
                 </div>
               )}
@@ -814,9 +873,15 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
             </div>
             
-            <div>
-              <label className="block text-sm font-medium text-copper tracking-widest mb-2 uppercase">상세 설명</label>
-              <textarea name="recipe" value={formData.recipe} onChange={handleChange} rows="5" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="상세한 제품 설명을 입력하세요."></textarea>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label className="block text-sm font-medium text-copper tracking-widest mb-2 uppercase">생두 상세 정보 / 상품 스토리</label>
+                <textarea name="recipe" value={formData.recipe} onChange={handleChange} rows="6" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="생두에 대한 이야기나 상품의 상세 정보를 입력하세요."></textarea>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-copper tracking-widest mb-2 uppercase">추천 추출 방법 / 가이드</label>
+                <textarea name="story" value={formData.story} onChange={handleChange} rows="6" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="아키미스트가 추천하는 추출 레시피나 가이드를 입력하세요."></textarea>
+              </div>
             </div>
 
             <button type="submit" className="w-full bg-gradient-to-r from-yellow-700 via-copper to-yellow-600 text-[#111] font-bold py-5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.5)] hover:scale-[1.01] transition-all duration-300 text-lg tracking-widest uppercase">
@@ -835,13 +900,23 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                ))}
             </div>
 
-            <button 
-              onClick={() => { resetForm(); setActiveTab('register'); }}
-              className="flex items-center justify-center gap-3 bg-gradient-to-r from-copper to-yellow-600 text-[#111] px-8 py-3.5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.3)] transition-all duration-300 font-bold tracking-widest text-xs uppercase"
-            >
-              <span className="text-lg">＋</span>
-              신규 상품 등록하기
-            </button>
+            <div className="flex gap-2">
+              <button 
+                onClick={handleDownloadAllQRs} 
+                className="flex items-center justify-center gap-2 bg-indigo-600 border border-indigo-500 text-white px-5 py-2 rounded-xl hover:bg-indigo-500 transition-all font-bold tracking-widest text-[10px] uppercase shadow-lg shadow-indigo-500/20 active:scale-95"
+                title="현재 표시된 모든 품목의 QR 코드를 다운로드합니다"
+              >
+                <QrCode size={14} />
+                전체 QR 다운로드
+              </button>
+              <button 
+                onClick={() => { resetForm(); setActiveTab('register'); }}
+                className="flex items-center justify-center gap-3 bg-gradient-to-r from-copper to-yellow-600 text-[#111] px-8 py-3.5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.3)] transition-all duration-300 font-bold tracking-widest text-xs uppercase"
+              >
+                <span className="text-lg">＋</span>
+                신규 상품 등록하기
+              </button>
+            </div>
           </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
@@ -917,6 +992,23 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
                           </td>
                           <td className="py-5 px-4 text-right">
                             <div className="flex justify-end gap-1">
+                              <div className="hidden">
+                                <QRCodeCanvas 
+                                  id={`qr-hidden-${item.id}`}
+                                  value={`${window.location.origin}${window.location.pathname}#product/${item.id}`}
+                                  size={512}
+                                  level={"H"}
+                                  includeMargin={true}
+                                />
+                              </div>
+                              <button 
+                                onClick={(e) => { e.stopPropagation(); handleDownloadQR(item); }} 
+                                className="bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 active:scale-95" 
+                                title="QR 코드 다운로드"
+                              >
+                                <QrCode size={12} />
+                                QR
+                              </button>
                               <button onClick={(e) => { e.stopPropagation(); handleToggleRecommended(item.id); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.recommended ? 'bg-copper text-black' : 'bg-gray-800 text-gray-500 hover:text-white'}`}>{item.recommended ? '추천됨' : '추천하기'}</button>
                               <button onClick={(e) => { e.stopPropagation(); handleToggleVisibility(item.id); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${item.visible ? 'bg-gray-800 text-gray-400 hover:text-white' : 'bg-copper/40 text-white hover:bg-copper'}`}>{item.visible ? '숨기기' : '보이기'}</button>
                               <button onClick={(e) => { e.stopPropagation(); handleEdit(item); }} className="bg-blue-900/20 text-blue-400 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all">수정</button>

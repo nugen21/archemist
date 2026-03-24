@@ -120,16 +120,24 @@ function App() {
                <p className="text-copper text-[9px] font-bold tracking-widest uppercase">Admin Session Active</p>
              )}
            </div>
-           <div className="flex gap-6 items-center">
-             {isAdmin && (
-               <button 
-                 onClick={() => handleAdminAuth(false)}
-                 className="text-gray-600 hover:text-red-400 text-[10px] sm:text-xs tracking-widest font-bold uppercase transition-colors"
+            <div className="flex gap-6 items-center">
+              {isAdmin ? (
+                <button 
+                  onClick={() => handleAdminAuth(false)}
+                  className="text-gray-600 hover:text-red-400 text-[10px] sm:text-xs tracking-widest font-bold uppercase transition-colors"
+                 >
+                   Logout
+                 </button>
+              ) : (
+                <a 
+                  href="#admin"
+                  className="text-gray-700 hover:text-copper text-[9px] sm:text-xs tracking-[0.2em] font-bold uppercase transition-all flex items-center gap-1.5 border border-white/5 px-4 py-2 rounded-full hover:bg-white/5 active:scale-95"
                 >
-                  Logout
-                </button>
-             )}
-           </div>
+                  <span className="opacity-40">🔒</span>
+                  Admin Panel
+                </a>
+              )}
+            </div>
         </div>
       </footer>
     </div>

@@ -110,7 +110,7 @@ export default function Header({ isAdmin }) {
                 key={link.name} 
                 href={link.href} 
                 className={`whitespace-nowrap px-3 sm:px-0 py-1 text-[11px] sm:text-[12px] transition-all duration-300 tracking-[0.2em] uppercase font-bold sm:font-medium 
-                  ${link.isAdminLink ? 'text-gray-600 hover:text-copper border-l border-white/10 pl-4 ml-2' : 
+                  ${link.isAdminLink ? 'text-gray-400 hover:text-copper border-l border-white/10 pl-4 ml-2' : 
                     link.bold ? 'text-copper sm:text-gray-200 sm:border-l sm:border-gray-800' : 
                     'text-gray-500 sm:text-gray-400 hover:text-copper'}`}
               >

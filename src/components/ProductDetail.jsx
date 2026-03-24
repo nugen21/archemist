@@ -300,9 +300,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               <h1 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
                 {product.name}
               </h1>
-              {product.category === 'beverage' && (product.story || product.description) && (
+              {(product.recipe || product.story || product.description) && (
                 <p className="text-gray-400 text-lg leading-relaxed mb-8 break-keep italic">
-                  "{product.story || product.description}"
+                  "{product.recipe || product.story || product.description}"
                 </p>
               )}
               <div className="mb-10">
@@ -339,17 +339,16 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4 mb-12">
                     {[
-                      { 
-                        label: '국가', 
-                        value: product.country || '정보 없음',
-                        flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null
-                      },
+                      { label: '국가', value: product.country || '정보 없음', flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null },
                       { label: '상세 지역', value: product.region || '정보 없음' },
                       { label: '농장', value: product.farm || '정보 없음' },
                       { label: '마이크로밀', value: product.micromill || '정보 없음' },
                       { label: '재배 고도', value: product.altitude || '정보 없음' },
                       { label: product.beanType === 'blend' ? '블렌딩 구성' : '품종', value: product.beanType === 'blend' ? [1, 2, 3, 4].map(n => ({ name: product[`blend${n}`], ratio: product[`ratio${n}`] })).filter(c => c.name).map(c => `${c.name}${c.ratio ? ` (${c.ratio}%)` : ''}`).join(' | ') || product.variety || '정보 없음' : product.variety || '정보 없음' },
                       { label: '가공방식', value: product.process || '정보 없음' },
+                      { label: '수입사', value: product.importer || '정보 없음' },
+                      { label: '생두 정식 명칭', value: product.greenBeanName || '정보 없음' },
+                      { label: 'SCA 점수', value: product.scaScore || '정보 없음' },
                       { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g') }
                     ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
@@ -549,7 +548,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             </h3>
             <div className="bg-[#111211] p-12 rounded-[3rem] border border-white/5 shadow-2xl">
               <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep italic">
-                {product.story || "아키미스트가 엄선한 생두의 상세 정보와 로스터의 정성이 담긴 이야기가 곧 업데이트됩니다."}
+                {product.recipe || "아키미스트가 엄선한 생두의 상세 정보와 로스터의 정성이 담긴 이야기가 곧 업데이트됩니다."}
               </p>
             </div>
           </div>
@@ -644,7 +643,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       <div className="w-8 h-[1px] bg-copper/30"></div>
                     </div>
                     <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-medium break-keep italic">
-                      "{product.recipe || (product.category === 'dripbag' 
+                      "{product.story || (product.category === 'dripbag' 
                         ? "뜸 들이는 30초가 커피의 단맛과 바디감을 결정하는 가장 중요한 시간입니다. 천천히 기다려주세요."
                         : "신선한 원두일수록 뜸 들이기 과정에서 기포가 많이 발생합니다. 원두가 가진 고유의 향미를 온전히 즐겨보세요.")}"
                     </p>
@@ -656,7 +655,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     <Droplet size={200} className="text-copper" />
                   </div>
                   <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
-                    {product.recipe || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
+                    {product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
                   </p>
                 </>
               )}
