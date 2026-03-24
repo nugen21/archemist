@@ -18,6 +18,8 @@ function App() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [lastScrollPos, setLastScrollPos] = useState(0);
+
   const loadProducts = async () => {
     // 1. First, quickly load from localStorage if available for instant UI response
     const localSaved = localStorage.getItem('archemist_beans');
@@ -71,14 +73,35 @@ function App() {
 
   useEffect(() => {
     const onHashChange = () => {
-      setCurrentPath(window.location.hash);
-      if (window.location.hash === '' || window.location.hash === '#' || window.location.hash === '#home' || window.location.hash === '#menu') {
+      const newHash = window.location.hash;
+      const oldHash = currentPath;
+      
+      // If navigating TO product detail center from something else, save scroll position
+      if (newHash.startsWith('#product/') && !oldHash.startsWith('#product/')) {
+        setLastScrollPos(window.scrollY);
+        console.log('Saving scroll position:', window.scrollY);
+      }
+      
+      setCurrentPath(newHash);
+      
+      // Handle back or home navigation
+      if (newHash === '' || newHash === '#' || newHash === '#home') {
+        // Only restore if we have a saved position AND we came from a product
+        if (oldHash.startsWith('#product/')) {
+          setTimeout(() => {
+            window.scrollTo({ top: lastScrollPos, behavior: 'instant' });
+            console.log('Restoring scroll position:', lastScrollPos);
+          }, 0);
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } else if (newHash === '#menu') {
         window.scrollTo(0, 0);
       }
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
-  }, []);
+  }, [currentPath, lastScrollPos]);
 
   const handleAdminAuth = (state) => {
     setIsAdmin(state);
@@ -92,9 +115,8 @@ function App() {
   };
 
   const handleBack = () => {
+    // Let onHashChange handle the scroll restoration
     window.location.hash = '#home';
-    setCurrentPath('#home');
-    window.scrollTo(0, 0);
   };
 
   // Route: Admin
