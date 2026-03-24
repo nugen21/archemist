@@ -144,8 +144,8 @@
     "sweetness": "5",
     "bodyRate": "4",
     "balance": "4",
-    "showBasicInfo": false,
-    "showAnalysisInfo": false,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true,
     "blend1": "",
     "ratio1": "",
     "blend2": "",
@@ -239,8 +239,8 @@
     "sweetness": "5",
     "bodyRate": "4",
     "balance": "4",
-    "showBasicInfo": false,
-    "showAnalysisInfo": false,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true,
     "blend1": "",
     "ratio1": "",
     "blend2": "",
@@ -321,7 +321,9 @@
     "isSpecial": false,
     "subCategory": "espresso",
     "beanType": "single",
-    "id": 1774220811162
+    "id": 1774220811162,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "category": "dripbag",
@@ -360,7 +362,9 @@
     "isSpecial": false,
     "subCategory": "espresso",
     "beanType": "single",
-    "id": 1774220602392
+    "id": 1774220602392,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1710850000001,
@@ -393,7 +397,9 @@
     "roastPointGround": "Moderately Light",
     "order": 6,
     "agingDays": "7",
-    "size": "200"
+    "size": "200",
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1710850000003,
@@ -413,7 +419,9 @@
     "order": 7,
     "beanType": "blend",
     "blend1": "BRAZIL CERRADO NAUTRAL",
-    "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)"
+    "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)",
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1711023000001,
@@ -427,7 +435,9 @@
     "visible": true,
     "recommended": false,
     "image": "/images/icons/beverage.jpg",
-    "order": 8
+    "order": 8,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1711023000002,
@@ -441,7 +451,9 @@
     "visible": true,
     "recommended": false,
     "image": "/images/icons/beverage.jpg",
-    "order": 9
+    "order": 9,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1711023000003,
@@ -455,7 +467,9 @@
     "visible": true,
     "recommended": false,
     "image": "/images/icons/beverage.jpg",
-    "order": 10
+    "order": 10,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1711023000004,
@@ -470,7 +484,9 @@
     "recommended": false,
     "isSpecial": true,
     "image": "/images/icons/beverage.jpg",
-    "order": 11
+    "order": 11,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1711023000005,
@@ -483,7 +499,9 @@
     "recommended": false,
     "image": "/images/icons/bean.jpg",
     "order": 12,
-    "process": "워시드"
+    "process": "워시드",
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1711023000006,
@@ -495,7 +513,9 @@
     "visible": true,
     "recommended": false,
     "image": "/images/icons/bean.jpg",
-    "order": 13
+    "order": 13,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   },
   {
     "id": 1711023000007,
@@ -508,6 +528,8 @@
     "recommended": false,
     "image": "/images/icons/bean.jpg",
     "recipe": "",
-    "order": 14
+    "order": 14,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true
   }
 ]
