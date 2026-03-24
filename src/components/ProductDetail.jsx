@@ -563,6 +563,151 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                </div>
             </div>
           )}
+
+          {/* 5. Recommended Extraction Recipe */}
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
+              <div className="h-[1px] w-12 bg-copper/30"></div>
+              추천 추출 방식
+              <div className="h-[1px] w-12 bg-copper/30"></div>
+            </h3>
+            <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+              {['dripbag', 'bean'].includes(product.category) ? (
+                <div className="relative z-10 space-y-12">
+                  {/* Tab Switcher */}
+                  <div className="flex justify-center gap-4 mb-8">
+                    <button 
+                      onClick={() => setRecipeTab('hot')}
+                      className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'hot' ? 'bg-red-500/10 border-red-500/50 text-red-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
+                    >
+                      <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'hot' ? 'bg-red-500 animate-pulse' : 'bg-gray-700'}`}></div>
+                      HOT RECIPE
+                    </button>
+                    <button 
+                      onClick={() => setRecipeTab('ice')}
+                      className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'ice' ? 'bg-blue-500/10 border-blue-500/50 text-blue-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
+                    >
+                      <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'ice' ? 'bg-blue-500 animate-pulse' : 'bg-gray-700'}`}></div>
+                      ICE RECIPE
+                    </button>
+                  </div>
+
+                  {/* Recipe Content */}
+                  {(() => {
+                    const prefix = recipeTab === 'hot' ? 'hot_' : 'ice_';
+                    const hasData = product[`${prefix}grind`] || product[`${prefix}bloom_water`];
+                    
+                    if (!hasData) {
+                      return (
+                        <div className="py-12 text-center text-gray-600 italic">
+                          {recipeTab.toUpperCase()} 레시피가 아직 등록되지 않았습니다.
+                        </div>
+                      );
+                    }
+
+                    const pours = [
+                      { label: '뜸 (Bloom)', time: product[`${prefix}bloom_time`], water: product[`${prefix}bloom_water`] },
+                      { label: '1차 푸어', time: product[`${prefix}p1_time`], water: product[`${prefix}p1_water`] },
+                      { label: '2차 푸어', time: product[`${prefix}p2_time`], water: product[`${prefix}p2_water`] },
+                      { label: '3차 푸어', time: product[`${prefix}p3_time`], water: product[`${prefix}p3_water`] },
+                      { label: '4차 푸어', time: product[`${prefix}p4_time`], water: product[`${prefix}p4_water`] },
+                    ].filter(p => p.water);
+
+                    const totalWater = pours.reduce((acc, p) => acc + Number(p.water || 0), 0);
+
+                    return (
+                      <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        {/* Summary Row */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                          {[
+                            { label: '커피량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
+                            { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
+                            { label: '물 온도', value: product[`${prefix}temp`], icon: <Thermometer size={14} /> },
+                            { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
+                            { label: recipeTab === 'ice' ? '얼음 중량' : '투입 비율', value: recipeTab === 'ice' ? (product.ice_weight ? `${product.ice_weight}g` : '-') : product.hot_ratio, icon: <Target size={14} /> }
+                          ].map((item, idx) => (
+                            <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
+                              <div className="text-copper/50">{item.icon}</div>
+                              <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{item.label}</span>
+                              <span className="text-sm font-bold text-white uppercase">{item.value || '-'}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Timeline pours */}
+                        <div className="relative pt-4 pb-8">
+                          <div className="absolute top-0 bottom-0 left-[20px] md:left-1/2 w-[1px] bg-gradient-to-b from-copper/50 via-copper/20 to-transparent"></div>
+                          
+                          <div className="space-y-12">
+                            {pours.map((pour, pIdx) => (
+                              <div key={pIdx} className="relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0">
+                                <div className="absolute left-[20px] md:left-1/2 -ml-[4.5px] w-2.5 h-2.5 rounded-full bg-copper border-2 border-[#111211] z-20 shadow-[0_0_10px_rgba(161,118,76,0.6)]"></div>
+                                <div className={`flex-1 w-full md:pr-12 md:text-right pl-12 md:pl-0 ${pIdx % 2 === 1 ? 'md:order-2 md:text-left md:pl-12 md:pr-0' : ''}`}>
+                                  <h6 className="text-copper font-black text-[10px] uppercase tracking-widest mb-1">{pour.label}</h6>
+                                  <div className="flex items-baseline gap-2 md:justify-end">
+                                    <span className="text-3xl font-serif font-black text-white tabular-nums">{pour.water}</span>
+                                    <span className="text-xs font-bold text-gray-600 uppercase">g</span>
+                                  </div>
+                                </div>
+                                <div className={`flex-1 w-full md:pl-12 pl-12 md:pl-0 ${pIdx % 2 === 1 ? 'md:order-1 md:text-right md:pr-12 md:pl-0' : ''}`}>
+                                  <div className="flex items-center gap-2 text-gray-500 md:justify-start">
+                                    <Timer size={14} className="opacity-40" />
+                                    <span className="text-lg font-serif font-bold text-gray-400 tabular-nums">{pour.time || '-'}</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">sec</span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                          <div className="flex items-center gap-4">
+                            <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-4xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
+                              <span className="text-sm font-bold text-gray-500 uppercase">ml</span>
+                            </div>
+                          </div>
+                          
+                          {product[`${prefix}comment`] && (
+                            <div className="max-w-md text-center md:text-right">
+                               <div className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
+                               <div 
+                                 className="text-gray-400 text-sm leading-relaxed font-medium break-keep italic html-content"
+                                 dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
+                               />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              ) : (
+                <>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
+                    <Droplet size={200} className="text-copper" />
+                  </div>
+                  <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
+                    {product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* 6. Detailed HTML Description */}
+          {product.recipe && (
+             <div className="max-w-4xl mx-auto px-4 mt-20">
+               <h3 className="text-2xl font-serif font-black text-white mb-8 flex items-center justify-center gap-6">
+                 <div className="h-[1px] w-8 bg-white/10"></div>
+                 상세 스토리
+                 <div className="h-[1px] w-8 bg-white/10"></div>
+               </h3>
+               <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 rounded-[2.5rem] prose prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-300" dangerouslySetInnerHTML={{ __html: product.recipe }} />
+            </div>
+          )}
         </div>
       
       {/* Visual Alchemy - Floating Particles */}
