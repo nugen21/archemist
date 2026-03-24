@@ -144,19 +144,22 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
   if (!product) return null;
 
-  // Formatting logic for display
-  const formattedPrice = product.category === 'beverage' 
-    ? (Number(product.price) / 1000).toFixed(1)
-    : (Number(product.price) || 0).toLocaleString();
-
   const isBean = product.category === 'bean' || !product.category;
   const isCafe = product.category === 'beverage';
+
+  const priceNum = Number(product.price);
+  const formattedPrice = priceNum > 0 
+    ? (isCafe ? (priceNum / 1000).toFixed(1) : priceNum.toLocaleString())
+    : (isCafe ? '0.0' : '0'); 
+
 
   const renderCupNotes = (notesString) => {
     if (!notesString) return null;
     
     // Split by comma, space, or slash, then clean up
-    const notes = notesString.split(/[,/|]+/).filter(n => n.trim().length > 0);
+    const notes = Array.isArray(notesString) 
+      ? notesString.filter(n => typeof n === 'string' && n.trim().length > 0)
+      : String(notesString).split(/[,/|]+/).filter(n => n.trim().length > 0);
     
     return (
       <div className="flex flex-wrap gap-4 justify-center px-4">
@@ -319,7 +322,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                         <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
                         <span className="text-lg text-copper font-bold tabular-nums">
                           {(() => {
-                            const roastStr = (product.roastDate || '').replace(/\./g, '-');
+                            const roastStr = String(product.roastDate || '').replace(/\./g, '-');
                             const date = new Date(roastStr);
                             if (isNaN(date.getTime())) return `${product.agingDays}일 후`;
                             date.setDate(date.getDate() + parseInt(product.agingDays));
@@ -345,7 +348,14 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '생두 정식 명칭', value: product.greenBeanName || '정보 없음', category: 'basic' },
                       { label: 'SCA 점수', value: product.scaScore || '정보 없음', category: 'basic' },
                       { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g'), category: 'essential' }
-                    ].filter(item => item.category === 'essential' || product.showBasicInfo !== false).map((item, idx) => (
+                    ].filter(item => 
+                      item.category === 'essential' || 
+                      (product.showBasicInfo !== false && 
+                       item.value && 
+                       item.value !== '정보 없음' && 
+                       item.value !== '0' &&
+                       String(item.value).trim() !== '')
+                    ).map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
                         <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em] transition-colors hover:text-copper/40">{item.label}</span>
                         <div className="flex items-center gap-2">
@@ -367,7 +377,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
                     </span>
                     <span className="text-xl font-bold text-copper">
-                      {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size.toLowerCase())) : '정보 없음'}
+                      {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : String(product.size).toLowerCase())) : '정보 없음'}
                     </span>
                   </div>
                 </div>

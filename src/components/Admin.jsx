@@ -201,8 +201,10 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
         if (!putRes.ok) {
           const errorData = await putRes.json();
           if (putRes.status === 409) {
-             console.warn('Admin: SHA Conflict during sync, retrying...');
-             return syncWithGitHub(latestBeans);
+             console.error('Admin: Sync conflict. Remote content was modified. Aborting sync.');
+             setSyncStatus('error');
+             alert('다른 장치나 터미널에서 데이터가 수정되어 현재 창의 데이터가 동기화되지 않았습니다. 페이지를 새로고침하여 최신 데이터를 불러온 후 다시 시도해주세요.');
+             return; 
           }
           setSyncStatus('error');
           throw new Error(errorData.message || 'GitHub 업데이트 실패');

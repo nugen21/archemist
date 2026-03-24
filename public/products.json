@@ -9,7 +9,7 @@
     "micromill": "El Velo",
     "variety": "Geisha",
     "altitude": "1,750 ~ 1,900",
-    "process": "Nautral",
+    "process": "Natural",
     "roaster": "",
     "agtronWb": "65.6",
     "agtronGround": "80.4",
@@ -49,8 +49,8 @@
     "sweetness": "4.5",
     "bodyRate": "4",
     "balance": "5",
-    "showBasicInfo": false,
-    "showAnalysisInfo": false,
+    "showBasicInfo": true,
+    "showAnalysisInfo": true,
     "blend1": "",
     "ratio1": "",
     "blend2": "",
@@ -92,7 +92,8 @@
     "ice_p4_water": "",
     "ice_weight": "100",
     "ice_comment": "<p>얼음을&nbsp;100g&nbsp;정도&nbsp;담고&nbsp;저울&nbsp;0점을&nbsp;맞추는&nbsp;것을&nbsp;기준으로&nbsp;최종&nbsp;추출량은&nbsp;얼음을&nbsp;뺀&nbsp;중량으로&nbsp;측정하세요.</p><p>모두&nbsp;추출하고&nbsp;얼음을&nbsp;좀&nbsp;더&nbsp;추가해&nbsp;마시세요.</p>",
-    "id": 1774158540680
+    "id": 1774158540680,
+    "showExtraction": true
   },
   {
     "category": "bean",
@@ -187,7 +188,8 @@
     "ice_p4_water": "",
     "ice_weight": "",
     "ice_comment": "",
-    "id": 1774277734035
+    "id": 1774277734035,
+    "showExtraction": true
   },
   {
     "category": "bean",
@@ -282,7 +284,8 @@
     "ice_p4_water": "",
     "ice_weight": "",
     "ice_comment": "",
-    "id": 1774277454706
+    "id": 1774277454706,
+    "showExtraction": true
   },
   {
     "category": "dripbag",
@@ -323,7 +326,8 @@
     "beanType": "single",
     "id": 1774220811162,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "category": "dripbag",
@@ -364,7 +368,8 @@
     "beanType": "single",
     "id": 1774220602392,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1710850000001,
@@ -375,7 +380,7 @@
     "region": "YIRGACHEFFE",
     "variety": "Heirom",
     "altitude": "1,900 ~ 2,000",
-    "process": "Nautral",
+    "process": "Natural",
     "roaster": "-",
     "roastWb": "65",
     "roastGround": "77",
@@ -399,7 +404,8 @@
     "agingDays": "7",
     "size": "200",
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1710850000003,
@@ -421,7 +427,8 @@
     "blend1": "BRAZIL CERRADO NAUTRAL",
     "blend2": "INDONESIA SUMATRA MANDHELING G1(Wet Hulled)",
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1711023000001,
@@ -437,7 +444,8 @@
     "image": "/images/icons/beverage.jpg",
     "order": 8,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1711023000002,
@@ -453,7 +461,8 @@
     "image": "/images/icons/beverage.jpg",
     "order": 9,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1711023000003,
@@ -469,7 +478,8 @@
     "image": "/images/icons/beverage.jpg",
     "order": 10,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1711023000004,
@@ -486,7 +496,8 @@
     "image": "/images/icons/beverage.jpg",
     "order": 11,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1711023000005,
@@ -501,7 +512,8 @@
     "order": 12,
     "process": "워시드",
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1711023000006,
@@ -515,7 +527,8 @@
     "image": "/images/icons/bean.jpg",
     "order": 13,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+    "showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "id": 1711023000007,
@@ -530,7 +543,8 @@
     "recipe": "",
     "order": 14,
     "showBasicInfo": true,
-    "showAnalysisInfo": true
+"showAnalysisInfo": true,
+    "showExtraction": true
   },
   {
     "category": "bean",
@@ -626,5 +640,6 @@
     "ice_weight": "",
     "ice_comment": "",
     "id": 1774363698268
+
   }
 ]
