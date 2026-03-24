@@ -456,10 +456,9 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
     } 
     // 2. If initialEditingId is cleared from outside but we are still "editing" locally
     else if (!initialEditingId && editingId && activeTab === 'register') {
-      // This handles cases where App resets the editing state
-      // We don't automatically reset the whole form here to avoid losing unsaved work if possible,
-      // but usually this means we should go back to Manage or Reset.
-      // For stabilization, let's keep it simple: if prop is null, we should probably not be in edit mode.
+      setEditingId(null);
+      setActiveTab('manage');
+      setFormData(getInitialFormData());
     }
   }, [initialEditingId, beans, externalProducts, editingId, activeTab]);
 

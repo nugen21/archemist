@@ -136,7 +136,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-matte-black text-white selection:bg-copper font-sans overflow-x-hidden">
       <main className="flex-grow">
-        <Header isAdmin={isAdmin} />
+        <Header isAdmin={isAdmin} onAdminNav={() => setEditingId(null)} />
         <Hero id="home" />
         <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} products={products} />
         <Products products={products} />

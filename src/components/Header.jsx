@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export default function Header({ isAdmin }) {
+export default function Header({ isAdmin, onAdminNav }) {
   const [user, setUser] = useState(null);
   
   const navLinks = [
@@ -113,6 +113,7 @@ export default function Header({ isAdmin }) {
                   ${link.isAdminLink ? 'text-gray-400 hover:text-copper border-l border-white/10 pl-4 ml-2' : 
                     link.bold ? 'text-copper sm:text-gray-200 sm:border-l sm:border-gray-800' : 
                     'text-gray-500 sm:text-gray-400 hover:text-copper'}`}
+                onClick={link.isAdminLink ? onAdminNav : undefined}
               >
                 {link.isAdminLink && <span className="opacity-50 mr-1">🔒</span>}
                 {link.name}
