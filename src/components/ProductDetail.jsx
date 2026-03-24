@@ -348,14 +348,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '생두 정식 명칭', value: product.greenBeanName || '정보 없음', category: 'basic' },
                       { label: 'SCA 점수', value: product.scaScore || '정보 없음', category: 'basic' },
                       { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g'), category: 'essential' }
-                    ].filter(item => 
-                      item.category === 'essential' || 
-                      (product.showBasicInfo !== false && 
-                       item.value && 
-                       item.value !== '정보 없음' && 
-                       item.value !== '0' &&
-                       String(item.value).trim() !== '')
-                    ).map((item, idx) => (
+                    ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
                         <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em] transition-colors hover:text-copper/40">{item.label}</span>
                         <div className="flex items-center gap-2">
