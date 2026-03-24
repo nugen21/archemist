@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { QrCode, Download, Trash2, Edit2, Star, Eye, EyeOff } from 'lucide-react';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 const FLAVOR_CATEGORIES = [
   { label: '베리류 (Berries)', items: ['딸기', '라즈베리', '블루베리', '블랙베리'] },
@@ -873,13 +875,37 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId }) => {
               )}
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <label className="block text-sm font-medium text-copper tracking-widest mb-2 uppercase">생두 상세 정보 / 상품 스토리</label>
-                <textarea name="recipe" value={formData.recipe} onChange={handleChange} rows="6" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="생두에 대한 이야기나 상품의 상세 정보를 입력하세요."></textarea>
+            <div className="grid grid-cols-1 gap-8 pt-4 border-t border-gray-800">
+              <div className="flex flex-col">
+                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">생두 상세 정보 / 상품 스토리 (HTML Editor)</label>
+                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[400px]">
+                  <style>{`
+                    .quill { height: 350px; display: flex; flex-direction: column; }
+                    .ql-container { flex-grow: 1; font-family: 'Pretendard', sans-serif; font-size: 14px; background: #0b0c0b; color: #e5e7eb; border: none !important; }
+                    .ql-toolbar { background: #1a1c1a; border: none !important; border-bottom: 1px solid #2d2f2d !important; }
+                    .ql-editor { min-height: 300px; padding: 20px; }
+                    .ql-snow.ql-toolbar button { stroke: #9ca3af; fill: #9ca3af; }
+                    .ql-snow.ql-toolbar button:hover, .ql-snow.ql-toolbar button.ql-active { color: #A1764C !important; }
+                    .ql-snow.ql-toolbar button:hover .ql-stroke, .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #A1764C !important; }
+                    .ql-snow.ql-toolbar .ql-picker { color: #9ca3af; }
+                  `}</style>
+                  <ReactQuill 
+                    theme="snow" 
+                    value={formData.recipe} 
+                    onChange={(content) => setFormData(prev => ({ ...prev, recipe: content }))}
+                    modules={{
+                      toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{'list': 'ordered'}, {'list': 'bullet'}],
+                        ['link', 'image', 'clean']
+                      ],
+                    }}
+                  />
+                </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-copper tracking-widest mb-2 uppercase">추천 추출 방법 / 가이드</label>
+                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">추천 추출 방법 / 가이드 (Text Only)</label>
                 <textarea name="story" value={formData.story} onChange={handleChange} rows="6" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="아키미스트가 추천하는 추출 레시피나 가이드를 입력하세요."></textarea>
               </div>
             </div>

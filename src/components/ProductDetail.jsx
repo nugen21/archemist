@@ -523,7 +523,33 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
         {/* Detail Information Sections */}
         <div className="mt-20 border-t border-white/5 pt-20 space-y-32">
           
-          {/* 1. Shipping & Shelf Life Policy */}
+          {/* 1. Green Bean Story / Main Body */}
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <style>{`
+              .html-content { text-align: left; }
+              .html-content h1, .html-content h2, .html-content h3 { color: #A1764C; margin-top: 2rem; margin-bottom: 1rem; font-family: 'Lora', serif; font-weight: 800; border-left: 4px solid #A1764C; padding-left: 1rem; }
+              .html-content p { margin-bottom: 1.5rem; line-height: 2; color: #a1a1aa; }
+              .html-content b, .html-content strong { color: #ffffff; }
+              .html-content ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; color: #71717a; }
+              .html-content ol { list-style: decimal; margin-left: 1.5rem; margin-bottom: 1.5rem; color: #71717a; }
+              .html-content blockquote { border-left: 4px solid rgba(161, 118, 76, 0.3); padding: 1rem 1.5rem; font-style: italic; background: rgba(161, 118, 76, 0.05); border-radius: 0 1rem 1rem 0; margin-bottom: 2rem; }
+              .html-content img { max-width: 100%; border-radius: 1.5rem; margin: 2rem auto; display: block; border: 1px solid rgba(255, 255, 255, 0.05); }
+              .html-content a { color: #A1764C; text-decoration: underline; }
+            `}</style>
+            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
+              <div className="h-[1px] w-12 bg-white/10"></div>
+              생두 정보
+              <div className="h-[1px] w-12 bg-white/10"></div>
+            </h3>
+            <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl">
+              <div 
+                className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep html-content"
+                dangerouslySetInnerHTML={{ __html: product.recipe || "아키미스트가 엄선한 생두의 상세 정보와 로스터의 정성이 담긴 이야기가 곧 업데이트됩니다." }}
+              />
+            </div>
+          </div>
+
+          {/* 2. Shipping & Shelf Life Policy */}
           {!isCafe && (
             <div className="max-w-4xl mx-auto text-center">
               <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
@@ -538,20 +564,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               </div>
             </div>
           )}
-
-          {/* 2. Green Bean Story */}
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
-              <div className="h-[1px] w-12 bg-white/10"></div>
-              생두 정보
-              <div className="h-[1px] w-12 bg-white/10"></div>
-            </h3>
-            <div className="bg-[#111211] p-12 rounded-[3rem] border border-white/5 shadow-2xl">
-              <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep italic">
-                {product.recipe || "아키미스트가 엄선한 생두의 상세 정보와 로스터의 정성이 담긴 이야기가 곧 업데이트됩니다."}
-              </p>
-            </div>
-          </div>
 
           {/* 3. Recommended Extraction Recipe */}
           <div className="max-w-4xl mx-auto text-center">
