@@ -269,9 +269,19 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   <span className="bg-copper text-black text-[10px] font-black px-4 py-1.5 rounded-full tracking-[0.2em] uppercase shadow-xl">
                     {product.category === 'bean' ? '원두' : product.category === 'dripbag' ? '드립팩' : product.category === 'coldbrew' ? '콜드브루' : '매장 음료'}
                   </span>
-                  {product.isSpecial && (
+                  {product.subCategory && (
                     <span className="bg-white/10 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
+                      {product.subCategory === 'espresso' ? '에스프레소' : '핸드 드립'}
+                    </span>
+                  )}
+                  {product.isSpecial && (
+                    <span className="bg-white/10 backdrop-blur-md text-blue-300 border border-blue-400/30 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
                       시즌 한정 에디션
+                    </span>
+                  )}
+                  {product.recommended && (
+                    <span className="bg-white/10 backdrop-blur-md text-copper border border-copper/30 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
+                      추천 상품
                     </span>
                   )}
                 </div>
@@ -304,6 +314,16 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               <h1 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
                 {product.name}
               </h1>
+              {product.englishName && (
+                <h2 className="text-xl sm:text-2xl font-serif text-gray-500 tracking-wider mb-6">
+                  {product.englishName}
+                </h2>
+              )}
+              {product.story && (
+                <div className="mb-6 p-6 bg-white/5 border border-white/10 rounded-2xl">
+                  <p className="text-gray-300 text-sm leading-relaxed break-keep italic">"{product.story}"</p>
+                </div>
+              )}
               <div className="mb-6">
                 <div className="flex items-center justify-between gap-6 mb-8 border-b border-white/5 pb-8">
                   <p className="text-4xl sm:text-5xl font-serif font-black text-copper tracking-wider tabular-nums">
@@ -347,6 +367,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '수입사', value: product.importer || '정보 없음', category: 'basic' },
                       { label: '생두 정식 명칭', value: product.greenBeanName || '정보 없음', category: 'basic' },
                       { label: 'SCA 점수', value: product.scaScore || '정보 없음', category: 'basic' },
+                      { label: '로스팅 소요 시간', value: product.roastTime || '정보 없음', category: 'basic' },
                       { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g'), category: 'essential' }
                     ].map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
@@ -461,6 +482,37 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               )}
             </>
           )} 
+          {/* 3. Sensory Profile Card */}
+          {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
+            <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group mt-8">
+              <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-8 flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                센서리 프로파일
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                  { label: '향 (Flavor)', val: product.flavor || 0 },
+                  { label: '후미 (Aftertaste)', val: product.aftertaste || 0 },
+                  { label: '산미 (Acidity)', val: product.acidityRate || 0 },
+                  { label: '단맛 (Sweetness)', val: product.sweetness || 0 },
+                  { label: '바디 (Body)', val: product.bodyRate || 0 },
+                  { label: '밸런스 (Balance)', val: product.balance || 0 }
+                ].map((s, idx) => (
+                  <div key={idx} className="flex flex-col gap-3">
+                    <div className="flex justify-between items-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+                      <span>{s.label}</span>
+                      <span className="text-copper">{s.val > 0 ? s.val : '-'} / 5</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 h-2">
+                      {[1, 2, 3, 4, 5].map(v => (
+                        <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? 'bg-copper shadow-[0_0_8px_rgba(161,118,76,0.3)]' : 'bg-white/5'}`} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -487,7 +539,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
 
           {/* 4. Green Bean Analysis (Optional) */}
-          {isBean && product.showAnalysisInfo && (
+          {isBean && (
             <div className="max-w-4xl mx-auto px-4">
                <h3 className="text-2xl font-serif font-black text-white mb-8 flex items-center justify-center gap-6">
                  <div className="h-[1px] w-8 bg-white/10"></div>
