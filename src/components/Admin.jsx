@@ -109,6 +109,18 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
     }
     setFormData(prev => ({ ...prev, cupNotes: newNotes.join(', ') }));
   };
+
+  const quillModules = {
+    toolbar: [
+      [{ 'header': [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'align': [] }],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+  };
   const loadBeans = async (forceFetch = true) => {
     try {
       // Always fetch fresh data from server to ensure global sync
@@ -734,6 +746,19 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 <InputField label="네이버 스마트 스토어 URL (선택)" name="storeUrl" value={formData.storeUrl} onChange={handleChange} placeholder="https://smartstore.naver.com/..." />
               </div>
 
+              <div className="md:col-span-2 lg:col-span-3">
+                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">상품 한 줄 스토리 / 서브 설명 (Intro Story HTML)</label>
+                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
+                  <ReactQuill 
+                    theme="snow" 
+                    value={formData.story} 
+                    onChange={(content) => setFormData(prev => ({ ...prev, story: content }))}
+                    modules={quillModules}
+                    style={{ height: '120px' }}
+                  />
+                </div>
+              </div>
+
               {formData.category === 'beverage' && (
                 <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
                   <input 
@@ -1052,6 +1077,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                           theme="snow" 
                           value={formData.hot_comment} 
                           onChange={(content) => setFormData(prev => ({ ...prev, hot_comment: content }))}
+                          modules={quillModules}
                           style={{ height: '100px' }}
                         />
                       </div>
@@ -1136,6 +1162,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                           theme="snow" 
                           value={formData.ice_comment} 
                           onChange={(content) => setFormData(prev => ({ ...prev, ice_comment: content }))}
+                          modules={quillModules}
                           style={{ height: '100px' }}
                         />
                       </div>
@@ -1163,14 +1190,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     theme="snow" 
                     value={formData.recipe} 
                     onChange={(content) => setFormData(prev => ({ ...prev, recipe: content }))}
-                    modules={{
-                      toolbar: [
-                        [{ 'header': [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{'list': 'ordered'}, {'list': 'bullet'}],
-                        ['link', 'image', 'clean']
-                      ],
-                    }}
+                    modules={quillModules}
                   />
                 </div>
               </div>

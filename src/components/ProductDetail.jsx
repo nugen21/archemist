@@ -140,6 +140,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
   const [showAgtronHelp, setShowAgtronHelp] = useState(false);
   const [showCupNotesHelp, setShowCupNotesHelp] = useState(false);
+  const [showAgingHelp, setShowAgingHelp] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -342,7 +343,29 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     )}
                     {product.category === 'bean' && product.agingDays && (
                       <div className="flex flex-col items-end gap-1">
-                        <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
+                        <div className="flex items-center gap-1.5 justify-end relative">
+                          <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
+                          <button 
+                            onClick={() => setShowAgingHelp(!showAgingHelp)}
+                            className="p-0.5 hover:text-white transition-colors text-gray-700 outline-none"
+                            aria-label="Aging Help"
+                          >
+                            <HelpCircle size={10} strokeWidth={2.5} />
+                          </button>
+
+                          {/* Aging Help Popup */}
+                          {showAgingHelp && (
+                            <div className="absolute top-6 right-0 z-[100] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in duration-200">
+                              <div className="flex justify-between items-start mb-2">
+                                <span className="text-[11px] text-copper font-black uppercase tracking-widest">Recommended Aging</span>
+                                <button onClick={() => setShowAgingHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
+                              </div>
+                              <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep text-left">
+                                에이징(Aging)은 원두가 로스팅된 후 맛이 가장 조화롭게 발현되는 숙성 기간을 의미합니다. 가스가 안정화되어 더 풍성한 아로마와 깊은 맛을 느끼실 수 있는 권장 시점을 안내해 드립니다.
+                              </p>
+                            </div>
+                          )}
+                        </div>
                         <span className="text-lg text-copper font-bold tabular-nums">
                           {(() => {
                             const roastStr = String(product.roastDate || '').replace(/\./g, '-');
