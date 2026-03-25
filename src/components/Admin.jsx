@@ -800,7 +800,16 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
                 <div className="md:col-span-2 lg:col-span-3 space-y-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-2">
                   <div className="flex flex-col gap-4">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 기본 정보</h4>
+                    <div className="flex items-center gap-3 pl-1 mb-1">
+                      <input 
+                        type="checkbox"
+                        id="showBasicInfo"
+                        checked={formData.showBasicInfo}
+                        onChange={() => setFormData(prev => ({ ...prev, showBasicInfo: !prev.showBasicInfo }))}
+                        className="w-4 h-4 rounded border-gray-700 bg-black text-copper focus:ring-copper"
+                      />
+                      <label htmlFor="showBasicInfo" className="text-[10px] font-black text-copper/60 uppercase tracking-widest cursor-pointer hover:text-copper transition-colors">생두 기본 정보 (상세 페이지 노출)</label>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <InputField label="생두 정식 명칭" name="greenBeanName" value={formData.greenBeanName} onChange={handleChange} placeholder="예: Ethiopia Sidamo Hamela G1 Natural" />
                       <InputField label="수입사" name="importer" value={formData.importer} onChange={handleChange} placeholder="예: 그린비알" />
@@ -808,29 +817,17 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     </div>
                   </div>
 
-                  {/* Visibility Toggles */}
-                  <div className="flex flex-col gap-4 py-4 border-y border-gray-800">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1">노출 설정</h4>
-                    <div className="flex gap-4">
-                      <button 
-                        type="button" 
-                        onClick={() => setFormData(prev => ({ ...prev, showBasicInfo: !prev.showBasicInfo }))}
-                        className={`flex-grow py-3 px-4 rounded-xl text-[11px] font-bold uppercase transition-all tracking-widest border ${formData.showBasicInfo ? 'bg-copper text-[#111] border-copper' : 'bg-[#0b0c0b] text-gray-600 border-gray-800'}`}
-                      >
-                        {formData.showBasicInfo ? '생두 기본 정보 표시 중' : '생두 기본 정보 숨김'}
-                      </button>
-                      <button 
-                        type="button" 
-                        onClick={() => setFormData(prev => ({ ...prev, showAnalysisInfo: !prev.showAnalysisInfo }))}
-                        className={`flex-grow py-3 px-4 rounded-xl text-[11px] font-bold uppercase transition-all tracking-widest border ${formData.showAnalysisInfo ? 'bg-copper text-[#111] border-copper' : 'bg-[#0b0c0b] text-gray-600 border-gray-800'}`}
-                      >
-                        {formData.showAnalysisInfo ? '생두 분석 정보 표시 중' : '생두 분석 정보 숨김'}
-                      </button>
-                    </div>
-                  </div>
-                  
                   <div className="flex flex-col gap-4 border-t border-gray-800/50 pt-6">
-                    <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">생두 분석</h4>
+                    <div className="flex items-center gap-3 pl-1 mb-1">
+                      <input 
+                        type="checkbox"
+                        id="showAnalysisInfo"
+                        checked={formData.showAnalysisInfo}
+                        onChange={() => setFormData(prev => ({ ...prev, showAnalysisInfo: !prev.showAnalysisInfo }))}
+                        className="w-4 h-4 rounded border-gray-700 bg-black text-copper focus:ring-copper"
+                      />
+                      <label htmlFor="showAnalysisInfo" className="text-[10px] font-black text-copper/60 uppercase tracking-widest cursor-pointer hover:text-copper transition-colors">생두 분석 (상세 페이지 노출)</label>
+                    </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       <InputField label="수분율 (%)" name="moisture" value={formData.moisture} onChange={handleChange} placeholder="11.2" type="number" step="0.1" />
                       <InputField label="밀도 (g/L)" name="density" value={formData.density} onChange={handleChange} placeholder="840" type="number" />
@@ -1137,12 +1134,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   />
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">추천 추출 방법 / 가이드 (Text Only)</label>
-                <textarea name="story" value={formData.story} onChange={handleChange} rows="6" className="w-full bg-[#0b0c0b] border border-gray-700/60 rounded-xl px-4 py-4 text-gray-200 focus:outline-none focus:border-copper focus:bg-[#111] transition-all duration-300 resize-none shadow-inner leading-relaxed" placeholder="아키미스트가 추천하는 추출 레시피나 가이드를 입력하세요."></textarea>
-              </div>
             </div>
-
+            
             <button type="submit" className="w-full bg-gradient-to-r from-yellow-700 via-copper to-yellow-600 text-[#111] font-bold py-5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.5)] hover:scale-[1.01] transition-all duration-300 text-lg tracking-widest uppercase">
               {editingId ? '정보 수정 완료' : '품목 등록 완료'}
             </button>
