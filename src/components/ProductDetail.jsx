@@ -598,27 +598,28 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 4.1 Grind Guide Section */}
           {isBean && (
-            <div className="max-w-4xl mx-auto px-4 mt-24">
+            <div className="max-w-5xl mx-auto px-4 mt-24">
               <h3 className="text-2xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
                 <div className="h-[1px] w-8 bg-white/10"></div>
                 분쇄 가이드
                 <div className="h-[1px] w-8 bg-white/10"></div>
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 min-[450px]:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
                 {[
-                  { title: '굵은 분쇄', desc: 'SEA SALT', methods: '핸드드립 / 커피메이커', img: '/images/grind/coarse.png' },
-                  { title: '고운 분쇄', desc: 'GRANULATED SUGAR', methods: '더치 / 모카포트', img: '/images/grind/fine.png' },
-                  { title: '매우 고운 분쇄', desc: 'POWDERED SUGAR', methods: '에스프레소', img: '/images/grind/very_fine.png' }
+                  { title: '핸드드립', desc: '굵은 분쇄', img: '/images/grind/hand_drip.png' },
+                  { title: '커피메이커', desc: '굵은 분쇄', img: '/images/grind/coffee_maker.png' },
+                  { title: '더치', desc: '고운 분쇄', img: '/images/grind/dutch.png' },
+                  { title: '모카포트', desc: '고운 분쇄', img: '/images/grind/mocha_pot.png' },
+                  { title: '에스프레소', desc: '매우 고운 분쇄', img: '/images/grind/espresso.png' }
                 ].map((item, idx) => (
-                  <div key={idx} className="bg-[#111211] border border-white/5 rounded-[2rem] overflow-hidden group hover:border-copper/20 transition-all duration-500 shadow-xl">
-                    <div className="aspect-[5/4] overflow-hidden relative">
+                  <div key={idx} className="bg-[#111211] border border-white/5 rounded-2xl overflow-hidden group hover:border-copper/20 transition-all duration-500 shadow-xl">
+                    <div className="aspect-square overflow-hidden relative">
                       <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-60"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111211]/80 via-transparent to-transparent opacity-60"></div>
                     </div>
-                    <div className="p-6 text-center relative -mt-4 bg-[#111211]">
-                      <span className="text-copper font-black text-[9px] uppercase tracking-[0.2em] block mb-2">{item.desc}</span>
-                      <h4 className="text-white font-serif font-black text-lg mb-2">{item.title}</h4>
-                      <p className="text-gray-500 text-[11px] font-bold tracking-tight px-4 leading-relaxed break-keep">{item.methods}</p>
+                    <div className="p-3 sm:p-4 text-center bg-[#111211]">
+                      <h4 className="text-white font-black text-xs sm:text-sm mb-1">{item.title}</h4>
+                      <span className="text-copper font-black text-[8px] sm:text-[9px] uppercase tracking-wider block opacity-70">{item.desc}</span>
                     </div>
                   </div>
                 ))}
