@@ -598,31 +598,75 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 4.1 Grind Guide Section */}
           {isBean && (
-            <div className="max-w-5xl mx-auto px-4 mt-24">
+            <div className="max-w-6xl mx-auto px-4 mt-24">
               <h3 className="text-2xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
                 <div className="h-[1px] w-8 bg-white/10"></div>
                 분쇄 가이드
                 <div className="h-[1px] w-8 bg-white/10"></div>
               </h3>
-              <div className="grid grid-cols-2 min-[450px]:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-                {[
-                  { title: '핸드드립', desc: '굵은 분쇄', img: '/images/grind/hand_drip.png' },
-                  { title: '커피메이커', desc: '굵은 분쇄', img: '/images/grind/coffee_maker.png' },
-                  { title: '더치', desc: '고운 분쇄', img: '/images/grind/dutch.png' },
-                  { title: '모카포트', desc: '고운 분쇄', img: '/images/grind/mocha_pot.png' },
-                  { title: '에스프레소', desc: '매우 고운 분쇄', img: '/images/grind/espresso.png' }
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-[#111211] border border-white/5 rounded-2xl overflow-hidden group hover:border-copper/20 transition-all duration-500 shadow-xl">
-                    <div className="aspect-square overflow-hidden relative">
-                      <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111211]/80 via-transparent to-transparent opacity-60"></div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                {/* Group 1: Coarse (Hand Drip + Coffee Maker) */}
+                <div className="lg:col-span-5 space-y-4">
+                  <div className="text-center">
+                    <span className="text-copper font-black text-[10px] uppercase tracking-[0.2em] bg-copper/5 px-6 py-2 rounded-full border border-copper/20">굵은 분쇄</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { title: '핸드드립', img: '/images/grind/hand_drip.png' },
+                      { title: '커피메이커', img: '/images/grind/coffee_maker.png' }
+                    ].map((item, idx) => (
+                      <div key={idx} className="bg-[#111211] border border-white/5 rounded-2xl overflow-hidden group hover:border-copper/20 transition-all duration-500 shadow-xl">
+                        <div className="aspect-square overflow-hidden relative">
+                          <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-40"></div>
+                        </div>
+                        <div className="p-3 sm:p-4 text-center bg-[#111211]">
+                          <h4 className="text-white font-black text-xs sm:text-sm">{item.title}</h4>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Group 2: Fine (Dutch + Mocha Pot) */}
+                <div className="lg:col-span-5 space-y-4">
+                  <div className="text-center">
+                    <span className="text-copper font-black text-[10px] uppercase tracking-[0.2em] bg-copper/5 px-6 py-2 rounded-full border border-copper/20">고운 분쇄</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { title: '더치', img: '/images/grind/dutch.png' },
+                      { title: '모카포트', img: '/images/grind/mocha_pot.png' }
+                    ].map((item, idx) => (
+                      <div key={idx} className="bg-[#111211] border border-white/5 rounded-2xl overflow-hidden group hover:border-copper/20 transition-all duration-500 shadow-xl">
+                        <div className="aspect-square overflow-hidden relative">
+                          <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-40"></div>
+                        </div>
+                        <div className="p-3 sm:p-4 text-center bg-[#111211]">
+                          <h4 className="text-white font-black text-xs sm:text-sm">{item.title}</h4>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Group 3: Very Fine (Espresso) */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="text-center">
+                    <span className="text-copper font-black text-[10px] uppercase tracking-[0.2em] bg-copper/5 px-6 py-2 rounded-full border border-copper/20">매우 고운 분쇄</span>
+                  </div>
+                  <div className="bg-[#111211] border border-white/5 rounded-2xl overflow-hidden group hover:border-copper/20 transition-all duration-500 shadow-xl h-[calc(100%-44px)] flex flex-col">
+                    <div className="aspect-square lg:aspect-auto lg:flex-grow overflow-hidden relative">
+                      <img src="/images/grind/espresso.png" alt="에스프레소" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-40"></div>
                     </div>
                     <div className="p-3 sm:p-4 text-center bg-[#111211]">
-                      <h4 className="text-white font-black text-xs sm:text-sm mb-1">{item.title}</h4>
-                      <span className="text-copper font-black text-[8px] sm:text-[9px] uppercase tracking-wider block opacity-70">{item.desc}</span>
+                      <h4 className="text-white font-black text-xs sm:text-sm">에스프레소</h4>
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           )}
