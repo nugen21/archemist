@@ -480,10 +480,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
                   {/* Roasting Point Guide (Right Side) */}
                   <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-4 md:pt-0">
-                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-2 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                      로스팅 포인트 가이드 <span className="text-[10px] text-gray-500 font-bold ml-2 lowercase tracking-normal opacity-40"> (DiFluid Omni 기준)</span> <span className="text-[10px] text-gray-500 font-bold ml-2 lowercase tracking-normal opacity-40"> (DiFluid Omni 기준)</span>
+                        로스팅 포인트 가이드
                     </h4>
+                      <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-10 opacity-60">* DiFluid Omni 측정 기준</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16">
                       <div className="space-y-4">

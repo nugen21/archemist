@@ -1267,7 +1267,13 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                              </span>
                           </td>
                           <td className="py-5 px-4">
-                            <p className="font-bold text-gray-200 group-hover:text-copper transition-colors">{item.name}</p>
+                            <a 
+                              href={`#product/${item.id}`}
+                              className="font-bold text-gray-200 hover:text-copper transition-colors hover:underline underline-offset-4 block"
+                              title="상품 상세 페이지 보기"
+                            >
+                              {item.name}
+                            </a>
                             <div className="flex gap-2 items-center mt-1">
                               <span className={`text-[10px] ${item.visible ? 'text-gray-500' : 'text-red-900'}`}>{item.visible ? '공개됨' : '숨김'}</span>
                               {item.recommended && (
