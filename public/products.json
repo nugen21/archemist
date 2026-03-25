@@ -1,7 +1,7 @@
 [
   {
     "category": "bean",
-    "name": "La Esmeralda Geisha Private Collection El Velo",
+    "name": "La Esmeralda Private Collection Geisha El Velo",
     "price": "",
     "country": "Panama",
     "region": "Boquete, Chiriqui",
@@ -30,7 +30,7 @@
     "order": 1,
     "storeUrl": "",
     "agingDays": "7",
-    "story": "<p class=\"ql-align-center\"></p>",
+    "story": "<p>파나마&nbsp;하시엔다&nbsp;라&nbsp;에스메랄다&nbsp;프라이빗&nbsp;컬렉션&nbsp;게이샤&nbsp;엘&nbsp;벨로</p>",
     "englishName": "",
     "size": "200",
     "isSpecial": false,
@@ -74,7 +74,7 @@
     "hot_p3_water": "80",
     "hot_p4_time": "30",
     "hot_p4_water": "80",
-    "hot_comment": "<p><span style=\"color: rgb(102, 163, 224);\">30초를&nbsp;반드시&nbsp;지킬&nbsp;필요&nbsp;없고&nbsp;물&nbsp;빠짐을&nbsp;보고&nbsp;붓는&nbsp;시점을&nbsp;결정하면&nbsp;됩니다.</span></p>",
+    "hot_comment": "<p class=\"ql-align-center\"><span style=\"color: rgb(102, 163, 224);\">30초를&nbsp;반드시&nbsp;지킬&nbsp;필요&nbsp;없고&nbsp;물&nbsp;빠짐을&nbsp;보고&nbsp;붓는&nbsp;시점을&nbsp;결정하면&nbsp;됩니다.</span></p>",
     "ice_coffee_amount": "18",
     "ice_grind": "코만단테 25클릭",
     "ice_temp": "94도",
