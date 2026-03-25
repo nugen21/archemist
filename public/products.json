@@ -713,7 +713,7 @@
     "grind": "",
     "temp": "",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/beverage.jpg",
     "order": 9,
     "storeUrl": "",
@@ -781,7 +781,7 @@
     "ice_weight": "",
     "ice_comment": "",
     "id": 1711023000001,
-    "englishSub": "아키미스트 블랜딩 No.1"
+    "englishSub": "ARCHEMIST BLEND No.1"
   },
   {
     "id": 1711023000002,
