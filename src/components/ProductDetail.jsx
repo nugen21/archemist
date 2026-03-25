@@ -490,7 +490,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
                           <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
-                          <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronWb || '-'}</span>
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronWb || '-'}</span>
+                            {product.roastPointWb && <span className="text-[10px] font-bold text-copper uppercase tracking-tighter">({product.roastPointWb})</span>}
+                          </div>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -502,6 +505,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                           {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
                             <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
+                              {/* Floating Label */}
+                              <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-[#111] text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg whitespace-nowrap flex items-center gap-1 z-30">
+                                <span>{product.agtronWb}</span>
+                                {product.roastPointWb && <span className="opacity-60 text-[8px]">{product.roastPointWb}</span>}
+                                {/* Little Arrow */}
+                                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-white rotate-45"></div>
+                              </div>
                               <div className="w-3.5 h-3.5 bg-white border-2 border-white shadow-[0_0_10px_rgba(255,255,255,0.4)] rounded-full -ml-[7px]"></div>
                             </div>
                           )}
@@ -511,7 +521,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
                           <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
-                          <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronGround || '-'}</span>
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronGround || '-'}</span>
+                            {product.roastPointGround && <span className="text-[10px] font-bold text-copper uppercase tracking-tighter">({product.roastPointGround})</span>}
+                          </div>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -523,12 +536,21 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                           {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
                             <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
+                              {/* Floating Label */}
+                              <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-copper text-[#111] text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg whitespace-nowrap flex items-center gap-1 z-30">
+                                <span>{product.agtronGround}</span>
+                                {product.roastPointGround && <span className="opacity-60 text-[8px]">{product.roastPointGround}</span>}
+                                {/* Little Arrow */}
+                                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-copper rotate-45"></div>
+                              </div>
                               <div className="w-3.5 h-3.5 bg-copper border-2 border-copper shadow-[0_0_10px_rgba(161,118,76,0.4)] rounded-full -ml-[7px]"></div>
                             </div>
                           )}
                         </div>
                       </div>
                     </div>
+
+
                   </div>
                 </div>
               )}
