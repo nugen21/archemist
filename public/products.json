@@ -30,7 +30,7 @@
     "order": 1,
     "storeUrl": "",
     "agingDays": "7",
-    "story": "<p class=\"ql-align-center\">테스트</p>",
+    "story": "<p class=\"ql-align-center\"></p>",
     "englishName": "",
     "size": "200",
     "isSpecial": false,
