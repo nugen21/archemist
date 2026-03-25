@@ -267,13 +267,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 {/* Product Badge */}
                 <div className="absolute top-6 left-6 flex flex-col gap-2">
                   <span className="bg-copper text-black text-[10px] font-black px-4 py-1.5 rounded-full tracking-[0.2em] uppercase shadow-xl">
-                    {product.category === 'bean' ? '원두' : product.category === 'dripbag' ? '드립팩' : product.category === 'coldbrew' ? '콜드브루' : '매장 음료'}
+                      {(product.category === "beverage" && product.subCategory)
+                        ? (product.subCategory === "espresso" ? "에스프레소" : "핸드 드립")
+                        : (product.category === "bean" ? "원두" : product.category === "dripbag" ? "드립백" : product.category === "coldbrew" ? "콜드브루" : "매장 음료")}
                   </span>
-                  {product.subCategory && (
-                    <span className="bg-white/10 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
-                      {product.subCategory === 'espresso' ? '에스프레소' : '핸드 드립'}
-                    </span>
-                  )}
                   {product.isSpecial && (
                     <span className="bg-white/10 backdrop-blur-md text-blue-300 border border-blue-400/30 text-[9px] font-bold px-4 py-1.5 rounded-full tracking-[0.2em] uppercase">
                       시즌 한정 에디션
