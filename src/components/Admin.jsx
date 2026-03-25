@@ -696,7 +696,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
               <div className="md:col-span-2 lg:col-span-3 mt-2">
                 <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">상품 한 줄 스토리 / 서브 설명 (Intro Story HTML)</label>
-                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
+                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[150px]">
                   <ReactQuill 
                     theme="snow" 
                     value={formData.story} 
@@ -1064,7 +1064,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
                     <div>
                       <label className="block text-[11px] font-medium text-gray-400 mb-2 tracking-wider uppercase">HOT 레시피 추가 코멘트</label>
-                      <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
+                      <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[150px]">
                         <ReactQuill 
                           theme="snow" 
                           value={formData.hot_comment} 
@@ -1149,7 +1149,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
                     <div>
                       <label className="block text-[11px] font-medium text-gray-400 mb-2 tracking-wider uppercase">ICE 레시피 추가 코멘트</label>
-                      <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
+                      <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[150px]">
                         <ReactQuill 
                           theme="snow" 
                           value={formData.ice_comment} 
@@ -1167,7 +1167,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
             <div className="grid grid-cols-1 gap-8 pt-4 border-t border-gray-800">
               <div className="flex flex-col">
                 <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">생두 상세 정보 / 상품 스토리 (HTML Editor)</label>
-                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[400px]">
+                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[400px]">
                   <style>{`
                     .quill { height: 350px; display: flex; flex-direction: column; }
                     .ql-container { flex-grow: 1; font-family: 'Pretendard', sans-serif; font-size: 14px; background: #0b0c0b; color: #e5e7eb; border: none !important; }
