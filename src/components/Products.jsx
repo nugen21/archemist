@@ -4,7 +4,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
   if (!items || items.length === 0) return null;
 
   return (
-    <section id={category} className={`py-4 sm:py-16 scroll-mt-24 relative overflow-hidden border-b border-white/5 last:border-b-0 ${bgColor}`}>
+    <section id={category} className={`py-4 sm:py-10 scroll-mt-24 relative overflow-hidden border-b border-white/5 last:border-b-0 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
         <div className="flex items-center gap-4 mb-12">
           <div className="flex flex-col">

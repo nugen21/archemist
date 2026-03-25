@@ -1,13 +1,13 @@
 export default function Hero({ id }) {
   return (
-    <section id={id} className="relative min-h-[70vh] flex items-center justify-center pt-12 px-4 sm:px-8 scroll-mt-24 overflow-hidden">
+    <section id={id} className="relative min-h-[60vh] flex items-center justify-center pt-12 px-4 sm:px-8 scroll-mt-24 overflow-hidden">
       {/* Background decorations for a premium dynamic feel */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-copper/10 rounded-full blur-[120px] mix-blend-screen"></div>
         <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/4 w-[600px] h-[600px] bg-copper/5 rounded-full blur-[150px] mix-blend-screen"></div>
       </div>
 
-      <div className="max-w-5xl text-center z-10 relative mt-16 break-keep w-full flex flex-col items-center">
+      <div className="max-w-5xl text-center z-10 relative mt-10 break-keep w-full flex flex-col items-center">
         <div className="flex flex-col items-center justify-center mb-6 sm:mb-8 max-w-xs sm:max-w-md md:max-w-[28rem]">
           <img
             src="/logo-alchemist.png"
@@ -27,7 +27,7 @@ export default function Hero({ id }) {
           우리는 그저 당신의 감각이 찾아낸 그 기분 좋은 마주침이 매일 아침 당신을 깨우도록 돕습니다.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 w-full px-2 mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 w-full px-2 mb-6">
           <a 
             href="#subscribe"
             className="bg-copper text-matte-black px-8 py-3.5 sm:px-10 sm:py-4 rounded-sm font-bold text-base sm:text-lg hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(161,118,76,0.5)] transition-all duration-300 w-full md:w-auto max-w-sm text-center"

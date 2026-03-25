@@ -458,32 +458,32 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
               {/* 3. Roasting Point & Time Card */}
               {isBean && (
-                <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-8 md:gap-12 mt-0 items-center">
+                <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center">
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
                   </div>
                   
                   {/* Roasting Time (Left Side) */}
-                  <div className="flex-shrink-0 flex flex-col justify-center min-w-[200px] border-b md:border-b-0 md:border-r border-white/5 pb-8 md:pb-0 md:pr-12 w-full md:w-auto text-center md:text-left">
-                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-4 flex items-center justify-center md:justify-start gap-3">
+                  <div className="flex-shrink-0 flex flex-col justify-center min-w-[200px] border-b md:border-b-0 md:border-r border-white/5 pb-6 md:pb-0 md:pr-8 w-full md:w-auto text-center md:text-left">
+                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
                        <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                        로스팅 시간
                      </h4>
-                     <div className="flex flex-col gap-2">
-                       <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-2 md:mt-4">총 소요 시간</div>
+                     <div className="flex flex-col gap-1">
+                       <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-1 md:mt-2">총 소요 시간</div>
                        <div className="text-3xl font-serif font-black text-white">{product.roastTime || '정보 없음'}</div>
                      </div>
                   </div>
 
                   {/* Roasting Point Guide (Right Side) */}
-                  <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-4 md:pt-0">
+                  <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-2 md:pt-0">
                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-2 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                         로스팅 포인트 가이드
                     </h4>
-                      <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-10 opacity-60">* DiFluid Omni 측정 기준</p>
+                      <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-6 opacity-60">* DiFluid Omni 측정 기준</p>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
                           <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
@@ -529,6 +529,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   </div>
                 </div>
               )}
+
             </div>
           )} 
         </div>
@@ -539,8 +540,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
         <div className="mt-20 border-t border-white/5 pt-20 space-y-32">
           
           {/* 1. Shipping & Shelf Life Policy */}
-          {!isCafe && (
-            <div className="max-w-4xl mx-auto text-center px-4">
+          <div className="max-w-4xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 배송 및 소비기한 안내
@@ -552,7 +552,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 </p>
               </div>
             </div>
-          )}
+
 
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
@@ -634,161 +634,161 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               </div>
             )}
 
-          {/* 5. Recommended Extraction Recipe */}
-          <div className="max-w-8xl mx-auto text-center px-4">
-            <h3 className="text-xl font-serif font-black text-white mb-6 flex items-center justify-center gap-4">
-              <div className="h-[1px] w-8 bg-copper/30"></div>
-              추천 추출 방식
-              <div className="h-[1px] w-8 bg-copper/30"></div>
-            </h3>
-            <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
-              {['dripbag', 'bean'].includes(product.category) ? (
-                <div className="relative z-10 space-y-12">
-                  {/* Tab Switcher */}
-                  <div className="flex justify-center gap-4 mb-8">
-                    <button 
-                      onClick={() => setRecipeTab('hot')}
-                      className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'hot' ? 'bg-red-500/10 border-red-500/50 text-red-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
-                    >
-                      <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'hot' ? 'bg-red-500 animate-pulse' : 'bg-gray-700'}`}></div>
-                      HOT RECIPE
-                    </button>
-                    <button 
-                      onClick={() => setRecipeTab('ice')}
-                      className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'ice' ? 'bg-blue-500/10 border-blue-500/50 text-blue-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
-                    >
-                      <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'ice' ? 'bg-blue-500 animate-pulse' : 'bg-gray-700'}`}></div>
-                      ICE RECIPE
-                    </button>
-                  </div>
+          {!isCafe && (
+            <div className="max-w-8xl mx-auto text-center px-4">
+              <h3 className="text-xl font-serif font-black text-white mb-6 flex items-center justify-center gap-4">
+                <div className="h-[1px] w-8 bg-copper/30"></div>
+                추천 추출 방식
+                <div className="h-[1px] w-8 bg-copper/30"></div>
+              </h3>
+              <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+                {['dripbag', 'bean'].includes(product.category) ? (
+                  <div className="relative z-10 space-y-12">
+                    {/* Tab Switcher */}
+                    <div className="flex justify-center gap-4 mb-8">
+                      <button 
+                        onClick={() => setRecipeTab('hot')}
+                        className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'hot' ? 'bg-red-500/10 border-red-500/50 text-red-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
+                      >
+                        <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'hot' ? 'bg-red-500 animate-pulse' : 'bg-gray-700'}`}></div>
+                        HOT RECIPE
+                      </button>
+                      <button 
+                        onClick={() => setRecipeTab('ice')}
+                        className={`px-8 py-3 rounded-full text-xs font-black tracking-[0.2em] uppercase transition-all flex items-center gap-2 border ${recipeTab === 'ice' ? 'bg-blue-500/10 border-blue-500/50 text-blue-500' : 'bg-white/5 border-transparent text-gray-500 hover:text-gray-300'}`}
+                      >
+                        <div className={`w-1.5 h-1.5 rounded-full ${recipeTab === 'ice' ? 'bg-blue-500 animate-pulse' : 'bg-gray-700'}`}></div>
+                        ICE RECIPE
+                      </button>
+                    </div>
 
-                  {/* Recipe Content */}
-                  {(() => {
-                    const prefix = recipeTab === 'hot' ? 'hot_' : 'ice_';
-                    const hasData = product[`${prefix}grind`] || product[`${prefix}bloom_water`];
-                    
-                    if (!hasData) {
+                    {/* Recipe Content */}
+                    {(() => {
+                      const prefix = recipeTab === 'hot' ? 'hot_' : 'ice_';
+                      const hasData = product[`${prefix}grind`] || product[`${prefix}bloom_water`];
+                      
+                      if (!hasData) {
+                        return (
+                          <div className="py-12 text-center text-gray-600 italic">
+                            {recipeTab.toUpperCase()} 레시피가 아직 등록되지 않았습니다.
+                          </div>
+                        );
+                      }
+
+                      const pours = [
+                        { label: '뜸 (Bloom)', time: product[`${prefix}bloom_time`], water: product[`${prefix}bloom_water`] },
+                        { label: '1차 푸어', time: product[`${prefix}p1_time`], water: product[`${prefix}p1_water`] },
+                        { label: '2차 푸어', time: product[`${prefix}p2_time`], water: product[`${prefix}p2_water`] },
+                        { label: '3차 푸어', time: product[`${prefix}p3_time`], water: product[`${prefix}p3_water`] },
+                        { label: '4차 푸어', time: product[`${prefix}p4_time`], water: product[`${prefix}p4_water`] },
+                      ].filter(p => p.water);
+
+                      const totalWater = pours.reduce((acc, p) => acc + Number(p.water || 0), 0);
+
                       return (
-                        <div className="py-12 text-center text-gray-600 italic">
-                          {recipeTab.toUpperCase()} 레시피가 아직 등록되지 않았습니다.
-                        </div>
-                      );
-                    }
-
-                    const pours = [
-                      { label: '뜸 (Bloom)', time: product[`${prefix}bloom_time`], water: product[`${prefix}bloom_water`] },
-                      { label: '1차 푸어', time: product[`${prefix}p1_time`], water: product[`${prefix}p1_water`] },
-                      { label: '2차 푸어', time: product[`${prefix}p2_time`], water: product[`${prefix}p2_water`] },
-                      { label: '3차 푸어', time: product[`${prefix}p3_time`], water: product[`${prefix}p3_water`] },
-                      { label: '4차 푸어', time: product[`${prefix}p4_time`], water: product[`${prefix}p4_water`] },
-                    ].filter(p => p.water);
-
-                    const totalWater = pours.reduce((acc, p) => acc + Number(p.water || 0), 0);
-
-                    return (
-                      <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        {/* Summary Row */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                          {[
-                            { label: '원두량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
-                            { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
-                            { label: '물 온도', value: product[`${prefix}temp`], icon: <Thermometer size={14} /> },
-                            { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
-                            { 
-                              label: recipeTab === 'ice' ? '얼음 중량' : '추출 비율', 
-                              value: recipeTab === 'ice' 
-                                ? (product.ice_weight ? `${product.ice_weight}g` : '-') 
-                                : (product.hot_ratio ? (String(product.hot_ratio).includes(':') ? product.hot_ratio : `1:${product.hot_ratio}`) : '-'), 
-                              icon: <Target size={14} /> 
-                            }
-                          ].map((item, idx) => (
-                            <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
-                              <div className="text-copper/50">{item.icon}</div>
-                              <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{item.label}</span>
-                              <span className="text-sm font-bold text-white uppercase">{item.value || '-'}</span>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Horizontal Step-by-Step Layout */}
-                        <div className="relative pt-4 pb-4">
-                          <div className="flex flex-col md:flex-row gap-y-12 md:gap-y-0 md:gap-x-4">
-                            {pours.map((pour, pIdx) => (
-                              <div key={pIdx} className="flex-1 group relative">
-                                {/* Horizontal Connector Line (Hidden on mobile) */}
-                                {pIdx < pours.length - 1 && (
-                                  <div className="absolute top-[45px] left-[50%] w-full h-[1px] bg-gradient-to-r from-copper/40 via-copper/10 to-transparent hidden md:block z-0"></div>
-                                )}
-                                
-                                <div className="flex flex-col items-center relative z-10">
-                                  {/* Step Label */}
-                                  <span className="text-copper font-black text-[10px] uppercase tracking-[0.2em] mb-4 opacity-100">{pour.label}</span>
-                                  
-                                  {/* Step Circle with Number */}
-                                  <div className="w-[50px] h-[50px] rounded-full bg-[#181a19] border border-white/10 flex items-center justify-center mb-6 group-hover:border-copper/40 transition-all duration-500 shadow-xl relative overflow-hidden">
-                                     <div className="absolute inset-0 bg-gradient-to-br from-copper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                     <span className="text-base font-serif font-black text-white group-hover:text-copper transition-colors">{pIdx + 1}</span>
-                                     
-                                     {/* Mobile Vertical Connector Line */}
-                                     {pIdx < pours.length - 1 && (
-                                       <div className="absolute top-1/2 left-1/2 translate-y-[25px] w-[1px] h-[48px] bg-copper/20 md:hidden"></div>
-                                     )}
-                                  </div>
-                                  
-                                  {/* Step Data */}
-                                  <div className="flex flex-col items-center gap-1 pt-1">
-                                    <div className="flex items-baseline gap-1.5">
-                                      <span className="text-3xl font-serif font-black text-white tabular-nums group-hover:text-copper transition-colors">{pour.water}</span>
-                                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">g</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-gray-400">
-                                      <Timer size={14} className="opacity-30 group-hover:opacity-60 transition-opacity" />
-                                      <span className="text-lg font-serif font-bold tabular-nums text-gray-400 group-hover:text-gray-200 transition-colors">{pour.time || '-'}</span>
-                                      <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">sec</span>
-                                    </div>
-                                  </div>
-                                </div>
+                        <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                          {/* Summary Row */}
+                          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                            {[
+                              { label: '원두량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
+                              { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
+                              { label: '물 온도', value: product[`${prefix}temp`], icon: <Thermometer size={14} /> },
+                              { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
+                              { 
+                                label: recipeTab === 'ice' ? '얼음 중량' : '추출 비율', 
+                                value: recipeTab === 'ice' 
+                                  ? (product.ice_weight ? `${product.ice_weight}g` : '-') 
+                                  : (product.hot_ratio ? (String(product.hot_ratio).includes(':') ? product.hot_ratio : `1:${product.hot_ratio}`) : '-'), 
+                                icon: <Target size={14} /> 
+                              }
+                            ].map((item, idx) => (
+                              <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
+                                <div className="text-copper/50">{item.icon}</div>
+                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{item.label}</span>
+                                <span className="text-sm font-bold text-white uppercase">{item.value || '-'}</span>
                               </div>
                             ))}
                           </div>
-                        </div>
 
-                        <div className="pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-10">
-                          <div className="flex items-center gap-4">
-                            <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
-                            <div className="flex items-baseline gap-2">
-                              <span className="text-4xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
-                              <span className="text-sm font-bold text-gray-500 uppercase">ml</span>
+                          {/* Horizontal Step-by-Step Layout */}
+                          <div className="relative pt-4 pb-4">
+                            <div className="flex flex-col md:flex-row gap-y-12 md:gap-y-0 md:gap-x-4">
+                              {pours.map((pour, pIdx) => (
+                                <div key={pIdx} className="flex-1 group relative">
+                                  {/* Horizontal Connector Line (Hidden on mobile) */}
+                                  {pIdx < pours.length - 1 && (
+                                    <div className="absolute top-[45px] left-[50%] w-full h-[1px] bg-gradient-to-r from-copper/40 via-copper/10 to-transparent hidden md:block z-0"></div>
+                                  )}
+                                  
+                                  <div className="flex flex-col items-center relative z-10">
+                                    {/* Step Label */}
+                                    <span className="text-copper font-black text-[10px] uppercase tracking-[0.2em] mb-4 opacity-100">{pour.label}</span>
+                                    
+                                    {/* Step Circle with Number */}
+                                    <div className="w-[50px] h-[50px] rounded-full bg-[#181a19] border border-white/10 flex items-center justify-center mb-6 group-hover:border-copper/40 transition-all duration-500 shadow-xl relative overflow-hidden">
+                                       <div className="absolute inset-0 bg-gradient-to-br from-copper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                       <span className="text-base font-serif font-black text-white group-hover:text-copper transition-colors">{pIdx + 1}</span>
+                                       
+                                       {/* Mobile Vertical Connector Line */}
+                                       {pIdx < pours.length - 1 && (
+                                         <div className="absolute top-1/2 left-1/2 translate-y-[25px] w-[1px] h-[48px] bg-copper/20 md:hidden"></div>
+                                       )}
+                                    </div>
+                                    
+                                    {/* Step Data */}
+                                    <div className="flex flex-col items-center gap-1 pt-1">
+                                      <div className="flex items-baseline gap-1.5">
+                                        <span className="text-3xl font-serif font-black text-white tabular-nums group-hover:text-copper transition-colors">{pour.water}</span>
+                                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">g</span>
+                                      </div>
+                                      <div className="flex items-center gap-2 text-gray-400">
+                                        <Timer size={14} className="opacity-30 group-hover:opacity-60 transition-opacity" />
+                                        <span className="text-lg font-serif font-bold tabular-nums text-gray-400 group-hover:text-gray-200 transition-colors">{pour.time || '-'}</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">sec</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
                             </div>
                           </div>
-                          
-                          {product[`${prefix}comment`] && (
-                            <div className="max-w-2xl text-center mx-auto">
-                               <div className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
-                               <div 
-                                 className="text-gray-400 text-sm leading-relaxed font-medium break-keep italic html-content"
-                                 dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
-                               />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })()}
-                </div>
-              ) : (
-                <>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
-                    <Droplet size={200} className="text-copper" />
-                  </div>
-                  <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
-                    {product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
 
+                          <div className="pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-10">
+                            <div className="flex items-center gap-4">
+                              <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
+                              <div className="flex items-baseline gap-2">
+                                <span className="text-4xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
+                                <span className="text-sm font-bold text-gray-500 uppercase">ml</span>
+                              </div>
+                            </div>
+                            
+                            {product[`${prefix}comment`] && (
+                              <div className="max-w-2xl text-center mx-auto">
+                                 <div className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
+                                 <div 
+                                   className="text-gray-400 text-sm leading-relaxed font-medium break-keep italic html-content"
+                                   dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
+                                 />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                ) : (
+                  <>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
+                      <Droplet size={200} className="text-copper" />
+                    </div>
+                    <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
+                      {product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       
       {/* Visual Alchemy - Floating Particles */}
@@ -797,3 +797,4 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
     </section>
   );
 }
+

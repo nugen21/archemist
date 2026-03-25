@@ -167,7 +167,7 @@ function App() {
         <Contact />
       </main>
 
-      <footer className="py-6 bg-[#0b0c0b] border-t border-gray-900 w-full mt-auto relative z-50">
+      <footer className="py-4 bg-[#0b0c0b] border-t border-gray-900 w-full mt-auto relative z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-4 sm:px-8">
            <div className="flex flex-col gap-1">
              <p className="text-gray-600 text-[10px] sm:text-xs">© 2026 Archemist Roasters. All rights reserved.</p>

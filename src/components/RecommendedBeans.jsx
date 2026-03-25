@@ -70,7 +70,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
   if (visibleBeans.length === 0) return null; 
 
   return (
-    <section id="recommended" className="pt-10 sm:pt-16 pb-12 px-4 sm:px-8 scroll-mt-24 bg-gradient-to-br from-[#1a110a] via-[#111211] to-[#0b0c0b] relative border-y border-copper/10 overflow-hidden">
+    <section id="recommended" className="pt-8 sm:pt-12 pb-8 px-4 sm:px-8 scroll-mt-24 bg-gradient-to-br from-[#1a110a] via-[#111211] to-[#0b0c0b] relative border-y border-copper/10 overflow-hidden">
       {/* Decorative Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-copper/40 to-transparent"></div>
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-copper/5 blur-[120px] rounded-full"></div>
@@ -121,12 +121,26 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-80"></div>
                 
-                {/* BeanType Badge */}
+                {/* BeanType Badge (Left) */}
                 {['bean', 'dripbag', 'coldbrew'].includes(bean.category) && (
                   <div className="absolute bottom-4 left-4 z-20">
                     <span className="bg-black/70 backdrop-blur-md border border-white/10 text-white text-[9px] font-black px-3 py-1.5 rounded-full tracking-widest uppercase shadow-[0_5px_15px_rgba(0,0,0,0.5)] flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper animate-pulse pointer-events-none"></span>
                       {bean.beanType === 'blend' ? '블렌드' : '싱글 오리진'}
+                    </span>
+                  </div>
+                )}
+
+                {/* Size Badge (Right) */}
+                {bean.size && (
+                  <div className="absolute bottom-4 right-4 z-20">
+                    <span className="bg-black/70 backdrop-blur-md border border-white/10 text-white text-[12px] font-black px-3 py-1.5 rounded-lg tracking-widest shadow-xl">
+                      {(() => {
+                        const s = String(bean.size).toLowerCase();
+                        if (bean.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
+                        if (bean.category === 'bean') return s.includes('g') ? s : `${s}g`;
+                        return s;
+                      })()}
                     </span>
                   </div>
                 )}
@@ -178,18 +192,11 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                         ? (Number(bean.price) / 1000).toFixed(1)
                         : (Number(bean.price) || 0).toLocaleString()}
                     </span>
-                        {bean.size && (
-                          <span className="text-xl font-black text-white px-3 py-1 bg-white/5 rounded-lg border border-white/5 whitespace-nowrap">
-                            {(() => {
-                              const s = String(bean.size).toLowerCase();
-                              if (bean.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
-                              if (bean.category === 'bean') return s.includes('g') ? s : `${s}g`;
-                              return s;
-                            })()}
-                          </span>
-                        )}
+                    <span className="text-xs text-gray-600 font-black uppercase tracking-widest">원</span>
                   </div>
                 </div>
+
+
                 {(bean.category === 'beverage' || bean.variety || (bean.beanType === 'blend' && (bean.blend1 || bean.blend2 || bean.blend3 || bean.blend4))) && (
                   <div className="mb-4">
                     {bean.beanType === 'blend' ? (
