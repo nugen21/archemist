@@ -135,7 +135,7 @@ const countryToCode = {
   '한국': 'kr', 'korea': 'kr', 'Korea': 'kr', 'South Korea': 'kr'
 };
 
-export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
+export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiveNumber }) {
   const [recipeTab, setRecipeTab] = useState('hot');
 
   const [showAgtronHelp, setShowAgtronHelp] = useState(false);
@@ -298,27 +298,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               </div>
             </div>
             
-            {/* Direct Purchase Button (Desktop Only) */}
-            {product.storeUrl && (
-              <div className="hidden lg:block mt-8">
-                <a 
-                  href={product.storeUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-[#03C75A] hover:bg-[#02b351] text-white py-5 rounded-2xl flex items-center justify-center gap-4 font-black text-lg tracking-widest transition-all shadow-[0_15px_30px_rgba(3,199,90,0.2)] hover:shadow-[0_20px_40px_rgba(3,199,90,0.4)] hover:-translate-y-1"
-                >
-                  <div className="bg-white text-[#03C75A] w-8 h-8 rounded-lg flex items-center justify-center font-black text-base shadow-sm">N</div>
-                    네이버 스마트 스토어 구매하기
-                    <ExternalLink size={18} className="opacity-50" />
-                  </a>
-                </div>
-              )}
           </div>
 
           <div className="lg:col-span-3 flex flex-col justify-center">
             <div className="mb-0">
               <div className="flex items-center gap-4 mb-4">
-                <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">아키미스트 아카이브 No.{product.id % 999}</h2>
+                <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">아키미스트 아카이브 No.{String(archiveNumber || (product.id % 999)).padStart(3, '0')}</h2>
                 <div className="h-[1px] flex-grow bg-gradient-to-r from-copper/30 to-transparent"></div>
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight leading-tight mb-3 break-keep">
@@ -440,6 +425,19 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   )}
                 </div>
               )}
+              {/* Direct Purchase Button (Right Side) */}
+              <div className="mt-10 pt-8 border-t border-white/5">
+                <a 
+                  href={product.storeUrl || "https://smartstore.naver.com/archemist"} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-[#03C75A] hover:bg-[#02b351] text-white py-5 rounded-2xl flex items-center justify-center gap-4 font-black text-base sm:text-lg tracking-widest transition-all shadow-[0_15px_30px_rgba(3,199,90,0.1)] hover:shadow-[0_20px_40px_rgba(3,199,90,0.3)] hover:-translate-y-1"
+                >
+                  <div className="bg-white text-[#03C75A] w-8 h-8 rounded-lg flex items-center justify-center font-black text-base shadow-sm">N</div>
+                  네이버 스마트 스토어에서 구매하기
+                  <ExternalLink size={18} className="opacity-50" />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -448,7 +446,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             <div className="lg:col-span-6 grid grid-cols-1 lg:grid-cols-6 gap-4">
               {/* 1. Cup Notes Card */}
               {product.cupNotes && (
-                <div className="lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative overflow-hidden group">
+                <div className="lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group">
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
                   </div>
@@ -647,8 +645,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 배송 및 소비기한 안내
                 <div className="h-[1px] w-8 bg-copper/30"></div>
               </h3>
-              <div className="bg-copper/5 border border-copper/20 p-8 rounded-[2rem] shadow-8xl backdrop-blur-sm">
-                <p className="text-gray-300 text-sm sm:text-base leading-[1.8] break-keep font-medium">
+              <div className="bg-copper/5 border border-copper/20 p-8 sm:p-12 rounded-[2.5rem] shadow-8xl backdrop-blur-sm">
+                <p className="text-gray-200 text-base sm:text-lg md:text-xl leading-[1.8] break-keep font-medium">
                   원두의 소비기한은 생산일로부터 1년이며, 로스팅 일자는 원두 뒷면에 별도 표기됩니다. 주문하신 상품은 주문일 기준 1~4일 이내에 로스팅 된 원두로 출고됩니다.
                 </p>
               </div>
@@ -658,12 +656,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
              <div className="max-w-8xl mx-auto px-4 mt-6">
-               <h3 className="text-sm font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
+               <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  상세 스토리
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
-               <div className="bg-[#111211] border border-white/5 p-6 sm:p-10 rounded-[2.5rem] prose prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-300 html-content" dangerouslySetInnerHTML={{ __html: product.recipe }} />
+               <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content" dangerouslySetInnerHTML={{ __html: product.recipe }} />
             </div>
           )}
 
@@ -725,9 +723,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금' }
                         ].map((item, idx) => (
                             <div key={idx} className="text-center group/item hover:translate-y-[-4px] transition-transform duration-300">
-                                <span className="text-[12.5px] sm:text-[16px] md:text-lg font-black text-white uppercase tracking-widest block mb-1">{item.name}</span>
-                                <span className="text-[10px] sm:text-xs font-bold text-copper/60 block">{item.value}</span>
-                                <span className="text-[8px] sm:text-[9.5px] text-gray-700 block mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
+                                <span className="text-[16px] sm:text-[20px] md:text-[24px] font-black text-white uppercase tracking-widest block mb-2">{item.name}</span>
+                                <span className="text-[12px] sm:text-[15px] font-bold text-copper/60 block">{item.value}</span>
+                                <span className="text-[10px] sm:text-[12px] text-gray-600 block mt-2 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
                             </div>
                         ))}
                     </div>
@@ -867,7 +865,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                               <div className="max-w-2xl text-center mx-auto">
                                  <div className="text-[8.5px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
                                  <div 
-                                   className="text-gray-400 text-[11px] leading-relaxed font-medium break-keep italic html-content"
+                                   className="text-gray-300 text-base sm:text-lg md:text-xl leading-relaxed font-medium break-keep italic html-content"
                                    dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
                                  />
                               </div>

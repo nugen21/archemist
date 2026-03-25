@@ -146,9 +146,12 @@ function App() {
   // Route: Product Detail
   if (currentPath.startsWith('#product/')) {
     const id = parseInt(currentPath.split('/')[1]);
-    const product = products.find(p => String(p.id) === String(id));
+    const sortedProducts = [...products].sort((a,b) => (Number(a.order) || 999) - (Number(b.order) || 999));
+    const product = sortedProducts.find(p => String(p.id) === String(id));
+    const archiveNumber = sortedProducts.findIndex(p => String(p.id) === String(id)) + 1;
+
     if (product) {
-      return <ProductDetail product={product} onBack={handleBack} isAdmin={isAdmin} onEdit={handleEdit} />;
+      return <ProductDetail product={product} onBack={handleBack} isAdmin={isAdmin} onEdit={handleEdit} archiveNumber={archiveNumber} />;
     } else if (!isLoading) {
       // If not loading and not found, redirect home
       window.location.hash = '#home';

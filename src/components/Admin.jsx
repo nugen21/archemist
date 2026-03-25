@@ -113,6 +113,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
   const quillModules = {
     toolbar: [
       [{ 'header': [1, 2, 3, false] }],
+      [{ 'size': ['small', false, 'large', 'huge'] }],
       ['bold', 'italic', 'underline', 'strike'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       [{ 'indent': '-1' }, { 'indent': '+1' }],
@@ -690,6 +691,19 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       삭제
                     </button>
                   )}
+                </div>
+              </div>
+
+              <div className="md:col-span-2 lg:col-span-3 mt-2">
+                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">상품 한 줄 스토리 / 서브 설명 (Intro Story HTML)</label>
+                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
+                  <ReactQuill 
+                    theme="snow" 
+                    value={formData.story} 
+                    onChange={(content) => setFormData(prev => ({ ...prev, story: content }))}
+                    modules={quillModules}
+                    style={{ height: '120px' }}
+                  />
                 </div>
               </div>
 

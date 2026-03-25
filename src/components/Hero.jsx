@@ -21,10 +21,10 @@ export default function Hero({ id }) {
           />
         </div>
 
-        <p className="text-base sm:text-lg md:text-[22px] text-gray-300 mb-4 sm:mb-6 max-w-4xl mx-auto leading-relaxed sm:leading-loose font-light px-4 md:px-8 whitespace-pre-wrap text-center">
-          <strong className="block text-xl sm:text-2xl md:text-[28px] text-copper mb-2 sm:mb-3 font-medium">당신의 감각을 믿으세요.</strong>
-          연금술사의 세심한 로스팅과 데이터는 오직 당신의 확신을 돕기 위한 도구일 뿐입니다.
-          우리는 그저 당신의 감각이 찾아낸 그 기분 좋은 마주침이 매일 아침 당신을 깨우도록 돕습니다.
+        <p className="text-base sm:text-lg md:text-[20px] text-gray-300 mb-4 sm:mb-6 max-w-4xl mx-auto leading-relaxed sm:leading-loose font-light px-4 md:px-8 whitespace-pre-wrap text-center break-keep">
+          <strong className="block text-xl sm:text-2xl md:text-[28px] text-copper mb-4 sm:mb-6 font-serif">“Ad Fontes, Ad Aroma - 근원으로, 향기로”</strong>
+          세상의 모든 물질이 4원소로 이루어져 있다는 고대 철학처럼, 커피의 맛 또한 씨앗, 토양, 물, 그리고 불(로스팅)이라는 근원에서 시작됩니다.
+          ARCHEMIST는 이 근원의 에너지를 가장 순수한 형태의 ‘액체’로 정제하는 자들입니다.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 w-full px-2 mb-6">
