@@ -19,7 +19,7 @@
     "roastDate": "2024.03.23",
     "degassing": "",
     "cupNotes": "자스민, 정향, 블랙베리, 깔끔한 클린컵, 뛰어난 균형감",
-    "recipe": "<p class=\"ql-align-center\">그&nbsp;유명하다는&nbsp;게이샤&nbsp;에스메랄다&nbsp;농장</p><p class=\"ql-align-center\"></p><p class=\"ql-align-center\">두&nbsp;번째&nbsp;줄</p>",
+    "recipe": "<p class=\"ql-align-center\">그&nbsp;유명하다는&nbsp;게이샤&nbsp;에스메랄다&nbsp;농장</p><p class=\"ql-align-center\"></p><p class=\"ql-align-center\"><span style=\"background-color: rgb(68, 68, 68);\">두&nbsp;번째&nbsp;줄</span></p>",
     "dripper": "하리오 V60 Neo",
     "coffeeAmount": "20g",
     "grind": "28클릭",
@@ -74,7 +74,7 @@
     "hot_p3_water": "80",
     "hot_p4_time": "30",
     "hot_p4_water": "80",
-    "hot_comment": "<p>30초를&nbsp;반드시&nbsp;지킬&nbsp;필요&nbsp;없고&nbsp;물&nbsp;빠짐을&nbsp;보고&nbsp;붓는&nbsp;시점을&nbsp;결정하면&nbsp;됩니다.</p>",
+    "hot_comment": "<p><span style=\"color: rgb(102, 163, 224);\">30초를&nbsp;반드시&nbsp;지킬&nbsp;필요&nbsp;없고&nbsp;물&nbsp;빠짐을&nbsp;보고&nbsp;붓는&nbsp;시점을&nbsp;결정하면&nbsp;됩니다.</span></p>",
     "ice_coffee_amount": "18",
     "ice_grind": "코만단테 25클릭",
     "ice_temp": "94도",
@@ -91,7 +91,7 @@
     "ice_p4_time": "",
     "ice_p4_water": "",
     "ice_weight": "100",
-    "ice_comment": "<p class=\"ql-align-center\">얼음을&nbsp;100g&nbsp;정도&nbsp;담고&nbsp;저울&nbsp;0점을&nbsp;맞추는&nbsp;것을&nbsp;기준으로&nbsp;최종&nbsp;추출량은&nbsp;얼음을&nbsp;뺀&nbsp;중량으로&nbsp;측정하세요.</p><p class=\"ql-align-center\">모두&nbsp;추출하고&nbsp;얼음을&nbsp;좀&nbsp;더&nbsp;추가해&nbsp;마시세요.</p>",
+    "ice_comment": "<p class=\"ql-align-center\"><span style=\"color: rgb(230, 0, 0);\">얼음을&nbsp;100g&nbsp;정도&nbsp;담고&nbsp;저울&nbsp;0점을&nbsp;맞추는&nbsp;것을&nbsp;기준으로&nbsp;최종&nbsp;추출량은&nbsp;얼음을&nbsp;뺀&nbsp;중량으로&nbsp;측정하세요.</span></p><p class=\"ql-align-center\"><span style=\"color: rgb(230, 0, 0);\">모두&nbsp;추출하고&nbsp;얼음을&nbsp;좀&nbsp;더&nbsp;추가해&nbsp;마시세요.</span></p>",
     "id": 1774158540680
   },
   {
