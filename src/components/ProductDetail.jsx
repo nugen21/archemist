@@ -640,11 +640,17 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                         {/* Summary Row */}
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                           {[
-                            { label: '커피량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
+                            { label: '원두량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
                             { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
                             { label: '물 온도', value: product[`${prefix}temp`], icon: <Thermometer size={14} /> },
                             { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
-                            { label: recipeTab === 'ice' ? '얼음 중량' : '투입 비율', value: recipeTab === 'ice' ? (product.ice_weight ? `${product.ice_weight}g` : '-') : product.hot_ratio, icon: <Target size={14} /> }
+                            { 
+                              label: recipeTab === 'ice' ? '얼음 중량' : '추출 비율', 
+                              value: recipeTab === 'ice' 
+                                ? (product.ice_weight ? `${product.ice_weight}g` : '-') 
+                                : (product.hot_ratio ? (String(product.hot_ratio).includes(':') ? product.hot_ratio : `1:${product.hot_ratio}`) : '-'), 
+                              icon: <Target size={14} /> 
+                            }
                           ].map((item, idx) => (
                             <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
                               <div className="text-copper/50">{item.icon}</div>

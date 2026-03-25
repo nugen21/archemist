@@ -983,10 +983,30 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     </div>
 
                     <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
-                      <InputField label="커피량" name="hot_coffee_amount" value={formData.hot_coffee_amount} onChange={handleChange} placeholder="예: 20g" />
+                      <InputField label="원두량" name="hot_coffee_amount" value={formData.hot_coffee_amount} onChange={handleChange} placeholder="예: 20g" />
                       <InputField label="분쇄도" name="hot_grind" value={formData.hot_grind} onChange={handleChange} placeholder="예: 25 clicks" />
                       <InputField label="물 온도" name="hot_temp" value={formData.hot_temp} onChange={handleChange} placeholder="예: 94°C" />
-                      <InputField label="투입 비율" name="hot_ratio" value={formData.hot_ratio} onChange={handleChange} placeholder="예: 1:15" />
+                      <div className="w-full">
+                        <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">추출 비율</label>
+                        <div className="flex items-center gap-3">
+                          <div className="flex-grow flex items-center bg-[#0b0c0b] border border-gray-700/60 rounded-lg px-4 transition-colors focus-within:border-copper">
+                            <span className="text-gray-500 text-xs font-bold mr-2 whitespace-nowrap">1 :</span>
+                            <input 
+                              name="hot_ratio" 
+                              value={String(formData.hot_ratio || '').replace('1:', '')} 
+                              onChange={(e) => {
+                                const val = e.target.value.replace(/[^0-9.]/g, '');
+                                handleChange({ target: { name: 'hot_ratio', value: val } });
+                              }} 
+                              className="w-full bg-transparent border-none py-3 text-gray-200 focus:outline-none placeholder:text-gray-700"
+                              placeholder="15"
+                            />
+                          </div>
+                          <span className="text-copper font-serif font-black text-xs whitespace-nowrap">
+                            ({Math.round((parseFloat(String(formData.hot_coffee_amount || '0').replace(/[^0-9.]/g, '')) || 0) * (parseFloat(formData.hot_ratio) || 0))}g)
+                          </span>
+                        </div>
+                      </div>
                       <InputField label="추천 드리퍼" name="hot_dripper" value={formData.hot_dripper} onChange={handleChange} placeholder="예: Hario V60" />
                     </div>
 
@@ -1046,10 +1066,30 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     </div>
 
                     <div className="grid grid-cols-2 lg:grid-cols-6 gap-6">
-                      <InputField label="커피량" name="ice_coffee_amount" value={formData.ice_coffee_amount} onChange={handleChange} placeholder="예: 20g" />
+                      <InputField label="원두량" name="ice_coffee_amount" value={formData.ice_coffee_amount} onChange={handleChange} placeholder="예: 20g" />
                       <InputField label="분쇄도" name="ice_grind" value={formData.ice_grind} onChange={handleChange} placeholder="예: 22 clicks" />
                       <InputField label="물 온도" name="ice_temp" value={formData.ice_temp} onChange={handleChange} placeholder="예: 92°C" />
-                      <InputField label="투입 비율" name="ice_ratio" value={formData.ice_ratio} onChange={handleChange} placeholder="예: 1:12" />
+                      <div className="w-full">
+                        <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">추출 비율</label>
+                        <div className="flex items-center gap-3">
+                          <div className="flex-grow flex items-center bg-[#0b0c0b] border border-gray-700/60 rounded-lg px-4 transition-colors focus-within:border-copper">
+                            <span className="text-gray-500 text-xs font-bold mr-2 whitespace-nowrap">1 :</span>
+                            <input 
+                              name="ice_ratio" 
+                              value={String(formData.ice_ratio || '').replace('1:', '')} 
+                              onChange={(e) => {
+                                const val = e.target.value.replace(/[^0-9.]/g, '');
+                                handleChange({ target: { name: 'ice_ratio', value: val } });
+                              }} 
+                              className="w-full bg-transparent border-none py-3 text-gray-200 focus:outline-none placeholder:text-gray-700"
+                              placeholder="12"
+                            />
+                          </div>
+                          <span className="text-copper font-serif font-black text-xs whitespace-nowrap">
+                            ({Math.round((parseFloat(String(formData.ice_coffee_amount || '0').replace(/[^0-9.]/g, '')) || 0) * (parseFloat(formData.ice_ratio) || 0))}g)
+                          </span>
+                        </div>
+                      </div>
                       <InputField label="추천 드리퍼" name="ice_dripper" value={formData.ice_dripper} onChange={handleChange} placeholder="예: Hario V60" />
                       <InputField label="얼음 중량 (g)" name="ice_weight" value={formData.ice_weight} onChange={handleChange} placeholder="120" type="number" />
                     </div>
