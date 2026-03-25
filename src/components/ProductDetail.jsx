@@ -3,7 +3,7 @@ import {
   Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
   Flower2, Sprout, Leaf, Candy, Bean, Nut, Wheat, 
-  Sparkles, Milk, Wind, Edit, Coffee
+  Sparkles, Milk, Wind, Edit, Coffee, HelpCircle
 } from 'lucide-react';
 
 const FLAVOR_CONFIG = {
@@ -137,6 +137,8 @@ const countryToCode = {
 
 export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
   const [recipeTab, setRecipeTab] = useState('hot');
+
+  const [showAgtronHelp, setShowAgtronHelp] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -460,7 +462,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               </div>
 
               {/* 3. Roasting Point & Time Card */}
-              {isBean && (
+              {(isBean || product.category === 'dripbag') && (
                 <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center">
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
@@ -484,7 +486,30 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                         로스팅 포인트 가이드
                     </h4>
-                      <p className="text-[8.5px] text-gray-600 font-black uppercase tracking-widest mb-6 opacity-60">* DiFluid Omni 측정 기준</p>
+                      <p className="text-[8.5px] text-gray-600 font-black uppercase tracking-widest mb-2 opacity-60">* DiFluid Omni 측정 기준</p>
+                      <div className="flex items-center gap-1.5 mb-6 relative">
+                        <span className="text-[10px] text-copper/60 font-black tracking-widest uppercase">Agtron</span>
+                        <button 
+                          onClick={() => setShowAgtronHelp(!showAgtronHelp)}
+                          className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
+                          aria-label="Agtron Help"
+                        >
+                          <HelpCircle size={11} strokeWidth={2.5} />
+                        </button>
+
+                        {/* Agtron Help Popup */}
+                        {showAgtronHelp && (
+                          <div className="absolute top-6 left-0 z-[100] w-64 p-4 bg-[#1a1c1b] border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in duration-200">
+                            <div className="flex justify-between items-start mb-2">
+                              <span className="text-[11px] text-copper font-black uppercase tracking-widest">What is Agtron?</span>
+                              <button onClick={() => setShowAgtronHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
+                            </div>
+                            <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
+                              아그트론(Agtron)은 커피의 로스팅 정도(배전도)를 수치화한 글로벌 표준입니다. 숫자가 낮을수록 다크(강배전), 높을수록 라이트(약배전)를 의미하며, 디플루이드 옴니(DiFluid Omni) 등 정밀 측정기를 통해 객관적인 데이터를 도출합니다.
+                            </p>
+                          </div>
+                        )}
+                      </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-20 pt-8">
                       <div className="space-y-4">
