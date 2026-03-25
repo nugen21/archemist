@@ -91,7 +91,7 @@
     "ice_p4_time": "",
     "ice_p4_water": "",
     "ice_weight": "100",
-    "ice_comment": "<p>얼음을&nbsp;100g&nbsp;정도&nbsp;담고&nbsp;저울&nbsp;0점을&nbsp;맞추는&nbsp;것을&nbsp;기준으로&nbsp;최종&nbsp;추출량은&nbsp;얼음을&nbsp;뺀&nbsp;중량으로&nbsp;측정하세요.</p><p>모두&nbsp;추출하고&nbsp;얼음을&nbsp;좀&nbsp;더&nbsp;추가해&nbsp;마시세요.</p>",
+    "ice_comment": "<p class=\"ql-align-center\">얼음을&nbsp;100g&nbsp;정도&nbsp;담고&nbsp;저울&nbsp;0점을&nbsp;맞추는&nbsp;것을&nbsp;기준으로&nbsp;최종&nbsp;추출량은&nbsp;얼음을&nbsp;뺀&nbsp;중량으로&nbsp;측정하세요.</p><p class=\"ql-align-center\">모두&nbsp;추출하고&nbsp;얼음을&nbsp;좀&nbsp;더&nbsp;추가해&nbsp;마시세요.</p>",
     "id": 1774158540680
   },
   {
