@@ -747,18 +747,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 <InputField label="네이버 스마트 스토어 URL (선택)" name="storeUrl" value={formData.storeUrl} onChange={handleChange} placeholder="https://smartstore.naver.com/..." />
               </div>
 
-              <div className="md:col-span-2 lg:col-span-3">
-                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">상품 한 줄 스토리 / 서브 설명 (Intro Story HTML)</label>
-                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl overflow-hidden min-h-[150px]">
-                  <ReactQuill 
-                    theme="snow" 
-                    value={formData.story} 
-                    onChange={(content) => setFormData(prev => ({ ...prev, story: content }))}
-                    modules={quillModules}
-                    style={{ height: '120px' }}
-                  />
-                </div>
-              </div>
 
               {formData.category === 'beverage' && (
                 <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
@@ -982,17 +970,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               </div>
 
-              {formData.category === 'beverage' && (
-                <div className="lg:col-span-3">
-                  <InputField 
-                    label="상품 영문 서브타이틀 (선택)" 
-                    name="englishSub" 
-                    value={formData.englishSub || ''} 
-                    onChange={handleChange} 
-                    placeholder="예: Velvet Smooth Texture" 
-                  />
-                </div>
-              )}
 
               {(formData.category === 'bean' || formData.category === 'dripbag') && (
                 <div className="md:col-span-2 lg:col-span-3 space-y-12 mt-8 border-t border-gray-800 pt-10">

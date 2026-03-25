@@ -329,10 +329,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   {product.englishName}
                 </h2>
               )}
-              {product.story && (
-                <div className="mb-6 p-6 bg-white/5 border border-white/10 rounded-2xl">
+              {product.story && product.story !== '<p><br></p>' && (
+                <div className="mb-8 mt-2 px-1">
                   <div 
-                    className="text-gray-300 text-sm leading-relaxed break-keep italic html-content prose prose-invert max-w-none"
+                    className="text-gray-400 text-base sm:text-lg leading-relaxed break-keep italic html-content prose prose-invert max-w-none border-l-2 border-copper/30 pl-6 py-2"
                     dangerouslySetInnerHTML={{ __html: product.story }}
                   />
                 </div>
