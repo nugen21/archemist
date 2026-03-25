@@ -660,26 +660,42 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           ))}
                         </div>
 
-                        {/* Timeline pours */}
-                        <div className="relative pt-4 pb-8">
-                          <div className="absolute top-0 bottom-0 left-[20px] md:left-1/2 w-[1px] bg-gradient-to-b from-copper/50 via-copper/20 to-transparent"></div>
-                          
-                          <div className="space-y-12">
+                        {/* Horizontal Step-by-Step Layout */}
+                        <div className="relative pt-4 pb-4">
+                          <div className="flex flex-col md:flex-row gap-y-12 md:gap-y-0 md:gap-x-4">
                             {pours.map((pour, pIdx) => (
-                              <div key={pIdx} className="relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0">
-                                <div className="absolute left-[20px] md:left-1/2 -ml-[4.5px] w-2.5 h-2.5 rounded-full bg-copper border-2 border-[#111211] z-20 shadow-[0_0_10px_rgba(161,118,76,0.6)]"></div>
-                                <div className={`flex-1 w-full md:pr-12 md:text-right pl-12 md:pl-0 ${pIdx % 2 === 1 ? 'md:order-2 md:text-left md:pl-12 md:pr-0' : ''}`}>
-                                  <h6 className="text-copper font-black text-[10px] uppercase tracking-widest mb-1">{pour.label}</h6>
-                                  <div className="flex items-baseline gap-2 md:justify-end">
-                                    <span className="text-3xl font-serif font-black text-white tabular-nums">{pour.water}</span>
-                                    <span className="text-xs font-bold text-gray-600 uppercase">g</span>
+                              <div key={pIdx} className="flex-1 group relative">
+                                {/* Horizontal Connector Line (Hidden on mobile) */}
+                                {pIdx < pours.length - 1 && (
+                                  <div className="absolute top-[45px] left-[50%] w-full h-[1px] bg-gradient-to-r from-copper/40 via-copper/10 to-transparent hidden md:block z-0"></div>
+                                )}
+                                
+                                <div className="flex flex-col items-center relative z-10">
+                                  {/* Step Label */}
+                                  <span className="text-copper font-black text-[10px] uppercase tracking-[0.2em] mb-4 opacity-100">{pour.label}</span>
+                                  
+                                  {/* Step Circle with Number */}
+                                  <div className="w-[50px] h-[50px] rounded-full bg-[#181a19] border border-white/10 flex items-center justify-center mb-6 group-hover:border-copper/40 transition-all duration-500 shadow-xl relative overflow-hidden">
+                                     <div className="absolute inset-0 bg-gradient-to-br from-copper/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                     <span className="text-base font-serif font-black text-white group-hover:text-copper transition-colors">{pIdx + 1}</span>
+                                     
+                                     {/* Mobile Vertical Connector Line */}
+                                     {pIdx < pours.length - 1 && (
+                                       <div className="absolute top-1/2 left-1/2 translate-y-[25px] w-[1px] h-[48px] bg-copper/20 md:hidden"></div>
+                                     )}
                                   </div>
-                                </div>
-                                <div className={`flex-1 w-full md:pl-12 pl-12 md:pl-0 ${pIdx % 2 === 1 ? 'md:order-1 md:text-right md:pr-12 md:pl-0' : ''}`}>
-                                  <div className="flex items-center gap-2 text-gray-500 md:justify-start">
-                                    <Timer size={14} className="opacity-40" />
-                                    <span className="text-lg font-serif font-bold text-gray-400 tabular-nums">{pour.time || '-'}</span>
-                                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">sec</span>
+                                  
+                                  {/* Step Data */}
+                                  <div className="flex flex-col items-center gap-1 pt-1">
+                                    <div className="flex items-baseline gap-1.5">
+                                      <span className="text-3xl font-serif font-black text-white tabular-nums group-hover:text-copper transition-colors">{pour.water}</span>
+                                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">g</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-gray-400">
+                                      <Timer size={14} className="opacity-30 group-hover:opacity-60 transition-opacity" />
+                                      <span className="text-lg font-serif font-bold tabular-nums text-gray-400 group-hover:text-gray-200 transition-colors">{pour.time || '-'}</span>
+                                      <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">sec</span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
