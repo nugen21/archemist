@@ -695,7 +695,7 @@
     "region": "",
     "farm": "",
     "micromill": "",
-    "variety": "",
+    "variety": "아키미스트 블렌드 No.1 더 고소",
     "altitude": "",
     "process": "",
     "roaster": "",
@@ -707,7 +707,7 @@
     "roastDate": "",
     "degassing": "",
     "cupNotes": "",
-    "recipe": "<p>브라질&nbsp;세하도&nbsp;내추럴&nbsp;70%&nbsp;/&nbsp;인도네시아&nbsp;슈마트라&nbsp;만데링&nbsp;G1&nbsp;30%</p>",
+    "recipe": "<p>브라질&nbsp;세하도&nbsp;내추럴&nbsp;<strong>70%</strong>&nbsp;/&nbsp;인도네시아&nbsp;슈마트라&nbsp;만데링&nbsp;G1&nbsp;<strong>30%</strong></p>",
     "dripper": "",
     "coffeeAmount": "",
     "grind": "",
@@ -780,8 +780,7 @@
     "ice_p4_water": "",
     "ice_weight": "",
     "ice_comment": "",
-    "id": 1711023000001,
-    "englishSub": "아키미스트 블랜딩 No.1"
+    "id": 1711023000001
   },
   {
     "id": 1711023000002,
