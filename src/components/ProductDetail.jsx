@@ -482,7 +482,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-4 md:pt-0">
                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                      로스팅 포인트 가이드
+                      로스팅 포인트 가이드 <span className="text-[10px] text-gray-500 font-bold ml-2 lowercase tracking-normal opacity-40"> (DiFluid Omni 기준)</span> <span className="text-[10px] text-gray-500 font-bold ml-2 lowercase tracking-normal opacity-40"> (DiFluid Omni 기준)</span>
                     </h4>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16">
@@ -599,11 +599,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           {/* 4.1 Grind Guide Section */}
             {isBean && (
               <div className="max-w-6xl mx-auto px-4 mt-24">
-                <h3 className="text-2xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
+                <h3 className="text-2xl font-serif font-black text-white mb-2 flex items-center justify-center gap-6">
                   <div className="h-[1px] w-8 bg-white/10"></div>
                   분쇄 가이드
                   <div className="h-[1px] w-8 bg-white/10"></div>
                 </h3>
+                  <p className="text-center text-[10px] text-gray-600 font-black uppercase tracking-widest mb-10 opacity-60">* DiFluid 측정 기준</p>
                 
                 <div className="relative bg-[#111211] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl group">
                   <img 
@@ -615,8 +616,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111211]/30 to-transparent pointer-events-none"></div>
                 </div>
 
-                <div className="mt-12 max-w-4xl mx-auto">
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+                <div className="mt-6 px-2 sm:px-6">
+                    <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-8">
                         {[
                             { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루' },
                             { name: '모카포트', value: '400~600μm', desc: '고운 소금' },
@@ -625,9 +626,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금' }
                         ].map((item, idx) => (
                             <div key={idx} className="text-center group/item hover:translate-y-[-4px] transition-transform duration-300">
-                                <span className="text-[10px] font-black text-copper/60 uppercase tracking-widest block mb-1">{item.name}</span>
-                                <span className="text-sm font-bold text-white block">{item.value}</span>
-                                <span className="text-[9px] text-gray-600 block mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500">{item.desc}</span>
+                                <span className="text-sm sm:text-lg md:text-xl font-black text-white uppercase tracking-widest block mb-1">{item.name}</span>
+                                <span className="text-[10px] sm:text-xs font-bold text-copper/60 block">{item.value}</span>
+                                <span className="text-[9px] sm:text-[10px] text-gray-700 block mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
                             </div>
                         ))}
                     </div>
