@@ -541,12 +541,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           {/* 1. Shipping & Shelf Life Policy */}
           {!isCafe && (
             <div className="max-w-4xl mx-auto text-center px-4">
-              <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
-                <div className="h-[1px] w-12 bg-copper/30"></div>
+              <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4">
+                <div className="h-[1px] w-8 bg-copper/30"></div>
                 배송 및 소비기한 안내
-                <div className="h-[1px] w-12 bg-copper/30"></div>
+                <div className="h-[1px] w-8 bg-copper/30"></div>
               </h3>
-              <div className="bg-copper/5 border border-copper/20 p-12 rounded-[3rem] shadow-2xl backdrop-blur-sm">
+              <div className="bg-copper/5 border border-copper/20 p-12 rounded-[3rem] shadow-8xl backdrop-blur-sm">
                 <p className="text-gray-300 text-lg sm:text-xl leading-[2.2] break-keep font-medium">
                   원두의 소비기한은 생산일로부터 1년이며, 로스팅 일자는 원두 뒷면에 별도 표기됩니다. 주문하신 상품은 주문일 기준 1~4일 이내에 로스팅 된 원두로 출고됩니다.
                 </p>
@@ -556,8 +556,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
-             <div className="max-w-4xl mx-auto px-4 mt-20">
-               <h3 className="text-2xl font-serif font-black text-white mb-8 flex items-center justify-center gap-6">
+             <div className="max-w-8xl mx-auto px-4 mt-20">
+               <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  상세 스토리
                  <div className="h-[1px] w-8 bg-white/10"></div>
@@ -570,8 +570,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 4. Green Bean Analysis (Optional) */}
           {isBean && product.showAnalysisInfo !== false && (
-            <div className="max-w-4xl mx-auto px-4 mt-20">
-               <h3 className="text-2xl font-serif font-black text-white mb-8 flex items-center justify-center gap-6">
+            <div className="max-w-8xl mx-auto px-4 mt-20">
+               <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  생두 분석 정보
                  <div className="h-[1px] w-8 bg-white/10"></div>
@@ -596,15 +596,15 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 4.1 Grind Guide Section */}
             {isBean && (
-              <div className="max-w-6xl mx-auto px-4 mt-24">
-                <h3 className="text-2xl font-serif font-black text-white mb-2 flex items-center justify-center gap-6">
+              <div className="max-w-8xl mx-auto px-4 mt-24">
+                <h3 className="text-xl font-serif font-black text-white mb-2 flex items-center justify-center gap-6">
                   <div className="h-[1px] w-8 bg-white/10"></div>
                   분쇄 가이드
                   <div className="h-[1px] w-8 bg-white/10"></div>
                 </h3>
                   <p className="text-center text-[10px] text-gray-600 font-black uppercase tracking-widest mb-10 opacity-60">* DiFluid 측정 기준</p>
                 
-                <div className="relative bg-[#111211] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-2xl group">
+                <div className="relative bg-[#111211] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-8xl group">
                   <img 
                     src="/images/grind/grind_guide_reference.png" 
                     alt="원두 분쇄 가이드" 
@@ -635,11 +635,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             )}
 
           {/* 5. Recommended Extraction Recipe */}
-          <div className="max-w-4xl mx-auto text-center px-4">
-            <h3 className="text-3xl font-serif font-black text-white mb-10 flex items-center justify-center gap-6">
-              <div className="h-[1px] w-12 bg-copper/30"></div>
+          <div className="max-w-8xl mx-auto text-center px-4">
+            <h3 className="text-xl font-serif font-black text-white mb-6 flex items-center justify-center gap-4">
+              <div className="h-[1px] w-8 bg-copper/30"></div>
               추천 추출 방식
-              <div className="h-[1px] w-12 bg-copper/30"></div>
+              <div className="h-[1px] w-8 bg-copper/30"></div>
             </h3>
             <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
               {['dripbag', 'bean'].includes(product.category) ? (
