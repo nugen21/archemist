@@ -139,6 +139,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
   const [recipeTab, setRecipeTab] = useState('hot');
 
   const [showAgtronHelp, setShowAgtronHelp] = useState(false);
+  const [showCupNotesHelp, setShowCupNotesHelp] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -411,14 +412,33 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
                   </div>
-                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-6 flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                    컵 노트
-                  </h4>
+                  <div className="flex items-center gap-3 mb-6 relative">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                      컵 노트
+                    </h4>
+                    <button 
+                      onClick={() => setShowCupNotesHelp(!showCupNotesHelp)}
+                      className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
+                      aria-label="Cup Notes Help"
+                    >
+                      <HelpCircle size={11} strokeWidth={2.5} />
+                    </button>
+
+                    {/* Cup Notes Help Popup */}
+                    {showCupNotesHelp && (
+                      <div className="absolute top-8 left-0 z-[100] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in duration-200">
+                        <div className="flex justify-between items-start mb-2">
+                          <span className="text-[11px] text-copper font-black uppercase tracking-widest">About Cup Notes</span>
+                          <button onClick={() => setShowCupNotesHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
+                        </div>
+                        <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
+                          컵 노트(Cup Notes)는 커피를 마셨을 때 느낄 수 있는 대표적인 향미를 과일, 꽃, 견과류 등에 빗대어 표현한 것입니다. 아키미스트는 생두가 가진 고유의 테루아를 가장 잘 드러낼 수 있는 향미들을 엄선하여 기록합니다.
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   <div className="flex flex-col gap-6 flex-grow">
-                    <p className="text-gray-500 text-[11px] font-bold tracking-widest leading-relaxed uppercase opacity-60">
-                      엄선된 테루아와 아로마
-                    </p>
                     <div className="flex-grow">
                       {renderCupNotes(product.cupNotes)}
                     </div>
