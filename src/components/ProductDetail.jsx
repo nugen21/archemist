@@ -453,9 +453,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   센서리 프로파일
                 </h4>
                 <div className="flex flex-col gap-6 flex-grow">
-                  <p className="text-gray-500 text-[11px] font-bold tracking-widest leading-relaxed uppercase opacity-60">
-                    아키미스트 테이스팅 맵
-                  </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
                     {[
                       { label: '향 (Flavor)', val: product.flavor || 0 },
@@ -534,7 +531,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-20 pt-8">
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
+                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean) AGTRON</span>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -563,7 +560,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
+                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground) AGTRON</span>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
