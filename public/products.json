@@ -713,7 +713,7 @@
     "grind": "",
     "temp": "",
     "visible": true,
-    "recommended": true,
+    "recommended": false,
     "image": "/images/icons/beverage.jpg",
     "order": 9,
     "storeUrl": "",
@@ -780,8 +780,7 @@
     "ice_p4_water": "",
     "ice_weight": "",
     "ice_comment": "",
-    "id": 1711023000001,
-    "englishSub": "ARCHEMIST BLEND No.1"
+    "id": 1711023000001
   },
   {
     "id": 1711023000002,
