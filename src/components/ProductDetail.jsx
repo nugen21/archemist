@@ -501,14 +501,18 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                           {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
                             <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
-                              {/* Floating Label (Large Speech Bubble) */}
-                              <div className="absolute -top-20 left-1/2 -translate-x-1/2 bg-white text-[#111] px-5 py-2.5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-30 min-w-[70px]">
-                                <span className="text-2xl font-serif font-black">{product.agtronWb}</span>
+                              {/* Parent is a zero-width point at the correct horizontal position. All children are centered on it. */}
+                              
+                              {/* Floating Label (Large Speech Bubble) - Even Higher and perfectly centered */}
+                              <div className="absolute -top-32 left-0 -translate-x-1/2 bg-white text-[#111] px-5 py-3 rounded-[1.25rem] shadow-[0_10px_40px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-30 min-w-[70px]">
+                                <span className="text-3xl font-serif font-black">{product.agtronWb}</span>
                                 {product.roastPointWb && <span className="text-[11px] font-black opacity-60 uppercase tracking-tighter mt-1.5">{product.roastPointWb}</span>}
                                 {/* Arrow */}
-                                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45"></div>
+                                <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45"></div>
                               </div>
-                              <div className="w-4 h-4 bg-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.6)] rounded-full -ml-[8px]"></div>
+                              
+                              {/* Marking Dot - also centered using transform instead of margin */}
+                              <div className="w-5 h-5 bg-white border-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.7)] rounded-full absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
                             </div>
                           )}
                         </div>
@@ -528,24 +532,21 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                           {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
                             <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
-                              {/* Floating Label (Large Speech Bubble) */}
-                              <div className="absolute -top-20 left-1/2 -translate-x-1/2 bg-copper text-[#111] px-5 py-2.5 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-30 min-w-[70px]">
-                                <span className="text-2xl font-serif font-black">{product.agtronGround}</span>
+                              {/* Floating Label (Large Speech Bubble) - Even Higher and perfectly centered */}
+                              <div className="absolute -top-32 left-0 -translate-x-1/2 bg-copper text-[#111] px-5 py-3 rounded-[1.25rem] shadow-[0_10px_40px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-30 min-w-[70px]">
+                                <span className="text-3xl font-serif font-black">{product.agtronGround}</span>
                                 {product.roastPointGround && <span className="text-[11px] font-black opacity-60 uppercase tracking-tighter mt-1.5">{product.roastPointGround}</span>}
                                 {/* Arrow */}
-                                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-copper rotate-45"></div>
+                                <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-copper rotate-45"></div>
                               </div>
-                              <div className="w-4 h-4 bg-copper border-2 border-copper shadow-[0_0_15px_rgba(161,118,76,0.6)] rounded-full -ml-[8px]"></div>
+                              
+                              {/* Marking Dot - also centered using transform instead of margin */}
+                              <div className="w-5 h-5 bg-copper border-2 border-copper shadow-[0_0_20px_rgba(161,118,76,0.7)] rounded-full absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
                             </div>
                           )}
                         </div>
                       </div>
-
                     </div>
-
-
-
-
                   </div>
                 </div>
               )}
