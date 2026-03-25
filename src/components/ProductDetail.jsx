@@ -402,7 +402,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* --- Tier 2: Analysis Row (Cup Notes & Sensory Profile) --- */}
           {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
-            <>
+            <div className="lg:col-span-6 grid grid-cols-1 lg:grid-cols-6 gap-4">
               {/* 1. Cup Notes Card */}
               {product.cupNotes && (
                 <div className="lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative overflow-hidden group">
@@ -461,7 +461,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
               {/* 3. Roasting Point & Time Card */}
               {isBean && (
-                <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-8 md:gap-12 mt-4 items-center">
+                <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-8 md:gap-12 mt-0 items-center">
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
                   </div>
@@ -531,7 +531,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   </div>
                 </div>
               )}
-            </>
+            </div>
           )} 
         </div>
       </div>
