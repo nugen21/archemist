@@ -753,7 +753,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                         </div>
 
-                        <div className="pt-8 border-t border-white/5 flex flex-col flex-col items-center justify-center gap-10">
+                        <div className="pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-10">
                           <div className="flex items-center gap-4">
                             <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
                             <div className="flex items-baseline gap-2">
@@ -763,7 +763,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                           
                           {product[`${prefix}comment`] && (
-                            <div className="max-w-md max-w-2xl text-center mx-auto">
+                            <div className="max-w-2xl text-center mx-auto">
                                <div className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
                                <div 
                                  className="text-gray-400 text-sm leading-relaxed font-medium break-keep italic html-content"
