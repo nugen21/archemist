@@ -318,7 +318,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               )}
               {product.story && (
                 <div className="mb-6 p-6 bg-white/5 border border-white/10 rounded-2xl">
-                  <p className="text-gray-300 text-sm leading-relaxed break-keep italic">"{product.story}"</p>
+                  <div 
+                    className="text-gray-300 text-sm leading-relaxed break-keep italic html-content prose prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{ __html: product.story }}
+                  />
                 </div>
               )}
               <div className="mb-6">
@@ -357,7 +360,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '국가', value: product.country || '정보 없음', flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null, category: 'basic' },
                       { label: '상세 지역', value: product.region || '정보 없음', category: 'basic' },
                       { label: '농장', value: product.farm || '정보 없음', category: 'basic' },
-                      { label: '마이크로밀', value: product.micromill || '정보 없음', category: 'basic' },
+                      { label: '마이크로랏', value: product.micromill || '정보 없음', category: 'basic' },
                       { label: '재배 고도', value: product.altitude || '정보 없음', category: 'basic' },
                       { label: product.beanType === 'blend' ? '블렌딩 구성' : '품종', value: product.beanType === 'blend' ? [1, 2, 3, 4].map(n => ({ name: product[`blend${n}`], ratio: product[`ratio${n}`] })).filter(c => c.name).map(c => `${c.name}${c.ratio ? ` (${c.ratio}%)` : ''}`).join(' | ') || product.variety || '정보 없음' : product.variety || '정보 없음', category: 'basic' },
                       { label: '가공방식', value: product.process || '정보 없음', category: 'basic' },
@@ -624,9 +627,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금' }
                         ].map((item, idx) => (
                             <div key={idx} className="text-center group/item hover:translate-y-[-4px] transition-transform duration-300">
-                                <span className="text-sm sm:text-lg md:text-xl font-black text-white uppercase tracking-widest block mb-1">{item.name}</span>
+                                <span className="text-[12.5px] sm:text-[16px] md:text-lg font-black text-white uppercase tracking-widest block mb-1">{item.name}</span>
                                 <span className="text-[10px] sm:text-xs font-bold text-copper/60 block">{item.value}</span>
-                                <span className="text-[9px] sm:text-[10px] text-gray-700 block mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
+                                <span className="text-[8px] sm:text-[9.5px] text-gray-700 block mt-1 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
                             </div>
                         ))}
                     </div>
@@ -781,9 +784,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
                       <Droplet size={200} className="text-copper" />
                     </div>
-                    <p className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10">
-                      {product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다."}
-                    </p>
+                    <div 
+                      className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10 html-content prose prose-invert max-w-none"
+                      dangerouslySetInnerHTML={{ __html: product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다." }}
+                    />
                   </>
                 )}
               </div>

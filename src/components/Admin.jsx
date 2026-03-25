@@ -775,7 +775,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   <InputField label="국가" name="country" value={formData.country} onChange={handleChange} placeholder="예: 파나마" />
                   <InputField label="생산 지역" name="region" value={formData.region} onChange={handleChange} placeholder="예: 보케테" />
                   <InputField label="농장 (Farm)" name="farm" value={formData.farm} onChange={handleChange} placeholder="예: 엘리다 농장" />
-                  <InputField label="마이크로밀 (Micro-mill)" name="micromill" value={formData.micromill} onChange={handleChange} placeholder="예: 엘리다 밀" />
+                  <InputField label="마이크로랏 (Micro-lot)" name="micromill" value={formData.micromill} onChange={handleChange} placeholder="예: 엘리다 랏" />
                   <InputField label="재배 고도" name="altitude" value={formData.altitude} onChange={handleChange} placeholder="예: 1,800m" />
                   {formData.beanType === 'blend' ? (
                     <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 bg-copper/5 p-6 rounded-2xl border border-copper/10 my-4">
