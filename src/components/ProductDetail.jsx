@@ -203,6 +203,15 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
   return (
     <section className="min-h-screen py-12 px-4 sm:px-8 bg-[#0b0c0b] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">
+      <style>{`
+        .html-content .ql-align-center { text-align: center !important; }
+        .html-content .ql-align-right { text-align: right !important; }
+        .html-content .ql-align-justify { text-align: justify !important; }
+        .html-content .ql-align-center img { display: block; margin-left: auto !important; margin-right: auto !important; }
+        .html-content .ql-align-right img { display: block; margin-left: auto !important; margin-right: 0 !important; }
+        .html-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; }
+        .html-content iframe { width: 100%; aspect-ratio: 16/9; border-radius: 1rem; margin: 1.5rem 0; }
+      `}</style>
       {/* Back Button */}
       <button 
         onClick={onBack}

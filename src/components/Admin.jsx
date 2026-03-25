@@ -115,6 +115,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
       [{ 'header': [1, 2, 3, false] }],
       ['bold', 'italic', 'underline', 'strike'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'indent': '-1' }, { 'indent': '+1' }],
       [{ 'color': [] }, { 'background': [] }],
       [{ 'align': [] }],
       ['link', 'image', 'video'],
@@ -1185,6 +1186,12 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     .ql-snow.ql-toolbar button:hover, .ql-snow.ql-toolbar button.ql-active { color: #A1764C !important; }
                     .ql-snow.ql-toolbar button:hover .ql-stroke, .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #A1764C !important; }
                     .ql-snow.ql-toolbar .ql-picker { color: #9ca3af; }
+                    .ql-align-center { text-align: center !important; }
+                    .ql-align-right { text-align: right !important; }
+                    .ql-align-justify { text-align: justify !important; }
+                    .ql-align-center img { display: block; margin-left: auto !important; margin-right: auto !important; }
+                    .ql-align-right img { display: block; margin-left: auto !important; margin-right: 0 !important; }
+                    .ql-editor img { max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0; }
                   `}</style>
                   <ReactQuill 
                     theme="snow" 
