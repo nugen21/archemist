@@ -400,7 +400,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
             </div>
           </div>
 
-          {/* --- Tier 2: Analysis Row (Cup Notes, Roast) --- */}
+          {/* --- Tier 2: Analysis Row (Cup Notes & Sensory Profile) --- */}
           {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
             <>
               {/* 1. Cup Notes Card */}
@@ -424,58 +424,108 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 </div>
               )}
 
-              {/* 2. Roasting Point Guide Card */}
+              {/* 2. Sensory Profile Card */}
+              <div className="lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col h-full">
+                <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                  센서리 프로파일
+                </h4>
+                <div className="flex flex-col gap-6 flex-grow">
+                  <p className="text-gray-500 text-[11px] font-bold tracking-widest leading-relaxed uppercase opacity-60">
+                    아키미스트 테이스팅 맵
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
+                    {[
+                      { label: '향 (Flavor)', val: product.flavor || 0 },
+                      { label: '후미 (Aftertaste)', val: product.aftertaste || 0 },
+                      { label: '산미 (Acidity)', val: product.acidityRate || 0 },
+                      { label: '단맛 (Sweetness)', val: product.sweetness || 0 },
+                      { label: '바디 (Body)', val: product.bodyRate || 0 },
+                      { label: '밸런스 (Balance)', val: product.balance || 0 }
+                    ].map((s, idx) => (
+                      <div key={idx} className="flex flex-col gap-2.5">
+                        <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                          <span>{s.label}</span>
+                          <span className="text-copper">{s.val > 0 ? s.val : '-'} / 5</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 h-1.5">
+                          {[1, 2, 3, 4, 5].map(v => (
+                            <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? 'bg-copper shadow-[0_0_8px_rgba(161,118,76,0.3)]' : 'bg-white/5'}`} />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Roasting Point & Time Card */}
               {isBean && (
-                <div className="lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl flex flex-col h-full relative group">
+                <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-8 md:gap-12 mt-4 items-center">
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
-                    <Scale size={80} className="text-copper" />
+                    <Scale size={120} className="text-copper" />
                   </div>
                   
-                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-8 flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                    로스팅 포인트 가이드
-                  </h4>
-                  
-                  <div className="space-y-10 flex-grow">
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-end mb-1 px-1">
-                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
-                        <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronWb || '-'}</span>
-                      </div>
-                      <div className="relative h-10 flex items-center px-0">
-                        <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
-                        <div className="flex justify-between w-full relative z-10">
-                          {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
-                            const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
-                            return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
-                          })}
-                        </div>
-                        {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
-                          <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
-                            <div className="w-3.5 h-3.5 bg-white border-2 border-white shadow-[0_0_10px_rgba(255,255,255,0.4)] rounded-full -ml-[7px]"></div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                  {/* Roasting Time (Left Side) */}
+                  <div className="flex-shrink-0 flex flex-col justify-center min-w-[200px] border-b md:border-b-0 md:border-r border-white/5 pb-8 md:pb-0 md:pr-12 w-full md:w-auto text-center md:text-left">
+                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-4 flex items-center justify-center md:justify-start gap-3">
+                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                       로스팅 시간
+                     </h4>
+                     <div className="flex flex-col gap-2">
+                       <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-2 md:mt-4">총 소요 시간</div>
+                       <div className="text-3xl font-serif font-black text-white">{product.roastTime || '정보 없음'}</div>
+                     </div>
+                  </div>
 
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-end mb-1 px-1">
-                        <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
-                        <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronGround || '-'}</span>
-                      </div>
-                      <div className="relative h-10 flex items-center px-0">
-                        <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
-                        <div className="flex justify-between w-full relative z-10">
-                          {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
-                            const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
-                            return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
-                          })}
+                  {/* Roasting Point Guide (Right Side) */}
+                  <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-4 md:pt-0">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                      로스팅 포인트 가이드
+                    </h4>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16">
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-end mb-1 px-1">
+                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
+                          <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronWb || '-'}</span>
                         </div>
-                        {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
-                          <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
-                            <div className="w-3.5 h-3.5 bg-copper border-2 border-copper shadow-[0_0_10px_rgba(161,118,76,0.4)] rounded-full -ml-[7px]"></div>
+                        <div className="relative h-10 flex items-center px-0">
+                          <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
+                          <div className="flex justify-between w-full relative z-10">
+                            {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
+                              const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
+                              return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
+                            })}
                           </div>
-                        )}
+                          {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
+                            <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
+                              <div className="w-3.5 h-3.5 bg-white border-2 border-white shadow-[0_0_10px_rgba(255,255,255,0.4)] rounded-full -ml-[7px]"></div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-end mb-1 px-1">
+                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
+                          <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronGround || '-'}</span>
+                        </div>
+                        <div className="relative h-10 flex items-center px-0">
+                          <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
+                          <div className="flex justify-between w-full relative z-10">
+                            {[25, 35, 45, 55, 65, 75, 85, 95].map((val) => {
+                              const colors = { 95: '#D4B483', 85: '#C19A6B', 75: '#A67B5B', 65: '#8B6242', 55: '#6D4C3D', 45: '#4E362A', 35: '#3D2B1F', 25: '#2B1B17' };
+                              return <div key={val} className="w-1 h-1 rounded-full bg-white/10" style={{ backgroundColor: colors[val] }} />;
+                            })}
+                          </div>
+                          {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
+                            <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
+                              <div className="w-3.5 h-3.5 bg-copper border-2 border-copper shadow-[0_0_10px_rgba(161,118,76,0.4)] rounded-full -ml-[7px]"></div>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -483,37 +533,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               )}
             </>
           )} 
-          {/* 3. Sensory Profile Card */}
-          {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
-            <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group mt-8">
-              <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-8 flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                센서리 프로파일
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[
-                  { label: '향 (Flavor)', val: product.flavor || 0 },
-                  { label: '후미 (Aftertaste)', val: product.aftertaste || 0 },
-                  { label: '산미 (Acidity)', val: product.acidityRate || 0 },
-                  { label: '단맛 (Sweetness)', val: product.sweetness || 0 },
-                  { label: '바디 (Body)', val: product.bodyRate || 0 },
-                  { label: '밸런스 (Balance)', val: product.balance || 0 }
-                ].map((s, idx) => (
-                  <div key={idx} className="flex flex-col gap-3">
-                    <div className="flex justify-between items-center text-xs font-bold text-gray-400 uppercase tracking-widest">
-                      <span>{s.label}</span>
-                      <span className="text-copper">{s.val > 0 ? s.val : '-'} / 5</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 h-2">
-                      {[1, 2, 3, 4, 5].map(v => (
-                        <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? 'bg-copper shadow-[0_0_8px_rgba(161,118,76,0.3)]' : 'bg-white/5'}`} />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
