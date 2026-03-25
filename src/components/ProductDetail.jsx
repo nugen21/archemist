@@ -152,8 +152,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
   const priceNum = Number(product.price);
   const formattedPrice = priceNum > 0 
-    ? (isCafe ? (priceNum / 1000).toFixed(1) : priceNum.toLocaleString())
-    : (isCafe ? '0.0' : '0'); 
+    ? priceNum.toLocaleString()
+    : '0'; 
 
 
   const renderCupNotes = (notesString) => {
@@ -314,7 +314,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               <h1 className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight leading-tight mb-3 break-keep">
                 {product.name}
               </h1>
-              {product.englishName && (
+              {!isCafe && product.englishName && (
                 <h2 className="text-sm sm:text-base font-serif text-gray-500 tracking-wider mb-5">
                   {product.englishName}
                 </h2>
@@ -389,8 +389,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
               </div>
 
               {isCafe && (
-                <div className="flex justify-center mt-6">
-                  <div className="bg-[#181a19] border border-white/5 py-6 px-10 rounded-2xl flex flex-col items-center gap-2 max-w-xs w-full">
+                <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                  <div className="bg-[#181a19] border border-white/5 py-6 px-8 rounded-2xl flex flex-col items-center gap-2 flex-1 max-w-xs">
                     <span className="text-xs text-gray-600 font-black uppercase tracking-widest">
                       {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
                     </span>
@@ -398,6 +398,14 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : String(product.size).toLowerCase())) : '정보 없음'}
                     </span>
                   </div>
+                  {product.variety && (
+                    <div className="bg-[#181a19] border border-white/5 py-6 px-8 rounded-2xl flex flex-col items-center gap-2 flex-1 max-w-xs">
+                      <span className="text-xs text-gray-600 font-black uppercase tracking-widest">사용 원두</span>
+                      <span className="text-sm font-bold text-white text-center break-keep">
+                        {product.variety}
+                      </span>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

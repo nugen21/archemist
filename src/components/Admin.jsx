@@ -632,7 +632,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
               {formData.category === 'beverage' && (
                 <div className="md:col-span-2 lg:col-span-1">
-                  <InputField label="영문명 (English Name)" name="englishName" value={formData.englishName} onChange={handleChange} placeholder="예: Americano" />
+                  <InputField label="사용 원두 (Coffee Bean)" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 아키미스트 다크 하우스 블렌드" />
                 </div>
               )}
 
