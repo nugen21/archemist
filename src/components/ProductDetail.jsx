@@ -170,11 +170,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           return (
             <div 
               key={idx} 
-              className="px-6 py-3 rounded-full border border-white/10 bg-[#131513] shadow-lg transition-all hover:-translate-y-1"
+              className="px-4 py-2 rounded-full border border-white/10 bg-[#131513] shadow-lg transition-all hover:-translate-y-1"
               style={{ borderColor: `${categoryColor}40` }}
             >
               <span 
-                className="text-[13px] font-black tracking-widest text-center uppercase"
+                className="text-[10px] font-black tracking-widest text-center uppercase"
                 style={{ color: categoryColor }}
               >
                 {note}
@@ -308,11 +308,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                 <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">아키미스트 아카이브 No.{product.id % 999}</h2>
                 <div className="h-[1px] flex-grow bg-gradient-to-r from-copper/30 to-transparent"></div>
               </div>
-              <h1 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-tight mb-4 break-keep">
+              <h1 className="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight leading-tight mb-3 break-keep">
                 {product.name}
               </h1>
               {product.englishName && (
-                <h2 className="text-xl sm:text-2xl font-serif text-gray-500 tracking-wider mb-6">
+                <h2 className="text-sm sm:text-base font-serif text-gray-500 tracking-wider mb-5">
                   {product.englishName}
                 </h2>
               )}
@@ -372,12 +372,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       item.category !== 'greenBeanBasic' || product.showBasicInfo !== false
                     ).map((item, idx) => (
                       <div key={idx} className="flex flex-col gap-1.5">
-                        <span className="text-[15px] text-gray-600 font-black uppercase tracking-[0.2em] transition-colors hover:text-copper/40">{item.label}</span>
+                        <span className="text-[11px] text-gray-600 font-black uppercase tracking-[0.2em] transition-colors hover:text-copper/40">{item.label}</span>
                         <div className="flex items-center gap-2">
                           {item.flag && (
                             <img src={item.flag} alt="flag" className="w-5 h-3.5 object-cover rounded shadow-sm opacity-90 border border-white/10" />
                           )}
-                          <span className="text-xl text-white font-bold tracking-tight">{item.value}</span>
+                          <span className="text-sm text-white font-bold tracking-tight">{item.value}</span>
                         </div>
                       </div>
                     ))}
@@ -387,11 +387,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
               {isCafe && (
                 <div className="flex justify-center mt-6">
-                  <div className="bg-[#181a19] border border-white/5 py-8 px-12 rounded-2xl flex flex-col items-center gap-2 max-w-xs w-full">
-                    <span className="text-base text-gray-600 font-black uppercase tracking-widest">
+                  <div className="bg-[#181a19] border border-white/5 py-6 px-10 rounded-2xl flex flex-col items-center gap-2 max-w-xs w-full">
+                    <span className="text-xs text-gray-600 font-black uppercase tracking-widest">
                       {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
                     </span>
-                    <span className="text-xl font-bold text-copper">
+                    <span className="text-sm font-bold text-copper">
                       {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : String(product.size).toLowerCase())) : '정보 없음'}
                     </span>
                   </div>
@@ -409,7 +409,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
                   </div>
-                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
+                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-6 flex items-center gap-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                     컵 노트
                   </h4>
@@ -426,7 +426,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
               {/* 2. Sensory Profile Card */}
               <div className="lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col h-full">
-                <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-6 flex items-center gap-3">
+                <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-6 flex items-center gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                   센서리 프로파일
                 </h4>
@@ -444,7 +444,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       { label: '밸런스 (Balance)', val: product.balance || 0 }
                     ].map((s, idx) => (
                       <div key={idx} className="flex flex-col gap-2.5">
-                        <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        <div className="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-widest">
                           <span>{s.label}</span>
                           <span className="text-copper">{s.val > 0 ? s.val : '-'} / 5</span>
                         </div>
@@ -468,28 +468,28 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                   
                   {/* Roasting Time (Left Side) */}
                   <div className="flex-shrink-0 flex flex-col justify-center min-w-[200px] border-b md:border-b-0 md:border-r border-white/5 pb-6 md:pb-0 md:pr-8 w-full md:w-auto text-center md:text-left">
-                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
+                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
                        <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                        로스팅 시간
                      </h4>
                      <div className="flex flex-col gap-1">
                        <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-1 md:mt-2">총 소요 시간</div>
-                       <div className="text-3xl font-serif font-black text-white">{product.roastTime || '정보 없음'}</div>
+                       <div className="text-xl font-serif font-black text-white">{product.roastTime || '정보 없음'}</div>
                      </div>
                   </div>
 
                   {/* Roasting Point Guide (Right Side) */}
                   <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-2 md:pt-0">
-                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-sm uppercase mb-2 flex items-center gap-3">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-2 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                         로스팅 포인트 가이드
                     </h4>
-                      <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-6 opacity-60">* DiFluid Omni 측정 기준</p>
+                      <p className="text-[8.5px] text-gray-600 font-black uppercase tracking-widest mb-6 opacity-60">* DiFluid Omni 측정 기준</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-20 pt-8">
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
+                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -500,19 +500,17 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             })}
                           </div>
                           {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
-                            <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
-                              {/* Parent is a zero-width point at the correct horizontal position. All children are centered on it. */}
-                              
-                              {/* Floating Label (Large Speech Bubble) - Even Higher and perfectly centered */}
-                              <div className="absolute -top-32 left-0 -translate-x-1/2 bg-white text-[#111] px-5 py-3 rounded-[1.25rem] shadow-[0_10px_40px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-30 min-w-[70px]">
-                                <span className="text-3xl font-serif font-black">{product.agtronWb}</span>
-                                {product.roastPointWb && <span className="text-[11px] font-black opacity-60 uppercase tracking-tighter mt-1.5">{product.roastPointWb}</span>}
+                            <div className="absolute top-1/2 -translate-y-1/2 z-30" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
+                              {/* Large Speech Bubble - 30% smaller than previous 27px -> 19px */}
+                              <div className="absolute -top-[85px] left-0 -translate-x-1/2 bg-white text-[#111] px-4 py-2 rounded-xl shadow-[0_6px_30px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-40 min-w-[55px]">
+                                <span className="text-[19px] font-serif font-black">{product.agtronWb}</span>
+                                {product.roastPointWb && <span className="text-[8.5px] font-black opacity-60 uppercase tracking-tighter mt-1">{product.roastPointWb}</span>}
                                 {/* Arrow */}
-                                <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-white rotate-45"></div>
+                                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-white rotate-45"></div>
                               </div>
                               
-                              {/* Marking Dot - also centered using transform instead of margin */}
-                              <div className="w-5 h-5 bg-white border-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.7)] rounded-full absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+                              {/* Marking Dot centered - also scaled slightly */}
+                              <div className="w-4 h-4 bg-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.7)] rounded-full absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
                             </div>
                           )}
                         </div>
@@ -520,7 +518,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
+                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -531,17 +529,17 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                             })}
                           </div>
                           {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
-                            <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
-                              {/* Floating Label (Large Speech Bubble) - Even Higher and perfectly centered */}
-                              <div className="absolute -top-32 left-0 -translate-x-1/2 bg-copper text-[#111] px-5 py-3 rounded-[1.25rem] shadow-[0_10px_40px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-30 min-w-[70px]">
-                                <span className="text-3xl font-serif font-black">{product.agtronGround}</span>
-                                {product.roastPointGround && <span className="text-[11px] font-black opacity-60 uppercase tracking-tighter mt-1.5">{product.roastPointGround}</span>}
+                            <div className="absolute top-1/2 -translate-y-1/2 z-30" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
+                              {/* Large Speech Bubble - 30% smaller than previous 27px -> 19px */}
+                              <div className="absolute -top-[85px] left-0 -translate-x-1/2 bg-copper text-[#111] px-4 py-2 rounded-xl shadow-[0_6px_30px_rgba(0,0,0,0.6)] whitespace-nowrap flex flex-col items-center leading-none z-40 min-w-[55px]">
+                                <span className="text-[19px] font-serif font-black">{product.agtronGround}</span>
+                                {product.roastPointGround && <span className="text-[8.5px] font-black opacity-60 uppercase tracking-tighter mt-1">{product.roastPointGround}</span>}
                                 {/* Arrow */}
-                                <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-copper rotate-45"></div>
+                                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-copper rotate-45"></div>
                               </div>
                               
-                              {/* Marking Dot - also centered using transform instead of margin */}
-                              <div className="w-5 h-5 bg-copper border-2 border-copper shadow-[0_0_20px_rgba(161,118,76,0.7)] rounded-full absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+                              {/* Marking Dot centered - also scaled slightly */}
+                              <div className="w-4 h-4 bg-copper border-2 border-copper shadow-[0_0_15px_rgba(161,118,76,0.7)] rounded-full absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"></div>
                             </div>
                           )}
                         </div>
@@ -562,13 +560,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           
           {/* 1. Shipping & Shelf Life Policy */}
           <div className="max-w-4xl mx-auto text-center px-4">
-              <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4">
+              <h3 className="text-sm font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 배송 및 소비기한 안내
                 <div className="h-[1px] w-8 bg-copper/30"></div>
               </h3>
-              <div className="bg-copper/5 border border-copper/20 p-12 rounded-[3rem] shadow-8xl backdrop-blur-sm">
-                <p className="text-gray-300 text-lg sm:text-xl leading-[2.2] break-keep font-medium">
+              <div className="bg-copper/5 border border-copper/20 p-8 rounded-[2rem] shadow-8xl backdrop-blur-sm">
+                <p className="text-gray-300 text-sm sm:text-base leading-[1.8] break-keep font-medium">
                   원두의 소비기한은 생산일로부터 1년이며, 로스팅 일자는 원두 뒷면에 별도 표기됩니다. 주문하신 상품은 주문일 기준 1~4일 이내에 로스팅 된 원두로 출고됩니다.
                 </p>
               </div>
@@ -578,12 +576,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
              <div className="max-w-8xl mx-auto px-4 mt-6">
-               <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
+               <h3 className="text-sm font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  상세 스토리
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
-               <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 rounded-[2.5rem] prose prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-300 html-content" dangerouslySetInnerHTML={{ __html: product.recipe }} />
+               <div className="bg-[#111211] border border-white/5 p-6 sm:p-10 rounded-[2.5rem] prose prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-300 html-content" dangerouslySetInnerHTML={{ __html: product.recipe }} />
             </div>
           )}
 
@@ -592,7 +590,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           {/* 4. Green Bean Analysis (Optional) */}
           {isBean && product.showAnalysisInfo !== false && (
             <div className="max-w-8xl mx-auto px-4 mt-6">
-               <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
+               <h3 className="text-sm font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  생두 분석 정보
                  <div className="h-[1px] w-8 bg-white/10"></div>
@@ -604,10 +602,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     { label: '수분활성도', value: product.aw || '-', unit: 'aW' },
                     { label: '수확년도', value: product.cropYear || '-', unit: '' }
                   ].map(stat => (
-                    <div key={stat.label} className="bg-[#111211] border border-white/5 p-6 rounded-2xl flex flex-col items-center gap-1 group hover:border-copper/30 transition-all">
-                      <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">{stat.label}</span>
-                      <span className="text-xl font-serif font-black text-white group-hover:text-copper transition-colors">
-                        {stat.value}{stat.value !== '-' && stat.unit ? <span className="text-[10px] ml-0.5 opacity-50">{stat.unit}</span> : ''}
+                    <div key={stat.label} className="bg-[#111211] border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1 group hover:border-copper/30 transition-all">
+                      <span className="text-[8.5px] font-black text-gray-600 uppercase tracking-widest">{stat.label}</span>
+                      <span className="text-base font-serif font-black text-white group-hover:text-copper transition-colors">
+                        {stat.value}{stat.value !== '-' && stat.unit ? <span className="text-[8px] ml-0.5 opacity-50">{stat.unit}</span> : ''}
                       </span>
                     </div>
                   ))}
@@ -618,12 +616,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
           {/* 4.1 Grind Guide Section */}
             {isBean && (
               <div className="max-w-8xl mx-auto px-4 mt-8">
-                <h3 className="text-xl font-serif font-black text-white mb-2 flex items-center justify-center gap-6">
+                <h3 className="text-sm font-serif font-black text-white mb-2 flex items-center justify-center gap-6">
                   <div className="h-[1px] w-8 bg-white/10"></div>
                   분쇄 가이드
                   <div className="h-[1px] w-8 bg-white/10"></div>
                 </h3>
-                  <p className="text-center text-[10px] text-gray-600 font-black uppercase tracking-widest mb-10 opacity-60">* DiFluid 측정 기준</p>
+                  <p className="text-center text-[8.5px] text-gray-600 font-black uppercase tracking-widest mb-10 opacity-60">* DiFluid 측정 기준</p>
                 
                 <div className="relative bg-[#111211] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-8xl group">
                   <img 
@@ -759,13 +757,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                                     {/* Step Data */}
                                     <div className="flex flex-col items-center gap-1 pt-1">
                                       <div className="flex items-baseline gap-1.5">
-                                        <span className="text-3xl font-serif font-black text-white tabular-nums group-hover:text-copper transition-colors">{pour.water}</span>
-                                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">g</span>
+                                        <span className="text-xl font-serif font-black text-white tabular-nums group-hover:text-copper transition-colors">{pour.water}</span>
+                                        <span className="text-[8.5px] font-bold text-gray-500 uppercase tracking-widest">g</span>
                                       </div>
                                       <div className="flex items-center gap-2 text-gray-400">
                                         <Timer size={14} className="opacity-30 group-hover:opacity-60 transition-opacity" />
-                                        <span className="text-lg font-serif font-bold tabular-nums text-gray-400 group-hover:text-gray-200 transition-colors">{pour.time || '-'}</span>
-                                        <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">sec</span>
+                                        <span className="text-sm font-serif font-bold tabular-nums text-gray-400 group-hover:text-gray-200 transition-colors">{pour.time || '-'}</span>
+                                        <span className="text-[8.5px] font-bold uppercase tracking-widest opacity-40">sec</span>
                                       </div>
                                     </div>
                                   </div>
@@ -776,18 +774,18 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
                           <div className="pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-10">
                             <div className="flex items-center gap-4">
-                              <span className="text-[10px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
+                              <span className="text-[8.5px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
                               <div className="flex items-baseline gap-2">
-                                <span className="text-4xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
-                                <span className="text-sm font-bold text-gray-500 uppercase">ml</span>
+                                <span className="text-2xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
+                                <span className="text-xs font-bold text-gray-500 uppercase">ml</span>
                               </div>
                             </div>
                             
                             {product[`${prefix}comment`] && (
                               <div className="max-w-2xl text-center mx-auto">
-                                 <div className="text-[10px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
+                                 <div className="text-[8.5px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
                                  <div 
-                                   className="text-gray-400 text-sm leading-relaxed font-medium break-keep italic html-content"
+                                   className="text-gray-400 text-[11px] leading-relaxed font-medium break-keep italic html-content"
                                    dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
                                  />
                               </div>
@@ -803,7 +801,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       <Droplet size={200} className="text-copper" />
                     </div>
                     <div 
-                      className="text-gray-400 text-lg sm:text-xl leading-[2.2] font-medium break-keep relative z-10 html-content prose prose-invert max-w-none"
+                      className="text-gray-400 text-sm sm:text-base leading-[1.8] font-medium break-keep relative z-10 html-content prose prose-invert max-w-none"
                       dangerouslySetInnerHTML={{ __html: product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다." }}
                     />
                   </>
