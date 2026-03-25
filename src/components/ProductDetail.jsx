@@ -238,8 +238,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-30"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-20"></div>
       
-      <div className="max-w-7xl mx-auto relative z-10 pt-16 px-4 sm:px-8 lg:px-0">
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 lg:gap-y-16 lg:gap-x-8 mb-24 items-start">
+      <div className="max-w-7xl mx-auto relative z-10 pt-8 px-4 sm:px-8 lg:px-0">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 lg:gap-y-10 lg:gap-x-8 mb-10 items-start">
           
           {/* --- Tier 1: Hero Row (Image & Info) --- */}
           <div className="lg:col-span-3">
@@ -486,14 +486,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                     </h4>
                       <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-6 opacity-60">* DiFluid Omni 측정 기준</p>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-20 pt-8">
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
                           <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean)</span>
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronWb || '-'}</span>
-                            {product.roastPointWb && <span className="text-[10px] font-bold text-copper uppercase tracking-tighter">({product.roastPointWb})</span>}
-                          </div>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -505,14 +501,14 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                           {product.agtronWb && !isNaN(parseFloat(product.agtronWb)) && (
                             <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronWb) - 25) / 70 * 100))}%` }}>
-                              {/* Floating Label */}
-                              <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-[#111] text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg whitespace-nowrap flex items-center gap-1 z-30">
-                                <span>{product.agtronWb}</span>
-                                {product.roastPointWb && <span className="opacity-60 text-[8px]">{product.roastPointWb}</span>}
-                                {/* Little Arrow */}
-                                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-white rotate-45"></div>
+                              {/* Floating Label (Large Speech Bubble) */}
+                              <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white text-[#111] px-3 py-1.5 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] whitespace-nowrap flex flex-col items-center leading-none z-30">
+                                <span className="text-lg font-serif font-black">{product.agtronWb}</span>
+                                {product.roastPointWb && <span className="text-[9px] font-bold opacity-60 uppercase tracking-tighter mt-1">{product.roastPointWb}</span>}
+                                {/* Arrow */}
+                                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45"></div>
                               </div>
-                              <div className="w-3.5 h-3.5 bg-white border-2 border-white shadow-[0_0_10px_rgba(255,255,255,0.4)] rounded-full -ml-[7px]"></div>
+                              <div className="w-4 h-4 bg-white border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.6)] rounded-full -ml-[8px]"></div>
                             </div>
                           )}
                         </div>
@@ -521,10 +517,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
                           <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground)</span>
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-xl font-serif font-black text-white tabular-nums leading-none">{product.agtronGround || '-'}</span>
-                            {product.roastPointGround && <span className="text-[10px] font-bold text-copper uppercase tracking-tighter">({product.roastPointGround})</span>}
-                          </div>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -536,19 +528,20 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
                           </div>
                           {product.agtronGround && !isNaN(parseFloat(product.agtronGround)) && (
                             <div className="absolute top-1/2 -translate-y-1/2 z-20" style={{ left: `${Math.max(0, Math.min(100, (parseFloat(product.agtronGround) - 25) / 70 * 100))}%` }}>
-                              {/* Floating Label */}
-                              <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-copper text-[#111] text-[9px] font-black px-1.5 py-0.5 rounded shadow-lg whitespace-nowrap flex items-center gap-1 z-30">
-                                <span>{product.agtronGround}</span>
-                                {product.roastPointGround && <span className="opacity-60 text-[8px]">{product.roastPointGround}</span>}
-                                {/* Little Arrow */}
-                                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-copper rotate-45"></div>
+                              {/* Floating Label (Large Speech Bubble) */}
+                              <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-copper text-[#111] px-3 py-1.5 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] whitespace-nowrap flex flex-col items-center leading-none z-30">
+                                <span className="text-lg font-serif font-black">{product.agtronGround}</span>
+                                {product.roastPointGround && <span className="text-[9px] font-bold opacity-60 uppercase tracking-tighter mt-1">{product.roastPointGround}</span>}
+                                {/* Arrow */}
+                                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-copper rotate-45"></div>
                               </div>
-                              <div className="w-3.5 h-3.5 bg-copper border-2 border-copper shadow-[0_0_10px_rgba(161,118,76,0.4)] rounded-full -ml-[7px]"></div>
+                              <div className="w-4 h-4 bg-copper border-2 border-copper shadow-[0_0_15px_rgba(161,118,76,0.6)] rounded-full -ml-[8px]"></div>
                             </div>
                           )}
                         </div>
                       </div>
                     </div>
+
 
 
                   </div>
@@ -562,7 +555,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
 
         {/* Detail Information Sections */}
-        <div className="mt-20 border-t border-white/5 pt-20 space-y-32">
+        <div className="mt-6 border-t border-white/5 pt-6 space-y-8">
           
           {/* 1. Shipping & Shelf Life Policy */}
           <div className="max-w-4xl mx-auto text-center px-4">
@@ -581,7 +574,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
-             <div className="max-w-8xl mx-auto px-4 mt-20">
+             <div className="max-w-8xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  상세 스토리
@@ -595,7 +588,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 4. Green Bean Analysis (Optional) */}
           {isBean && product.showAnalysisInfo !== false && (
-            <div className="max-w-8xl mx-auto px-4 mt-20">
+            <div className="max-w-8xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  생두 분석 정보
@@ -621,7 +614,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit }) {
 
           {/* 4.1 Grind Guide Section */}
             {isBean && (
-              <div className="max-w-8xl mx-auto px-4 mt-24">
+              <div className="max-w-8xl mx-auto px-4 mt-8">
                 <h3 className="text-xl font-serif font-black text-white mb-2 flex items-center justify-center gap-6">
                   <div className="h-[1px] w-8 bg-white/10"></div>
                   분쇄 가이드
