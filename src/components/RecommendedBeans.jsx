@@ -272,7 +272,10 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                     )}
                     <div className="col-span-2 border-t border-copper/5 pt-3">
                       <p className="text-[9px] text-gray-500 uppercase tracking-widest mb-1">로스팅 날짜</p>
-                      <p className="text-gray-200 font-medium text-sm">{bean.roastDate || '-'}</p>
+                      <p className="text-gray-200 font-medium text-sm">
+                        {bean.roastDate || '-'}
+                        {bean.agingDays && <span className="text-copper ml-3 font-black text-xs whitespace-nowrap opacity-90">(에이징 {bean.agingDays}일)</span>}
+                      </p>
                     </div>
                   </>
                 ) : (
