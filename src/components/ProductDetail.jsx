@@ -694,7 +694,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-xl font-serif font-black text-white">
+                          <div className="text-base font-serif font-black text-white">
                             {product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}
                           </div>
                         </div>
