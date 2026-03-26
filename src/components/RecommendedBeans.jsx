@@ -254,7 +254,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                         </div>
                         <div className="flex items-baseline gap-0.5">
                           <span className="text-[15.5px] font-serif font-black text-amber-500">
-                             +{(parseFloat(String(bean.price || '0').replace(/,/g, '')) * 0.001 * (bean.recommended ? 1.1 : 1)).toFixed(1)}
+                             +{(parseFloat(String(bean.price || '0').replace(/,/g, '')) * 0.0001 * (bean.recommended ? 1.1 : 1)).toFixed(1)}
                           </span>
                           <div className="flex items-center gap-1">
                             <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>

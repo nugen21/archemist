@@ -128,7 +128,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                         </div>
                         <div className="flex items-baseline gap-0.5">
                           <span className="text-sm font-serif font-black text-amber-500">
-                            +{(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.001 * (product.recommended ? 1.1 : 1)).toFixed(1)}
+                            +{(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1)).toFixed(1)}
                           </span>
                           <span className="text-[8px] font-black text-amber-500/60 uppercase">xp</span>
                           {product.recommended && <span className="text-[7px] text-amber-500 font-black ml-0.5 leading-none animate-bounce">+10%</span>}

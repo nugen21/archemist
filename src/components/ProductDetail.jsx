@@ -390,7 +390,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           </div>
                           <div className="flex items-baseline gap-1">
                             <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">
-                              +{(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.001 * (product.recommended ? 1.1 : 1)).toFixed(1)}
+                              +{(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1)).toFixed(1)}
                             </span>
                             <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
                             {product.recommended && (
