@@ -194,7 +194,7 @@
   {
     "category": "bean",
     "name": "La Esmeralda Geisha Private Collection El Velo",
-    "price": "0",
+    "price": "50000",
     "country": "Panama",
     "region": "Boquete, Chiriqui",
     "farm": "Esmeralda",
@@ -241,6 +241,7 @@
     "sweetness": "5",
     "bodyRate": "4",
     "balance": "4",
+    "experience": 50,
     "showBasicInfo": false,
     "showAnalysisInfo": false,
     "blend1": "",
