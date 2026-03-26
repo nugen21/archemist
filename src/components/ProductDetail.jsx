@@ -477,7 +477,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
                   </div>
                   <div className="flex items-center gap-3 mb-6 relative">
-                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase flex items-center gap-3">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                       컵 노트
                     </h4>
@@ -512,7 +512,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
               {/* 2. Sensory Profile Card */}
               <div className="lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col h-full">
-                <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-6 flex items-center gap-3">
+                <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-6 flex items-center gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                   센서리 프로파일
                 </h4>
@@ -554,7 +554,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                   
                   {/* Roasting Time (Left Side) */}
                   <div className="flex-shrink-0 flex flex-col justify-center min-w-[200px] border-b md:border-b-0 md:border-r border-white/5 pb-6 md:pb-0 md:pr-8 w-full md:w-auto text-center md:text-left">
-                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
+                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
                        <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                        로스팅 시간
                      </h4>
@@ -566,7 +566,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                   {/* Roasting Point Guide (Right Side) */}
                   <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-2 md:pt-0">
-                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase mb-2 flex items-center gap-3">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-2 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                         로스팅 포인트 가이드
                     </h4>
@@ -851,7 +851,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                   
                                   <div className="flex flex-col items-center relative z-10">
                                     {/* Step Label */}
-                                    <span className="text-copper font-black text-[10px] uppercase tracking-[0.2em] mb-4 opacity-100">{pour.label}</span>
+                                    <span className="text-copper font-black text-[12px] uppercase tracking-[0.2em] mb-4 opacity-100">{pour.label}</span>
                                     
                                     {/* Step Circle with Number */}
                                     <div className="w-[50px] h-[50px] rounded-full bg-[#181a19] border border-white/10 flex items-center justify-center mb-6 group-hover:border-copper/40 transition-all duration-500 shadow-xl relative overflow-hidden">
