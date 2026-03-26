@@ -138,10 +138,7 @@ const countryToCode = {
 export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiveNumber }) {
   const [recipeTab, setRecipeTab] = useState('hot');
 
-  const [showAgtronHelp, setShowAgtronHelp] = useState(false);
-  const [showCupNotesHelp, setShowCupNotesHelp] = useState(false);
-  const [showAgingHelp, setShowAgingHelp] = useState(false);
-  const [showRoastTimeHelp, setShowRoastTimeHelp] = useState(false);
+  const [activeHelp, setActiveHelp] = useState(null);
 
   const agtronHelpRef = useRef(null);
   const cupNotesHelpRef = useRef(null);
@@ -150,22 +147,21 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (agtronHelpRef.current && !agtronHelpRef.current.contains(event.target)) {
-        setShowAgtronHelp(false);
-      }
-      if (cupNotesHelpRef.current && !cupNotesHelpRef.current.contains(event.target)) {
-        setShowCupNotesHelp(false);
-      }
-      if (agingHelpRef.current && !agingHelpRef.current.contains(event.target)) {
-        setShowAgingHelp(false);
-      }
-      if (roastTimeHelpRef.current && !roastTimeHelpRef.current.contains(event.target)) {
-        setShowRoastTimeHelp(false);
+      if (activeHelp) {
+        const currentRef = 
+          activeHelp === 'agtron' ? agtronHelpRef :
+          activeHelp === 'cupNotes' ? cupNotesHelpRef :
+          activeHelp === 'aging' ? agingHelpRef :
+          activeHelp === 'roastTime' ? roastTimeHelpRef : null;
+
+        if (currentRef?.current && !currentRef.current.contains(event.target)) {
+          setActiveHelp(null);
+        }
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [activeHelp]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -391,7 +387,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         >
                           <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
                           <button 
-                            onClick={() => setShowAgingHelp(!showAgingHelp)}
+                            onClick={() => setActiveHelp(activeHelp === 'aging' ? null : 'aging')}
                             className="p-0.5 hover:text-white transition-colors text-gray-700 outline-none"
                             aria-label="Aging Help"
                           >
@@ -399,11 +395,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           </button>
 
                           {/* Aging Help Popup */}
-                          {showAgingHelp && (
+                          {activeHelp === 'aging' && (
                             <div className="absolute top-6 right-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                               <div className="flex justify-between items-start mb-2">
                                 <span className="text-[11px] text-copper font-black uppercase tracking-widest">Recommended Aging</span>
-                                <button onClick={() => setShowAgingHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
+                                <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
                               </div>
                               <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep text-left">
                                 에이징(Aging)은 원두가 로스팅된 후 맛이 가장 조화롭게 발현되는 숙성 기간을 의미합니다. 가스가 안정화되어 더 풍성한 아로마와 깊은 맛을 느끼실 수 있는 권장 시점을 안내해 드립니다.
@@ -510,7 +506,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       컵 노트
                     </h4>
                     <button 
-                      onClick={() => setShowCupNotesHelp(!showCupNotesHelp)}
+                      onClick={() => setActiveHelp(activeHelp === 'cupNotes' ? null : 'cupNotes')}
                       className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
                       aria-label="Cup Notes Help"
                     >
@@ -518,11 +514,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     </button>
 
                     {/* Cup Notes Help Popup */}
-                    {showCupNotesHelp && (
+                    {activeHelp === 'cupNotes' && (
                       <div className="absolute top-8 left-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                         <div className="flex justify-between items-start mb-2">
                           <span className="text-[11px] text-copper font-black uppercase tracking-widest">About Cup Notes</span>
-                          <button onClick={() => setShowCupNotesHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
+                          <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
                         </div>
                         <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
                           컵 노트(Cup Notes)는 커피를 마셨을 때 느낄 수 있는 대표적인 향미를 과일, 꽃, 견과류 등에 빗대어 표현한 것입니다. 아키미스트는 생두가 가진 고유의 테루아를 가장 잘 드러낼 수 있는 향미들을 엄선하여 기록합니다.
@@ -601,7 +597,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                            <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[100] w-64 p-5 bg-[#0b0c0b]/fb border border-copper/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                              <div className="flex justify-between items-start mb-3">
                                <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none">로스팅 배출 시간의 의미</span>
-                               <button onClick={() => setShowRoastTimeHelp(false)} className="text-gray-600 hover:text-white leading-none">&times;</button>
+                               <button onClick={() => setActiveHelp(null)} className="text-gray-600 hover:text-white leading-none">&times;</button>
                              </div>
                              <p className="text-[11px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal">
                                <span className="text-gray-200 font-bold">배출 시간</span>은 원두가 완성되는 결정적인 시점입니다. 단 1초의 차이가 커피의 향미와 로스팅 포인트를 결정지을 만큼 중요한 과정입니다. <br/><br/>
@@ -627,7 +623,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <div className="flex items-center gap-1.5 mb-6 relative">
                         <span className="text-[12px] text-copper/60 font-black tracking-widest uppercase">Agtron</span>
                         <button 
-                          onClick={() => setShowAgtronHelp(!showAgtronHelp)}
+                          onClick={() => setActiveHelp(activeHelp === 'agtron' ? null : 'agtron')}
                           className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
                           aria-label="Agtron Help"
                         >
@@ -635,7 +631,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         </button>
 
                         {/* Agtron Help Popup */}
-                        {showAgtronHelp && (
+                        {activeHelp === 'agtron' && (
                           <div className="absolute top-6 left-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                             <div className="flex justify-between items-start mb-2">
                               <span className="text-[11px] text-copper font-black uppercase tracking-widest">What is Agtron?</span>
