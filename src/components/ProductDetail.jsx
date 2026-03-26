@@ -1045,7 +1045,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                     </div>
                                     
                                     {/* Step Data */}
-                                    <div className="flex flex-col items-center gap-1 pt-1">
+                                    <div className="flex flex-col items-center gap-1 pt-0">
                                       <div className="flex items-baseline gap-1.5">
                                         <span className="text-xl font-serif font-black text-white tabular-nums group-hover:text-copper transition-colors">{pour.water}</span>
                                         <span className="text-[8.5px] font-bold text-gray-500 tracking-widest">g</span>
