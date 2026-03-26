@@ -589,7 +589,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white leading-none">&times;</button>
                       </div>
                       <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
-                        향(Flavor), 후미(Aftertaste), 산미(Acidity), 단맛(Sweetness), 바디(Body), 밸런스(Balance) 등 커피의 매력을 결정하는 6가지 핵심 지표를 시각화한 결과물입니다.
+                        향(Flavor), 후미(Aftertaste), 산미(Acidity), 단맛(Sweetness), 바디(Body), 밸런스(Balance) 등 커피의 매력을 결정하는 6가지 핵심 지표를 시각화한 결과물입니다. <br/><br/>
+                        <span className="text-[9px] text-gray-500 italic font-bold leading-none">* 표기된 수치는 아키미스트 로스터의 주관적인 평가이며, 절대적인 수치가 아님을 안내 드립니다.</span>
                       </p>
                     </div>
                   )}
@@ -733,8 +734,20 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             {product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}
                           </div>
                         </div>
+                      </div>
+
+                      {/* Roaster's Comment */}
+                      {product.roasterComment && (
+                        <div className="mt-8 pt-6 border-t border-white/5 w-full">
+                           <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                             <span className="text-[10px] font-black text-copper uppercase tracking-[0.2em]">로스터 코멘트</span>
+                           </div>
+                           <p className="text-[11px] text-gray-400 leading-relaxed font-bold break-keep text-center md:text-left italic">
+                             "{product.roasterComment}"
+                           </p>
+                        </div>
+                      )}
                      </div>
-                  </div>
 
                   {/* Roasting Point Guide (Right Side) */}
                   <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-2 md:pt-0">

@@ -39,7 +39,7 @@ const getInitialFormData = () => ({
   experience: 50,
   showBasicInfo: true, showAnalysisInfo: true,
   blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: '',
-  dt: '', dtr: '', roastCapacity: '',
+  dt: '', dtr: '', roastCapacity: '', roasterComment: '',
   // Extraction Recipe (Hot)
   hot_coffee_amount: '20g', hot_grind: '', hot_temp: '', hot_ratio: '', hot_dripper: '',
   hot_bloom_time: '', hot_bloom_water: '',
@@ -837,6 +837,9 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       <InputField label="DT (Develop Time)" name="dt" value={formData.dt} onChange={handleChange} placeholder="예: 1분 30초" />
                       <InputField label="DTR (Develop Time Ratio)" name="dtr" value={formData.dtr} onChange={handleChange} placeholder="예: 15.5%" />
                       <InputField label="로스팅 용량 (1회 배치)" name="roastCapacity" value={formData.roastCapacity} onChange={handleChange} placeholder="예: 800g" />
+                      <div className="md:col-span-2 lg:col-span-4">
+                        <InputField label="로스터 코멘트 (Roaster's Note)" name="roasterComment" value={formData.roasterComment} onChange={handleChange} placeholder="예: 단맛의 밸런스가 매우 뛰어나며 후미가 깔끔하게 떨어집니다." />
+                      </div>
                     </>
                   )}
                 </>
