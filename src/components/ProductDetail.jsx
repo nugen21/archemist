@@ -527,7 +527,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       { label: '밸런스 (Balance)', val: product.balance || 0 }
                     ].map((s, idx) => (
                       <div key={idx} className="flex flex-col gap-2.5">
-                        <div className="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-widest">
+                        <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                           <span>{s.label}</span>
                           <span className="text-copper">{s.val > 0 ? s.val : '-'} / 5</span>
                         </div>
