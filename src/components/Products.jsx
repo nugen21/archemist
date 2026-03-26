@@ -68,7 +68,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
               </div>
 
               <div className="flex flex-col mb-4">
-                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 group-hover:text-copper transition-colors line-clamp-2 h-16 leading-tight">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 group-hover:text-copper transition-colors line-clamp-3 min-h-[4rem] sm:min-h-[5rem] leading-tight">
                   {product.name}
                 </h3>
                 <div className="flex justify-between items-baseline border-b border-copper/10 pb-3">

@@ -201,7 +201,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                     )}
                   </div>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors h-24 line-clamp-3 italic">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors min-h-[6rem] line-clamp-4 italic">
                   {bean.name}
                   {bean.process && (
                     <span className="text-sm sm:text-base text-copper/60 ml-2 not-italic font-sans font-bold align-middle">
