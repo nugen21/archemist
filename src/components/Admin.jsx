@@ -718,14 +718,18 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   placeholder="예: 3.5 또는 18,000" 
                 />
 
-                <div className="flex flex-col gap-1.5 opacity-60">
-                  <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">획득 경험치 (Auto XP: 0.01%)</label>
+                <div className="flex flex-col gap-1.5">
+                  <InputField label="기본 경험치 (Base Experience)" name="experience" value={formData.experience} onChange={handleChange} type="number" placeholder="예: 50" />
+                </div>
+
+                <div className="flex flex-col gap-1.5 opacity-80">
+                  <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">최종 획득 경험치 (Total XP)</label>
                   <div className="bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-3 text-copper text-base font-black flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                       <span>{Math.floor(parseFloat(String(formData.price || '0').replace(/,/g, '')) * 0.0001 * (formData.recommended ? 1.1 : 1))} XP</span>
-                       {formData.recommended && <span className="text-[9px] bg-copper/10 text-copper px-2 py-1 rounded-md border border-copper/20">+10% 보너스</span>}
+                       <span>{((Number(formData.experience) || 0) * (formData.recommended ? 1.1 : 1)).toFixed(1)} XP</span>
+                       {formData.recommended && <span className="text-[9px] bg-copper/10 text-copper px-2 py-1 rounded-md border border-copper/20">+10% 추천 보너스 합산</span>}
                     </div>
-                    <span className="text-[9px] text-gray-600 font-bold uppercase tracking-widest">자동 계산됨</span>
+                    <span className="text-[9px] text-gray-600 font-bold uppercase tracking-widest">최종 적용치</span>
                   </div>
                 </div>
 
