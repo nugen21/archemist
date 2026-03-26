@@ -682,7 +682,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                   <span className="text-[10px] text-copper font-black uppercase tracking-widest">DT (Develop Time)</span>
                                   <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
                                 </div>
-                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1차 크랙 시작부터 배출까지의 시간을 의미합니다. 커피의 바디감과 단맛을 결정하는 중요한 지표입니다.</p>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1차 크랙이 시작된 후부터 배출까지의 시간입니다. 커피의 당도와 바디감이 결정되는 핵심 구간입니다.</p>
                               </div>
                             )}
                           </div>
@@ -726,44 +726,31 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                   <span className="text-[10px] text-copper font-black uppercase tracking-widest">배치 용량 (Batch Size)</span>
                                   <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
                                 </div>
-                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1회 로스팅 시 투입되는 원두의 양입니다. 동일한 규격을 유지하여                             <button 
-                              onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'agtron' ? null : 'agtron'); }}
-                              className="p-1 hover:text-white transition-colors text-white/40 outline-none"
-                              aria-label="Agtron Help"
-                            >
-                              <HelpCircle size={13} strokeWidth={2.5} />
-                            </button>
-                            {activeHelp === 'agtron' && (
-                              <div className="absolute top-6 left-0 z-[9999] w-64 p-4 bg-[#111211]/98 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
-                                <div className="flex justify-between items-start mb-2">
-                                  <span className="text-[11px] text-copper font-black uppercase tracking-widest font-sans">아그트론(Agtron) 가이드</span>
-                                  <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
-                                </div>
-                                <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
-                                  아그트론(Agtron)은 커피의 로스팅 정도(배전도)를 수치화한 글로벌 표준입니다. 숫자가 낮을수록 다크(강배전), 높을수록 라이트(약배전)를 의미하며, 디플루이드 옴니(DiFluid Omni) 등 정밀 측정기를 통해 객관적인 데이터를 도출합니다.
-                                </p>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1회 로스팅 시 투입되는 원두의 양입니다. 동일한 규격을 유지하여 로스팅의 균일성을 확보합니다.</p>
                               </div>
                             )}
                           </div>
+                          <div className="text-base font-serif font-black text-white text-center">
+                            {product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="flex items-center gap-5">
-                         <div className="flex flex-col items-center md:items-end leading-none gap-1.5">
-                            <span className="text-[8px] text-gray-600 font-black uppercase tracking-[0.2em]">홀빈 AGTRON</span>
-                            <span className="text-lg font-serif font-black text-white">{product.agtronWb || '-'}</span>
-                         </div>
-                         <div className="w-[1px] h-6 bg-white/5"></div>
-                         <div className="flex flex-col items-center md:items-end leading-none gap-1.5">
-                            <span className="text-[8px] text-gray-600 font-black uppercase tracking-[0.2em]">분쇄 AGTRON</span>
-                            <span className="text-lg font-serif font-black text-white">{product.agtronGround || '-'}</span>
-                         </div>
-                      </div>
-                    </div>
-Ground || '-'}</span>
-                         </div>
-                      </div>
-                    </div>
+
+                      {/* Roaster's Comment */}
+                      {product.roasterComment && (
+                        <div className="mt-5 pt-4 border-t border-white/5 w-full">
+                           <div className="flex items-center gap-2 mb-1.5 justify-center md:justify-start">
+                             <span className="text-[10px] font-black text-copper uppercase tracking-[0.2em]">로스터 코멘트</span>
+                           </div>
+                           <p className="text-[11px] text-gray-400 leading-relaxed font-bold break-keep text-center md:text-left italic">
+                             "{product.roasterComment}"
+                           </p>
+                        </div>
+                      )}
+                     </div>
+
+                  {/* Roasting Point Guide (Right Side) */}
+                  <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-2 md:pt-0">
                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-1.5 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                         로스팅 포인트 가이드
@@ -966,7 +953,7 @@ Ground || '-'}</span>
             <div className="max-w-8xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
-                추천 <Filter size={20} className="inline-block text-copper/80 mx-1.5 -translate-y-[2px] animate-pulse" /> 추출 방식
+                추천 <Filter size={18} className="inline-block text-copper/80 mx-1.5 -translate-y-[1px] animate-pulse" /> 추출 방식
                 <div className="h-[1px] w-8 bg-copper/30"></div>
               </h3>
               <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
