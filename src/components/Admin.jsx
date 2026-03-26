@@ -712,6 +712,23 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 <InputField label={formData.category === 'beverage' ? "가격 (Price)" : "가격"} name="price" value={formData.price} onChange={handleChange} placeholder="예: 3.5 또는 18,000" />
               </div>
 
+              <div className="flex flex-col justify-end">
+                <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 (XP: {formData.experience || 50})</label>
+                <div className="flex items-center gap-3 bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-2.5 h-[50px]">
+                  <input 
+                    type="range" 
+                    name="experience" 
+                    min="1" 
+                    max="100" 
+                    step="1"
+                    value={formData.experience || 50} 
+                    onChange={handleChange}
+                    className="flex-grow accent-copper h-1"
+                  />
+                  <span className="text-sm font-black text-copper min-w-[30px] text-right">{formData.experience || 50}</span>
+                </div>
+              </div>
+
               {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag' || formData.category === 'bean') && (
                 <div className="flex flex-col justify-end">
                   <InputField 
@@ -985,34 +1002,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               </div>
 
-              {/* Experience Points Area */}
-              <div className="bg-[#181a19] border border-white/5 p-8 rounded-3xl mt-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></div>
-                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase">경험치 설정 (Experience Points)</h4>
-                </div>
-                <div className="flex flex-col gap-6">
-                  <div className="flex items-center gap-6">
-                    <input 
-                      type="range" 
-                      name="experience" 
-                      min="1" 
-                      max="100" 
-                      step="1"
-                      value={formData.experience || 50} 
-                      onChange={handleChange}
-                      className="flex-grow accent-copper"
-                    />
-                    <div className="min-w-[80px] text-center bg-white/5 border border-white/10 rounded-xl py-2 px-4">
-                       <span className="text-xl font-serif font-black text-white">{formData.experience || 50}</span>
-                       <span className="text-[10px] text-gray-500 uppercase ml-1">XP</span>
-                    </div>
-                  </div>
-                  <p className="text-[11px] text-gray-500 leading-relaxed break-keep">
-                    상품의 전반적인 복합성과 깊이를 수치화합니다 (1~100). 이 수치는 상세 페이지에서 제품의 레벨이나 난이도로 표시될 수 있습니다.
-                  </p>
-                </div>
-              </div>
 
 
               {(formData.category === 'bean' || formData.category === 'dripbag') && (
