@@ -670,7 +670,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             </button>
                             {activeHelp === 'dtr' && (
                               <div className="absolute top-0 left-12 md:left-24 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
-                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">DTR (Time Ratio)</span>
+                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">DTR (Develop Time Ratio)</span>
                                 <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep">전체 로스팅 시간에 대한 DT의 비율입니다. 밸런스와 플레이버의 특징을 파악할 수 있는 고정밀 지표입니다.</p>
                               </div>
                             )}
