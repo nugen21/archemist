@@ -557,8 +557,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
   }
 
   return (
-    <div className="min-h-screen bg-[#111211] text-gray-200 py-4 px-4 sm:px-6 lg:px-8 font-sans selection:bg-copper selection:text-white">
-      <div className="max-w-5xl mx-auto bg-[#181a19] border border-copper/30 rounded-3xl p-4 shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen bg-[#111211] text-gray-200 py-6 px-4 sm:px-8 lg:px-12 font-sans selection:bg-copper selection:text-white">
+      <div className="max-w-7xl mx-auto bg-[#181a19] border border-copper/30 rounded-[2.5rem] p-6 sm:p-12 shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-copper/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 border-b border-copper/20 pb-4 relative z-10 gap-4">
@@ -641,8 +641,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className={formData.category === 'beverage' ? "md:col-span-2 lg:col-span-2" : "md:col-span-2 lg:col-span-3"}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="md:col-span-2 lg:col-span-3">
                 <InputField label="상품명" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
               </div>
 
@@ -653,7 +653,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               )}
 
               
-              <div className="md:col-span-2 lg:col-span-2">
+              <div className="md:col-span-2 lg:col-span-3">
                 <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">상품 이미지 업로드 (Recommended: Square, Max 2MB)</label>
                 <div className="flex gap-4 items-start">
                   <div className="relative group flex-1">
@@ -837,7 +837,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       <InputField label="DT (Develop Time)" name="dt" value={formData.dt} onChange={handleChange} placeholder="예: 1분 30초" />
                       <InputField label="DTR (Develop Time Ratio)" name="dtr" value={formData.dtr} onChange={handleChange} placeholder="예: 15.5%" />
                       <InputField label="로스팅 용량 (1회 배치)" name="roastCapacity" value={formData.roastCapacity} onChange={handleChange} placeholder="예: 800g" />
-                      <div className="md:col-span-2 lg:col-span-4">
+                      <div className="md:col-span-2 lg:col-span-3">
                         <InputField label="로스터 코멘트 (Roaster's Note)" name="roasterComment" value={formData.roasterComment} onChange={handleChange} placeholder="예: 단맛의 밸런스가 매우 뛰어나며 후미가 깔끔하게 떨어집니다." />
                       </div>
                     </>
