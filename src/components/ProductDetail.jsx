@@ -337,7 +337,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     )}
                     {product.category === 'bean' && product.agingDays && (
                       <div className="flex flex-col items-end gap-1">
-                        <div className="flex items-center gap-1.5 justify-end relative">
+                        <div className={`flex items-center gap-1.5 justify-end relative ${showAgingHelp ? 'z-50' : 'z-10'}`}>
                           <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
                           <button 
                             onClick={() => setShowAgingHelp(!showAgingHelp)}
@@ -349,7 +349,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                           {/* Aging Help Popup */}
                           {showAgingHelp && (
-                            <div className="absolute top-6 right-0 z-[1000] w-64 p-4 bg-[#1a1c1b]/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
+                            <div className="absolute top-6 right-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                               <div className="flex justify-between items-start mb-2">
                                 <span className="text-[11px] text-copper font-black uppercase tracking-widest">Recommended Aging</span>
                                 <button onClick={() => setShowAgingHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
@@ -446,7 +446,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
             <div className="lg:col-span-6 grid grid-cols-1 lg:grid-cols-6 gap-4">
               {/* 1. Cup Notes Card */}
               {product.cupNotes && (
-                <div className="lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group">
+                <div className={`lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group ${showCupNotesHelp ? 'z-50' : 'z-10'}`}>
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
                   </div>
@@ -465,7 +465,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                     {/* Cup Notes Help Popup */}
                     {showCupNotesHelp && (
-                      <div className="absolute top-8 left-0 z-[1000] w-64 p-4 bg-[#1a1c1b]/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
+                      <div className="absolute top-8 left-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                         <div className="flex justify-between items-start mb-2">
                           <span className="text-[11px] text-copper font-black uppercase tracking-widest">About Cup Notes</span>
                           <button onClick={() => setShowCupNotesHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
@@ -518,7 +518,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
               {/* 3. Roasting Point & Time Card */}
               {(isBean || product.category === 'dripbag') && (
-                <div className="lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center">
+                <div className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${showAgtronHelp ? 'z-50' : 'z-10'}`}>
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
                   </div>
@@ -554,7 +554,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                         {/* Agtron Help Popup */}
                         {showAgtronHelp && (
-                          <div className="absolute top-6 left-0 z-[1000] w-64 p-4 bg-[#1a1c1b]/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
+                          <div className="absolute top-6 left-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                             <div className="flex justify-between items-start mb-2">
                               <span className="text-[11px] text-copper font-black uppercase tracking-widest">What is Agtron?</span>
                               <button onClick={() => setShowAgtronHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
