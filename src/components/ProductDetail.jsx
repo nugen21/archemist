@@ -351,21 +351,24 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     </p>
                     
                     {/* XP Reward Highlight */}
-                    <div className="flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default">
-                      <Sparkles size={16} className="text-amber-500 animate-pulse" />
-                      <div className="flex flex-col">
-                        <span className="text-[10px] text-amber-500/80 font-black tracking-[0.1em] leading-none mb-1">경험치 보상</span>
-                        <div className="flex items-baseline gap-1">
-                          <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">
-                            +{Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1))}
-                          </span>
-                          <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
-                          {product.recommended && (
-                            <span className="text-[8px] bg-amber-500/10 text-amber-500 px-1.5 py-0.5 rounded border border-amber-500/20 ml-1 font-black animate-bounce">+10% HOT</span>
-                          )}
+                    {/* XP Reward Highlight - No XP for beverages */}
+                    {product.category !== 'beverage' && (
+                      <div className="flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default">
+                        <Sparkles size={16} className="text-amber-500 animate-pulse" />
+                        <div className="flex flex-col">
+                          <span className="text-[10px] text-amber-500/80 font-black tracking-[0.1em] leading-none mb-1">경험치 보상</span>
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">
+                              +{Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1))}
+                            </span>
+                            <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
+                            {product.recommended && (
+                              <span className="text-[8px] bg-amber-500/10 text-amber-500 px-1.5 py-0.5 rounded border border-amber-500/20 ml-1 font-black animate-bounce">+10% HOT</span>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   <div className="flex gap-8">
@@ -681,8 +684,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
             </div>
           )}
 
-          {/* 4. Experience Points (XP) Card - Visual Level Bar */}
-          {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
+          {/* 4. Experience Points (XP) Card - Visual Level Bar - No XP for beverages */}
+          {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
             <div className="lg:col-span-6 bg-[#111211] border border-white/5 p-8 rounded-[2.5rem] shadow-xl relative overflow-hidden group">
                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                  <Sparkles size={80} className="text-copper" />

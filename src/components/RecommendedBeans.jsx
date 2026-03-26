@@ -197,21 +197,24 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                   </div>
 
                   {/* XP Reward Badge */}
-                  <div className="flex items-center gap-2 bg-gradient-to-br from-amber-500/15 to-yellow-500/5 border border-amber-500/20 px-3 py-2 rounded-xl backdrop-blur-sm group-hover:scale-105 transition-all">
-                    <Sparkles size={11} className="text-amber-500 animate-pulse" />
-                    <div className="flex flex-col items-start leading-none gap-0.5">
-                      <span className="text-[8px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
-                      <div className="flex items-baseline gap-0.5">
-                        <span className="text-[15.5px] font-serif font-black text-amber-500">
-                          +{Math.floor(parseFloat(String(bean.price || '0').replace(/,/g, '')) * 0.0001 * 1.1)}
-                        </span>
-                        <div className="flex items-center gap-1">
-                          <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
-                          <span className="text-[8px] bg-amber-500/15 text-amber-500 px-1.5 py-0.5 rounded border border-amber-500/20 font-black leading-tight">+10%</span>
+                  {/* XP Reward Badge - No XP for beverages */}
+                  {bean.category !== 'beverage' && (
+                    <div className="flex items-center gap-2 bg-gradient-to-br from-amber-500/15 to-yellow-500/5 border border-amber-500/20 px-3 py-2 rounded-xl backdrop-blur-sm group-hover:scale-105 transition-all">
+                      <Sparkles size={11} className="text-amber-500 animate-pulse" />
+                      <div className="flex flex-col items-start leading-none gap-0.5">
+                        <span className="text-[8px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                        <div className="flex items-baseline gap-0.5">
+                          <span className="text-[15.5px] font-serif font-black text-amber-500">
+                            +{Math.floor(parseFloat(String(bean.price || '0').replace(/,/g, '')) * 0.0001 * 1.1)}
+                          </span>
+                          <div className="flex items-center gap-1">
+                            <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
+                            <span className="text-[8px] bg-amber-500/15 text-amber-500 px-1.5 py-0.5 rounded border border-amber-500/20 font-black leading-tight">+10%</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
 
 
