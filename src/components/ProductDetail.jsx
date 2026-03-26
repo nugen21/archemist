@@ -671,7 +671,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               <HelpCircle size={15} strokeWidth={2.5} />
                             </button>
                             {activeHelp === 'dt' && (
-                              <div className="absolute top-0 left-12 md:left-24 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                              <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                                 <div className="flex justify-between items-start mb-1">
                                   <span className="text-[10px] text-copper font-black uppercase tracking-widest">DT (Develop Time)</span>
                                   <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
@@ -693,7 +693,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               <HelpCircle size={15} strokeWidth={2.5} />
                             </button>
                             {activeHelp === 'dtr' && (
-                              <div className="absolute top-0 left-12 md:left-24 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                              <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                                 <div className="flex justify-between items-start mb-1">
                                   <span className="text-[10px] text-copper font-black uppercase tracking-widest">DTR (Develop Time Ratio)</span>
                                   <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
