@@ -717,49 +717,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   placeholder="예: 3.5 또는 18,000" 
                 />
 
-                <div className="flex flex-col gap-1.5">
-                  <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 (XP: 1-100)</label>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <input 
-                        type="number" 
-                        name="experience" 
-                        min="1" 
-                        max="100" 
-                        value={formData.experience} 
-                        onChange={handleChange}
-                        className="w-full bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-3 text-white text-base font-black focus:border-copper focus:ring-1 focus:ring-copper outline-none transition"
-                      />
-                      <div className="flex gap-1 shrink-0">
-                        {[25, 50, 75, 100].map(val => (
-                          <button 
-                            key={val}
-                            type="button"
-                            onClick={() => handleChange({ target: { name: 'experience', value: val } })}
-                            className={`w-10 h-10 rounded-lg text-[10px] font-black border transition-all ${Number(formData.experience) === val ? 'bg-copper text-black border-copper shadow-[0_0_12px_rgba(161,118,76,0.4)]' : 'bg-black/40 border-gray-800 text-gray-500 hover:border-copper/40'}`}
-                          >
-                            {val}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex gap-1.5 items-center">
-                      {['+5', '+10', '-5', '-10'].map(mod => (
-                        <button
-                          key={mod}
-                          type="button"
-                          onClick={() => {
-                            const current = parseInt(formData.experience) || 0;
-                            const delta = parseInt(mod);
-                            const next = Math.max(1, Math.min(100, current + delta));
-                            handleChange({ target: { name: 'experience', value: next } });
-                          }}
-                          className="flex-grow py-2 bg-white/5 border border-white/5 rounded-lg text-[9px] font-bold text-gray-500 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all uppercase tracking-widest"
-                        >
-                          {mod}
-                        </button>
-                      ))}
-                    </div>
+                <div className="flex flex-col gap-1.5 opacity-60">
+                  <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 보상 (Auto XP: 0.01%)</label>
+                  <div className="bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-3 text-copper text-base font-black flex items-center justify-between">
+                    <span>{Math.floor(parseFloat(String(formData.price || '0').replace(/,/g, '')) * 0.0001)} XP</span>
+                    <span className="text-[9px] text-gray-600 font-bold uppercase tracking-widest">자동 계산됨</span>
                   </div>
                 </div>
 

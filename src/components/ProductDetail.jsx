@@ -356,7 +356,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <div className="flex flex-col">
                         <span className="text-[10px] text-amber-500/80 font-black tracking-[0.1em] leading-none mb-1">경험치 보상</span>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">+{product.experience || 50}</span>
+                          <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">
+                            +{Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001)}
+                          </span>
                           <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
                         </div>
                       </div>
@@ -689,7 +691,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                        경험치
                     </h4>
                     <div className="flex items-baseline gap-1 mt-2">
-                       <span className="text-3xl font-serif font-black text-white">{product.experience || 50}</span>
+                       <span className="text-3xl font-serif font-black text-white">
+                         {Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001)}
+                       </span>
                        <span className="text-xs font-black text-gray-600 uppercase tracking-widest">XP</span>
                     </div>
                   </div>
@@ -702,12 +706,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                      <div className="relative h-4 bg-white/5 rounded-full overflow-hidden border border-white/5">
                         <div 
                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-copper/40 via-copper to-copper/40 shadow-[0_0_15px_rgba(161,118,76,0.3)] transition-all duration-1000 ease-out"
-                           style={{ width: `${product.experience || 50}%` }}
+                           style={{ width: `${Math.max(1, Math.min(100, Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001)))}%` }}
                         ></div>
                         {/* Subtle glow at the end of progress */}
                         <div 
                            className="absolute top-0 w-8 h-full bg-white/20 blur-md transition-all duration-1000 ease-out"
-                           style={{ left: `calc(${product.experience || 50}% - 16px)` }}
+                           style={{ left: `calc(${Math.max(1, Math.min(100, Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001)))}% - 16px)` }}
                         ></div>
                      </div>
                   </div>
