@@ -354,7 +354,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     <div className="flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default">
                       <Sparkles size={16} className="text-amber-500 animate-pulse" />
                       <div className="flex flex-col">
-                        <span className="text-[9px] text-amber-500/80 font-black uppercase tracking-[0.2em] leading-none mb-1">XP Reward</span>
+                        <span className="text-[10px] text-amber-500/80 font-black tracking-[0.1em] leading-none mb-1">경험치 보상</span>
                         <div className="flex items-baseline gap-1">
                           <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">+{product.experience || 50}</span>
                           <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
