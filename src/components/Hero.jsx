@@ -21,11 +21,17 @@ export default function Hero({ id }) {
           />
         </div>
 
-        <p className="text-base sm:text-lg md:text-[20px] text-gray-300 mb-4 sm:mb-6 max-w-4xl mx-auto leading-relaxed sm:leading-loose font-light px-4 md:px-8 whitespace-pre-wrap text-center break-keep">
-          <strong className="block text-xl sm:text-2xl md:text-[28px] text-copper mb-4 sm:mb-6 font-serif">“Ad Fontes, Ad Aroma - 근원으로, 향기로”</strong>
-          세상의 모든 물질이 4원소로 이루어져 있다는 고대 철학처럼, 커피의 맛 또한 씨앗, 토양, 물, 그리고 불(로스팅)이라는 근원에서 시작됩니다.
-          ARCHEMIST는 이 근원의 에너지를 가장 순수한 형태의 ‘액체’로 정제하는 자들입니다.
-        </p>
+        <div className="max-w-4xl mx-auto px-4 md:px-8 space-y-8 animate-fade-in">
+          <p className="text-lg sm:text-2xl md:text-[26px] text-copper font-serif italic leading-snug break-keep">
+            고대 그리스어로 ‘Arche(ἀρχή)”는 <br className="hidden sm:block" />
+            만물의 시초이자 근원적인 원리를 뜻합니다.
+          </p>
+          <p className="text-[15px] sm:text-lg md:text-[19px] text-gray-400 leading-relaxed sm:leading-[1.8] font-normal tracking-normal break-keep max-w-3xl mx-auto">
+            아키미스트 로스터스는 유행에 휩쓸리는 커피가 아닌, <br className="hidden md:block"/>
+            원두가 가진 <span className="text-gray-200 font-bold">‘태초의 잠재력(Arche)’</span>을 현대적 연금술(Alchemy)로 <br className="hidden md:block"/>
+            증명해내기 위해 설립된 비밀 결사체와 같은 로스터리입니다.
+          </p>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 w-full px-2 mb-6">
           <a 
