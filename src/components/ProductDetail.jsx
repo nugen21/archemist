@@ -1031,7 +1031,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                   
                                   <div className="flex flex-col items-center relative z-10">
                                     {/* Step Label */}
-                                    <span className="text-copper font-black text-[12px] uppercase tracking-[0.2em] mb-4 opacity-100">{pour.label}</span>
+                                    <span className="text-copper font-black text-[12px] uppercase tracking-[0.2em] mb-2 opacity-100">{pour.label}</span>
                                     
                                     {/* Step Circle with Number */}
                                     <div className="w-[50px] h-[50px] rounded-full bg-[#181a19] border border-white/10 flex items-center justify-center mb-6 group-hover:border-copper/40 transition-all duration-500 shadow-xl relative overflow-hidden">
