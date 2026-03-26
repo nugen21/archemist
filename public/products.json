@@ -98,7 +98,7 @@
   {
     "category": "bean",
     "name": "Puente San Antonia Geisha",
-    "price": "0",
+    "price": "28000",
     "country": "Costa Rica",
     "region": "Leon Cortes, Tarrazu",
     "farm": "San Antonia",
@@ -145,6 +145,7 @@
     "sweetness": "5",
     "bodyRate": "4",
     "balance": "4",
+    "experience": 50,
     "showBasicInfo": false,
     "showAnalysisInfo": false,
     "blend1": "",
