@@ -46,7 +46,7 @@ const getInitialFormData = () => ({
   hot_p1_time: '', hot_p1_water: '',
   hot_p2_time: '', hot_p2_water: '',
   hot_p3_time: '', hot_p3_water: '',
-  hot_p4_time: '', hot_p4_water: '',
+  hot_p4_time: '', hot_p4_water: '', hot_tds: '',
   hot_comment: '',
   // Extraction Recipe (Ice)
   ice_coffee_amount: '20g', ice_grind: '', ice_temp: '', ice_ratio: '', ice_dripper: '',
@@ -55,7 +55,7 @@ const getInitialFormData = () => ({
   ice_p2_time: '', ice_p2_water: '',
   ice_p3_time: '', ice_p3_water: '',
   ice_p4_time: '', ice_p4_water: '',
-  ice_weight: '',
+  ice_weight: '', ice_tds: '',
   ice_comment: ''
 });
 
@@ -1046,6 +1046,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                         </div>
                       </div>
                       <InputField label="추천 드리퍼" name="hot_dripper" value={formData.hot_dripper} onChange={handleChange} placeholder="예: Hario V60" />
+                      <InputField label="TDS (%)" name="hot_tds" value={formData.hot_tds} onChange={handleChange} placeholder="1.25" />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 bg-black/40 p-6 rounded-2xl border border-white/5">
@@ -1131,6 +1132,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       </div>
                       <InputField label="추천 드리퍼" name="ice_dripper" value={formData.ice_dripper} onChange={handleChange} placeholder="예: Hario V60" />
                       <InputField label="얼음 중량 (g)" name="ice_weight" value={formData.ice_weight} onChange={handleChange} placeholder="120" type="number" />
+                      <InputField label="TDS (%)" name="ice_tds" value={formData.ice_tds} onChange={handleChange} placeholder="1.25" />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 bg-black/40 p-6 rounded-2xl border border-white/5">
