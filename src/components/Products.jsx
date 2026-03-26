@@ -96,37 +96,17 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
 
                   {/* XP Reward Badge - No XP for beverages */}
                   {product.category !== 'beverage' && (
-                    <div className="flex items-center gap-1.5 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/10 px-2 py-1.5 rounded-xl shadow-sm">
+                    <div 
+                      ref={activeXpHelp === product.id ? xpHelpRef : null}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveXpHelp(activeXpHelp === product.id ? null : product.id);
+                      }}
+                      className="flex items-center gap-1.5 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/10 px-2 py-1.5 rounded-xl shadow-sm cursor-pointer relative"
+                    >
                       <Sparkles size={10} className="text-amber-500 animate-pulse" />
                       <div className="flex flex-col items-start leading-none gap-0.5">
-                        <div className="flex items-center gap-1">
-                          <span className="text-[7px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
-                          <div className="relative inline-block z-40" ref={activeXpHelp === product.id ? xpHelpRef : null}>
-                            <button 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setActiveXpHelp(activeXpHelp === product.id ? null : product.id);
-                              }}
-                              className="p-0.5 hover:text-white transition-colors text-amber-500/40 outline-none"
-                              aria-label="XP Help"
-                            >
-                              <HelpCircle size={8} strokeWidth={3} />
-                            </button>
-
-                            {activeXpHelp === product.id && (
-                              <div className="absolute top-4 left-0 z-[100] w-48 p-3 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
-                                <div className="flex justify-between items-start mb-2">
-                                  <span className="text-[8px] text-amber-500 font-black uppercase tracking-widest leading-none">Membership Benefit</span>
-                                  <button onClick={(e) => { e.stopPropagation(); setActiveXpHelp(null); }} className="text-gray-600 hover:text-white leading-none text-xs">&times;</button>
-                                </div>
-                                <p className="text-[8px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal">
-                                  경험치를 쌓아서 <span className="text-amber-500 font-bold">등급</span>을 높여보세요! <br/>
-                                  레벨이 올라갈수록 더 특별한 혜택이 제공됩니다.
-                                </p>
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                        <span className="text-[7px] text-amber-500/80 font-black tracking-widest uppercase mb-0.5">경험치 보상</span>
                         <div className="flex items-baseline gap-0.5">
                           <span className="text-sm font-serif font-black text-amber-500">
                             +{Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1))}
@@ -135,6 +115,20 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                           {product.recommended && <span className="text-[7px] text-amber-500 font-black ml-0.5 leading-none animate-bounce">+10%</span>}
                         </div>
                       </div>
+
+                      {/* XP Help Popup */}
+                      {activeXpHelp === product.id && (
+                        <div className="absolute top-full left-0 mt-2 z-[100] w-48 p-3 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                          <div className="flex justify-between items-start mb-2">
+                            <span className="text-[8px] text-amber-500 font-black uppercase tracking-widest leading-none">Membership Benefit</span>
+                            <button onClick={(e) => { e.stopPropagation(); setActiveXpHelp(null); }} className="text-gray-600 hover:text-white leading-none text-xs">&times;</button>
+                          </div>
+                          <p className="text-[8px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal normal-case">
+                            경험치를 쌓아서 <span className="text-amber-500 font-bold">등급</span>을 높여보세요! <br/>
+                            레벨이 올라갈수록 더 특별한 혜택이 제공됩니다.
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
