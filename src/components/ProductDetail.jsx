@@ -150,7 +150,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
     function handleClickOutside(event) {
       if (activeHelp) {
         const currentRef = 
-          activeHelp === 'agtron' ? agtronHelpRef :
+          activeHelp === 'agtron' || activeHelp === 'dt' || activeHelp === 'dtr' || activeHelp === 'capacity' ? agtronHelpRef :
           activeHelp === 'cupNotes' ? cupNotesHelpRef :
           activeHelp === 'aging' ? agingHelpRef :
           activeHelp === 'roastTime' ? roastTimeHelpRef :
@@ -599,7 +599,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               {(isBean || product.category === 'dripbag') && (
                 <div 
                   ref={agtronHelpRef}
-                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${(activeHelp === 'agtron' || activeHelp === 'roastTime') ? 'z-[10000]' : 'z-10'}`}
+                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${(activeHelp === 'agtron' || activeHelp === 'roastTime' || activeHelp === 'dt' || activeHelp === 'dtr' || activeHelp === 'capacity') ? 'z-[10000]' : 'z-10'}`}
                 >
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
@@ -635,22 +635,69 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                          )}
                        </div>
                      </h4>
-                     <div className="grid grid-cols-2 gap-y-4 gap-x-6">
-                        <div className="flex flex-col gap-0.5">
-                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">총 소요 시간</div>
-                          <div className="text-base font-serif font-black text-white">{product.roastTime || '-'}</div>
+                      <div className="grid grid-cols-2 gap-y-4 gap-x-6">
+                        <div className="flex flex-col gap-1">
+                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-1">총 소요 시간</div>
+                          <div className="text-xl font-serif font-black text-white">{product.roastTime || '-'}</div>
                         </div>
-                        <div className="flex flex-col gap-0.5">
-                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">DT</div>
-                          <div className="text-base font-serif font-black text-white">{product.dt || '-'}</div>
+                        
+                        <div className="flex flex-col gap-1 relative">
+                          <div className="flex items-center gap-1.5">
+                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DT</div>
+                            <button 
+                              onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'dt' ? null : 'dt'); }}
+                              className="p-1 text-white/80 hover:text-white transition-colors outline-none"
+                            >
+                              <HelpCircle size={15} strokeWidth={2.5} />
+                            </button>
+                            {activeHelp === 'dt' && (
+                              <div className="absolute top-0 left-12 md:left-24 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">DT (Develop Time)</span>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep">1차 크랙이 시작된 후부터 배출까지의 시간입니다. 커피의 당도와 바디감이 결정되는 핵심 구간입니다.</p>
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-xl font-serif font-black text-white">{product.dt || '-'}</div>
                         </div>
-                        <div className="flex flex-col gap-0.5">
-                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">DTR</div>
-                          <div className="text-base font-serif font-black text-white">{product.dtr || '-'}</div>
+
+                        <div className="flex flex-col gap-1 relative">
+                          <div className="flex items-center gap-1.5">
+                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DTR</div>
+                            <button 
+                              onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'dtr' ? null : 'dtr'); }}
+                              className="p-1 text-white/80 hover:text-white transition-colors outline-none"
+                            >
+                              <HelpCircle size={15} strokeWidth={2.5} />
+                            </button>
+                            {activeHelp === 'dtr' && (
+                              <div className="absolute top-0 left-12 md:left-24 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">DTR (Time Ratio)</span>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep">전체 로스팅 시간에 대한 DT의 비율입니다. 밸런스와 플레이버의 특징을 파악할 수 있는 고정밀 지표입니다.</p>
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-xl font-serif font-black text-white">{product.dtr || '-'}</div>
                         </div>
-                        <div className="flex flex-col gap-0.5">
-                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">배치 용량</div>
-                          <div className="text-base font-serif font-black text-white">{product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}</div>
+
+                        <div className="flex flex-col gap-1 relative">
+                          <div className="flex items-center gap-1.5">
+                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">배치 용량</div>
+                            <button 
+                              onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'capacity' ? null : 'capacity'); }}
+                              className="p-1 text-white/80 hover:text-white transition-colors outline-none"
+                            >
+                              <HelpCircle size={15} strokeWidth={2.5} />
+                            </button>
+                            {activeHelp === 'capacity' && (
+                              <div className="absolute top-8 left-0 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">배치 용량 (Batch Size)</span>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep">1회 로스팅 시 투입되는 원두의 양입니다. 동일한 규격을 유지하여 로스팅의 균일성을 확보합니다.</p>
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-xl font-serif font-black text-white">
+                            {product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}
+                          </div>
                         </div>
                      </div>
                   </div>
