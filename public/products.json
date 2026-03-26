@@ -577,7 +577,7 @@
   {
     "category": "dripbag",
     "name": "Los Angeles El Vendaval Catuai",
-    "price": "0",
+    "price": "25000",
     "country": "Costa Rica",
     "region": "Dota, Tarrazu",
     "farm": "Los Angeles",
@@ -624,6 +624,7 @@
     "sweetness": "4",
     "bodyRate": "3.5",
     "balance": "3.5",
+    "experience": 50,
     "showBasicInfo": false,
     "showAnalysisInfo": false,
     "blend1": "",
