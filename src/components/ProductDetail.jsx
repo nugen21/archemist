@@ -145,6 +145,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   const agingHelpRef = useRef(null);
   const roastTimeHelpRef = useRef(null);
   const xpHelpRef = useRef(null);
+  const sensoryHelpRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -154,7 +155,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           activeHelp === 'cupNotes' ? cupNotesHelpRef :
           activeHelp === 'aging' ? agingHelpRef :
           activeHelp === 'roastTime' ? roastTimeHelpRef :
-          activeHelp === 'xp' ? xpHelpRef : null;
+          activeHelp === 'xp' ? xpHelpRef : 
+          activeHelp === 'sensory' ? sensoryHelpRef : null;
 
         if (currentRef?.current && !currentRef.current.contains(event.target)) {
           setActiveHelp(null);
@@ -563,11 +565,35 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               )}
 
               {/* 2. Sensory Profile Card */}
-              <div className="lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col h-full">
-                <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-6 flex items-center gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                  센서리 프로파일
-                </h4>
+              <div 
+                ref={sensoryHelpRef}
+                className={`lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col h-full ${activeHelp === 'sensory' ? 'z-[10000]' : 'z-10'}`}
+              >
+                <div className="flex items-center gap-3 mb-6 relative">
+                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                    센서리 프로파일
+                  </h4>
+                  <button 
+                    onClick={() => setActiveHelp(activeHelp === 'sensory' ? null : 'sensory')}
+                    className="p-1 hover:text-white transition-colors text-white/80 outline-none"
+                    aria-label="Sensory Help"
+                  >
+                    <HelpCircle size={15} strokeWidth={2.5} />
+                  </button>
+
+                  {activeHelp === 'sensory' && (
+                    <div className="absolute top-8 left-0 z-[9999] w-64 p-4 bg-[#0b0c0b]/98 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="text-[11px] text-copper font-black uppercase tracking-widest font-sans">센서리 프로파일 안내</span>
+                        <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white leading-none">&times;</button>
+                      </div>
+                      <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
+                        향(Flavor), 후미(Aftertaste), 산미(Acidity), 단맛(Sweetness), 바디(Body), 밸런스(Balance) 등 커피의 매력을 결정하는 6가지 핵심 지표를 시각화한 결과물입니다.
+                      </p>
+                    </div>
+                  )}
+                </div>
                 <div className="flex flex-col gap-6 flex-grow">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
                     {[
