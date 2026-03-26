@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Sparkles } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Sparkles, HelpCircle } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
 
 const countryToCode = {
@@ -47,6 +47,8 @@ const countryToCode = {
 
 export default function RecommendedBeans({ isAdmin, onEdit, products }) {
   const [beans, setBeans] = useState([]);
+  const [activeXpHelp, setActiveXpHelp] = useState(null);
+  const xpHelpRef = useRef(null);
 
   useEffect(() => {
     if (products && products.length > 0) {
@@ -58,6 +60,16 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
       }));
     }
   }, [products, isAdmin]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (activeXpHelp && xpHelpRef.current && !xpHelpRef.current.contains(event.target)) {
+        setActiveXpHelp(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [activeXpHelp]);
 
   const handleHide = (id) => {
     if (window.confirm('이 원두를 메인 페이지에서 숨기시겠습니까? (관리자 메뉴에서 다시 보이게 할 수 있습니다)')) {
@@ -213,10 +225,37 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                     <div className="flex items-center gap-2 bg-gradient-to-br from-amber-500/15 to-yellow-500/5 border border-amber-500/20 px-3 py-2 rounded-xl backdrop-blur-sm group-hover:scale-105 transition-all">
                       <Sparkles size={11} className="text-amber-500 animate-pulse" />
                       <div className="flex flex-col items-start leading-none gap-0.5">
-                        <span className="text-[8px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-[8px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                          <div className="relative inline-block z-40" ref={activeXpHelp === bean.id ? xpHelpRef : null}>
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveXpHelp(activeXpHelp === bean.id ? null : bean.id);
+                              }}
+                              className="p-0.5 hover:text-white transition-colors text-amber-500/40 outline-none"
+                              aria-label="XP Help"
+                            >
+                              <HelpCircle size={8} strokeWidth={3} />
+                            </button>
+
+                            {activeXpHelp === bean.id && (
+                              <div className="absolute top-4 left-0 z-[100] w-48 p-3 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                <div className="flex justify-between items-start mb-2">
+                                  <span className="text-[8px] text-amber-500 font-black uppercase tracking-widest leading-none">Membership Guide</span>
+                                  <button onClick={(e) => { e.stopPropagation(); setActiveXpHelp(null); }} className="text-gray-600 hover:text-white leading-none text-xs">&times;</button>
+                                </div>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal normal-case">
+                                  경험치를 쌓아서 최고 레벨에 도전해 보세요! <br/>
+                                  <span className="text-amber-500 font-bold">등급</span>이 올라갈수록 더 특별한 혜택이 제공됩니다.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
                         <div className="flex items-baseline gap-0.5">
                           <span className="text-[15.5px] font-serif font-black text-amber-500">
-                            +{Math.floor(parseFloat(String(bean.price || '0').replace(/,/g, '')) * 0.0001 * 1.1)}
+                             +{Math.floor(parseFloat(String(bean.price || '0').replace(/,/g, '')) * 0.0001 * 1.1)}
                           </span>
                           <div className="flex items-center gap-1">
                             <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>

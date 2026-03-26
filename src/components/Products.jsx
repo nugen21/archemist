@@ -1,9 +1,21 @@
-import React from 'react';
-import { Sparkles } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Sparkles, HelpCircle } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
 
-const ProductSection = ({ title, category, icon, items, bgColor }) => {
+const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, setActiveXpHelp }) => {
   if (!items || items.length === 0) return null;
+
+  const xpHelpRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (activeXpHelp && xpHelpRef.current && !xpHelpRef.current.contains(event.target)) {
+        setActiveXpHelp(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [activeXpHelp]);
 
   return (
     <section id={category} className={`py-4 sm:py-10 scroll-mt-24 relative overflow-hidden border-b border-white/5 last:border-b-0 ${bgColor}`}>
@@ -87,7 +99,34 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                     <div className="flex items-center gap-1.5 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/10 px-2 py-1.5 rounded-xl shadow-sm">
                       <Sparkles size={10} className="text-amber-500 animate-pulse" />
                       <div className="flex flex-col items-start leading-none gap-0.5">
-                        <span className="text-[7px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                        <div className="flex items-center gap-1">
+                          <span className="text-[7px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                          <div className="relative inline-block z-40" ref={activeXpHelp === product.id ? xpHelpRef : null}>
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveXpHelp(activeXpHelp === product.id ? null : product.id);
+                              }}
+                              className="p-0.5 hover:text-white transition-colors text-amber-500/40 outline-none"
+                              aria-label="XP Help"
+                            >
+                              <HelpCircle size={8} strokeWidth={3} />
+                            </button>
+
+                            {activeXpHelp === product.id && (
+                              <div className="absolute top-4 left-0 z-[100] w-48 p-3 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                <div className="flex justify-between items-start mb-2">
+                                  <span className="text-[8px] text-amber-500 font-black uppercase tracking-widest leading-none">Membership Benefit</span>
+                                  <button onClick={(e) => { e.stopPropagation(); setActiveXpHelp(null); }} className="text-gray-600 hover:text-white leading-none text-xs">&times;</button>
+                                </div>
+                                <p className="text-[8px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal">
+                                  경험치를 쌓아서 <span className="text-amber-500 font-bold">등급</span>을 높여보세요! <br/>
+                                  레벨이 올라갈수록 더 특별한 혜택이 제공됩니다.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
                         <div className="flex items-baseline gap-0.5">
                           <span className="text-sm font-serif font-black text-amber-500">
                             +{Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1))}
@@ -133,6 +172,7 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
 };
 
 export default function Products({ products }) {
+  const [activeXpHelp, setActiveXpHelp] = useState(null);
   if (!products) return null;
 
   const beans = products.filter(p => (p.category === 'bean' || !p.category) && p.visible !== false && p.recommended !== true);
@@ -149,24 +189,32 @@ export default function Products({ products }) {
         category="bean" 
         items={beans} 
         bgColor="bg-[#111211]" 
+        activeXpHelp={activeXpHelp}
+        setActiveXpHelp={setActiveXpHelp}
       />
       <ProductSection 
         title="드립백 셀렉션" 
         category="dripbag" 
         items={dripBags} 
         bgColor="bg-gradient-to-b from-[#111211] to-[#181a19]" 
+        activeXpHelp={activeXpHelp}
+        setActiveXpHelp={setActiveXpHelp}
       />
       <ProductSection 
         title="콜드브루 에센스" 
         category="coldbrew" 
         items={coldBrew} 
         bgColor="bg-[#181a19]" 
+        activeXpHelp={activeXpHelp}
+        setActiveXpHelp={setActiveXpHelp}
       />
       <ProductSection 
         title="매장 시그니처" 
         category="beverage" 
         items={beverages} 
         bgColor="bg-gradient-to-b from-[#181a19] to-[#0b0c0b]" 
+        activeXpHelp={activeXpHelp}
+        setActiveXpHelp={setActiveXpHelp}
       />
       
       {showFallback && (
