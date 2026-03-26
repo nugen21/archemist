@@ -109,7 +109,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                 <p className="text-[9px] text-black font-black tracking-widest uppercase">추천 상품</p>
               </div>
 
-              {isAdmin && (
+              {isAdmin === true && (
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
@@ -188,7 +188,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                     </p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    {isAdmin && (
+                    {isAdmin === true && (
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
