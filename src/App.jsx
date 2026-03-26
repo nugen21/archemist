@@ -123,7 +123,7 @@ function App() {
 
   // Route: Admin
   if (currentPath === '#admin') {
-    return <Admin products={products} setProducts={setProducts} handleLogout={() => handleAdminAuth(false)} setEditingId={setEditingId} editingId={editingId} />;
+    return <Admin isAdmin={isAdmin} setAdminAuth={handleAdminAuth} products={products} setProducts={setProducts} handleLogout={() => handleAdminAuth(false)} setEditingId={setEditingId} editingId={editingId} />;
   }
 
   return (
