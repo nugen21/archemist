@@ -1027,7 +1027,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                           {/* Horizontal Step-by-Step Layout */}
                           <div className="relative pt-4 pb-4">
-                            <div className="flex flex-col md:flex-row gap-y-12 md:gap-y-0 md:gap-x-4">
+                            <div className="flex flex-col md:flex-row gap-y-10 md:gap-y-0 md:gap-x-1">
                               {pours.map((pour, pIdx) => (
                                 <div key={pIdx} className="flex-1 group relative">
                                   {/* Horizontal Connector Line (Hidden on mobile) */}
