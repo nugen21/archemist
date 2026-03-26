@@ -481,7 +481,7 @@
   {
     "category": "dripbag",
     "name": "Puente San Antonia Geisha",
-    "price": "0",
+    "price": "30000",
     "country": "Costa Rica",
     "region": "Leon Cortes, Tarrazu",
     "farm": "",
@@ -528,6 +528,7 @@
     "sweetness": "4",
     "bodyRate": "3.5",
     "balance": "4",
+    "experience": 50,
     "showBasicInfo": false,
     "showAnalysisInfo": false,
     "blend1": "",
