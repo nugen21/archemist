@@ -36,6 +36,7 @@ const getInitialFormData = () => ({
   moisture: '', density: '', aw: '', cropYear: '',
   greenBeanName: '', importer: '', scaScore: '',
   flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
+  experience: 50,
   showBasicInfo: true, showAnalysisInfo: true,
   blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: '',
   // Extraction Recipe (Hot)
@@ -981,6 +982,35 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   <RatingSlider label="산미 (Acidity)" name="acidityRate" value={formData.acidityRate} onChange={handleChange} />
                   <RatingSlider label="바디 (Body)" name="bodyRate" value={formData.bodyRate} onChange={handleChange} />
                   <RatingSlider label="밸런스 (Balance)" name="balance" value={formData.balance} onChange={handleChange} />
+                </div>
+              </div>
+
+              {/* Experience Points Area */}
+              <div className="bg-[#181a19] border border-white/5 p-8 rounded-3xl mt-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></div>
+                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-xs uppercase">경험치 설정 (Experience Points)</h4>
+                </div>
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center gap-6">
+                    <input 
+                      type="range" 
+                      name="experience" 
+                      min="1" 
+                      max="100" 
+                      step="1"
+                      value={formData.experience || 50} 
+                      onChange={handleChange}
+                      className="flex-grow accent-copper"
+                    />
+                    <div className="min-w-[80px] text-center bg-white/5 border border-white/10 rounded-xl py-2 px-4">
+                       <span className="text-xl font-serif font-black text-white">{formData.experience || 50}</span>
+                       <span className="text-[10px] text-gray-500 uppercase ml-1">XP</span>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-gray-500 leading-relaxed break-keep">
+                    상품의 전반적인 복합성과 깊이를 수치화합니다 (1~100). 이 수치는 상세 페이지에서 제품의 레벨이나 난이도로 표시될 수 있습니다.
+                  </p>
                 </div>
               </div>
 

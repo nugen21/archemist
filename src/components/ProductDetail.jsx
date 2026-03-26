@@ -659,7 +659,50 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               )}
 
             </div>
-          )} 
+          )}
+
+          {/* 4. Experience Points (XP) Card - Visual Level Bar */}
+          {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
+            <div className="lg:col-span-6 bg-[#111211] border border-white/5 p-8 rounded-[2.5rem] shadow-xl relative overflow-hidden group">
+               <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+                 <Sparkles size={80} className="text-copper" />
+               </div>
+               <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
+                  <div className="flex flex-col items-center sm:items-start gap-2 min-w-[140px]">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase flex items-center gap-3">
+                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                       경험치
+                    </h4>
+                    <div className="flex items-baseline gap-1 mt-2">
+                       <span className="text-3xl font-serif font-black text-white">{product.experience || 50}</span>
+                       <span className="text-xs font-black text-gray-600 uppercase tracking-widest">XP</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex-grow w-full">
+                     <div className="flex justify-between items-center text-[10px] font-black text-gray-600 uppercase tracking-widest mb-3">
+                        <span>초급자용 (Light)</span>
+                        <span>매니아용 (Complex)</span>
+                     </div>
+                     <div className="relative h-4 bg-white/5 rounded-full overflow-hidden border border-white/5">
+                        <div 
+                           className="absolute top-0 left-0 h-full bg-gradient-to-r from-copper/40 via-copper to-copper/40 shadow-[0_0_15px_rgba(161,118,76,0.3)] transition-all duration-1000 ease-out"
+                           style={{ width: `${product.experience || 50}%` }}
+                        ></div>
+                        {/* Subtle glow at the end of progress */}
+                        <div 
+                           className="absolute top-0 w-8 h-full bg-white/20 blur-md transition-all duration-1000 ease-out"
+                           style={{ left: `calc(${product.experience || 50}% - 16px)` }}
+                        ></div>
+                     </div>
+                  </div>
+
+                  <div className="text-[11px] text-gray-500 font-medium max-w-[200px] text-center sm:text-left leading-relaxed opacity-60">
+                    아키미스트가 제안하는 플레이버의 복합성과 깊이감을 나타내는 수치입니다.
+                  </div>
+               </div>
+            </div>
+          )}
         </div>
       </div>
 
