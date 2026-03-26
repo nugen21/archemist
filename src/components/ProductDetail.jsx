@@ -343,11 +343,26 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 </div>
               )}
               <div className="mb-6">
-                <div className="flex items-center justify-between gap-6 mb-8 border-b border-white/5 pb-8">
-                  <p className="text-4xl sm:text-5xl font-serif font-black text-copper tracking-wider tabular-nums">
-                    {formattedPrice}
-                    <span className="text-lg ml-3 text-gray-500 font-sans font-black">원</span>
-                  </p>
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8 border-b border-white/5 pb-8">
+                  <div className="flex flex-row items-center gap-6">
+                    <p className="text-4xl sm:text-5xl font-serif font-black text-white tracking-wider tabular-nums">
+                      {formattedPrice}
+                      <span className="text-lg ml-3 text-gray-500 font-sans font-black">원</span>
+                    </p>
+                    
+                    {/* XP Reward Highlight */}
+                    <div className="flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default">
+                      <Sparkles size={16} className="text-amber-500 animate-pulse" />
+                      <div className="flex flex-col">
+                        <span className="text-[9px] text-amber-500/80 font-black uppercase tracking-[0.2em] leading-none mb-1">XP Reward</span>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">+{product.experience || 50}</span>
+                          <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="flex gap-8">
                     {product.roastDate && (
                       <div className="flex flex-col items-end gap-1">
@@ -698,7 +713,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                   </div>
 
                   <div className="text-[11px] text-gray-500 font-medium max-w-[200px] text-center sm:text-left leading-relaxed opacity-60">
-                    아키미스트가 제안하는 플레이버의 복합성과 깊이감을 나타내는 수치입니다.
+                    상품 구매 시 적립되는 포인트입니다. 쌓인 경험치에 따라 고객 등급이 상승하며 다양한 혜택이 제공됩니다.
                   </div>
                </div>
             </div>
