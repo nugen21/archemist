@@ -225,7 +225,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                     <div className="flex items-center bg-gradient-to-br from-amber-500/15 to-yellow-500/5 border border-amber-500/20 px-2 py-1.5 rounded-lg backdrop-blur-sm group-hover:scale-105 transition-all relative">
                       <div className="flex flex-col items-start leading-none gap-0.5">
                         <div className="flex items-center gap-1.5 mb-0.5">
-                          <span className="text-[8px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                          <span className="text-[8px] text-amber-500/80 font-black tracking-widest uppercase">경험치 획득</span>
                           <div className="relative inline-block z-40" ref={activeXpHelp === bean.id ? xpHelpRef : null}>
                             <button 
                               onClick={(e) => {
