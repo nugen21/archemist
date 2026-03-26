@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { 
-  Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
+  Filter, Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
   Flower2, Sprout, Leaf, Candy, Bean, Nut, Wheat, 
   Sparkles, Milk, Wind, Edit, Coffee, HelpCircle
@@ -966,7 +966,7 @@ Ground || '-'}</span>
             <div className="max-w-8xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
-                추천 추출 방식
+                추천 <Filter size={20} className="inline-block text-copper/80 mx-1.5 -translate-y-[2px] animate-pulse" /> 추출 방식
                 <div className="h-[1px] w-8 bg-copper/30"></div>
               </h3>
               <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">
