@@ -359,7 +359,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <div className={`flex items-center bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-3.5 py-1.5 rounded-xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default relative ${activeHelp === 'xp' ? 'z-[10000]' : 'z-10'}`}>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-2 mb-0.5">
-                            <span className="text-[9px] text-amber-500/80 font-black tracking-[0.1em] leading-none">경험치 획득</span>
+                            <span className="text-[9px] text-amber-500/80 font-black tracking-[0.1em] leading-none">획득 경험치</span>
                             <div className="relative inline-block" ref={xpHelpRef}>
                               <button 
                                 onClick={(e) => {

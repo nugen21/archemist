@@ -719,7 +719,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 />
 
                 <div className="flex flex-col gap-1.5 opacity-60">
-                  <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 획득 (Auto XP: 0.01%)</label>
+                  <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">획득 경험치 (Auto XP: 0.01%)</label>
                   <div className="bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-3 text-copper text-base font-black flex items-center justify-between">
                     <div className="flex items-center gap-2">
                        <span>{Math.floor(parseFloat(String(formData.price || '0').replace(/,/g, '')) * 0.0001 * (formData.recommended ? 1.1 : 1))} XP</span>
