@@ -239,7 +239,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
       `}</style>
 
       {/* Admin Edit Button */}
-      {isAdmin === true && onEdit && (
+      {(isAdmin === true) && onEdit && (
         <button 
           onClick={() => onEdit(product.id)}
           className="fixed top-24 right-8 z-[110] flex items-center gap-2 text-[10px] font-bold text-copper/80 hover:text-copper uppercase tracking-[0.2em] transition-all bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-copper/30 hover:border-copper/60 hover:bg-black/60 group shadow-[0_0_15px_rgba(161,118,76,0.15)] hover:shadow-[0_0_20px_rgba(161,118,76,0.3)]"
