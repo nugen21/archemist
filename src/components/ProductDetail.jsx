@@ -933,7 +933,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금' }
                         ].map((item, idx) => (
                             <div key={idx} className="text-center group/item hover:translate-y-[-4px] transition-transform duration-300">
-                                <span className="text-[14px] sm:text-[18px] md:text-[22px] font-black text-white uppercase tracking-widest block mb-1">{item.name}</span>
+                                <span className="text-[12px] sm:text-[16px] md:text-[20px] font-black text-white uppercase tracking-widest block mb-1">{item.name}</span>
                                 <span className="text-[12px] sm:text-[15px] font-bold text-copper/60 block">{item.value}</span>
                                 <span className="text-[10px] sm:text-[12px] text-gray-600 block mt-2 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
                             </div>
