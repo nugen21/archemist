@@ -395,7 +395,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             className="p-0.5 hover:text-white transition-colors text-gray-700 outline-none"
                             aria-label="Aging Help"
                           >
-                            <HelpCircle size={10} strokeWidth={2.5} />
+                            <HelpCircle size={12} strokeWidth={2.5} />
                           </button>
 
                           {/* Aging Help Popup */}
@@ -514,7 +514,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
                       aria-label="Cup Notes Help"
                     >
-                      <HelpCircle size={11} strokeWidth={2.5} />
+                      <HelpCircle size={13} strokeWidth={2.5} />
                     </button>
 
                     {/* Cup Notes Help Popup */}
@@ -594,7 +594,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                            className="p-1 hover:text-white transition-colors text-copper/40 outline-none"
                            aria-label="Roast Time Help"
                          >
-                           <HelpCircle size={13} strokeWidth={2.5} />
+                           <HelpCircle size={15} strokeWidth={2.5} />
                          </button>
 
                          {showRoastTimeHelp && (
@@ -631,7 +631,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
                           aria-label="Agtron Help"
                         >
-                          <HelpCircle size={11} strokeWidth={2.5} />
+                          <HelpCircle size={13} strokeWidth={2.5} />
                         </button>
 
                         {/* Agtron Help Popup */}
