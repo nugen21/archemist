@@ -227,7 +227,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   );
 
   return (
-    <section className="min-h-screen py-12 px-4 sm:px-8 bg-[#0b0c0b] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">
+    <section className="min-h-screen pt-32 pb-12 px-4 sm:px-8 bg-[#0b0c0b] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">
       <style>{`
         .html-content .ql-align-center { text-align: center !important; }
         .html-content .ql-align-right { text-align: right !important; }
