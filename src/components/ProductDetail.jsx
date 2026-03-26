@@ -1094,7 +1094,7 @@ Ground || '-'}</span>
                               <div className="max-w-2xl w-full text-center mx-auto px-6 sm:px-8 md:px-0">
                                  <div className="text-[8.5px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
                                  <div 
-                                   className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed font-medium break-words italic html-content"
+                                   className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed font-medium break-words italic html-content prose prose-invert max-w-none"
                                    dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
                                  />
                               </div>
