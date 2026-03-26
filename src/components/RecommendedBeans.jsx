@@ -135,7 +135,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                 {/* Size Badge (Right) */}
                 {bean.size && (
                   <div className="absolute bottom-4 right-4 z-20">
-                    <span className="bg-black/70 backdrop-blur-md border border-white/10 text-white text-[12px] font-black px-3 py-1.5 rounded-lg tracking-widest shadow-xl">
+                    <span className="bg-black/70 backdrop-blur-md border border-white/10 text-white text-[15px] font-black px-4 py-2 rounded-lg tracking-widest shadow-xl">
                       {(() => {
                         const s = String(bean.size).toLowerCase();
                         if (bean.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
