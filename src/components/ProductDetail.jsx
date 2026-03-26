@@ -405,7 +405,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                   <div className="flex gap-8">
                     {product.roastDate && (
                       <div className="flex flex-col items-end gap-1">
-                        <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">로스팅 날짜</span>
+                        <div className="h-7 flex items-center">
+                            <span className="text-[10px] text-gray-600 font-black uppercase tracking-[0.2em]">로스팅 날짜</span>
+                          </div>
                         <span className="text-lg text-gray-400 font-bold tabular-nums">{product.roastDate}</span>
                       </div>
                     )}
@@ -413,7 +415,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <div className="flex flex-col items-end gap-1">
                         <div 
                           ref={agingHelpRef}
-                          className={`flex items-center gap-1.5 justify-end relative ${activeHelp === 'aging' ? 'z-[10000]' : 'z-10'}`}
+                          className={`h-7 flex items-center gap-1.5 justify-end relative ${activeHelp === 'aging' ? 'z-[10000]' : 'z-10'}`}
                         >
                           <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">권장 에이징</span>
                           <button 
