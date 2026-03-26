@@ -708,11 +708,17 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               </div>
 
-              <div className="flex flex-col justify-end">
-                <InputField label={formData.category === 'beverage' ? "가격 (Price)" : "가격"} name="price" value={formData.price} onChange={handleChange} placeholder="예: 3.5 또는 18,000" />
+              <div className="flex flex-col gap-1.5">
+                <InputField 
+                  label={formData.category === 'beverage' ? "가격 (Price)" : "가격"} 
+                  name="price" 
+                  value={formData.price} 
+                  onChange={handleChange} 
+                  placeholder="예: 3.5 또는 18,000" 
+                />
               </div>
 
-              <div className="flex flex-col justify-end">
+              <div className="flex flex-col gap-1.5">
                 <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 (XP: {formData.experience || 50})</label>
                 <div className="flex items-center gap-3 bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-2.5 h-[50px]">
                   <input 
@@ -730,7 +736,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               </div>
 
               {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag' || formData.category === 'bean') && (
-                <div className="flex flex-col justify-end">
+                <div className="flex flex-col gap-1.5">
                   <InputField 
                     label={
                       formData.category === 'beverage' ? "사이즈 (Size)" : 
@@ -748,11 +754,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     } 
                   />
                 </div>
-              )}
-
-              {(formData.category === 'bean' || formData.category === 'dripbag') && (
-                <>
-                </>
               )}
 
               <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
