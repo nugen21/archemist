@@ -383,7 +383,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <div className="flex flex-col items-end gap-1">
                         <div 
                           ref={agingHelpRef}
-                          className={`flex items-center gap-1.5 justify-end relative ${showAgingHelp ? 'z-50' : 'z-10'}`}
+                          className={`flex items-center gap-1.5 justify-end relative ${activeHelp === 'aging' ? 'z-50' : 'z-10'}`}
                         >
                           <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
                           <button 
@@ -495,7 +495,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               {product.cupNotes && (
                 <div 
                   ref={cupNotesHelpRef}
-                  className={`lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group ${showCupNotesHelp ? 'z-50' : 'z-10'}`}
+                  className={`lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group ${activeHelp === 'cupNotes' ? 'z-50' : 'z-10'}`}
                 >
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
@@ -570,7 +570,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               {(isBean || product.category === 'dripbag') && (
                 <div 
                   ref={agtronHelpRef}
-                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${showAgtronHelp ? 'z-50' : 'z-10'}`}
+                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${activeHelp === 'agtron' ? 'z-50' : 'z-10'}`}
                 >
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
@@ -585,7 +585,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                          <button 
                            onClick={(e) => {
                              e.stopPropagation();
-                             setShowRoastTimeHelp(!showRoastTimeHelp);
+                             setActiveHelp(activeHelp === 'roastTime' ? null : 'roastTime');
                            }}
                            className="p-1 hover:text-white transition-colors text-copper/40 outline-none"
                            aria-label="Roast Time Help"
@@ -593,7 +593,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                            <HelpCircle size={15} strokeWidth={2.5} />
                          </button>
 
-                         {showRoastTimeHelp && (
+                         {activeHelp === 'roastTime' && (
                            <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[100] w-64 p-5 bg-[#0b0c0b]/fb border border-copper/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                              <div className="flex justify-between items-start mb-3">
                                <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none">로스팅 배출 시간의 의미</span>
@@ -635,7 +635,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           <div className="absolute top-6 left-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                             <div className="flex justify-between items-start mb-2">
                               <span className="text-[11px] text-copper font-black uppercase tracking-widest">What is Agtron?</span>
-                              <button onClick={() => setShowAgtronHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
+                              <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
                             </div>
                             <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
                               아그트론(Agtron)은 커피의 로스팅 정도(배전도)를 수치화한 글로벌 표준입니다. 숫자가 낮을수록 다크(강배전), 높을수록 라이트(약배전)를 의미하며, 디플루이드 옴니(DiFluid Omni) 등 정밀 측정기를 통해 객관적인 데이터를 도출합니다.
