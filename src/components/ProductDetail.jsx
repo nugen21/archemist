@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { 
   Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
@@ -141,6 +141,26 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   const [showAgtronHelp, setShowAgtronHelp] = useState(false);
   const [showCupNotesHelp, setShowCupNotesHelp] = useState(false);
   const [showAgingHelp, setShowAgingHelp] = useState(false);
+
+  const agtronHelpRef = useRef(null);
+  const cupNotesHelpRef = useRef(null);
+  const agingHelpRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (agtronHelpRef.current && !agtronHelpRef.current.contains(event.target)) {
+        setShowAgtronHelp(false);
+      }
+      if (cupNotesHelpRef.current && !cupNotesHelpRef.current.contains(event.target)) {
+        setShowCupNotesHelp(false);
+      }
+      if (agingHelpRef.current && !agingHelpRef.current.contains(event.target)) {
+        setShowAgingHelp(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -337,7 +357,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     )}
                     {product.category === 'bean' && product.agingDays && (
                       <div className="flex flex-col items-end gap-1">
-                        <div className={`flex items-center gap-1.5 justify-end relative ${showAgingHelp ? 'z-50' : 'z-10'}`}>
+                        <div 
+                          ref={agingHelpRef}
+                          className={`flex items-center gap-1.5 justify-end relative ${showAgingHelp ? 'z-50' : 'z-10'}`}
+                        >
                           <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
                           <button 
                             onClick={() => setShowAgingHelp(!showAgingHelp)}
@@ -446,7 +469,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
             <div className="lg:col-span-6 grid grid-cols-1 lg:grid-cols-6 gap-4">
               {/* 1. Cup Notes Card */}
               {product.cupNotes && (
-                <div className={`lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group ${showCupNotesHelp ? 'z-50' : 'z-10'}`}>
+                <div 
+                  ref={cupNotesHelpRef}
+                  className={`lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group ${showCupNotesHelp ? 'z-50' : 'z-10'}`}
+                >
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
                   </div>
@@ -518,7 +544,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
               {/* 3. Roasting Point & Time Card */}
               {(isBean || product.category === 'dripbag') && (
-                <div className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${showAgtronHelp ? 'z-50' : 'z-10'}`}>
+                <div 
+                  ref={agtronHelpRef}
+                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${showAgtronHelp ? 'z-50' : 'z-10'}`}
+                >
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
                   </div>
