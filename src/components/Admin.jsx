@@ -708,7 +708,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1.5">
+              <div className="md:col-span-2 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-6 relative z-10 mt-6 pt-6 border-t border-white/5">
                 <InputField 
                   label={formData.category === 'beverage' ? "가격 (Price)" : "가격"} 
                   name="price" 
@@ -716,56 +716,54 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   onChange={handleChange} 
                   placeholder="예: 3.5 또는 18,000" 
                 />
-              </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 (XP: 1-100)</label>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <input 
-                      type="number" 
-                      name="experience" 
-                      min="1" 
-                      max="100" 
-                      value={formData.experience} 
-                      onChange={handleChange}
-                      className="w-full bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-3 text-white text-base font-black focus:border-copper focus:ring-1 focus:ring-copper outline-none transition"
-                    />
-                    <div className="flex gap-1 shrink-0">
-                      {[25, 50, 75, 100].map(val => (
-                        <button 
-                          key={val}
+                <div className="flex flex-col gap-1.5">
+                  <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 (XP: 1-100)</label>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <input 
+                        type="number" 
+                        name="experience" 
+                        min="1" 
+                        max="100" 
+                        value={formData.experience} 
+                        onChange={handleChange}
+                        className="w-full bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-3 text-white text-base font-black focus:border-copper focus:ring-1 focus:ring-copper outline-none transition"
+                      />
+                      <div className="flex gap-1 shrink-0">
+                        {[25, 50, 75, 100].map(val => (
+                          <button 
+                            key={val}
+                            type="button"
+                            onClick={() => handleChange({ target: { name: 'experience', value: val } })}
+                            className={`w-10 h-10 rounded-lg text-[10px] font-black border transition-all ${Number(formData.experience) === val ? 'bg-copper text-black border-copper shadow-[0_0_12px_rgba(161,118,76,0.4)]' : 'bg-black/40 border-gray-800 text-gray-500 hover:border-copper/40'}`}
+                          >
+                            {val}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex gap-1.5 items-center">
+                      {['+5', '+10', '-5', '-10'].map(mod => (
+                        <button
+                          key={mod}
                           type="button"
-                          onClick={() => handleChange({ target: { name: 'experience', value: val } })}
-                          className={`w-10 h-10 rounded-lg text-[10px] font-black border transition-all ${Number(formData.experience) === val ? 'bg-copper text-black border-copper shadow-[0_0_12px_rgba(161,118,76,0.4)]' : 'bg-black/40 border-gray-800 text-gray-500 hover:border-copper/40'}`}
+                          onClick={() => {
+                            const current = parseInt(formData.experience) || 0;
+                            const delta = parseInt(mod);
+                            const next = Math.max(1, Math.min(100, current + delta));
+                            handleChange({ target: { name: 'experience', value: next } });
+                          }}
+                          className="flex-grow py-2 bg-white/5 border border-white/5 rounded-lg text-[9px] font-bold text-gray-500 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all uppercase tracking-widest"
                         >
-                          {val}
+                          {mod}
                         </button>
                       ))}
                     </div>
                   </div>
-                  <div className="flex gap-1.5 items-center">
-                    {['+5', '+10', '-5', '-10'].map(mod => (
-                      <button
-                        key={mod}
-                        type="button"
-                        onClick={() => {
-                          const current = parseInt(formData.experience) || 0;
-                          const delta = parseInt(mod);
-                          const next = Math.max(1, Math.min(100, current + delta));
-                          handleChange({ target: { name: 'experience', value: next } });
-                        }}
-                        className="flex-grow py-2 bg-white/5 border border-white/5 rounded-lg text-[9px] font-bold text-gray-500 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all uppercase tracking-widest"
-                      >
-                        {mod}
-                      </button>
-                    ))}
-                  </div>
                 </div>
-              </div>
 
-              {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag' || formData.category === 'bean') && (
-                <div className="flex flex-col gap-1.5">
+                {(formData.category === 'beverage' || formData.category === 'coldbrew' || formData.category === 'dripbag' || formData.category === 'bean') && (
                   <InputField 
                     label={
                       formData.category === 'beverage' ? "사이즈 (Size)" : 
@@ -782,31 +780,31 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       formData.category === 'coldbrew' ? "예: 500ml" : "예: 10개"
                     } 
                   />
+                )}
+
+                <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
+                  <input 
+                    type="checkbox" 
+                    id="recommended-check"
+                    name="recommended" 
+                    checked={formData.recommended} 
+                    onChange={handleChange}
+                    className="w-5 h-5 rounded border-gray-800 bg-black text-copper focus:ring-copper cursor-pointer"
+                  />
+                  <label htmlFor="recommended-check" className="text-xs font-bold text-gray-400 cursor-pointer uppercase tracking-widest">
+                    {formData.category === 'beverage' ? '인기 메뉴로 설정 (Best)' : '추천 상품으로 설정'}
+                  </label>
                 </div>
-              )}
 
-              <div className="flex items-center space-x-1.5 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl md:col-span-2 lg:col-span-1">
-                <input 
-                  type="checkbox" 
-                  id="recommended-check"
-                  name="recommended" 
-                  checked={formData.recommended} 
-                  onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-800 bg-black text-copper focus:ring-copper cursor-pointer"
-                />
-                <label htmlFor="recommended-check" className="text-xs font-bold text-gray-400 cursor-pointer uppercase tracking-widest">
-                  {formData.category === 'beverage' ? '인기 메뉴로 설정 (Best)' : '추천 상품으로 설정'}
-                </label>
-              </div>
+                {formData.recommended && (
+                  <div className="md:col-span-2 lg:col-span-1">
+                    <InputField label="노출 순서 (낮을수록 먼저)" name="order" value={formData.order} onChange={handleChange} placeholder="예: 1, 2, 3" type="number" />
+                  </div>
+                )}
 
-              {formData.recommended && (
                 <div className="md:col-span-2 lg:col-span-1">
-                  <InputField label="노출 순서 (낮을수록 먼저)" name="order" value={formData.order} onChange={handleChange} placeholder="예: 1, 2, 3" type="number" />
+                  <InputField label="네이버 스마트 스토어 URL (선택)" name="storeUrl" value={formData.storeUrl} onChange={handleChange} placeholder="https://smartstore.naver.com/..." />
                 </div>
-              )}
-
-              <div className="md:col-span-2 lg:col-span-1">
-                <InputField label="네이버 스마트 스토어 URL (선택)" name="storeUrl" value={formData.storeUrl} onChange={handleChange} placeholder="https://smartstore.naver.com/..." />
               </div>
 
 
