@@ -605,7 +605,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                              </div>
                              <p className="text-[11px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal">
                                <span className="text-gray-200 font-bold">배출 시간</span>은 원두가 완성되는 결정적인 시점입니다. 단 1초의 차이가 커피의 향미와 로스팅 포인트를 결정지을 만큼 중요한 과정입니다. <br/><br/>
-                               아키미스트 로스터스는 세계적인 표준 장비인 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span> 하이엔드 로스터를 사용합니다. 스마트 제어 시스템을 통한 정밀한 데이터 분석으로, 매 로스팅마다 변함없는 최상의 품질을 보장합니다.
+                               아키미스트 로스터스는 정교한 제어 시스템을 갖춘 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span> 하이엔드 로스터를 사용합니다. 스마트 제어 시스템을 통한 정밀한 데이터 분석으로, 매 로스팅마다 변함없는 최상의 품질을 보장합니다.
                              </p>
                            </div>
                          )}
