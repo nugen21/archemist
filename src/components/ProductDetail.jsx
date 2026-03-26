@@ -237,14 +237,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
         .html-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; }
         .html-content iframe { width: 100%; aspect-ratio: 16/9; border-radius: 1rem; margin: 1.5rem 0; }
       `}</style>
-      {/* Back Button */}
-      <button 
-        onClick={onBack}
-        className="fixed top-24 left-8 z-[110] flex items-center gap-2 text-[10px] font-bold text-gray-400 hover:text-copper uppercase tracking-[0.2em] transition-all bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/5 group shadow-2xl"
-      >
-        <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-        홈으로 돌아가기
-      </button>
 
       {/* Admin Edit Button */}
       {isAdmin === true && onEdit && (
