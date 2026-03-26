@@ -625,14 +625,14 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               {(isBean || product.category === 'dripbag') && (
                 <div 
                   ref={agtronHelpRef}
-                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${(activeHelp === 'agtron' || activeHelp === 'roastTime' || activeHelp === 'dt' || activeHelp === 'dtr' || activeHelp === 'capacity') ? 'z-[10000]' : 'z-10'}`}
+                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-4 md:p-5 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-4 md:gap-6 mt-0 items-center ${(activeHelp === 'agtron' || activeHelp === 'roastTime' || activeHelp === 'dt' || activeHelp === 'dtr' || activeHelp === 'capacity') ? 'z-[10000]' : 'z-10'}`}
                 >
-                  <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
-                    <Scale size={120} className="text-copper" />
+                  <div className="absolute top-0 right-0 p-4 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
+                    <Scale size={100} className="text-copper" />
                   </div>
                                    {/* Roasting Information (Left Side) */}
-                  <div className="flex-shrink-0 flex flex-col justify-center min-w-[240px] border-b md:border-b-0 md:border-r border-white/5 pb-6 md:pb-0 md:pr-8 w-full md:w-auto text-center md:text-left">
-                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
+                  <div className="flex-shrink-0 flex flex-col justify-center min-w-[240px] border-b md:border-b-0 md:border-r border-white/5 pb-4 md:pb-0 md:pr-6 w-full md:w-auto text-center md:text-left">
+                     <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-2 flex items-center justify-center md:justify-start gap-3">
                        <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                        로스팅 정보
                        <div className="relative inline-block" ref={roastTimeHelpRef}>
@@ -661,7 +661,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                          )}
                        </div>
                      </h4>
-                      <div className="grid grid-cols-2 gap-y-4 gap-x-6">
+                      <div className="grid grid-cols-2 gap-y-3 gap-x-4">
                         <div className="flex flex-col items-center gap-1">
                           <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-1">총 소요 시간</div>
                           <div className="text-base font-serif font-black text-white text-center">{product.roastTime || '-'}</div>
@@ -738,8 +738,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                       {/* Roaster's Comment */}
                       {product.roasterComment && (
-                        <div className="mt-8 pt-6 border-t border-white/5 w-full">
-                           <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                        <div className="mt-5 pt-4 border-t border-white/5 w-full">
+                           <div className="flex items-center gap-2 mb-1.5 justify-center md:justify-start">
                              <span className="text-[10px] font-black text-copper uppercase tracking-[0.2em]">로스터 코멘트</span>
                            </div>
                            <p className="text-[11px] text-gray-400 leading-relaxed font-bold break-keep text-center md:text-left italic">
@@ -751,12 +751,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                   {/* Roasting Point Guide (Right Side) */}
                   <div className="flex-grow flex flex-col justify-center w-full relative z-10 pt-2 md:pt-0">
-                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-2 flex items-center gap-3">
+                    <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-1.5 flex items-center gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                         로스팅 포인트 가이드
                     </h4>
-                      <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-2 opacity-60">* DiFluid Omni 측정 기준</p>
-                      <div className="flex items-center gap-1.5 mb-6 relative">
+                      <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-1.5 opacity-60">* DiFluid Omni 측정 기준</p>
+                      <div className="flex items-center gap-1.5 mb-4 relative">
                         <span className="text-[12px] text-copper/60 font-black tracking-widest uppercase">Agtron</span>
                         <button 
                           onClick={() => setActiveHelp(activeHelp === 'agtron' ? null : 'agtron')}
@@ -780,8 +780,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         )}
                       </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-20 pt-8">
-                      <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 pt-4">
+                      <div className="space-y-3">
                         <div className="flex justify-between items-end mb-1 px-1">
                           <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean) AGTRON</span>
                         </div>
