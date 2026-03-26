@@ -415,7 +415,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           ref={agingHelpRef}
                           className={`flex items-center gap-1.5 justify-end relative ${activeHelp === 'aging' ? 'z-[10000]' : 'z-10'}`}
                         >
-                          <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
+                          <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">권장 에이징</span>
                           <button 
                             onClick={() => setActiveHelp(activeHelp === 'aging' ? null : 'aging')}
                             className="p-1 hover:text-white transition-colors text-white/80 outline-none"
@@ -428,11 +428,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           {activeHelp === 'aging' && (
                             <div className="absolute top-6 right-0 z-[9999] w-64 p-4 bg-[#0b0c0b]/98 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                               <div className="flex justify-between items-start mb-2">
-                                <span className="text-[11px] text-copper font-black uppercase tracking-widest font-sans">에이징(Aging) 가이드</span>
+                                <span className="text-[11px] text-copper font-black uppercase tracking-widest font-sans">권장 에이징(Aging) 가이드</span>
                                 <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
                               </div>
                               <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep text-left">
-                                에이징(Aging)은 원두가 로스팅된 후 맛이 가장 조화롭게 발현되는 숙성 기간을 의미합니다. 가스가 안정화되어 더 풍성한 아로마와 깊은 맛을 느끼실 수 있는 권장 시점을 안내해 드립니다.
+                                권장 에이징(Aging)은 원두가 로스팅된 후 맛이 가장 조화롭게 발현되는 숙성 기간을 의미합니다. 가스가 안정화되어 더 풍성한 아로마와 깊은 맛을 느끼실 수 있는 권장 시점을 안내해 드립니다.
                               </p>
                             </div>
                           )}

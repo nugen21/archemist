@@ -792,7 +792,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 <div className={`md:col-span-2 lg:col-span-1 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-4`}>
                   <InputField label="로스팅/제조 날짜" name="roastDate" value={formData.roastDate} onChange={handleChange} placeholder="예: 2024.03.21" />
                   {formData.category !== 'beverage' && (
-                    <InputField label="에이징 (로스팅 후 며칠)" name="agingDays" value={formData.agingDays} onChange={handleChange} type="number" placeholder="예: 7" />
+                    <InputField label="권장 에이징 (로스팅 후 며칠)" name="agingDays" value={formData.agingDays} onChange={handleChange} type="number" placeholder="예: 7" />
                   )}
                 </div>
               )}
