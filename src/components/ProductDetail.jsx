@@ -1064,13 +1064,24 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                           <div className="pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-10">
                             <div className="flex items-center gap-4">
-                              <span className="text-[8.5px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
+                              <span className="text-[17px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
                               <div className="flex items-baseline gap-2">
                                 <span className="text-2xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
                                 <span className="text-xs font-bold text-gray-500">g</span>
                               </div>
                             </div>
                             
+                            
+                            {product[`${prefix}tds`] && (
+                              <div className="flex items-center gap-4">
+                                <span className="text-[17px] font-black text-gray-600 uppercase tracking-widest">TDS</span>
+                                <div className="flex items-baseline gap-2">
+                                  <span className="text-2xl font-serif font-black text-copper tabular-nums">{product[`${prefix}tds`]}</span>
+                                  <span className="text-xs font-bold text-gray-500">%</span>
+                                </div>
+                              </div>
+                            )}
+
                             {product[`${prefix}comment`] && (
                               <div className="max-w-2xl w-full text-center mx-auto px-6 sm:px-8 md:px-0">
                                  <div className="text-[8.5px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
