@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Hero from './components/Hero';
 import RecommendedBeans from './components/RecommendedBeans';
 import Events from './components/Events';
@@ -115,89 +116,57 @@ function App() {
   };
 
   const handleBack = () => {
-    // Let onHashChange handle the scroll restoration
+    setActiveSection('home');
+    setEditingId(null);
     window.location.hash = '#home';
   };
 
   // Route: Admin
   if (currentPath === '#admin') {
-    return (
-      <Admin 
-        isAdmin={isAdmin} 
-        setAdminAuth={handleAdminAuth} 
-        initialEditingId={editingId} 
-        clearEditingId={() => setEditingId(null)} 
-        externalProducts={products}
-        onEditTriggered={handleEdit}
-      />
-    );
-  }
-
-  // Route: Drink Menu
-  if (currentPath === '#menu') {
-    return <DrinkMenu onBack={handleBack} products={products} />;
-  }
-
-  // Route: Subscribe
-  if (currentPath === '#subscribe') {
-    return <EmailSubscription />;
-  }
-
-  // Route: Product Detail
-  if (currentPath.startsWith('#product/')) {
-    const id = parseInt(currentPath.split('/')[1]);
-    const sortedProducts = [...products].sort((a,b) => (Number(a.order) || 999) - (Number(b.order) || 999));
-    const product = sortedProducts.find(p => String(p.id) === String(id));
-    const archiveNumber = sortedProducts.findIndex(p => String(p.id) === String(id)) + 1;
-
-    if (product) {
-      return <ProductDetail product={product} onBack={handleBack} isAdmin={isAdmin} onEdit={handleEdit} archiveNumber={archiveNumber} />;
-    } else if (!isLoading) {
-      // If not loading and not found, redirect home
-      window.location.hash = '#home';
-    }
+    return <Admin products={products} setProducts={setProducts} handleLogout={() => handleAdminAuth(false)} setEditingId={setEditingId} editingId={editingId} />;
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-matte-black text-white selection:bg-copper font-sans overflow-x-hidden">
+      <Header isAdmin={isAdmin} onAdminNav={() => setEditingId(null)} />
+      
       <main className="flex-grow">
-        <Header isAdmin={isAdmin} onAdminNav={() => setEditingId(null)} />
-        <Hero id="home" />
-        <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} products={products} />
-        <Products products={products} />
-        <Events />
-        <Brand />
-        <Contact />
+        {(() => {
+          // Route: Subscribe
+          if (currentPath === '#subscribe') {
+            return <EmailSubscription />;
+          }
+
+          // Route: Product Detail
+          if (currentPath.startsWith('#product/')) {
+            const id = parseInt(currentPath.split('/')[1]);
+            const sortedProducts = [...products].sort((a,b) => (Number(a.order) || 999) - (Number(b.order) || 999));
+            const product = sortedProducts.find(p => String(p.id) === String(id));
+            const archiveNumber = sortedProducts.findIndex(p => String(p.id) === String(id)) + 1;
+
+            if (product) {
+              return <ProductDetail product={product} onBack={handleBack} isAdmin={isAdmin} onEdit={handleEdit} archiveNumber={archiveNumber} />;
+            } else if (!isLoading) {
+              window.location.hash = '#home';
+              return null;
+            }
+          }
+
+          // Default: Home Page
+          return (
+            <>
+              <Hero id="home" />
+              <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} products={products} />
+              <Products products={products} />
+              <Events />
+              <Brand />
+              <Contact />
+            </>
+          );
+        })()}
       </main>
 
-      <footer className="py-4 bg-[#0b0c0b] border-t border-gray-900 w-full mt-auto relative z-50">
-        <div className="max-w-6xl mx-auto flex justify-between items-center px-4 sm:px-8">
-           <div className="flex flex-col gap-1">
-             <p className="text-gray-600 text-[10px] sm:text-xs">© 2026 Archemist Roasters. All rights reserved.</p>
-             {isAdmin && (
-               <p className="text-copper text-[9px] font-bold tracking-widest uppercase">Admin Session Active</p>
-             )}
-           </div>
-            <div className="flex gap-6 items-center">
-              {isAdmin ? (
-                <button 
-                  onClick={() => handleAdminAuth(false)}
-                  className="text-gray-600 hover:text-red-400 text-[10px] sm:text-xs tracking-widest font-bold uppercase transition-colors"
-                 >
-                   Logout
-                 </button>
-              ) : (
-                <a 
-                  href="#admin"
-                  className="text-gray-700 hover:text-copper text-[9px] sm:text-xs tracking-[0.2em] font-bold uppercase transition-all flex items-center gap-1.5 border border-white/5 px-4 py-2 rounded-full hover:bg-white/5 active:scale-95"
-                >
-                  <span className="opacity-40">🔒</span>
-                  Admin Panel
-                </a>
-              )}
-            </div>
-        </div>
-      </footer>
+      <Footer isAdmin={isAdmin} />
     </div>
   );
 }
