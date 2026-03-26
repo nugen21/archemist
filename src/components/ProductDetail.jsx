@@ -1076,7 +1076,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             
                             {product[`${prefix}tds`] && (
                               <div className="flex items-center gap-4">
-                                <div className="flex items-center gap-1.5">
+                                  <div className="flex items-center gap-1.5 relative" ref={tdsHelpRef}>
                                     <span className="text-[17px] font-black text-gray-600 uppercase tracking-widest leading-none">TDS</span>
                                     <button 
                                       onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'tds' ? null : 'tds'); }}
