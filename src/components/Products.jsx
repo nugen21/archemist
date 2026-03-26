@@ -135,10 +135,10 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
 export default function Products({ products }) {
   if (!products) return null;
 
-  const beans = products.filter(p => (p.category === 'bean' || !p.category) && p.visible !== false);
-  const dripBags = products.filter(p => p.category === 'dripbag' && p.visible !== false);
-  const coldBrew = products.filter(p => p.category === 'coldbrew' && p.visible !== false);
-  const beverages = products.filter(p => p.category === 'beverage' && p.visible !== false);
+  const beans = products.filter(p => (p.category === 'bean' || !p.category) && p.visible !== false && p.recommended !== true);
+  const dripBags = products.filter(p => p.category === 'dripbag' && p.visible !== false && p.recommended !== true);
+  const coldBrew = products.filter(p => p.category === 'coldbrew' && p.visible !== false && p.recommended !== true);
+  const beverages = products.filter(p => p.category === 'beverage' && p.visible !== false && p.recommended !== true);
 
   const showFallback = products.length === 0;
 
