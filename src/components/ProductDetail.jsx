@@ -559,7 +559,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                        로스팅 시간
                      </h4>
                      <div className="flex flex-col gap-1">
-                       <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-1 md:mt-2">총 소요 시간</div>
+                       <div className="text-[12px] font-black text-gray-600 uppercase tracking-widest mt-1 md:mt-2">총 소요 시간</div>
                        <div className="text-xl font-serif font-black text-white">{product.roastTime || '정보 없음'}</div>
                      </div>
                   </div>
@@ -570,9 +570,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                         로스팅 포인트 가이드
                     </h4>
-                      <p className="text-[8.5px] text-gray-600 font-black uppercase tracking-widest mb-2 opacity-60">* DiFluid Omni 측정 기준</p>
+                      <p className="text-[10px] text-gray-600 font-black uppercase tracking-widest mb-2 opacity-60">* DiFluid Omni 측정 기준</p>
                       <div className="flex items-center gap-1.5 mb-6 relative">
-                        <span className="text-[10px] text-copper/60 font-black tracking-widest uppercase">Agtron</span>
+                        <span className="text-[12px] text-copper/60 font-black tracking-widest uppercase">Agtron</span>
                         <button 
                           onClick={() => setShowAgtronHelp(!showAgtronHelp)}
                           className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
@@ -598,7 +598,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-20 pt-8">
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean) AGTRON</span>
+                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">홀빈 (Whole Bean) AGTRON</span>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
@@ -627,7 +627,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                       <div className="space-y-4">
                         <div className="flex justify-between items-end mb-1 px-1">
-                          <span className="text-[8.5px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground) AGTRON</span>
+                          <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">분쇄 (Ground) AGTRON</span>
                         </div>
                         <div className="relative h-10 flex items-center px-0">
                           <div className="absolute inset-0 h-1.5 bg-gradient-to-r from-[#2B1B17] via-[#8B6242] to-[#D4B483] rounded-full opacity-20"></div>
