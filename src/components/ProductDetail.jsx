@@ -1074,7 +1074,24 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             
                             {product[`${prefix}tds`] && (
                               <div className="flex items-center gap-4">
-                                <span className="text-[17px] font-black text-gray-600 uppercase tracking-widest">TDS</span>
+                                <div className="flex items-center gap-1.5">
+                                    <span className="text-[17px] font-black text-gray-600 uppercase tracking-widest leading-none">TDS</span>
+                                    <button 
+                                      onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'tds' ? null : 'tds'); }}
+                                      className="p-1 text-white/50 hover:text-white transition-colors outline-none"
+                                    >
+                                      <HelpCircle size={15} strokeWidth={2.5} />
+                                    </button>
+                                    {activeHelp === 'tds' && (
+                                      <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                        <div className="flex justify-between items-start mb-1">
+                                          <span className="text-[10px] text-copper font-black uppercase tracking-widest">TDS</span>
+                                          <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
+                                        </div>
+                                        <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">추출된 커피 성분의 농도를 백분율(%)로 나타낸 것입니다. 풍미의 강도와 추출 효율을 보여주는 핵심 지표입니다.</p>
+                                      </div>
+                                    )}
+                                  </div>
                                 <div className="flex items-baseline gap-2">
                                   <span className="text-2xl font-serif font-black text-copper tabular-nums">{product[`${prefix}tds`]}</span>
                                   <span className="text-xs font-bold text-gray-500">%</span>
