@@ -277,7 +277,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-20"></div>
       
       <div className="max-w-7xl mx-auto relative z-10 pt-8 px-4 sm:px-8 lg:px-0">
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 lg:gap-y-10 lg:gap-x-8 mb-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-y-8 lg:gap-x-12 mb-10 items-start">
           
           {/* --- Tier 1: Hero Row (Image & Info) --- */}
           <div className="lg:col-span-3">
@@ -325,9 +325,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
             
           </div>
 
-          <div className="lg:col-span-3 flex flex-col justify-center">
+          <div className="lg:col-span-3 flex flex-col h-full justify-start">
             <div className="mb-0">
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4 mb-2">
                 <h2 className="text-copper/60 font-serif font-bold tracking-[0.4em] text-xs uppercase italic">아키미스트 아카이브 No.{String(archiveNumber || (product.id % 999)).padStart(3, '0')}</h2>
                 <div className="h-[1px] flex-grow bg-gradient-to-r from-copper/30 to-transparent"></div>
               </div>
@@ -340,15 +340,15 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 </h2>
               )}
               {product.story && product.story !== '<p><br></p>' && (
-                <div className="mb-8 mt-2 px-1">
+                <div className="mb-4 mt-1 px-1">
                   <div 
                     className="text-gray-400 text-base sm:text-lg leading-relaxed break-keep italic html-content prose prose-invert max-w-none border-l-2 border-copper/30 pl-6 py-2"
                     dangerouslySetInnerHTML={{ __html: product.story }}
                   />
                 </div>
               )}
-              <div className="mb-6">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8 border-b border-white/5 pb-8">
+              <div className="mb-2">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-4 border-b border-white/5 pb-4">
                   <div className="flex flex-row items-center gap-6">
                     <p className="text-4xl sm:text-5xl font-serif font-black text-white tracking-wider tabular-nums">
                       {formattedPrice}
@@ -457,7 +457,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4">
                     {[
                       { label: '국가', value: product.country || '정보 없음', flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null, category: 'basic' },
-                      { label: '상세 지역', value: product.region || '정보 없음', category: 'basic' },
+                      { label: '지역', value: product.region || '정보 없음', category: 'basic' },
                       { label: '농장', value: product.farm || '정보 없음', category: 'basic' },
                       { label: '마이크로랏', value: product.micromill || '정보 없음', category: 'basic' },
                       { label: '재배 고도', value: product.altitude || '정보 없음', category: 'basic' },
@@ -505,7 +505,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 </div>
               )}
               {/* Direct Purchase Button (Right Side) */}
-              <div className="mt-10 pt-8 border-t border-white/5">
+              <div className="mt-4 pt-4 border-t border-white/5">
                 <a 
                   href={product.storeUrl || "https://smartstore.naver.com/archemist"} 
                   target="_blank" 
