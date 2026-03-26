@@ -546,7 +546,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     {activeHelp === 'cupNotes' && (
                       <div className="absolute top-8 left-0 z-[9999] w-64 p-4 bg-[#0b0c0b]/98 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                         <div className="flex justify-between items-start mb-2">
-                          <span className="text-[11px] text-copper font-black uppercase tracking-widest">About Cup Notes</span>
+                          <span className="text-[11px] text-copper font-black uppercase tracking-widest font-sans">컵 노트(Cup Notes) 안내</span>
                           <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
                         </div>
                         <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
