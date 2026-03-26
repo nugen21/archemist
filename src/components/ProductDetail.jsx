@@ -635,12 +635,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                        </div>
                      </h4>
                       <div className="grid grid-cols-2 gap-y-4 gap-x-6">
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col items-center gap-1">
                           <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-1">총 소요 시간</div>
-                          <div className="text-xl font-serif font-black text-white">{product.roastTime || '-'}</div>
+                          <div className="text-base font-serif font-black text-white text-center">{product.roastTime || '-'}</div>
                         </div>
                         
-                        <div className="flex flex-col gap-1 relative">
+                        <div className="flex flex-col items-center gap-1 relative">
                           <div className="flex items-center gap-1.5">
                             <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DT</div>
                             <button 
@@ -656,10 +656,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-xl font-serif font-black text-white">{product.dt || '-'}</div>
+                          <div className="text-base font-serif font-black text-white text-center">{product.dt || '-'}</div>
                         </div>
 
-                        <div className="flex flex-col gap-1 relative">
+                        <div className="flex flex-col items-center gap-1 relative">
                           <div className="flex items-center gap-1.5">
                             <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DTR</div>
                             <button 
@@ -675,10 +675,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-xl font-serif font-black text-white">{product.dtr || '-'}</div>
+                          <div className="text-base font-serif font-black text-white text-center">{product.dtr || '-'}</div>
                         </div>
 
-                        <div className="flex flex-col gap-1 relative">
+                        <div className="flex flex-col items-center gap-1 relative">
                           <div className="flex items-center gap-1.5">
                             <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">배치 용량</div>
                             <button 
@@ -694,7 +694,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-base font-serif font-black text-white">
+                          <div className="text-base font-serif font-black text-white text-center">
                             {product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}
                           </div>
                         </div>
