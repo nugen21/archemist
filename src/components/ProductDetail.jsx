@@ -356,7 +356,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     {/* XP Reward Highlight */}
                     {/* XP Reward Highlight - No XP for beverages */}
                     {product.category !== 'beverage' && (
-                      <div className="flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default relative">
+                      <div className={`flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default relative ${activeHelp === 'xp' ? 'z-[10000]' : 'z-10'}`}>
                         <Sparkles size={16} className="text-amber-500 animate-pulse" />
                         <div className="flex flex-col">
                           <div className="flex items-center gap-2 mb-1">
@@ -412,7 +412,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <div className="flex flex-col items-end gap-1">
                         <div 
                           ref={agingHelpRef}
-                          className={`flex items-center gap-1.5 justify-end relative ${activeHelp === 'aging' ? 'z-50' : 'z-10'}`}
+                          className={`flex items-center gap-1.5 justify-end relative ${activeHelp === 'aging' ? 'z-[10000]' : 'z-10'}`}
                         >
                           <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
                           <button 
@@ -524,7 +524,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               {product.cupNotes && (
                 <div 
                   ref={cupNotesHelpRef}
-                  className={`lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group ${activeHelp === 'cupNotes' ? 'z-50' : 'z-10'}`}
+                  className={`lg:col-span-3 bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 backdrop-blur-sm shadow-xl flex flex-col h-full relative group ${activeHelp === 'cupNotes' ? 'z-[10000]' : 'z-10'}`}
                 >
                   <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                     <img src="/logo-alchemist.png" alt="Logo" className="w-24 h-24 object-contain" />
@@ -599,7 +599,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               {(isBean || product.category === 'dripbag') && (
                 <div 
                   ref={agtronHelpRef}
-                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${activeHelp === 'agtron' ? 'z-50' : 'z-10'}`}
+                  className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-6 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-6 md:gap-8 mt-0 items-center ${(activeHelp === 'agtron' || activeHelp === 'roastTime') ? 'z-[10000]' : 'z-10'}`}
                 >
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />

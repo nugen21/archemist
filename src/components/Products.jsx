@@ -35,7 +35,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
             <div 
               key={product.id} 
               onClick={() => window.location.hash = `#product/${product.id}`}
-              className="group bg-[#111211]/50 border border-white/5 rounded-3xl p-5 hover:border-copper/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col h-full w-[280px] sm:w-[360px] md:w-[400px] shrink-0 snap-start relative after:content-[''] after:absolute after:right-[-8px] sm:after:right-[-12px] md:after:right-[-16px] after:top-1/4 after:bottom-1/4 after:w-[1px] after:bg-white/5 last:after:hidden cursor-pointer"
+              className={`group bg-[#111211]/50 border border-white/5 rounded-3xl p-5 hover:border-copper/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col h-full w-[280px] sm:w-[360px] md:w-[400px] shrink-0 snap-start relative after:content-[''] after:absolute after:right-[-8px] sm:after:right-[-12px] md:after:right-[-16px] after:top-1/4 after:bottom-1/4 after:w-[1px] after:bg-white/5 last:after:hidden cursor-pointer ${activeXpHelp === product.id ? 'z-[10000]' : 'z-10'}`}
             >
               <div className="relative w-full h-56 mb-5 rounded-2xl overflow-hidden transition-all duration-700 bg-black/20 border border-white/5 shadow-inner">
                 {product.image ? (
