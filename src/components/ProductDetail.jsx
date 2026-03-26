@@ -1040,7 +1040,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                        
                                        {/* Mobile Vertical Connector Line */}
                                        {pIdx < pours.length - 1 && (
-                                         <div className="absolute top-1/2 left-1/2 translate-y-[25px] w-[1px] h-[48px] bg-copper/20 md:hidden"></div>
+                                         <div className="absolute top-1/2 left-1/2 translate-y-[25px] w-[1px] h-[32px] bg-copper/20 md:hidden"></div>
                                        )}
                                     </div>
                                     
