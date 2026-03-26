@@ -805,7 +805,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
                                 <div className="text-copper/50">{item.icon}</div>
                                 <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{item.label}</span>
-                                <span className="text-sm font-bold text-white uppercase">{item.value || '-'}</span>
+                                <span className="text-sm font-bold text-white">{item.value || '-'}</span>
                               </div>
                             ))}
                           </div>
@@ -839,7 +839,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                     <div className="flex flex-col items-center gap-1 pt-1">
                                       <div className="flex items-baseline gap-1.5">
                                         <span className="text-xl font-serif font-black text-white tabular-nums group-hover:text-copper transition-colors">{pour.water}</span>
-                                        <span className="text-[8.5px] font-bold text-gray-500 uppercase tracking-widest">g</span>
+                                        <span className="text-[8.5px] font-bold text-gray-500 tracking-widest">g</span>
                                       </div>
                                       <div className="flex items-center gap-2 text-gray-400">
                                         <Timer size={14} className="opacity-30 group-hover:opacity-60 transition-opacity" />
@@ -858,7 +858,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               <span className="text-[8.5px] font-black text-gray-600 uppercase tracking-widest">최종 추출량</span>
                               <div className="flex items-baseline gap-2">
                                 <span className="text-2xl font-serif font-black text-copper tabular-nums">{totalWater}</span>
-                                <span className="text-xs font-bold text-gray-500 uppercase">ml</span>
+                                <span className="text-xs font-bold text-gray-500">g</span>
                               </div>
                             </div>
                             
@@ -907,7 +907,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                   { label: '업소명의 명칭 및 소재지', value: '아키미스트 로스터스 / 대구광역시 수성구 범어동 범어역' },
                   { label: '제조일자', value: '상품 후면 별도 표기' },
                   { label: '소비기한', value: '제조일로부터 1년' },
-                  { label: '내용량', value: product.size ? (String(product.size).includes('g') || String(product.size).includes('개') ? product.size : `${product.size}g / ${product.size}개`) : '200g / 500g / 1kg (상품 전면 표기)' },
+                  { label: '내용량', value: product.size ? (String(product.size).includes('g') || String(product.size).includes('개') ? product.size : `${product.size}g / ${product.size}개`) : '200g / 500g / 1000g (상품 전면 표기)' },
                   { label: '원재료명 및 함량', value: '커피원두 100%' },
                   { label: '포장재질', value: '폴리에틸렌 (내면)' },
                   { label: '품목보고번호', value: '상품 후면 별도 표기' },
