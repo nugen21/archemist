@@ -651,8 +651,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             </button>
                             {activeHelp === 'dt' && (
                               <div className="absolute top-0 left-12 md:left-24 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
-                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">DT (Develop Time)</span>
-                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep">1차 크랙이 시작된 후부터 배출까지의 시간입니다. 커피의 당도와 바디감이 결정되는 핵심 구간입니다.</p>
+                                <div className="flex justify-between items-start mb-1">
+                                  <span className="text-[10px] text-copper font-black uppercase tracking-widest">DT (Develop Time)</span>
+                                  <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
+                                </div>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1차 크랙이 시작된 후부터 배출까지의 시간입니다. 커피의 당도와 바디감이 결정되는 핵심 구간입니다.</p>
                               </div>
                             )}
                           </div>
@@ -670,8 +673,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             </button>
                             {activeHelp === 'dtr' && (
                               <div className="absolute top-0 left-12 md:left-24 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
-                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">DTR (Develop Time Ratio)</span>
-                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep">전체 로스팅 시간에 대한 DT의 비율입니다. 밸런스와 플레이버의 특징을 파악할 수 있는 고정밀 지표입니다.</p>
+                                <div className="flex justify-between items-start mb-1">
+                                  <span className="text-[10px] text-copper font-black uppercase tracking-widest">DTR (Develop Time Ratio)</span>
+                                  <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
+                                </div>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">전체 로스팅 시간에 대한 DT의 비율입니다. 밸런스와 플레이버의 특징을 파악할 수 있는 고정밀 지표입니다.</p>
                               </div>
                             )}
                           </div>
@@ -688,9 +694,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               <HelpCircle size={15} strokeWidth={2.5} />
                             </button>
                             {activeHelp === 'capacity' && (
-                              <div className="absolute top-8 left-0 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
-                                <span className="block text-[10px] text-copper font-black mb-1 uppercase tracking-widest">배치 용량 (Batch Size)</span>
-                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep">1회 로스팅 시 투입되는 원두의 양입니다. 동일한 규격을 유지하여 로스팅의 균일성을 확보합니다.</p>
+                              <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                <div className="flex justify-between items-start mb-1">
+                                  <span className="text-[10px] text-copper font-black uppercase tracking-widest">배치 용량 (Batch Size)</span>
+                                  <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
+                                </div>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1회 로스팅 시 투입되는 원두의 양입니다. 동일한 규격을 유지하여 로스팅의 균일성을 확보합니다.</p>
                               </div>
                             )}
                           </div>
