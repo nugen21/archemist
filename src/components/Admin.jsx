@@ -39,6 +39,7 @@ const getInitialFormData = () => ({
   experience: 50,
   showBasicInfo: true, showAnalysisInfo: true,
   blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: '',
+  dt: '', dtr: '', roastCapacity: '',
   // Extraction Recipe (Hot)
   hot_coffee_amount: '20g', hot_grind: '', hot_temp: '', hot_ratio: '', hot_dripper: '',
   hot_bloom_time: '', hot_bloom_water: '',
@@ -831,7 +832,12 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   )}
                   <InputField label="가공방식" name="process" value={formData.process} onChange={handleChange} placeholder="예: 워시드" />
                   {formData.category !== 'beverage' && (
-                    <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
+                    <>
+                      <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
+                      <InputField label="DT (Develop Time)" name="dt" value={formData.dt} onChange={handleChange} placeholder="예: 1분 30초" />
+                      <InputField label="DTR (Develop Time Ratio)" name="dtr" value={formData.dtr} onChange={handleChange} placeholder="예: 15.5%" />
+                      <InputField label="로스팅 용량 (1회 배치)" name="roastCapacity" value={formData.roastCapacity} onChange={handleChange} placeholder="예: 800g" />
+                    </>
                   )}
                 </>
               )}

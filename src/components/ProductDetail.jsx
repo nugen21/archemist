@@ -604,12 +604,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                   <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity pointer-events-none">
                     <Scale size={120} className="text-copper" />
                   </div>
-                  
-                  {/* Roasting Time (Left Side) */}
-                  <div className="flex-shrink-0 flex flex-col justify-center min-w-[200px] border-b md:border-b-0 md:border-r border-white/5 pb-6 md:pb-0 md:pr-8 w-full md:w-auto text-center md:text-left">
+                                   {/* Roasting Information (Left Side) */}
+                  <div className="flex-shrink-0 flex flex-col justify-center min-w-[240px] border-b md:border-b-0 md:border-r border-white/5 pb-6 md:pb-0 md:pr-8 w-full md:w-auto text-center md:text-left">
                      <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
                        <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
-                       로스팅 시간
+                       로스팅 정보
                        <div className="relative inline-block" ref={roastTimeHelpRef}>
                          <button 
                            onClick={(e) => {
@@ -625,20 +624,34 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                          {activeHelp === 'roastTime' && (
                            <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[9999] w-64 p-5 bg-[#0b0c0b]/98 border border-copper/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                              <div className="flex justify-between items-start mb-3">
-                               <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none font-sans">로스팅 시간의 의미</span>
+                               <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none font-sans">로스팅 정보 가이드</span>
                                <button onClick={() => setActiveHelp(null)} className="text-gray-600 hover:text-white leading-none">&times;</button>
                              </div>
                              <p className="text-[11px] text-gray-400 leading-relaxed font-bold break-keep text-left tracking-normal font-sans">
-                               <span className="text-gray-200 font-bold">로스팅 시간</span>은 원두가 완성되는 결정적인 시점입니다. 단 1초의 차이가 커피의 향미와 로스팅 포인트를 결정지을 만큼 중요한 과정입니다. <br/><br/>
-                               아키미스트 로스터스는 정교한 제어 시스템을 갖춘 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span> 하이엔드 로스터를 사용합니다. 스마트 제어 시스템을 통한 정밀한 데이터 분석으로, 매 로스팅마다 변함없는 최상의 품질을 보장합니다.
+                               <span className="text-gray-200 font-bold">DT (Develop Time)</span>는 1차 크랙 시작부터 배출까지의 시간을 의미하며, <span className="text-gray-200 font-bold">DTR (Ratio)</span>은 총 시간에 대한 DT의 비율입니다. <br/><br/>
+                               아키미스트 로스터스는 하이엔드 로스터 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span>를 사용하여 최적의 DT와 DTR을 정밀하게 제어해 제품을 생산합니다.
                              </p>
                            </div>
                          )}
                        </div>
                      </h4>
-                     <div className="flex flex-col gap-1">
-                       <div className="text-[12px] font-black text-gray-600 uppercase tracking-widest mt-1 md:mt-2">총 소요 시간</div>
-                       <div className="text-xl font-serif font-black text-white">{product.roastTime || '정보 없음'}</div>
+                     <div className="grid grid-cols-2 gap-y-4 gap-x-6">
+                        <div className="flex flex-col gap-0.5">
+                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">총 소요 시간</div>
+                          <div className="text-base font-serif font-black text-white">{product.roastTime || '-'}</div>
+                        </div>
+                        <div className="flex flex-col gap-0.5">
+                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">DT</div>
+                          <div className="text-base font-serif font-black text-white">{product.dt || '-'}</div>
+                        </div>
+                        <div className="flex flex-col gap-0.5">
+                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">DTR</div>
+                          <div className="text-base font-serif font-black text-white">{product.dtr || '-'}</div>
+                        </div>
+                        <div className="flex flex-col gap-0.5">
+                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">배치 용량</div>
+                          <div className="text-base font-serif font-black text-white">{product.roastCapacity || '-'}</div>
+                        </div>
                      </div>
                   </div>
 
