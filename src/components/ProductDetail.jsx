@@ -641,7 +641,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           
           {/* 1. Shipping & Shelf Life Policy */}
           <div className="max-w-4xl mx-auto text-center px-4">
-              <h3 className="text-sm font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
+              <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 배송 및 소비기한 안내
                 <div className="h-[1px] w-8 bg-copper/30"></div>
@@ -657,7 +657,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
              <div className="max-w-8xl mx-auto px-4 mt-6">
-               <h3 className="text-xl font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
+               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  상세 스토리
                  <div className="h-[1px] w-8 bg-white/10"></div>
@@ -671,7 +671,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           {/* 4. Green Bean Analysis (Optional) */}
           {isBean && product.showAnalysisInfo !== false && (
             <div className="max-w-8xl mx-auto px-4 mt-6">
-               <h3 className="text-sm font-serif font-black text-white mb-8 flex items-center justify-center gap-4">
+               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  생두 분석 정보
                  <div className="h-[1px] w-8 bg-white/10"></div>
@@ -697,7 +697,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           {/* 4.1 Grind Guide Section */}
             {isBean && (
               <div className="max-w-8xl mx-auto px-4 mt-8">
-                <h3 className="text-sm font-serif font-black text-white mb-2 flex items-center justify-center gap-6">
+                <h3 className="text-xl font-serif font-black text-white mb-2 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                   <div className="h-[1px] w-8 bg-white/10"></div>
                   분쇄 가이드
                   <div className="h-[1px] w-8 bg-white/10"></div>
@@ -736,7 +736,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {!isCafe && (
             <div className="max-w-8xl mx-auto text-center px-4">
-              <h3 className="text-xl font-serif font-black text-white mb-6 flex items-center justify-center gap-4">
+              <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 추천 추출 방식
                 <div className="h-[1px] w-8 bg-copper/30"></div>
@@ -790,7 +790,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           {/* Summary Row */}
                           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                             {[
-                              { label: '원두량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
+                              { label: '원두량', value: product[`${prefix}coffee_amount`] ? (String(product[`${prefix}coffee_amount`]).toLowerCase().includes('g') ? product[`${prefix}coffee_amount`] : `${product[`${prefix}coffee_amount`]}g`) : '-', icon: <Coffee size={14} /> },
                               { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
                                { label: '물 온도', value: product[`${prefix}temp`] ? (String(product[`${prefix}temp`]).includes('℃') || String(product[`${prefix}temp`]).includes('C') || String(product[`${prefix}temp`]).includes('°') ? product[`${prefix}temp`] : `${product[`${prefix}temp`]}℃`) : '-', icon: <Thermometer size={14} /> },
                               { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
@@ -895,7 +895,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
         {/* 5. Regulatory Product Information Notice (Table) */}
         {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
           <div className="max-w-4xl mx-auto px-4 mt-20 mb-32 border-t border-white/5 pt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 relative z-10 text-center">
-            <h3 className="text-sm font-serif font-black text-gray-400 mb-8 uppercase tracking-[0.2em] flex items-center justify-center gap-4">
+            <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
               <div className="h-[1px] w-6 bg-white/10"></div>
               상품 정보 제공 고시
               <div className="h-[1px] w-6 bg-white/10"></div>
