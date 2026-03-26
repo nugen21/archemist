@@ -374,14 +374,14 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </button>
 
                               {activeHelp === 'xp' && (
-                                <div className="absolute top-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[110] w-64 p-5 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                <div className="absolute top-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[9999] w-64 p-5 bg-[#0b0c0b]/98 border border-amber-500/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                                   <div className="flex justify-between items-start mb-3">
-                                    <span className="text-[11px] text-amber-500 font-black uppercase tracking-widest leading-none">Level Up Your Membership</span>
+                                    <span className="text-[11px] text-amber-500 font-black uppercase tracking-widest leading-none font-sans">멤버십 및 등급 안내</span>
                                     <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
                                   </div>
-                                  <p className="text-[11px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal normal-case">
+                                  <p className="text-[11px] text-gray-400 leading-relaxed font-bold break-keep text-left tracking-normal normal-case font-sans">
                                     경험치를 쌓아서 최고 레벨에 도전해 보세요! <br/><br/>
-                                    <span className="text-amber-500 font-bold">등급</span>이 올라갈수록 아키미스트 멤버십만의 더 특별하고 다양한 혜택과 시크릿 오퍼를 누리실 수 있습니다.
+                                    <span className="text-amber-500 font-black">등급</span>이 올라갈수록 아키미스트 멤버십만의 더 특별하고 다양한 혜택과 시크릿 오퍼를 누리실 수 있습니다.
                                   </p>
                                 </div>
                               )}
@@ -425,9 +425,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                           {/* Aging Help Popup */}
                           {activeHelp === 'aging' && (
-                            <div className="absolute top-6 right-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
+                            <div className="absolute top-6 right-0 z-[9999] w-64 p-4 bg-[#0b0c0b]/98 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                               <div className="flex justify-between items-start mb-2">
-                                <span className="text-[11px] text-copper font-black uppercase tracking-widest">Recommended Aging</span>
+                                <span className="text-[11px] text-copper font-black uppercase tracking-widest font-sans">에이징(Aging) 가이드</span>
                                 <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
                               </div>
                               <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep text-left">
@@ -544,7 +544,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                     {/* Cup Notes Help Popup */}
                     {activeHelp === 'cupNotes' && (
-                      <div className="absolute top-8 left-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
+                      <div className="absolute top-8 left-0 z-[9999] w-64 p-4 bg-[#0b0c0b]/98 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                         <div className="flex justify-between items-start mb-2">
                           <span className="text-[11px] text-copper font-black uppercase tracking-widest">About Cup Notes</span>
                           <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
@@ -623,13 +623,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                          </button>
 
                          {activeHelp === 'roastTime' && (
-                           <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[100] w-64 p-5 bg-[#0b0c0b]/fb border border-copper/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                           <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[9999] w-64 p-5 bg-[#0b0c0b]/98 border border-copper/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                              <div className="flex justify-between items-start mb-3">
-                               <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none">로스팅 배출 시간의 의미</span>
+                               <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none font-sans">로스팅 시간의 의미</span>
                                <button onClick={() => setActiveHelp(null)} className="text-gray-600 hover:text-white leading-none">&times;</button>
                              </div>
-                             <p className="text-[11px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal">
-                               <span className="text-gray-200 font-bold">배출 시간</span>은 원두가 완성되는 결정적인 시점입니다. 단 1초의 차이가 커피의 향미와 로스팅 포인트를 결정지을 만큼 중요한 과정입니다. <br/><br/>
+                             <p className="text-[11px] text-gray-400 leading-relaxed font-bold break-keep text-left tracking-normal font-sans">
+                               <span className="text-gray-200 font-bold">로스팅 시간</span>은 원두가 완성되는 결정적인 시점입니다. 단 1초의 차이가 커피의 향미와 로스팅 포인트를 결정지을 만큼 중요한 과정입니다. <br/><br/>
                                아키미스트 로스터스는 정교한 제어 시스템을 갖춘 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span> 하이엔드 로스터를 사용합니다. 스마트 제어 시스템을 통한 정밀한 데이터 분석으로, 매 로스팅마다 변함없는 최상의 품질을 보장합니다.
                              </p>
                            </div>
@@ -661,9 +661,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                         {/* Agtron Help Popup */}
                         {activeHelp === 'agtron' && (
-                          <div className="absolute top-6 left-0 z-[9999] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
+                          <div className="absolute top-6 left-0 z-[9999] w-64 p-4 bg-[#111211]/98 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                             <div className="flex justify-between items-start mb-2">
-                              <span className="text-[11px] text-copper font-black uppercase tracking-widest">What is Agtron?</span>
+                              <span className="text-[11px] text-copper font-black uppercase tracking-widest font-sans">아그트론(Agtron) 가이드</span>
                               <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white">&times;</button>
                             </div>
                             <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">

@@ -114,13 +114,13 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                             </button>
 
                             {activeXpHelp === product.id && (
-                              <div className="absolute top-4 left-0 z-[100] w-48 p-3 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                              <div className="absolute top-4 left-0 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-amber-500/20 rounded-xl shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                                 <div className="flex justify-between items-start mb-2">
-                                  <span className="text-[8px] text-amber-500 font-black uppercase tracking-widest leading-none">Membership Benefit</span>
+                                  <span className="text-[8px] text-amber-500 font-black uppercase tracking-widest leading-none font-sans">멤버십 및 등급 안내</span>
                                   <button onClick={(e) => { e.stopPropagation(); setActiveXpHelp(null); }} className="text-gray-600 hover:text-white leading-none text-xs">&times;</button>
                                 </div>
-                                <p className="text-[8px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal normal-case">
-                                  경험치를 쌓아서 <span className="text-amber-500 font-bold">등급</span>을 높여보세요! <br/>
+                                <p className="text-[8px] text-gray-400 leading-relaxed font-bold break-keep text-left tracking-normal normal-case font-sans">
+                                  경험치를 쌓아서 <span className="text-amber-500 font-black">등급</span>을 높여보세요! <br/>
                                   레벨이 올라갈수록 더 특별한 혜택이 제공됩니다.
                                 </p>
                               </div>
