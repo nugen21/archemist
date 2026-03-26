@@ -356,17 +356,37 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     {/* XP Reward Highlight */}
                     {/* XP Reward Highlight - No XP for beverages */}
                     {product.category !== 'beverage' && (
-                      <div 
-                        ref={xpHelpRef}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setActiveHelp(activeHelp === 'xp' ? null : 'xp');
-                        }}
-                        className="flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-pointer relative"
-                      >
+                      <div className="flex items-center gap-3 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-5 py-3 rounded-2xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default relative">
                         <Sparkles size={16} className="text-amber-500 animate-pulse" />
                         <div className="flex flex-col">
-                          <span className="text-[10px] text-amber-500/80 font-black tracking-[0.1em] leading-none mb-1">경험치 보상</span>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[10px] text-amber-500/80 font-black tracking-[0.1em] leading-none">경험치 보상</span>
+                            <div className="relative inline-block" ref={xpHelpRef}>
+                              <button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActiveHelp(activeHelp === 'xp' ? null : 'xp');
+                                }}
+                                className="p-0.5 hover:text-white transition-colors text-amber-500/40 outline-none"
+                                aria-label="XP Help"
+                              >
+                                <HelpCircle size={12} strokeWidth={2.5} />
+                              </button>
+
+                              {activeHelp === 'xp' && (
+                                <div className="absolute top-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[110] w-64 p-5 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                                  <div className="flex justify-between items-start mb-3">
+                                    <span className="text-[11px] text-amber-500 font-black uppercase tracking-widest leading-none">Level Up Your Membership</span>
+                                    <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
+                                  </div>
+                                  <p className="text-[11px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal normal-case">
+                                    경험치를 쌓아서 최고 레벨에 도전해 보세요! <br/><br/>
+                                    <span className="text-amber-500 font-bold">등급</span>이 올라갈수록 아키미스트 멤버십만의 더 특별하고 다양한 혜택과 시크릿 오퍼를 누리실 수 있습니다.
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                           <div className="flex items-baseline gap-1">
                             <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">
                               +{Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1))}
@@ -377,20 +397,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             )}
                           </div>
                         </div>
-
-                        {/* XP Help Popup */}
-                        {activeHelp === 'xp' && (
-                          <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-[110] w-64 p-5 bg-[#0b0c0b]/fb border border-amber-500/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
-                            <div className="flex justify-between items-start mb-3">
-                              <span className="text-[11px] text-amber-500 font-black uppercase tracking-widest leading-none">Level Up Your Membership</span>
-                              <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
-                            </div>
-                            <p className="text-[11px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal normal-case">
-                              경험치를 쌓아서 최고 레벨에 도전해 보세요! <br/><br/>
-                              <span className="text-amber-500 font-bold">등급</span>이 올라갈수록 아키미스트 멤버십만의 더 특별하고 다양한 혜택과 시크릿 오퍼를 누리실 수 있습니다.
-                            </p>
-                          </div>
-                        )}
                       </div>
                     )}
                   </div>
