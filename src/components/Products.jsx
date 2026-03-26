@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import { QRCodeCanvas } from 'qrcode.react';
 
 const ProductSection = ({ title, category, icon, items, bgColor }) => {
   if (!items || items.length === 0) return null;
@@ -32,6 +33,16 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                     <img src={`/images/icons/${product.category || 'bean'}.jpg`} alt="icon" className="w-full h-full object-contain" />
                   </div>
                 )}
+                {/* Product QR Code */}
+                <div className="absolute top-4 right-4 z-30 group-hover:scale-110 transition-transform bg-white p-1 rounded-xl shadow-2xl opacity-80 hover:opacity-100">
+                  <QRCodeCanvas 
+                    value={`${window.location.origin}${window.location.pathname}#product/${product.id}`}
+                    size={45}
+                    level={"M"}
+                    includeMargin={false}
+                  />
+                </div>
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 
                 {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (

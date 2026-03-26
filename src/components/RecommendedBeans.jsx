@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles } from 'lucide-react';
+import { QRCodeCanvas } from 'qrcode.react';
 
 const countryToCode = {
   // South & Central America
@@ -122,6 +123,16 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-80"></div>
                 
+                {/* Product QR Code */}
+                <div className="absolute top-4 right-4 z-30 group-hover:scale-110 transition-transform bg-white p-1 rounded-xl shadow-2xl opacity-80 hover:opacity-100">
+                  <QRCodeCanvas 
+                    value={`${window.location.origin}${window.location.pathname}#product/${bean.id}`}
+                    size={50}
+                    level={"M"}
+                    includeMargin={false}
+                  />
+                </div>
+
                 {/* BeanType Badge (Left) */}
                 {['bean', 'dripbag', 'coldbrew'].includes(bean.category) && (
                   <div className="absolute bottom-4 left-4 z-20">
