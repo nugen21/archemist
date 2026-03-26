@@ -600,12 +600,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                          {showRoastTimeHelp && (
                            <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[100] w-64 p-5 bg-[#0b0c0b]/fb border border-copper/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                              <div className="flex justify-between items-start mb-3">
-                               <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none">Philosophy of Roasting</span>
+                               <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none">로스팅 배출 시간의 의미</span>
                                <button onClick={() => setShowRoastTimeHelp(false)} className="text-gray-600 hover:text-white leading-none">&times;</button>
                              </div>
-                             <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep text-left normal-case tracking-normal">
-                               로스팅 배출 시간은 생두가 원두로 완성되어 배출되는 시점을 의미하며, 1초의 차이만으로도 로스팅 포인트와 향미 발현이 달라질 만큼 절대적인 영향을 미칩니다. <br/><br/>
-                               아키미스트 로스터스는 업계 표준인 <span className="text-gray-200 font-bold">스트롱홀드(Stronghold)</span> 로스터의 스마트 제어 시스템을 활용하여 정밀한 데이터 기반으로 일관된 최상의 퀄리티를 구현합니다.
+                             <p className="text-[11px] text-gray-400 leading-relaxed font-medium break-keep text-left tracking-normal">
+                               <span className="text-gray-200 font-bold">배출 시간</span>은 원두가 완성되는 결정적인 시점입니다. 단 1초의 차이가 커피의 향미와 로스팅 포인트를 결정지을 만큼 중요한 과정입니다. <br/><br/>
+                               아키미스트 로스터스는 세계적인 표준 장비인 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span> 하이엔드 로스터를 사용합니다. 스마트 제어 시스템을 통한 정밀한 데이터 분석으로, 매 로스팅마다 변함없는 최상의 품질을 보장합니다.
                              </p>
                            </div>
                          )}
