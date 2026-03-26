@@ -637,13 +637,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                      </h4>
                       <div className="grid grid-cols-2 gap-y-4 gap-x-6">
                         <div className="flex flex-col gap-1">
-                          <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest mt-1">총 소요 시간</div>
-                          <div className="text-xl font-serif font-black text-white">{product.roastTime || '-'}</div>
+                          <div className="text-[12px] font-black text-gray-600 uppercase tracking-widest mt-1">총 소요 시간</div>
+                          <div className="text-2xl font-serif font-black text-white">{product.roastTime || '-'}</div>
                         </div>
                         
                         <div className="flex flex-col gap-1 relative">
                           <div className="flex items-center gap-1.5">
-                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DT</div>
+                            <div className="text-[12px] font-black text-gray-600 uppercase tracking-widest leading-none">DT</div>
                             <button 
                               onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'dt' ? null : 'dt'); }}
                               className="p-1 text-white/80 hover:text-white transition-colors outline-none"
@@ -657,12 +657,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-xl font-serif font-black text-white">{product.dt || '-'}</div>
+                          <div className="text-2xl font-serif font-black text-white">{product.dt || '-'}</div>
                         </div>
 
                         <div className="flex flex-col gap-1 relative">
                           <div className="flex items-center gap-1.5">
-                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DTR</div>
+                            <div className="text-[12px] font-black text-gray-600 uppercase tracking-widest leading-none">DTR</div>
                             <button 
                               onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'dtr' ? null : 'dtr'); }}
                               className="p-1 text-white/80 hover:text-white transition-colors outline-none"
@@ -676,12 +676,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-xl font-serif font-black text-white">{product.dtr || '-'}</div>
+                          <div className="text-2xl font-serif font-black text-white">{product.dtr || '-'}</div>
                         </div>
 
                         <div className="flex flex-col gap-1 relative">
                           <div className="flex items-center gap-1.5">
-                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">배치 용량</div>
+                            <div className="text-[12px] font-black text-gray-600 uppercase tracking-widest leading-none">배치 용량</div>
                             <button 
                               onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'capacity' ? null : 'capacity'); }}
                               className="p-1 text-white/80 hover:text-white transition-colors outline-none"
@@ -695,7 +695,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-xl font-serif font-black text-white">
+                          <div className="text-2xl font-serif font-black text-white">
                             {product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}
                           </div>
                         </div>
