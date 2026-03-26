@@ -349,7 +349,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                           {/* Aging Help Popup */}
                           {showAgingHelp && (
-                            <div className="absolute top-6 right-0 z-[100] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in duration-200">
+                            <div className="absolute top-6 right-0 z-[1000] w-64 p-4 bg-[#1a1c1b]/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                               <div className="flex justify-between items-start mb-2">
                                 <span className="text-[11px] text-copper font-black uppercase tracking-widest">Recommended Aging</span>
                                 <button onClick={() => setShowAgingHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
@@ -465,7 +465,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                     {/* Cup Notes Help Popup */}
                     {showCupNotesHelp && (
-                      <div className="absolute top-8 left-0 z-[100] w-64 p-4 bg-[#1a1c1b]/95 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in duration-200">
+                      <div className="absolute top-8 left-0 z-[1000] w-64 p-4 bg-[#1a1c1b]/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                         <div className="flex justify-between items-start mb-2">
                           <span className="text-[11px] text-copper font-black uppercase tracking-widest">About Cup Notes</span>
                           <button onClick={() => setShowCupNotesHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
@@ -554,7 +554,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                         {/* Agtron Help Popup */}
                         {showAgtronHelp && (
-                          <div className="absolute top-6 left-0 z-[100] w-64 p-4 bg-[#1a1c1b] border border-white/10 rounded-2xl shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in duration-200">
+                          <div className="absolute top-6 left-0 z-[1000] w-64 p-4 bg-[#1a1c1b]/90 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in duration-200">
                             <div className="flex justify-between items-start mb-2">
                               <span className="text-[11px] text-copper font-black uppercase tracking-widest">What is Agtron?</span>
                               <button onClick={() => setShowAgtronHelp(false)} className="text-gray-500 hover:text-white">&times;</button>
@@ -633,6 +633,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           )} 
         </div>
       </div>
+
 
 
         {/* Detail Information Sections */}
@@ -791,7 +792,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             {[
                               { label: '원두량', value: product[`${prefix}coffee_amount`], icon: <Coffee size={14} /> },
                               { label: '분쇄도', value: product[`${prefix}grind`], icon: <Scale size={14} /> },
-                              { label: '물 온도', value: product[`${prefix}temp`], icon: <Thermometer size={14} /> },
+                               { label: '물 온도', value: product[`${prefix}temp`] ? (String(product[`${prefix}temp`]).includes('℃') || String(product[`${prefix}temp`]).includes('C') || String(product[`${prefix}temp`]).includes('°') ? product[`${prefix}temp`] : `${product[`${prefix}temp`]}℃`) : '-', icon: <Thermometer size={14} /> },
                               { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
                               { 
                                 label: recipeTab === 'ice' ? '얼음 중량' : '추출 비율', 
@@ -890,6 +891,51 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
             </div>
           )}
         </div>
+
+        {/* 5. Regulatory Product Information Notice (Table) */}
+        {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
+          <div className="max-w-4xl mx-auto px-4 mt-20 mb-32 border-t border-white/5 pt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 relative z-10 text-center">
+            <h3 className="text-sm font-serif font-black text-gray-400 mb-8 uppercase tracking-[0.2em] flex items-center justify-center gap-4">
+              <div className="h-[1px] w-6 bg-white/10"></div>
+              상품 정보 제공 고시
+              <div className="h-[1px] w-6 bg-white/10"></div>
+            </h3>
+            <div className="bg-[#111211] rounded-2xl border border-white/5 overflow-hidden shadow-2xl text-left">
+              <div className="flex flex-col">
+                {[
+                  { label: '식품유형', value: '커피 (Coffee)' },
+                  { label: '업소명의 명칭 및 소재지', value: '아키미스트 로스터스 / 대구광역시 수성구 범어동 범어역' },
+                  { label: '제조일자', value: '상품 후면 별도 표기' },
+                  { label: '소비기한', value: '제조일로부터 1년' },
+                  { label: '내용량', value: product.size ? (String(product.size).includes('g') || String(product.size).includes('개') ? product.size : `${product.size}g / ${product.size}개`) : '200g / 500g / 1kg (상품 전면 표기)' },
+                  { label: '원재료명 및 함량', value: '커피원두 100%' },
+                  { label: '포장재질', value: '폴리에틸렌 (내면)' },
+                  { label: '품목보고번호', value: '상품 후면 별도 표기' },
+                  { label: '반품 및 교환', value: '구입처 및 본사' },
+                  { label: '보관방법', value: '건냉한 곳에 밀폐보관' },
+                  { label: '고객 상담 전화', value: '010-0000-0000 (아키미스트)' },
+                ].map((info, idx) => (
+                  <div key={idx} className="flex flex-col sm:flex-row border-b border-white/5 last:border-b-0 hover:bg-white/[0.02] transition-colors">
+                     <div className="w-full sm:w-1/3 bg-white/[0.01] p-4 text-[10px] sm:text-[11px] font-black text-gray-500 uppercase tracking-widest flex items-center border-b sm:border-b-0 sm:border-r border-white/5">
+                       {info.label}
+                     </div>
+                     <div className="w-full sm:w-2/3 p-4 text-xs font-medium text-gray-300 flex items-center break-keep">
+                       {info.value}
+                     </div>
+                  </div>
+                ))}
+              </div>
+              <div className="p-6 bg-white/[0.01] border-t border-white/5">
+                <p className="text-[10px] text-gray-500 leading-relaxed font-medium mb-1.5 opacity-60 italic">
+                  * 본 제품은 공정거래위원회 고시 소비자 분쟁 해결 기준에 의거 정당한 소비자 피해에 대해 교환 또는 보상받을 수 있습니다.
+                </p>
+                <p className="text-[10px] text-gray-500 leading-relaxed font-bold opacity-80">
+                  * 부정·불량 식품 신고는 국번없이 1399
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       
       {/* Visual Alchemy - Floating Particles */}
       <div className="absolute top-1/4 left-10 w-1 h-1 bg-copper rounded-full blur-[2px] animate-pulse opacity-40"></div>
