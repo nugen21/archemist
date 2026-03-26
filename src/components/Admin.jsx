@@ -477,7 +477,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
       setActiveTab('manage');
       setFormData(getInitialFormData());
     }
-  }, [initialEditingId, beans, externalProducts, editingId, activeTab]);
+  }, [initialEditingId, editingId]); // Removed beans and externalProducts to prevent form reset on every global state change
 
   // --- Drag and Drop Handlers ---
   const handleDragStart = (e, index) => {
@@ -719,7 +719,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 (XP: {formData.experience || 50})</label>
+                <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">경험치 (XP: {formData.experience})</label>
                 <div className="flex items-center gap-3 bg-[#0b0c0b] border border-gray-800 rounded-xl px-4 py-2.5 h-[50px]">
                   <input 
                     type="range" 
@@ -727,11 +727,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     min="1" 
                     max="100" 
                     step="1"
-                    value={formData.experience || 50} 
+                    value={formData.experience} 
                     onChange={handleChange}
                     className="flex-grow accent-copper h-1"
                   />
-                  <span className="text-sm font-black text-copper min-w-[30px] text-right">{formData.experience || 50}</span>
+                  <span className="text-sm font-black text-copper min-w-[30px] text-right">{formData.experience}</span>
                 </div>
               </div>
 
