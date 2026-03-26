@@ -357,7 +357,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     
                     {/* XP Reward Highlight */}
                     {/* XP Reward Highlight - No XP for beverages */}
-                    {product.category !== 'beverage' && (
+                    {true && (
                       <div className={`flex items-center bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/20 px-3.5 py-1.5 rounded-xl shadow-[0_0_15px_rgba(245,158,11,0.05)] hover:scale-[1.02] transition-all group cursor-default relative ${activeHelp === 'xp' ? 'z-[10000]' : 'z-10'}`}>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-2 mb-0.5">
@@ -390,7 +390,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           </div>
                           <div className="flex items-baseline gap-1">
                             <span className="text-2xl font-serif font-black text-amber-500 tracking-tighter">
-                              +{((Number(product.experience) || 0) * (product.recommended ? 1.1 : 1)).toFixed(1)}
+                              +{(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.001 * (product.recommended ? 1.1 : 1)).toFixed(1)}
                             </span>
                             <span className="text-[10px] font-black text-amber-500/60 uppercase">xp</span>
                             {product.recommended && (

@@ -95,7 +95,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                   </div>
 
                   {/* XP Reward Badge - No XP for beverages */}
-                  {product.category !== 'beverage' && (
+                  {true && (
                     <div className="flex items-center bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/10 px-1.5 py-1 rounded-lg shadow-sm relative">
                       <div className="flex flex-col items-start leading-none gap-0.5">
                         <div className="flex items-center gap-1">
@@ -128,7 +128,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                         </div>
                         <div className="flex items-baseline gap-0.5">
                           <span className="text-sm font-serif font-black text-amber-500">
-                            +{((Number(product.experience) || 0) * (product.recommended ? 1.1 : 1)).toFixed(1)}
+                            +{(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.001 * (product.recommended ? 1.1 : 1)).toFixed(1)}
                           </span>
                           <span className="text-[8px] font-black text-amber-500/60 uppercase">xp</span>
                           {product.recommended && <span className="text-[7px] text-amber-500 font-black ml-0.5 leading-none animate-bounce">+10%</span>}
