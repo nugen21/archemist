@@ -1,4 +1,5 @@
 import React from 'react';
+import { Sparkles } from 'lucide-react';
 
 const ProductSection = ({ title, category, icon, items, bgColor }) => {
   if (!items || items.length === 0) return null;
@@ -49,22 +50,40 @@ const ProductSection = ({ title, category, icon, items, bgColor }) => {
                 </h3>
                 <div className="flex justify-between items-baseline border-b border-copper/10 pb-3">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-serif font-black text-copper tracking-widest drop-shadow-[0_0_15px_rgba(161,118,76,0.3)] tabular-nums">
+                    <span className="text-2xl font-serif font-black text-white tracking-widest tabular-nums">
                       {product.category === 'beverage' 
                         ? (Number(product.price) / 1000).toFixed(1)
                         : (Number(product.price) || 0).toLocaleString()}
                     </span>
-                    {product.size && (
-                      <span className="text-gray-500 font-bold tracking-widest flex items-center text-sm">
-                        <span className="opacity-30 mr-2">/</span>
-                        {(() => {
-                          const s = String(product.size).toLowerCase();
-                          if (product.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
-                          if (product.category === 'bean') return s.includes('g') ? s : `${s}g`;
-                          return s.toUpperCase();
-                        })()}
-                      </span>
-                    )}
+                    <span className="text-xs text-gray-500 font-bold tracking-widest flex items-center">
+                      원
+                      {product.size && (
+                        <>
+                          <span className="opacity-30 mx-2">/</span>
+                          {(() => {
+                            const s = String(product.size).toLowerCase();
+                            if (product.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
+                            if (product.category === 'bean') return s.includes('g') ? s : `${s}g`;
+                            return s.toUpperCase();
+                          })()}
+                        </>
+                      )}
+                    </span>
+                  </div>
+
+                  {/* XP Reward Badge */}
+                  <div className="flex items-center gap-1.5 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/10 px-2 py-1.5 rounded-xl shadow-sm">
+                    <Sparkles size={10} className="text-amber-500 animate-pulse" />
+                    <div className="flex flex-col items-start leading-none gap-0.5">
+                      <span className="text-[7px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                      <div className="flex items-baseline gap-0.5">
+                        <span className="text-sm font-serif font-black text-amber-500">
+                          +{Math.floor(parseFloat(String(product.price || '0').replace(/,/g, '')) * 0.0001 * (product.recommended ? 1.1 : 1))}
+                        </span>
+                        <span className="text-[8px] font-black text-amber-500/60 uppercase">xp</span>
+                        {product.recommended && <span className="text-[7px] text-amber-500 font-black ml-0.5 leading-none animate-bounce">+10%</span>}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
