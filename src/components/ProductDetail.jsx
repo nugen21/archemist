@@ -146,6 +146,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   const roastTimeHelpRef = useRef(null);
   const xpHelpRef = useRef(null);
   const sensoryHelpRef = useRef(null);
+  const tdsHelpRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -156,7 +157,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           activeHelp === 'aging' ? agingHelpRef :
           activeHelp === 'roastTime' ? roastTimeHelpRef :
           activeHelp === 'xp' ? xpHelpRef : 
-          activeHelp === 'sensory' ? sensoryHelpRef : null;
+          activeHelp === 'sensory' ? sensoryHelpRef :
+            activeHelp === 'tds' ? tdsHelpRef : null;
 
         if (currentRef?.current && !currentRef.current.contains(event.target)) {
           setActiveHelp(null);
