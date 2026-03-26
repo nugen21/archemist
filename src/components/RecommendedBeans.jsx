@@ -233,10 +233,10 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                                 e.stopPropagation();
                                 setActiveXpHelp(activeXpHelp === bean.id ? null : bean.id);
                               }}
-                              className="p-1 hover:text-white transition-colors text-amber-500/40 outline-none"
+                              className="p-1 hover:text-white transition-colors text-white/80 outline-none"
                               aria-label="XP Help"
                             >
-                              <HelpCircle size={16} strokeWidth={2.5} />
+                              <HelpCircle size={15} strokeWidth={2.5} />
                             </button>
 
                             {activeXpHelp === bean.id && (

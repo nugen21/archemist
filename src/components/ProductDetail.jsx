@@ -367,10 +367,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                   e.stopPropagation();
                                   setActiveHelp(activeHelp === 'xp' ? null : 'xp');
                                 }}
-                                className="p-0.5 hover:text-white transition-colors text-amber-500/40 outline-none"
-                                aria-label="XP Help"
-                              >
-                                <HelpCircle size={12} strokeWidth={2.5} />
+                                  className="p-1 hover:text-white transition-colors text-white/80 outline-none"
+                                  aria-label="XP Help"
+                                >
+                                  <HelpCircle size={15} strokeWidth={2.5} />
                               </button>
 
                               {activeHelp === 'xp' && (
@@ -417,7 +417,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                           <span className="text-[10px] text-copper/60 font-black uppercase tracking-[0.2em]">에이징</span>
                           <button 
                             onClick={() => setActiveHelp(activeHelp === 'aging' ? null : 'aging')}
-                            className="p-0.5 hover:text-white transition-colors text-gray-700 outline-none"
+                            className="p-1 hover:text-white transition-colors text-white/80 outline-none"
                             aria-label="Aging Help"
                           >
                             <HelpCircle size={15} strokeWidth={2.5} />
@@ -536,7 +536,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     </h4>
                     <button 
                       onClick={() => setActiveHelp(activeHelp === 'cupNotes' ? null : 'cupNotes')}
-                      className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
+                      className="p-1 hover:text-white transition-colors text-white/80 outline-none"
                       aria-label="Cup Notes Help"
                     >
                       <HelpCircle size={15} strokeWidth={2.5} />
@@ -615,7 +615,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                              e.stopPropagation();
                              setActiveHelp(activeHelp === 'roastTime' ? null : 'roastTime');
                            }}
-                           className="p-1 hover:text-white transition-colors text-copper/40 outline-none"
+                           className="p-1 hover:text-white transition-colors text-white/80 outline-none"
                            aria-label="Roast Time Help"
                          >
                            <HelpCircle size={15} strokeWidth={2.5} />
@@ -666,7 +666,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         <span className="text-[12px] text-copper/60 font-black tracking-widest uppercase">Agtron</span>
                         <button 
                           onClick={() => setActiveHelp(activeHelp === 'agtron' ? null : 'agtron')}
-                          className="p-0.5 hover:text-white transition-colors text-gray-600 outline-none"
+                          className="p-1 hover:text-white transition-colors text-white/80 outline-none"
                           aria-label="Agtron Help"
                         >
                           <HelpCircle size={15} strokeWidth={2.5} />

@@ -107,10 +107,10 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                                 e.stopPropagation();
                                 setActiveXpHelp(activeXpHelp === product.id ? null : product.id);
                               }}
-                              className="p-0.5 hover:text-white transition-colors text-amber-500/40 outline-none"
-                              aria-label="XP Help"
-                            >
-                              <HelpCircle size={8} strokeWidth={3} />
+                               className="p-1 hover:text-white transition-colors text-white/80 outline-none"
+                               aria-label="XP Help"
+                             >
+                               <HelpCircle size={15} strokeWidth={2.5} />
                             </button>
 
                             {activeXpHelp === product.id && (
