@@ -96,8 +96,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
 
                   {/* XP Reward Badge - No XP for beverages */}
                   {product.category !== 'beverage' && (
-                    <div className="flex items-center gap-1.5 bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/10 px-2 py-1.5 rounded-xl shadow-sm relative">
-                      <Sparkles size={10} className="text-amber-500 animate-pulse" />
+                    <div className="flex items-center bg-gradient-to-br from-amber-500/10 to-yellow-500/5 border border-amber-500/10 px-1.5 py-1 rounded-lg shadow-sm relative">
                       <div className="flex flex-col items-start leading-none gap-0.5">
                         <div className="flex items-center gap-1">
                           <span className="text-[7px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
