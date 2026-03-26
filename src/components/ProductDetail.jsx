@@ -650,7 +650,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         </div>
                         <div className="flex flex-col gap-0.5">
                           <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest">배치 용량</div>
-                          <div className="text-base font-serif font-black text-white">{product.roastCapacity || '-'}</div>
+                          <div className="text-base font-serif font-black text-white">{product.roastCapacity ? (String(product.roastCapacity).toLowerCase().includes('g') ? product.roastCapacity : `${product.roastCapacity}g`) : '-'}</div>
                         </div>
                      </div>
                   </div>
