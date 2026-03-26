@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Sparkles } from 'lucide-react';
 
 const countryToCode = {
   // South & Central America
@@ -193,6 +194,20 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                         : (Number(bean.price) || 0).toLocaleString()}
                     </span>
                     <span className="text-xs text-gray-600 font-black uppercase tracking-widest">원</span>
+                  </div>
+
+                  {/* XP Reward Badge */}
+                  <div className="flex items-center gap-2 bg-gradient-to-br from-amber-500/15 to-yellow-500/5 border border-amber-500/20 px-3 py-2 rounded-xl backdrop-blur-sm group-hover:scale-105 transition-all">
+                    <Sparkles size={11} className="text-amber-500 animate-pulse" />
+                    <div className="flex flex-col items-start leading-none gap-0.5">
+                      <span className="text-[7px] text-amber-500/80 font-black tracking-widest uppercase">경험치 보상</span>
+                      <div className="flex items-baseline gap-0.5">
+                        <span className="text-sm font-serif font-black text-amber-500">
+                          +{Math.floor(parseFloat(String(bean.price || '0').replace(/,/g, '')) * 0.0001 * 1.1)}
+                        </span>
+                        <span className="text-[9px] font-black text-amber-500/60 uppercase">xp</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
