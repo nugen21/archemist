@@ -141,10 +141,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   const [showAgtronHelp, setShowAgtronHelp] = useState(false);
   const [showCupNotesHelp, setShowCupNotesHelp] = useState(false);
   const [showAgingHelp, setShowAgingHelp] = useState(false);
+  const [showRoastTimeHelp, setShowRoastTimeHelp] = useState(false);
 
   const agtronHelpRef = useRef(null);
   const cupNotesHelpRef = useRef(null);
   const agingHelpRef = useRef(null);
+  const roastTimeHelpRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -156,6 +158,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
       }
       if (agingHelpRef.current && !agingHelpRef.current.contains(event.target)) {
         setShowAgingHelp(false);
+      }
+      if (roastTimeHelpRef.current && !roastTimeHelpRef.current.contains(event.target)) {
+        setShowRoastTimeHelp(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -580,6 +585,31 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                      <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
                        <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
                        로스팅 시간
+                       <div className="relative inline-block" ref={roastTimeHelpRef}>
+                         <button 
+                           onClick={(e) => {
+                             e.stopPropagation();
+                             setShowRoastTimeHelp(!showRoastTimeHelp);
+                           }}
+                           className="p-1 hover:text-white transition-colors text-copper/40 outline-none"
+                           aria-label="Roast Time Help"
+                         >
+                           <HelpCircle size={13} strokeWidth={2.5} />
+                         </button>
+
+                         {showRoastTimeHelp && (
+                           <div className="absolute top-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-0 z-[100] w-64 p-5 bg-[#0b0c0b]/fb border border-copper/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
+                             <div className="flex justify-between items-start mb-3">
+                               <span className="text-[11px] text-copper font-black uppercase tracking-widest leading-none">Philosophy of Roasting</span>
+                               <button onClick={() => setShowRoastTimeHelp(false)} className="text-gray-600 hover:text-white leading-none">&times;</button>
+                             </div>
+                             <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep text-left normal-case tracking-normal">
+                               로스팅 배출 시간은 생두가 원두로 완성되어 배출되는 시점을 의미하며, 1초의 차이만으로도 로스팅 포인트와 향미 발현이 달라질 만큼 절대적인 영향을 미칩니다. <br/><br/>
+                               아키미스트 로스터스는 업계 표준인 <span className="text-gray-200 font-bold">스트롱홀드(Stronghold)</span> 로스터의 스마트 제어 시스템을 활용하여 정밀한 데이터 기반으로 일관된 최상의 퀄리티를 구현합니다.
+                             </p>
+                           </div>
+                         )}
+                       </div>
                      </h4>
                      <div className="flex flex-col gap-1">
                        <div className="text-[12px] font-black text-gray-600 uppercase tracking-widest mt-1 md:mt-2">총 소요 시간</div>
