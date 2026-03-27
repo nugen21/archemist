@@ -10,7 +10,7 @@ export default function Header({ isAdmin, onAdminNav }) {
     { name: '원두', href: '#bean' },
     { name: '드립팩', href: '#dripbag' },
     { name: '콜드브루', href: '#coldbrew' },
-    ...(isAdmin ? [{ name: '매장음료', href: '#menu' }] : []),
+    { name: '매장음료', href: '#menu' },
     { name: '문의', href: '#contact', bold: true },
     { name: 'ADMIN', href: '#admin', isAdminLink: true },
   ];

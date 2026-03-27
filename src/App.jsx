@@ -152,6 +152,11 @@ function App() {
             return <EmailSubscription />;
           }
 
+          // Route: Drink Menu
+          if (currentPath === '#menu') {
+            return <DrinkMenu onBack={() => window.location.hash = '#home'} products={products} />;
+          }
+
           // Route: Product Detail
           if (currentPath.startsWith('#product/')) {
             const id = parseInt(currentPath.split('/')[1]);
