@@ -63,7 +63,7 @@ export default function DrinkMenu({ onBack, products }) {
           )}
         </div>
         <span className="text-lg sm:text-xl font-serif font-black text-white/90 group-hover:text-copper transition-colors w-12 text-right">
-          {(Number(item.price) || 0).toLocaleString()}
+          {(Number(item.price) / 1000).toFixed(1)}
         </span>
       </div>
     </div>
@@ -142,7 +142,7 @@ export default function DrinkMenu({ onBack, products }) {
                       <div className="flex items-baseline gap-4 shrink-0">
                         {item.size && <span className="text-[9px] text-gray-600 font-bold tracking-widest lowercase">{item.size}</span>}
                         <span className="text-2xl sm:text-3xl font-serif font-black text-copper tabular-nums">
-                          {(Number(item.price) || 0).toLocaleString()}
+                          {(Number(item.price) / 1000).toFixed(1)}
                         </span>
                       </div>
                     </div>
@@ -211,7 +211,7 @@ export default function DrinkMenu({ onBack, products }) {
                       <div className="flex items-baseline gap-6 shrink-0">
                         <div className="h-8 w-[1px] border-l border-dotted border-white/20 hidden md:block"></div>
                         <span className="text-3xl sm:text-4xl font-serif font-black text-copper tabular-nums">
-                          {(Number(item.price) || 0).toLocaleString()}
+                          {(Number(item.price) / 1000).toFixed(1)}
                         </span>
                       </div>
                     </div>
