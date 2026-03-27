@@ -63,7 +63,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                       e.stopPropagation();
                       onEdit(product.id);
                     }}
-                    className="absolute top-4 left-4 z-40 text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-3 py-1.5 rounded-md transition-all uppercase tracking-widest bg-black/40 backdrop-blur-md"
+                    className="absolute bottom-4 right-4 z-40 text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-3 py-1.5 rounded-md transition-all uppercase tracking-widest bg-black/40 backdrop-blur-md"
                   >
                     EDIT
                   </button>

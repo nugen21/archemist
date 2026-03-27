@@ -52,12 +52,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
 
   useEffect(() => {
     if (products && products.length > 0) {
-      setBeans(products.filter(p => {
-        const isRec = p.recommended === true;
-        const isBeev = p.category === 'beverage';
-        if (!isAdmin && isBeev) return false;
-        return isRec;
-      }));
+      setBeans(products.filter(p => p.recommended === true));
     }
   }, [products, isAdmin]);
 
@@ -186,19 +181,6 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                         : `${bean.category === 'dripbag' ? '드립팩 | ' : ''}${bean.country || ''}`} 
                       {bean.region && ` | ${bean.region}`}
                     </p>
-                  </div>
-                  <div className="flex flex-col items-end gap-1">
-                    {isAdmin === true && (
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onEdit(bean.id);
-                        }}
-                        className="text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-2 py-0.5 rounded-md transition-all uppercase tracking-tighter"
-                      >
-                        EDIT
-                      </button>
-                    )}
                   </div>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 leading-tight group-hover:text-copper transition-colors min-h-[6rem] line-clamp-4 italic">
@@ -336,6 +318,18 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
               <div className="mt-auto h-4 items-center justify-center flex">
                  <div className="w-12 h-[1px] bg-copper/20"></div>
               </div>
+
+              {isAdmin === true && (
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onEdit(bean.id);
+                  }}
+                  className="absolute bottom-6 right-6 z-40 text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-3 py-1.5 rounded-md transition-all uppercase tracking-widest bg-black/40 backdrop-blur-md"
+                >
+                  EDIT
+                </button>
+              )}
             </div>
           ))}
         </div>
