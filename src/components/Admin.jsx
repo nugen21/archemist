@@ -835,7 +835,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     <>
                       <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
                       <InputField label="DT (Develop Time)" name="dt" value={formData.dt} onChange={handleChange} placeholder="예: 1분 30초" />
-                      <InputField label="DTR (Develop Time Ratio)" name="dtr" value={formData.dtr} onChange={handleChange} placeholder="예: 15.5%" />
+                      <InputField label="DTR (Develop Time Ratio) (%)" name="dtr" value={formData.dtr} onChange={handleChange} placeholder="예: 15.5" />
                       <InputField label="로스팅 용량 (1회 배치)" name="roastCapacity" value={formData.roastCapacity} onChange={handleChange} placeholder="예: 800g" />
                       <div className="md:col-span-2 lg:col-span-3">
                         <InputField label="로스터 코멘트 (Roaster's Note)" name="roasterComment" value={formData.roasterComment} onChange={handleChange} placeholder="예: 단맛의 밸런스가 매우 뛰어나며 후미가 깔끔하게 떨어집니다." />
@@ -1267,9 +1267,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     <tr><td colSpan="5" className="py-12 text-center text-gray-600 italic">표시할 품목이 없습니다.</td></tr>
                   ) : (
                     filteredBeans.map((item, index) => {
-                      const formattedPrice = item.category === 'beverage' 
-                        ? (Number(item.price) / 1000).toFixed(1)
-                        : (Number(item.price) || 0).toLocaleString();
+                      const formattedPrice = (Number(item.price) || 0).toLocaleString();
                       
                       return (
                         <tr 

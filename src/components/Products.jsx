@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, HelpCircle } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
 
-const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, setActiveXpHelp }) => {
+const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, setActiveXpHelp, isAdmin, onEdit }) => {
   if (!items || items.length === 0) return null;
 
   const xpHelpRef = useRef(null);
@@ -57,6 +57,18 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 
+                {isAdmin === true && (
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onEdit(product.id);
+                    }}
+                    className="absolute top-4 left-4 z-40 text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-3 py-1.5 rounded-md transition-all uppercase tracking-widest bg-black/40 backdrop-blur-md"
+                  >
+                    EDIT
+                  </button>
+                )}
+
                 {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
                   <div className="absolute bottom-4 left-4 z-20">
                     <span className="bg-black/60 backdrop-blur-md border border-white/10 text-white text-[9px] font-black px-4 py-2 rounded-full tracking-widest uppercase shadow-xl flex items-center gap-2">
@@ -74,9 +86,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                 <div className="flex justify-between items-baseline border-b border-copper/10 pb-3">
                   <div className="flex items-baseline gap-2">
                     <span className="text-2xl font-serif font-black text-white tracking-widest tabular-nums">
-                      {product.category === 'beverage' 
-                        ? (Number(product.price) / 1000).toFixed(1)
-                        : (Number(product.price) || 0).toLocaleString()}
+                      {(Number(product.price) || 0).toLocaleString()}
                     </span>
                     <span className="text-xs text-gray-500 font-bold tracking-widest flex items-center">
                       원
@@ -170,7 +180,7 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
   );
 };
 
-export default function Products({ products }) {
+export default function Products({ products, isAdmin, onEdit }) {
   const [activeXpHelp, setActiveXpHelp] = useState(null);
   if (!products) return null;
 
@@ -190,6 +200,8 @@ export default function Products({ products }) {
         bgColor="bg-[#111211]" 
         activeXpHelp={activeXpHelp}
         setActiveXpHelp={setActiveXpHelp}
+        isAdmin={isAdmin}
+        onEdit={onEdit}
       />
       <ProductSection 
         title="드립백 셀렉션" 
@@ -198,6 +210,8 @@ export default function Products({ products }) {
         bgColor="bg-gradient-to-b from-[#111211] to-[#181a19]" 
         activeXpHelp={activeXpHelp}
         setActiveXpHelp={setActiveXpHelp}
+        isAdmin={isAdmin}
+        onEdit={onEdit}
       />
       <ProductSection 
         title="콜드브루 에센스" 
@@ -206,6 +220,8 @@ export default function Products({ products }) {
         bgColor="bg-[#181a19]" 
         activeXpHelp={activeXpHelp}
         setActiveXpHelp={setActiveXpHelp}
+        isAdmin={isAdmin}
+        onEdit={onEdit}
       />
       <ProductSection 
         title="매장 시그니처" 
@@ -214,6 +230,8 @@ export default function Products({ products }) {
         bgColor="bg-gradient-to-b from-[#181a19] to-[#0b0c0b]" 
         activeXpHelp={activeXpHelp}
         setActiveXpHelp={setActiveXpHelp}
+        isAdmin={isAdmin}
+        onEdit={onEdit}
       />
       
       {showFallback && (

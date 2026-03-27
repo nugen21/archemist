@@ -212,9 +212,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                 <div className="flex justify-between items-center mb-4 border-b border-copper/10 pb-2">
                   <div className="flex items-baseline gap-2">
                     <span className="text-copper font-bold text-xl tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)] tabular-nums">
-                      {bean.category === 'beverage' 
-                        ? (Number(bean.price) / 1000).toFixed(1)
-                        : (Number(bean.price) || 0).toLocaleString()}
+                      {(Number(bean.price) || 0).toLocaleString()}
                     </span>
                     <span className="text-xs text-gray-600 font-black uppercase tracking-widest">원</span>
                   </div>

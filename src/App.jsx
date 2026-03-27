@@ -100,9 +100,24 @@ function App() {
         window.scrollTo(0, 0);
       }
     };
+
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, [currentPath, lastScrollPos]);
+
+  // Handle scrolling to specific sections (like #bean, #brand, etc.)
+  useEffect(() => {
+    if (currentPath && currentPath.length > 1 && !currentPath.startsWith('#product/') && currentPath !== '#admin' && currentPath !== '#menu') {
+      const elementId = currentPath.substring(1);
+      // Use a slightly longer timeout to ensure content is fully rendered
+      setTimeout(() => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [currentPath]);
 
   const handleAdminAuth = (state) => {
     setIsAdmin(state);
@@ -123,7 +138,7 @@ function App() {
 
   // Route: Admin
   if (currentPath === '#admin') {
-    return <Admin isAdmin={isAdmin} setAdminAuth={handleAdminAuth} products={products} setProducts={setProducts} handleLogout={() => handleAdminAuth(false)} onEditTriggered={setEditingId} initialEditingId={editingId} clearEditingId={() => setEditingId(null)} />;
+    return <Admin isAdmin={isAdmin} setAdminAuth={handleAdminAuth} externalProducts={products} setProducts={setProducts} handleLogout={() => handleAdminAuth(false)} onEditTriggered={setEditingId} initialEditingId={editingId} clearEditingId={() => setEditingId(null)} />;
   }
 
   return (
@@ -157,7 +172,7 @@ function App() {
             <>
               <Hero id="home" />
               <RecommendedBeans isAdmin={isAdmin} onEdit={handleEdit} products={products} />
-              <Products products={products} />
+              <Products products={products} isAdmin={isAdmin} onEdit={handleEdit} />
               <Events />
               <Brand />
               <Contact />

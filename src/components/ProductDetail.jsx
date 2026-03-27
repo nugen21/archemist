@@ -650,8 +650,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                <button onClick={() => setActiveHelp(null)} className="text-gray-600 hover:text-white leading-none">&times;</button>
                              </div>
                              <p className="text-[11px] text-gray-400 leading-relaxed font-bold break-keep text-left tracking-normal font-sans">
-                               <span className="text-gray-200 font-bold">DT (Develop Time)</span>는 1차 크랙 시작부터 배출까지의 시간을 의미하며, <span className="text-gray-200 font-bold">DTR (Ratio)</span>은 총 시간에 대한 DT의 비율입니다. <br/><br/>
-                               아키미스트 로스터스는 하이엔드 로스터 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span>를 사용하여 최적의 DT와 DTR을 정밀하게 제어해 제품을 생산합니다.
+                               <span className="text-gray-200 font-bold">DT (Develop Time)</span>는 1차 크랙 시작부터 배출까지의 시간을 의미하며, <span className="text-gray-200 font-bold">DTR (Ratio, %)</span>은 총 시간에 대한 DT의 비율입니다. <br/><br/>
+                               아키미스트 로스터스는 하이엔드 로스터 <span className="text-copper font-bold">스트롱홀드(Stronghold)</span>를 사용하여 최적의 DT와 DTR(%)을 정밀하게 제어해 제품을 생산합니다.
                              </p>
                            </div>
                          )}
@@ -687,7 +687,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
                         <div className="flex flex-col items-center gap-1 relative">
                           <div className="flex items-center gap-1.5">
-                            <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DTR</div>
+                             <div className="text-[10px] font-black text-gray-600 uppercase tracking-widest leading-none">DTR (%)</div>
                             <button 
                               onClick={(e) => { e.stopPropagation(); setActiveHelp(activeHelp === 'dtr' ? null : 'dtr'); }}
                               className="p-1 text-white/80 hover:text-white transition-colors outline-none"
@@ -697,7 +697,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             {activeHelp === 'dtr' && (
                               <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 z-[9999] w-48 p-3 bg-[#0b0c0b]/98 border border-copper/20 rounded-xl shadow-2xl backdrop-blur-3xl animate-in fade-in zoom-in duration-200 cursor-default">
                                 <div className="flex justify-between items-start mb-1">
-                                  <span className="text-[10px] text-copper font-black uppercase tracking-widest">DTR (Develop Time Ratio)</span>
+                                   <span className="text-[10px] text-copper font-black uppercase tracking-widest">DTR (Develop Time Ratio) (%)</span>
                                   <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
                                 </div>
                                 <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">전체 로스팅 시간에 대한 DT의 비율입니다. 밸런스와 플레이버의 특징을 파악할 수 있는 고정밀 지표입니다.</p>
