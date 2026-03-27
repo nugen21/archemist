@@ -150,20 +150,6 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                   </div>
                 )}
 
-                {/* Size Badge (Right) */}
-                {bean.size && (
-                  <div className="absolute bottom-4 right-20 z-20">
-                    <span className="bg-black/70 backdrop-blur-md border border-white/10 text-white text-[15px] font-black px-4 py-2 rounded-lg tracking-widest shadow-xl">
-                      {(() => {
-                        const s = String(bean.size).toLowerCase();
-                        if (bean.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
-                        if (bean.category === 'bean') return s.includes('g') ? s : `${s}g`;
-                        return s;
-                      })()}
-                    </span>
-                  </div>
-                )}
-
                 {/* Admin Edit Button */}
                 {isAdmin === true && (
                   <button 
@@ -209,7 +195,20 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                     <span className="text-copper font-bold text-xl tracking-widest drop-shadow-[0_0_10px_rgba(161,118,76,0.2)] tabular-nums">
                       {(Number(bean.price) || 0).toLocaleString()}
                     </span>
-                    <span className="text-xs text-gray-600 font-black uppercase tracking-widest">원</span>
+                    <span className="text-xs text-gray-500 font-bold tracking-widest flex items-center">
+                      원
+                      {bean.size && (
+                        <>
+                          <span className="opacity-30 mx-2">/</span>
+                          {(() => {
+                            const s = String(bean.size).toLowerCase();
+                            if (bean.category === 'dripbag') return s.includes('개') ? s : `${s}개`;
+                            if (bean.category === 'bean') return s.includes('g') ? s : `${s}g`;
+                            return s.toUpperCase();
+                          })()}
+                        </>
+                      )}
+                    </span>
                   </div>
 
                   {/* XP Reward Badge */}
