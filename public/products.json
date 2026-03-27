@@ -897,7 +897,7 @@
     "grind": "",
     "temp": "",
     "visible": true,
-    "recommended": false,
+    "recommended": true,
     "image": "/images/icons/bean.jpg",
     "order": 13,
     "storeUrl": "",
