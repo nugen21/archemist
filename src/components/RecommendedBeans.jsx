@@ -152,7 +152,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
 
                 {/* Size Badge (Right) */}
                 {bean.size && (
-                  <div className="absolute bottom-4 right-4 z-20">
+                  <div className="absolute bottom-4 right-20 z-20">
                     <span className="bg-black/70 backdrop-blur-md border border-white/10 text-white text-[15px] font-black px-4 py-2 rounded-lg tracking-widest shadow-xl">
                       {(() => {
                         const s = String(bean.size).toLowerCase();
@@ -162,6 +162,19 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                       })()}
                     </span>
                   </div>
+                )}
+
+                {/* Admin Edit Button */}
+                {isAdmin === true && (
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onEdit(bean.id);
+                    }}
+                    className="absolute bottom-4 right-4 z-40 text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-3 py-1.5 rounded-md transition-all uppercase tracking-widest bg-black/40 backdrop-blur-md"
+                  >
+                    EDIT
+                  </button>
                 )}
               </div>
 
@@ -319,17 +332,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                  <div className="w-12 h-[1px] bg-copper/20"></div>
               </div>
 
-              {isAdmin === true && (
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit(bean.id);
-                  }}
-                  className="absolute bottom-6 right-6 z-40 text-[9px] font-black text-white/40 hover:text-copper border border-white/10 hover:border-copper/40 px-3 py-1.5 rounded-md transition-all uppercase tracking-widest bg-black/40 backdrop-blur-md"
-                >
-                  EDIT
-                </button>
-              )}
+
             </div>
           ))}
         </div>

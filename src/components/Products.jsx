@@ -163,19 +163,6 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
               <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3 font-medium overflow-hidden">
                 {product.cupNotes || "아키미스트 테이터들의 테이스팅 노트가 기록 중입니다."}
               </p>
-
-              <div className="relative group/btn mt-auto">
-                <div className="absolute -inset-1 bg-gradient-to-r from-copper/20 to-yellow-600/20 rounded-xl blur opacity-25 group-hover/btn:opacity-60 transition duration-500"></div>
-                <button 
-                  className="relative w-full py-4 rounded-xl bg-black/40 border border-white/10 text-white text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-white hover:text-black transition-all duration-500 shadow-xl"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.location.hash = '#contact';
-                  }}
-                >
-                  Discovery
-                </button>
-              </div>
             </div>
           ))}
         </div>
