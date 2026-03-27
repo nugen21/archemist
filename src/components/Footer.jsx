@@ -31,12 +31,11 @@ const Footer = ({ isAdmin }) => {
             <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-8">Business Info</h4>
             <ul className="text-[11px] space-y-4 leading-relaxed font-medium">
               <li className="flex flex-col gap-1">
-                <span className="text-gray-600 uppercase tracking-widest text-[9px] font-black">상호명</span>
-                <span className="text-gray-300">아키미스트 (ARCHEMIST)</span>
+                <span className="text-gray-300">아키미스트 로스터스</span>
               </li>
               <li className="flex flex-col gap-1">
                 <span className="text-gray-600 uppercase tracking-widest text-[9px] font-black">대표자</span>
-                <span className="text-gray-300">박주형</span>
+                <span className="text-gray-300">최창호</span>
               </li>
               <li className="flex flex-col gap-1">
                 <span className="text-gray-600 uppercase tracking-widest text-[9px] font-black">사업자등록번호</span>

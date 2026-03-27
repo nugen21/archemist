@@ -120,12 +120,12 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                 {bean.image ? (
                   <img src={bean.image} alt={bean.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center p-12">
-                     <img 
-                        src={bean.category === 'dripbag' ? '/images/icons/dripbag.jpg' : bean.category === 'coldbrew' ? '/images/icons/coldbrew.jpg' : bean.category === 'beverage' ? '/images/icons/beverage.jpg' : '/images/icons/bean.jpg'} 
-                        className="w-full h-full object-contain opacity-10 grayscale" 
-                        alt="icon fallback"
-                     />
+                  <div className={`w-full h-full flex items-center justify-center ${bean.subCategory === 'handdrip' ? '' : 'p-16 opacity-10 grayscale brightness-150'}`}>
+                    <img 
+                      src={bean.subCategory === 'handdrip' ? '/images/handdrip-default.jpg' : `/images/icons/${bean.category || 'bean'}.jpg`} 
+                      className={`w-full h-full ${bean.subCategory === 'handdrip' ? 'object-cover' : 'object-contain opacity-20 grayscale brightness-200 group-hover:opacity-40 transition-opacity'}`} 
+                      alt="icon" 
+                    />
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111211] via-transparent to-transparent opacity-80"></div>

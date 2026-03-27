@@ -317,7 +317,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
       );
       alert('정보가 성공적으로 수정되었습니다.');
     } else {
-      const newBean = { ...formData, id: Date.now(), visible: true };
+      let finalFormData = { ...formData };
+      if (finalFormData.subCategory === 'handdrip' && !finalFormData.image) {
+        finalFormData.image = '/images/handdrip-default.jpg';
+      }
+      const newBean = { ...finalFormData, id: Date.now(), visible: true };
       updated = [...existing, newBean];
       alert('품목이 성공적으로 등록되었습니다.');
     }

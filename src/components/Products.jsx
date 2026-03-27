@@ -41,8 +41,12 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                 {product.image ? (
                   <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center p-16 opacity-10 grayscale brightness-150">
-                    <img src={`/images/icons/${product.category || 'bean'}.jpg`} alt="icon" className="w-full h-full object-contain" />
+                  <div className={`w-full h-full flex items-center justify-center ${product.subCategory === 'handdrip' ? '' : 'p-16 opacity-10 grayscale brightness-150'}`}>
+                    <img 
+                      src={product.subCategory === 'handdrip' ? '/images/handdrip-default.jpg' : `/images/icons/${product.category || 'bean'}.jpg`} 
+                      className={`w-full h-full ${product.subCategory === 'handdrip' ? 'object-cover' : 'object-contain opacity-20 grayscale brightness-200 group-hover:opacity-40 transition-opacity'}`} 
+                      alt="icon" 
+                    />
                   </div>
                 )}
                 {/* Product QR Code */}
