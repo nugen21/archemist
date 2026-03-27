@@ -704,7 +704,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               </div>
                             )}
                           </div>
-                          <div className="text-base font-serif font-black text-white text-center">{product.dtr || '-'}</div>
+                          <div className="text-base font-serif font-black text-white text-center">
+                            {product.dtr ? (String(product.dtr).includes('%') ? product.dtr : `${product.dtr}%`) : '-'}
+                          </div>
                         </div>
 
                         <div className="flex flex-col items-center gap-1 relative">

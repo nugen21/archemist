@@ -7,7 +7,7 @@ export default function Header({ isAdmin, onAdminNav }) {
   const navLinks = [
     { name: '브랜드', href: '#brand' },
     { name: '이벤트', href: '#events' },
-    { name: '원두', href: '#recommended' },
+    { name: '원두', href: '#bean' },
     { name: '드립팩', href: '#dripbag' },
     { name: '콜드브루', href: '#coldbrew' },
     ...(isAdmin ? [{ name: '매장음료', href: '#menu' }] : []),
