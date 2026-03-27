@@ -447,7 +447,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                   </div>
                 </div>
 
-                {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
+                {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-4">
                     {[
                       { label: '국가', value: product.country || '정보 없음', flag: product.country && countryToCode[product.country] ? `https://flagcdn.com/w80/${countryToCode[product.country]}.png` : null, category: 'basic' },
@@ -478,26 +478,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 )}
               </div>
 
-              {isCafe && (
-                <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-                  <div className="bg-[#181a19] border border-white/5 py-6 px-8 rounded-2xl flex flex-col items-center gap-2 flex-1 max-w-xs">
-                    <span className="text-xs text-gray-600 font-black uppercase tracking-widest">
-                      {product.category === 'dripbag' ? '수량' : '중량 및 구성'}
-                    </span>
-                    <span className="text-sm font-bold text-copper">
-                      {product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : String(product.size).toLowerCase())) : '정보 없음'}
-                    </span>
-                  </div>
-                  {product.variety && (
-                    <div className="bg-[#181a19] border border-white/5 py-6 px-8 rounded-2xl flex flex-col items-center gap-2 flex-1 max-w-xs">
-                      <span className="text-xs text-gray-600 font-black uppercase tracking-widest">사용 원두</span>
-                      <span className="text-sm font-bold text-white text-center break-keep">
-                        {product.variety}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
+
               {/* Direct Purchase Button (Right Side) */}
               <div className="mt-4 pt-4 border-t border-white/5">
                 <a 
@@ -618,7 +599,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               </div>
 
               {/* 3. Roasting Point & Time Card */}
-              {(isBean || product.category === 'dripbag') && (
+              {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
                 <div 
                   ref={agtronHelpRef}
                   className={`lg:col-span-6 bg-[#181a19] border border-white/5 p-4 md:p-5 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col md:flex-row gap-4 md:gap-6 mt-0 items-center ${(activeHelp === 'agtron' || activeHelp === 'roastTime' || activeHelp === 'dt' || activeHelp === 'dtr' || activeHelp === 'capacity') ? 'z-[10000]' : 'z-10'}`}
@@ -882,7 +863,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
 
           {/* 4. Green Bean Analysis (Optional) */}
-          {isBean && product.showAnalysisInfo !== false && (
+          {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && product.showAnalysisInfo !== false && (
             <div className="max-w-8xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
@@ -908,7 +889,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           )}
 
           {/* 4.1 Grind Guide Section */}
-            {isBean && (
+            {['bean', 'dripbag', 'beverage'].includes(product.category) && (
               <div className="max-w-8xl mx-auto px-4 mt-8">
                 <h3 className="text-xl font-serif font-black text-white mb-2 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                   <div className="h-[1px] w-8 bg-white/10"></div>
@@ -947,7 +928,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               </div>
             )}
 
-          {!isCafe && (
+          {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
             <div className="max-w-8xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
