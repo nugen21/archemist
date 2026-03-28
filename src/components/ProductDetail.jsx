@@ -847,7 +847,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                  상세 스토리
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
-               <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content" dangerouslySetInnerHTML={{ __html: product.recipe }} />
+               <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: product.recipe }} />
             </div>
           )}
 
@@ -1079,8 +1079,8 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             {product[`${prefix}comment`] && (
                               <div className="max-w-2xl w-full text-center mx-auto px-6 sm:px-8 md:px-0">
                                  <div className="text-[8.5px] text-copper/40 font-black uppercase tracking-[0.2em] mb-2">Recipe Note</div>
-                                 <div 
-                                   className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed font-medium break-words italic html-content prose prose-invert max-w-none"
+                                  <div 
+                                   className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed font-medium break-words italic html-content prose prose-invert max-w-none whitespace-pre-wrap"
                                    dangerouslySetInnerHTML={{ __html: product[`${prefix}comment`] }}
                                  />
                               </div>
@@ -1096,7 +1096,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <Droplet size={200} className="text-copper" />
                     </div>
                     <div 
-                      className="text-gray-400 text-sm sm:text-base leading-[1.8] font-medium break-keep relative z-10 html-content prose prose-invert max-w-none"
+                      className="text-gray-400 text-sm sm:text-base leading-[1.8] font-medium break-keep relative z-10 html-content prose prose-invert max-w-none whitespace-pre-wrap"
                       dangerouslySetInnerHTML={{ __html: product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다." }}
                     />
                   </>

@@ -1213,6 +1213,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     .ql-align-center img { display: block; margin-left: auto !important; margin-right: auto !important; }
                     .ql-align-right img { display: block; margin-left: auto !important; margin-right: 0 !important; }
                     .ql-editor img { max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0; }
+                    .ql-editor p { margin: 0; padding: 0; min-height: 1em; }
+                    .ql-editor { font-size: 14px; font-weight: 500; color: #ccc; }
                   `}</style>
                   <ReactQuill 
                     theme="snow" 
