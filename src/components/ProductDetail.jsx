@@ -108,13 +108,31 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   return (
     <section className="min-h-screen pt-32 pb-12 px-4 sm:px-8 bg-[#0b0c0b] relative overflow-hidden text-gray-200 selection:bg-copper selection:text-white">
       <style>{`
+        .html-content { line-height: 1.8; letter-spacing: -0.01em; }
+        .html-content p { margin-top: 0; margin-bottom: 0; }
+        .html-content h1, .html-content h2, .html-content h3 { color: #fff; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.3; }
+        .html-content h1 { font-size: 2.2rem; }
+        .html-content h2 { font-size: 1.8rem; }
+        .html-content h3 { font-size: 1.5rem; }
         .html-content .ql-align-center { text-align: center !important; }
         .html-content .ql-align-right { text-align: right !important; }
         .html-content .ql-align-justify { text-align: justify !important; }
+        .html-content .ql-size-small { font-size: 0.75rem; }
+        .html-content .ql-size-large { font-size: 1.5rem; }
+        .html-content .ql-size-huge { font-size: 2.5rem; }
+        .html-content ul, .html-content ol { margin-top: 1rem; margin-bottom: 1rem; padding-left: 2rem; }
+        .html-content li { margin-bottom: 0.5rem; list-style-position: outside; }
+        .html-content ul > li { list-style-type: disc; }
+        .html-content ol > li { list-style-type: decimal; }
+        .html-content img { max-width: 100%; height: auto; border-radius: 1.5rem; margin: 2rem 0; box-shadow: 0 15px 45px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.03); display: inline-block; }
         .html-content .ql-align-center img { display: block; margin-left: auto !important; margin-right: auto !important; }
         .html-content .ql-align-right img { display: block; margin-left: auto !important; margin-right: 0 !important; }
-        .html-content img { max-width: 100%; height: auto; border-radius: 1rem; margin: 1.5rem 0; }
-        .html-content iframe { width: 100%; aspect-ratio: 16/9; border-radius: 1rem; margin: 1.5rem 0; }
+        .html-content strong, .html-content b { color: #fff; font-weight: 900; }
+        .html-content em, .html-content i { font-style: italic; opacity: 0.9; }
+        .html-content u { text-decoration: underline; text-underline-offset: 4px; }
+        .html-content a { color: #a1764c; text-decoration: underline; text-underline-offset: 6px; font-weight: 800; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .html-content a:hover { color: #fff; text-shadow: 0 0 15px rgba(161,118,76,0.6); }
+        .html-content iframe { width: 100%; aspect-ratio: 16/9; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.1); margin: 2rem 0; }
       `}</style>
 
       {/* Admin Edit Button */}
@@ -847,33 +865,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                  상세 스토리
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
-                <style>{`
-                  .html-content { line-height: 1.8; letter-spacing: -0.01em; }
-                  .html-content p { margin-top: 0; margin-bottom: 0; }
-                  .html-content h1, .html-content h2, .html-content h3 { color: #fff; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem; line-height: 1.3; }
-                  .html-content h1 { font-size: 2.2rem; }
-                  .html-content h2 { font-size: 1.8rem; }
-                  .html-content h3 { font-size: 1.5rem; }
-                  .html-content .ql-align-center { text-align: center !important; }
-                  .html-content .ql-align-right { text-align: right !important; }
-                  .html-content .ql-align-justify { text-align: justify !important; }
-                  .html-content .ql-size-small { font-size: 0.75rem; }
-                  .html-content .ql-size-large { font-size: 1.5rem; }
-                  .html-content .ql-size-huge { font-size: 2.5rem; }
-                  .html-content ul, .html-content ol { margin-top: 1rem; margin-bottom: 1rem; padding-left: 2rem; }
-                  .html-content li { margin-bottom: 0.5rem; list-style-position: outside; }
-                  .html-content ul > li { list-style-type: disc; }
-                  .html-content ol > li { list-style-type: decimal; }
-                  .html-content img { max-width: 100%; height: auto; border-radius: 1.5rem; margin: 2rem 0; box-shadow: 0 15px 45px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.03); display: inline-block; }
-                  .html-content .ql-align-center img { display: block; margin-left: auto; margin-right: auto; }
-                  .html-content .ql-align-right img { display: block; margin-left: auto; margin-right: 0; }
-                  .html-content strong, .html-content b { color: #fff; font-weight: 900; }
-                  .html-content em, .html-content i { font-style: italic; opacity: 0.9; }
-                  .html-content u { text-decoration: underline; text-underline-offset: 4px; }
-                  .html-content a { color: #a1764c; text-decoration: underline; text-underline-offset: 6px; font-weight: 800; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-                  .html-content a:hover { color: #fff; text-shadow: 0 0 15px rgba(161,118,76,0.6); }
-                  .html-content iframe { width: 100%; aspect-ratio: 16/9; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.1); margin: 2rem 0; }
-                `}</style>
                <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: product.recipe }} />
             </div>
           )}
