@@ -936,7 +936,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                 </div>
                                 <span className="text-[10px] sm:text-[14px] md:text-[17px] font-black text-white uppercase tracking-[0.15em] block mb-1">{item.name}</span>
                                 <span className="text-[9px] sm:text-[12px] font-bold text-copper/60 block">{item.value}</span>
-                                <span className="text-[8px] sm:text-[10px] text-gray-600 block mt-2 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
+                                <span className="text-[8px] sm:text-[10px] text-gray-600 block mt-2 whitespace-nowrap">{item.desc}</span>
                             </div>
                         ))}
                     </div>
