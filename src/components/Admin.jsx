@@ -651,11 +651,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 <InputField label="상품명" name="name" value={formData.name} onChange={handleChange} required placeholder="상품명을 입력하세요" />
               </div>
 
-              {formData.category === 'beverage' && (
-                <div className="md:col-span-2 lg:col-span-1">
-                  <InputField label="사용 원두 (Coffee Bean)" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 아키미스트 다크 하우스 블렌드" />
-                </div>
-              )}
+                {/* Variety/Used Bean field removed here as it is now in the origin section below */}
+
 
               
               <div className="md:col-span-2 lg:col-span-3">
@@ -802,7 +799,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               )}
 
-              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew' || (formData.category === 'beverage' && formData.subCategory === 'handdrip')) && (
+              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew' || formData.category === 'beverage') && (
                 <>
                   <div className="md:col-span-2 lg:col-span-1 bg-[#0b0c0b] border border-gray-800 p-4 rounded-xl flex flex-col justify-center">
                     <label className="text-[10px] font-black text-copper uppercase tracking-widest mb-3">블렌드 여부</label>
@@ -836,8 +833,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     <InputField label="품종" name="variety" value={formData.variety} onChange={handleChange} placeholder="예: 게이샤" />
                   )}
                   <InputField label="가공방식" name="process" value={formData.process} onChange={handleChange} placeholder="예: 워시드" />
-                  {formData.category !== 'beverage' && (
-                    <>
                       <InputField label="로스팅 소요 시간" name="roastTime" value={formData.roastTime} onChange={handleChange} placeholder="예: 9분 15초" />
                       <InputField label="DT (Develop Time)" name="dt" value={formData.dt} onChange={handleChange} placeholder="예: 1분 30초" />
                       <InputField label="DTR (Develop Time Ratio) (%)" name="dtr" value={formData.dtr} onChange={handleChange} placeholder="예: 15.5" />
@@ -845,12 +840,10 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       <div className="md:col-span-2 lg:col-span-3">
                         <InputField label="로스터 코멘트 (Roaster's Note)" name="roasterComment" value={formData.roasterComment} onChange={handleChange} placeholder="예: 단맛의 밸런스가 매우 뛰어나며 후미가 깔끔하게 떨어집니다." />
                       </div>
-                    </>
-                  )}
                 </>
               )}
 
-              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
+              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew' || formData.category === 'beverage') && (
                 <div className="md:col-span-2 lg:col-span-3 space-y-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-2">
                   <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-3 pl-1 mb-1">
@@ -891,7 +884,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               )}
 
-              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew') && (
+              {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew' || formData.category === 'beverage') && (
                 <div className={`md:col-span-2 lg:col-span-3 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4`}>
                   {formData.category === 'bean' && (
                     <div className="flex flex-col gap-4">
@@ -942,7 +935,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               )}
 
               <div className="lg:col-span-3">
-                { (formData.category !== 'beverage' || formData.subCategory === 'handdrip') && (
+                { (formData.category) && (
                   <div className="bg-[#0b0c0b] border border-gray-800 p-6 rounded-2xl">
                     <div 
                       className="flex justify-between items-center cursor-pointer group mb-1" 

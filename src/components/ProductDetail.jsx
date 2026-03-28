@@ -337,7 +337,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       { label: '수입사', value: product.importer || '정보 없음', category: 'greenBeanBasic' },
                       { label: '생두 정식 명칭', value: product.greenBeanName || '정보 없음', category: 'greenBeanBasic' },
                       { label: 'SCA 점수', value: product.scaScore || '정보 없음', category: 'greenBeanBasic' },
-                      { label: product.category === 'dripbag' ? '수량' : '중량', value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size)) : (product.category === 'dripbag' ? '10개' : '200g'), category: 'essential' }
+                      { label: product.category === 'beverage' ? '사이즈' : (product.category === 'dripbag' ? '수량' : '중량'), value: product.size ? (product.category === 'dripbag' ? (!String(product.size).includes('개') ? `${product.size}개` : product.size) : (product.category === 'beverage' ? product.size : (!String(product.size).toLowerCase().includes('g') ? `${product.size}g` : product.size))) : (product.category === 'beverage' ? '16oz' : (product.category === 'dripbag' ? '10개' : '200g')), category: 'essential' }
                     ].filter(item => 
                       item.category !== 'greenBeanBasic' || product.showBasicInfo !== false
                     ).map((item, idx) => (
