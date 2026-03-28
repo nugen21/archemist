@@ -1053,13 +1053,16 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                { label: '물 온도', value: product[`${prefix}temp`] ? (String(product[`${prefix}temp`]).includes('℃') || String(product[`${prefix}temp`]).includes('C') || String(product[`${prefix}temp`]).includes('°') ? product[`${prefix}temp`] : `${product[`${prefix}temp`]}℃`) : '-', icon: <Thermometer size={14} /> },
                               { label: '드리퍼', value: product[`${prefix}dripper`], icon: <Droplet size={14} /> },
                               { 
-                                label: recipeTab === 'ice' ? '얼음 중량' : '추출 비율', 
-                                value: recipeTab === 'ice' 
-                                  ? (product.ice_weight ? `${product.ice_weight}g` : '-') 
-                                  : (product.hot_ratio ? (String(product.hot_ratio).includes(':') ? product.hot_ratio : `1:${product.hot_ratio}`) : '-'), 
+                                label: '추출 비율', 
+                                value: product[`${prefix}ratio`] ? (String(product[`${prefix}ratio`]).includes(':') ? product[`${prefix}ratio`] : `1:${product[`${prefix}ratio`]}`) : '-', 
                                 icon: <Target size={14} /> 
+                              },
+                              recipeTab === 'ice' && { 
+                                label: '얼음 중량', 
+                                value: product.ice_weight ? `${product.ice_weight}g` : '-', 
+                                icon: <Droplet size={14} className="text-blue-400" /> 
                               }
-                            ].map((item, idx) => (
+                            ].filter(Boolean).map((item, idx) => (
                               <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
                                 <div className="text-copper/50">{item.icon}</div>
                                 <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{item.label}</span>
