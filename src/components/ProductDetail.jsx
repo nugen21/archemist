@@ -918,9 +918,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 
                 <div className="relative bg-[#111211] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-8xl group">
                   <img 
-                    src="/images/grind/grind_guide_reference.png" 
+                    src="/images/grind/grind_guide_reference.jpg" 
                     alt="원두 분쇄 가이드" 
-                    className="w-full h-auto object-cover opacity-90 transition-all duration-700 hover:opacity-100 hover:scale-[1.01]" 
+                    className="w-full h-auto object-cover opacity-95 transition-all duration-700 hover:opacity-100 hover:scale-[1.01]" 
                   />
                   {/* Subtle reflection overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111211]/30 to-transparent pointer-events-none"></div>
