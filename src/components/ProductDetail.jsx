@@ -6,7 +6,7 @@ import {
   Sparkles, Milk, Wind, Edit, Coffee, HelpCircle
 } from 'lucide-react';
 
-import { FLAVOR_CONFIG, countryToCode, SENSORY_COLORS } from '../utils/coffeeData';
+import { FLAVOR_CONFIG, countryToCode } from '../utils/coffeeData';
 
 
 export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiveNumber }) {
@@ -421,11 +421,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               {/* 2. Sensory Profile Card */}
               <div 
                 ref={sensoryHelpRef}
-                className={`lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-copper/20 transition-all duration-500 shadow-xl relative group flex flex-col h-full ${activeHelp === 'sensory' ? 'z-[10000]' : 'z-10'}`}
+                className={`lg:col-span-3 bg-[#181a19] border border-white/5 p-8 rounded-[2.5rem] hover:border-white/20 transition-all duration-500 shadow-xl relative group flex flex-col h-full ${activeHelp === 'sensory' ? 'z-[10000]' : 'z-10'}`}
               >
                 <div className="flex items-center gap-3 mb-6 relative">
-                  <h4 className="text-copper font-serif font-black tracking-[0.2em] text-[15px] uppercase flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(161,118,76,0.6)]"></span>
+                  <h4 className="text-white/60 font-serif font-black tracking-[0.2em] text-[15px] uppercase flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/40 shadow-[0_0_8px_rgba(255,255,255,0.2)]"></span>
                     센서리 프로파일
                   </h4>
                   <button 
@@ -458,32 +458,19 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       { label: '단맛 (Sweetness)', val: product.sweetness || 0 },
                       { label: '바디 (Body)', val: product.bodyRate || 0 },
                       { label: '밸런스 (Balance)', val: product.balance || 0 }
-                    ].map((s, idx) => {
-                      const style = SENSORY_COLORS[s.label] || { color: '#444', textColor: '#fff' };
-                      return (
-                        <div key={idx} className="flex flex-col gap-2.5">
-                          <div className="flex justify-between items-center h-5">
-                            <span 
-                              className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md shadow-sm border border-white/5"
-                              style={{ backgroundColor: style.color, color: style.textColor }}
-                            >
-                              {s.label}
-                            </span>
-                            <span className="text-copper text-[10px] font-bold">{s.val > 0 ? s.val : '-'} / 5</span>
-                          </div>
-                          <div className="flex items-center gap-1.5 h-1.5">
-                            {[1, 2, 3, 4, 5].map(v => (
-                              <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? '' : 'bg-white/5'}`} 
-                                style={{ 
-                                  backgroundColor: v <= Number(s.val) ? style.color : undefined,
-                                  boxShadow: v <= Number(s.val) ? `0 0 8px ${style.color}40` : undefined
-                                }} 
-                              />
-                            ))}
-                          </div>
+                    ].map((s, idx) => (
+                      <div key={idx} className="flex flex-col gap-2.5">
+                        <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                          <span>{s.label}</span>
+                          <span className="text-white/80">{s.val > 0 ? s.val : '-'} / 5</span>
                         </div>
-                      );
-                    })}
+                        <div className="flex items-center gap-1.5 h-1.5">
+                          {[1, 2, 3, 4, 5].map(v => (
+                            <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? 'bg-white/60 shadow-[0_0_8px_rgba(255,255,255,0.1)]' : 'bg-white/5'}`} />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -724,7 +711,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
         <div className="mt-6 border-t border-white/5 pt-6 space-y-8">
           
           {/* 1. Shipping & Shelf Life Policy */}
-          <div className="max-w-4xl mx-auto text-center px-4">
+          <div className="max-w-5xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 배송 및 소비기한 안내
@@ -740,7 +727,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
-             <div className="max-w-8xl mx-auto px-4 mt-6">
+             <div className="max-w-5xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  상세 스토리
@@ -754,7 +741,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {/* 4. Green Bean Analysis (Optional) */}
           {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && product.showAnalysisInfo !== false && (
-            <div className="max-w-8xl mx-auto px-4 mt-6">
+            <div className="max-w-5xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  생두 분석 정보
@@ -780,7 +767,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {/* 4.1 Grind Guide Section */}
             {['bean', 'dripbag', 'beverage'].includes(product.category) && (
-              <div className="max-w-8xl mx-auto px-4 mt-8">
+              <div className="max-w-5xl mx-auto px-4 mt-8">
                 <h3 className="text-xl font-serif font-black text-white mb-2 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                   <div className="h-[1px] w-8 bg-white/10"></div>
                   분쇄 가이드
@@ -818,8 +805,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               </div>
             )}
 
+          {/* 4.2 Recipe Section */}
           {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
-            <div className="max-w-8xl mx-auto text-center px-4">
+            <div className="max-w-5xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 추출 레시피
@@ -1006,7 +994,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
         {/* 5. Regulatory Product Information Notice (Table) */}
         {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
-          <div className="max-w-4xl mx-auto px-4 mt-20 mb-32 border-t border-white/5 pt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 relative z-10 text-center">
+          <div className="max-w-5xl mx-auto px-4 mt-20 mb-32 border-t border-white/5 pt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 relative z-10 text-center">
             <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
               <div className="h-[1px] w-6 bg-white/10"></div>
               상품 정보 제공 고시

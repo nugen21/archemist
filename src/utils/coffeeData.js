@@ -1,128 +1,121 @@
 export const FLAVOR_CONFIG = {
-  // --- FRUITY ---
-  // Berry
-  '딸기': { color: '#da1b5e', textColor: '#ffffff' }, 
-  '라즈베리': { color: '#da1b5e', textColor: '#ffffff' }, 
-  '블루베리': { color: '#4b61ba', textColor: '#ffffff' }, 
-  '블랙베리': { color: '#3e0317', textColor: '#ffffff' },
-  '믹스베리': { color: '#da1b5e', textColor: '#ffffff' },
-  '건크랜베리': { color: '#942d59', textColor: '#ffffff' },
+  // --- FRUITY (Red Family) ---
+  // Berry (#B51B2F)
+  '딸기': { color: '#D91B5E', textColor: '#ffffff' }, 
+  '라즈베리': { color: '#B11232', textColor: '#ffffff' }, 
+  '블루베리': { color: '#4B61BA', textColor: '#ffffff' }, 
+  '블랙베리': { color: '#3E0317', textColor: '#ffffff' },
+  '믹스베리': { color: '#B51B2F', textColor: '#ffffff' },
+  '건크랜베리': { color: '#B51B2F', textColor: '#ffffff' },
   
-  // Citrus
-  '레몬': { color: '#f9e200', textColor: '#111111' }, 
-  '라임': { color: '#bfd730', textColor: '#111111' }, 
-  '오렌지': { color: '#f39422', textColor: '#ffffff' }, 
-  '자몽': { color: '#ee2021', textColor: '#ffffff' }, 
-  '베르가못': { color: '#bfd730', textColor: '#111111' }, 
-  '귤': { color: '#f39422', textColor: '#ffffff' },
-  '레몬그라스': { color: '#bfd730', textColor: '#111111' },
+  // Dried Fruit (#942D59)
+  '건포도': { color: '#942D59', textColor: '#ffffff' }, 
+  '무화과': { color: '#942D59', textColor: '#ffffff' },
+  '자두': { color: '#942D59', textColor: '#ffffff' }, 
 
-  // Stone Fruit
-  '복숭아': { color: '#ee2021', textColor: '#ffffff' }, 
-  '자두': { color: '#ee2021', textColor: '#ffffff' }, 
-  '살구': { color: '#ee2021', textColor: '#ffffff' }, 
-  '체리': { color: '#ee2021', textColor: '#ffffff' },
-  '검은체리': { color: '#330303', textColor: '#ffffff' },
+  // Other Fruit (#EF4D28)
+  '코코넛': { color: '#EF4D28', textColor: '#ffffff' },
+  '체리': { color: '#E82C2E', textColor: '#ffffff' },
+  '석류': { color: '#E82C2E', textColor: '#ffffff' },
+  '파인애플': { color: '#F8B128', textColor: '#111111' },
+  '포도': { color: '#A1BE1F', textColor: '#111111' },
+  '사과': { color: '#A1BE1F', textColor: '#111111' },
+  '복숭아': { color: '#F49B7A', textColor: '#111111' },
+  '배': { color: '#F49B7A', textColor: '#111111' },
+  '청사과': { color: '#A1BE1F', textColor: '#111111' },
+  '청포도': { color: '#A1BE1F', textColor: '#111111' },
+  '적포도': { color: '#E82C2E', textColor: '#ffffff' },
+  '멜론': { color: '#A1BE1F', textColor: '#111111' },
 
-  // Tropical
-  '망고': { color: '#f9e200', textColor: '#111111' }, 
-  '파인애플': { color: '#f9e200', textColor: '#111111' }, 
-  '패션후르츠': { color: '#f39422', textColor: '#ffffff' }, 
-  '리치': { color: '#da1b5e', textColor: '#ffffff' }, 
-  '파파야': { color: '#f39422', textColor: '#ffffff' },
-  '코코넛': { color: '#c78d46', textColor: '#ffffff' },
-  '멜론': { color: '#a1be1f', textColor: '#111111' },
+  // Citrus Fruit (#F09D22)
+  '자몽': { color: '#F09D22', textColor: '#ffffff' },
+  '오렌지': { color: '#F39422', textColor: '#ffffff' },
+  '레몬': { color: '#F9E200', textColor: '#111111' },
+  '라임': { color: '#BFD730', textColor: '#111111' },
+  '귤': { color: '#F39422', textColor: '#ffffff' },
+  '베르가못': { color: '#BFD730', textColor: '#111111' },
 
-  // Other Fruit (Apple/Orchard/etc)
-  '사과': { color: '#a1be1f', textColor: '#111111' }, 
-  '청사과': { color: '#a1be1f', textColor: '#111111' }, 
-  '배': { color: '#a1be1f', textColor: '#111111' }, 
-  '청포도': { color: '#a1be1f', textColor: '#111111' }, 
-  '적포도': { color: '#942d59', textColor: '#ffffff' }, 
-  '건포도': { color: '#942d59', textColor: '#ffffff' }, 
-  '무화과': { color: '#942d59', textColor: '#ffffff' },
-  '석류': { color: '#ee2021', textColor: '#ffffff' },
+  // --- FLORAL (#DF2F71) ---
+  '꽃': { color: '#DF2F71', textColor: '#ffffff' },
+  '자스민': { color: '#F79A7E', textColor: '#ffffff' },
+  '장미': { color: '#EF4D68', textColor: '#ffffff' },
+  '카모마일': { color: '#FAD4AC', textColor: '#111111' },
+  '히비스커스': { color: '#DF2F71', textColor: '#ffffff' },
+  '아카시아': { color: '#FAD4AC', textColor: '#111111' },
+  '라벤더': { color: '#BE9CC1', textColor: '#ffffff' },
 
-  // --- FLORAL ---
-  '자스민': { color: '#e67ab0', textColor: '#ffffff' }, 
-  '오렌지 블로썸': { color: '#e67ab0', textColor: '#ffffff' }, 
-  '아카시아': { color: '#e67ab0', textColor: '#ffffff' }, 
-  '국화': { color: '#e67ab0', textColor: '#ffffff' }, 
-  '장미': { color: '#e67ab0', textColor: '#ffffff' }, 
-  '히비스커스': { color: '#e67ab0', textColor: '#ffffff' },
-  '라벤더': { color: '#e67ab0', textColor: '#ffffff' },
-  '꽃': { color: '#e67ab0', textColor: '#ffffff' },
+  // --- SWEET (#CB7034) ---
+  '바닐라': { color: '#F7A129', textColor: '#111111' },
+  '달콤함': { color: '#CB7034', textColor: '#ffffff' },
+  '흑설탕': { color: '#C4623C', textColor: '#ffffff' },
+  '당밀': { color: '#B97A3A', textColor: '#ffffff' },
+  '메이플시럽': { color: '#D4532D', textColor: '#ffffff' },
+  '캐러멜': { color: '#D4532D', textColor: '#ffffff' },
+  '꿀': { color: '#E87E34', textColor: '#ffffff' },
+  '아카시아 꿀': { color: '#E87E34', textColor: '#ffffff' },
+  '잡화 꿀': { color: '#E87E34', textColor: '#ffffff' },
 
-  // --- SWEET ---
-  '흑설탕': { color: '#b97a3a', textColor: '#ffffff' }, 
-  '백설탕': { color: '#ffffff', textColor: '#111111' }, 
-  '시럽': { color: '#cb7034', textColor: '#ffffff' }, 
-  '캐러멜': { color: '#cb7034', textColor: '#ffffff' }, 
-  '당밀': { color: '#b97a3a', textColor: '#ffffff' }, 
-  '아카시아 꿀': { color: '#cb7034', textColor: '#ffffff' }, 
-  '잡화 꿀': { color: '#cb7034', textColor: '#ffffff' },
-  '달콤함': { color: '#cb7034', textColor: '#ffffff' },
-  '메이플시럽': { color: '#b97a3a', textColor: '#ffffff' },
-  '바닐라': { color: '#ffffff', textColor: '#111111' },
+  // --- NUTTY/COCOA (#A1764C) ---
+  '초콜릿': { color: '#6A4B3A', textColor: '#ffffff' },
+  '다크 초콜릿': { color: '#4E342E', textColor: '#ffffff' },
+  '밀크 초콜릿': { color: '#A46D49', textColor: '#ffffff' },
+  '카카오': { color: '#6A4B3A', textColor: '#ffffff' },
+  '견과류': { color: '#92644D', textColor: '#ffffff' },
+  '아몬드': { color: '#92644D', textColor: '#ffffff' },
+  '구운 아몬드': { color: '#92644D', textColor: '#ffffff' },
+  '헤이즐넛': { color: '#92644D', textColor: '#ffffff' },
+  '땅콩': { color: '#92644D', textColor: '#ffffff' },
+  '피넛': { color: '#92644D', textColor: '#ffffff' },
+  '호두': { color: '#92644D', textColor: '#ffffff' },
 
-  // --- CHOCOLATE / COCOA ---
-  '다크 초콜릿': { color: '#4e342e', textColor: '#ffffff' }, 
-  '밀크 초콜릿': { color: '#a46d49', textColor: '#ffffff' }, 
-  '카카오': { color: '#4e342e', textColor: '#ffffff' }, 
-  '화이트 초콜릿': { color: '#f8f1d7', textColor: '#111111' },
-  '초콜릿': { color: '#4e342e', textColor: '#ffffff' },
+  // --- SPICES (#AD122A) ---
+  '정향': { color: '#AD122A', textColor: '#ffffff' },
+  '계피': { color: '#AD122A', textColor: '#ffffff' },
+  '시나몬': { color: '#AD122A', textColor: '#ffffff' },
+  '육두구': { color: '#AD122A', textColor: '#ffffff' },
+  '후추': { color: '#AD122A', textColor: '#ffffff' },
+  '블랙 페퍼': { color: '#AD122A', textColor: '#ffffff' },
 
-  // --- NUTS ---
-  '구운 아몬드': { color: '#a46d49', textColor: '#ffffff' }, 
-  '헤이즐넛': { color: '#a46d49', textColor: '#ffffff' }, 
-  '피넛': { color: '#a46d49', textColor: '#ffffff' }, 
-  '호두': { color: '#a46d49', textColor: '#ffffff' }, 
-  '캐슈넛': { color: '#a46d49', textColor: '#ffffff' },
-  '견과류': { color: '#a46d49', textColor: '#ffffff' },
-  '마카다미아': { color: '#a46d49', textColor: '#ffffff' },
+  // --- ROASTED (#C94A2D) ---
+  '담배': { color: '#C94A2D', textColor: '#ffffff' },
+  '곡류': { color: '#C94A2D', textColor: '#ffffff' },
+  '보리': { color: '#C94A2D', textColor: '#ffffff' },
+  '시리얼': { color: '#C94A2D', textColor: '#ffffff' },
+  '탄': { color: '#000000', textColor: '#ffffff' },
 
-  // --- CEREAL / ROASTED ---
-  '보리': { color: '#c78d46', textColor: '#ffffff' }, 
-  '구운 빵': { color: '#8d5b28', textColor: '#ffffff' }, 
-  '시리얼': { color: '#c78d46', textColor: '#ffffff' }, 
-  '호밀': { color: '#b97a3a', textColor: '#ffffff' }, 
-  '맥아': { color: '#b97a3a', textColor: '#ffffff' },
-  '토스트': { color: '#8d5b28', textColor: '#ffffff' },
+  // --- GREEN/VEGETATIVE (#078847) ---
+  '풀내음': { color: '#078847', textColor: '#ffffff' },
+  '허브': { color: '#078847', textColor: '#ffffff' },
+  '민트': { color: '#078847', textColor: '#ffffff' },
+  '레몬그라스': { color: '#078847', textColor: '#ffffff' },
 
-  // --- SPICES ---
-  '시나몬': { color: '#a13d2d', textColor: '#ffffff' }, 
-  '정향': { color: '#a13d2d', textColor: '#ffffff' }, 
-  '육두구': { color: '#a13d2d', textColor: '#ffffff' }, 
-  '블랙 페퍼': { color: '#a13d2d', textColor: '#ffffff' }, 
-  '생강': { color: '#a13d2d', textColor: '#ffffff' },
-  '향신료': { color: '#a13d2d', textColor: '#ffffff' },
+  // --- SOUR/FERMENTED (#F9E200) ---
+  '와인': { color: '#F9E200', textColor: '#111111' },
+  '위스키': { color: '#F9E200', textColor: '#111111' },
 
-  // --- HERBAL / GREEN ---
-  '허브': { color: '#468c48', textColor: '#ffffff' }, 
-  '미나리': { color: '#468c48', textColor: '#ffffff' }, 
-  '카모마일': { color: '#f8f1d7', textColor: '#111111' }, 
-  '민트': { color: '#468c48', textColor: '#ffffff' }, 
-  '세이지': { color: '#468c48', textColor: '#ffffff' }, 
-  '로즈마리': { color: '#468c48', textColor: '#ffffff' }, 
-  '딜': { color: '#468c48', textColor: '#ffffff' },
-  '풀내음': { color: '#468c48', textColor: '#ffffff' },
-  
-  // --- OTHERS ---
-  '버터': { color: '#f8f1d7', textColor: '#111111' }, 
-  '크림': { color: '#ffffff', textColor: '#111111' }, 
-  '치즈': { color: '#f9e200', textColor: '#111111' },
-  '가죽': { color: '#8d5b28', textColor: '#ffffff' }, 
-  '흙내음': { color: '#8d5b28', textColor: '#ffffff' }, 
-  '담뱃잎': { color: '#8d5b28', textColor: '#ffffff' },
-};
+  // --- OTHER (#0A888C) ---
+  '화학': { color: '#0A888C', textColor: '#ffffff' },
+  '고무': { color: '#0A888C', textColor: '#ffffff' },
 
-export const SENSORY_COLORS = {
-  '향 (Flavor)': { color: '#da1b5e', textColor: '#ffffff' },
-  '후미 (Aftertaste)': { color: '#942d59', textColor: '#ffffff' },
-  '산미 (Acidity)': { color: '#f9e200', textColor: '#111111' },
-  '단맛 (Sweetness)': { color: '#cb7034', textColor: '#ffffff' },
-  '바디 (Body)': { color: '#4e342e', textColor: '#ffffff' },
-  '밸런스 (Balance)': { color: '#0a888c', textColor: '#ffffff' },
+  // --- NON-WHEEL DESCRIPTORS (Black Background) ---
+  '긴 여운': { color: '#000000', textColor: '#ffffff' },
+  '깔끔한 마무리': { color: '#000000', textColor: '#ffffff' },
+  '달콤한 잔향': { color: '#000000', textColor: '#ffffff' },
+  '차와 같은': { color: '#000000', textColor: '#ffffff' },
+  '밝은 산미': { color: '#000000', textColor: '#ffffff' },
+  '섬세한 산미': { color: '#000000', textColor: '#ffffff' },
+  '와이니한': { color: '#F9E200', textColor: '#111111' }, 
+  '실키한 바디': { color: '#000000', textColor: '#ffffff' },
+  '벨벳 같은': { color: '#000000', textColor: '#ffffff' },
+  '주스 같은': { color: '#000000', textColor: '#ffffff' },
+  '크리미한': { color: '#000000', textColor: '#ffffff' },
+  '시리얼 같은': { color: '#C94A2D', textColor: '#ffffff' },
+  '단맛의 균형': { color: '#000000', textColor: '#ffffff' },
+  '뛰어난 균형감': { color: '#000000', textColor: '#ffffff' },
+  '조화로운': { color: '#000000', textColor: '#ffffff' },
+  '투명한': { color: '#000000', textColor: '#ffffff' },
+  '정돈된': { color: '#000000', textColor: '#ffffff' },
+  '깔끔한 클린컵': { color: '#000000', textColor: '#ffffff' },
 };
 
 export const countryToCode = {

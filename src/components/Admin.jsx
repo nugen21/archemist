@@ -3,7 +3,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import { QrCode, Download, Trash2, Edit2, Star, Eye, EyeOff } from 'lucide-react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { FLAVOR_CONFIG, SENSORY_COLORS } from '../utils/coffeeData';
+import { FLAVOR_CONFIG } from '../utils/coffeeData';
 
 const FLAVOR_CATEGORIES = [
   { label: '베리류 (Berries)', items: ['딸기', '라즈베리', '블루베리', '블랙베리', '크랜베리'] },
@@ -1406,35 +1406,26 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
   );
 };
 
-const RatingSlider = ({ label, name, value, onChange }) => {
-  const style = SENSORY_COLORS[label] || { color: '#444', textColor: '#fff' };
-  return (
-    <div className="flex flex-col gap-3">
-      <div className="flex justify-between items-center px-1">
-        <span 
-          className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md shadow-sm border border-white/5"
-          style={{ backgroundColor: style.color, color: style.textColor }}
-        >
-          {label}
-        </span>
-        <span className="text-[14px] font-black text-copper tabular-nums">{value} / 5</span>
-      </div>
-      <div className="relative h-6 flex items-center">
-        <input 
-          type="range" 
-          name={name} 
-          min="0" 
-          max="5" 
-          step="0.5"
-          value={value || 0} 
-          onChange={onChange}
-          className="w-full h-1.5 rounded-lg appearance-none cursor-pointer accent-copper transition-all hover:bg-gray-700"
-          style={{ backgroundColor: `${style.color}30` }}
-        />
-      </div>
+const RatingSlider = ({ label, name, value, onChange }) => (
+  <div className="flex flex-col gap-3">
+    <div className="flex justify-between items-center px-1">
+      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">{label}</span>
+      <span className="text-[14px] font-black text-copper tabular-nums">{value} / 5</span>
     </div>
-  );
-};
+    <div className="relative h-6 flex items-center">
+      <input 
+        type="range" 
+        name={name} 
+        min="0" 
+        max="5" 
+        step="0.5"
+        value={value || 0} 
+        onChange={onChange}
+        className="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-copper transition-all hover:bg-gray-700"
+      />
+    </div>
+  </div>
+);
 
 const UploadIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A1764C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mx-auto block">
