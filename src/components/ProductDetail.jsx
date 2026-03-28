@@ -908,13 +908,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
                <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content whitespace-pre-wrap relative" >
-                 {isTranslating && (
+                 {isAdmin && isTranslating && (
                    <div className="absolute top-4 right-8 flex items-center gap-2 animate-pulse">
                      <span className="w-1.5 h-1.5 rounded-full bg-copper"></span>
                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Translating from English...</span>
                    </div>
                  )}
-                 {!isTranslating && translatedRecipe && (
+                 {isAdmin && !isTranslating && translatedRecipe && (
                    <div className="absolute top-4 right-8 flex items-center gap-2">
                      <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">AI 한국어 번역 완료</span>
@@ -1168,13 +1168,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       <Droplet size={200} className="text-copper" />
                     </div>
                     <div className="relative">
-                      {isTranslatingStory && (
+                      {isAdmin && isTranslatingStory && (
                         <div className="flex items-center gap-2 mb-2 animate-pulse">
                           <span className="w-1.5 h-1.5 rounded-full bg-copper"></span>
                           <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Translating Intro...</span>
                         </div>
                       )}
-                      {!isTranslatingStory && translatedStory && (
+                      {isAdmin && !isTranslatingStory && translatedStory && (
                         <div className="flex items-center gap-2 mb-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
                           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">AI 한글 번역</span>
