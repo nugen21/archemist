@@ -147,7 +147,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-30"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-20"></div>
       
-      <div className="max-w-7xl mx-auto relative z-10 pt-8 px-4 sm:px-8 lg:px-0">
+      <div className="max-w-5xl mx-auto relative z-10 pt-8 px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-y-8 lg:gap-x-12 mb-10 items-start">
           
           {/* --- Tier 1: Hero Row (Image & Info) --- */}
