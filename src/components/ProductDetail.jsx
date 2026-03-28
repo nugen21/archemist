@@ -549,7 +549,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       })()}
                     </svg>
 
-                    {/* Labels with Scores (Moved closer to chart) */}
+                    {/* Labels with Scores (Synchronized with cup note font style) */}
                     {(() => {
                       const stats = [
                         { text: '향', val: product.flavor || 0 },
@@ -562,7 +562,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       return stats.map((l, idx) => {
                         const angle = idx * 60 - 90;
                         const rad = (angle * Math.PI) / 180;
-                        // Moved closer to chart (58 -> 48)
                         const x = 50 + 48 * Math.cos(rad);
                         const y = 50 + 48 * Math.sin(rad);
                         
@@ -576,10 +575,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               transform: 'translate(-50%, -50%)',
                             }}
                           >
-                            <span className="text-[13px] font-bold text-gray-200 tracking-tight leading-none drop-shadow-md">
+                            <span className="text-[12px] font-black tracking-widest text-white/50 uppercase drop-shadow-sm">
                               {l.text}
                             </span>
-                            <span className="text-[14px] font-black tracking-tighter leading-none drop-shadow-md" style={{ color: '#a1764c' }}>
+                            <span className="text-[15px] font-black tracking-tighter text-white drop-shadow-md">
                               {l.val > 0 ? l.val : '-'}
                             </span>
                           </div>
