@@ -581,6 +581,7 @@
     "hot_p3_water": "",
     "hot_p4_time": "",
     "hot_p4_water": "",
+    "hot_tds": "",
     "hot_comment": "<p>저울이&nbsp;없으면&nbsp;첫&nbsp;번째&nbsp;물은&nbsp;원두가&nbsp;충분히&nbsp;<strong>적셔질</strong>&nbsp;정도로만&nbsp;붓고&nbsp;30초간&nbsp;기다려&nbsp;주세요.&nbsp;두&nbsp;번째와&nbsp;세&nbsp;번째는&nbsp;<strong>드립백</strong>을&nbsp;가득&nbsp;채운&nbsp;뒤&nbsp;물이&nbsp;다&nbsp;빠지면&nbsp;추출을&nbsp;마무리하고&nbsp;드시면&nbsp;됩니다.</p><p></p><p>✻&nbsp;직접&nbsp;붓는&nbsp;방식&nbsp;외에,&nbsp;컵에&nbsp;뜨거운&nbsp;물을&nbsp;종이컵&nbsp;기준&nbsp;한&nbsp;컵&nbsp;반&nbsp;정도&nbsp;받고&nbsp;원두를&nbsp;모두&nbsp;부어&nbsp;잘&nbsp;저어&nbsp;주세요.&nbsp;그&nbsp;뒤&nbsp;새로운&nbsp;잔에&nbsp;<strong>드립백</strong>을&nbsp;거치하고&nbsp;부어서&nbsp;원두를&nbsp;걸러&nbsp;내는&nbsp;방법도&nbsp;추천합니다.</p>",
     "ice_coffee_amount": "20g",
     "ice_grind": "",
@@ -598,6 +599,7 @@
     "ice_p4_time": "",
     "ice_p4_water": "",
     "ice_weight": "",
+    "ice_tds": "",
     "ice_comment": "",
     "id": 1774220602392
   },
