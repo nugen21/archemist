@@ -114,12 +114,18 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
       input.onchange = async () => {
         const file = input.files[0];
+        if (!file) return;
+
         const reader = new FileReader();
         reader.onload = (e) => {
           const quill = quillRef.current.getEditor();
-          const range = quill.getSelection();
-          quill.insertEmbed(range.index, 'image', e.target.result);
-          quill.setSelection(range.index + 1);
+          let range = quill.getSelection(true);
+          
+          // If focus is lost or no selection, insert at the end
+          const index = range ? range.index : quill.getLength();
+          
+          quill.insertEmbed(index, 'image', e.target.result);
+          quill.setSelection(index + 1);
         };
         reader.readAsDataURL(file);
       };
