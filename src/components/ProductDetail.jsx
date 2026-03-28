@@ -443,7 +443,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white leading-none">&times;</button>
                       </div>
                       <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
-                        향(Flavor), 후미(Aftertaste), 산미(Acidity), 단맛(Sweetness), 바디(Body), 밸런스(Balance) 등 커피의 매력을 결정하는 6가지 핵심 지표를 시각화한 결과물입니다. <br/><br/>
+                        향(Flavor), 후미(Aftertaste), 산미(Acidity), 단맛(Sweetness), 마우스필(Mouthfeel), 밸런스(Balance) 등 커피의 매력을 결정하는 6가지 핵심 지표를 시각화한 결과물입니다. <br/><br/>
                         <span className="text-[9px] text-gray-500 italic font-bold leading-none">* 표기된 수치는 아키미스트 로스터의 주관적인 평가이며, 절대적인 수치가 아님을 안내 드립니다.</span>
                       </p>
                     </div>
@@ -556,7 +556,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         { text: '후미', val: product.aftertaste || 0 },
                         { text: '산미', val: product.acidityRate || 0 },
                         { text: '단맛', val: product.sweetness || 0 },
-                        { text: '바디', val: product.bodyRate || 0 },
+                        { text: '마우스필', val: product.bodyRate || 0 },
                         { text: '밸런스', val: product.balance || 0 }
                       ];
                       return stats.map((l, idx) => {
@@ -650,7 +650,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                   <span className="text-[10px] text-copper font-black uppercase tracking-widest">DT (Develop Time)</span>
                                   <button onClick={(e) => { e.stopPropagation(); setActiveHelp(null); }} className="text-gray-600 hover:text-white leading-none">&times;</button>
                                 </div>
-                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1차 크랙이 시작된 후부터 배출까지의 시간입니다. 커피의 당도와 바디감이 결정되는 핵심 구간입니다.</p>
+                                <p className="text-[9px] text-gray-400 leading-relaxed font-bold break-keep text-left">1차 크랙이 시작된 후부터 배출까지의 시간입니다. 커피의 당도와 마우스필이 결정되는 핵심 구간입니다.</p>
                               </div>
                             )}
                           </div>

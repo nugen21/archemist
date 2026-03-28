@@ -20,7 +20,7 @@ const FLAVOR_CATEGORIES = [
   { label: '향신료 (Spices)', items: ['시나몬', '정향', '육두구', '블랙 페퍼', '생강'] },
   { label: '커핑 (Cupping Descriptor)', items: [
       '긴 여운', '깔끔한 마무리', '달콤한 잔향', '차와 같은', '밝은 산미', '섬세한 산미', '와이니한', 
-      '실키한 바디', '벨벳 같은', '주스 같은', '크리미한', '시리얼 같은', '단맛의 균형', 
+      '마우스필', '실키한 마우스필', '벨벳 같은', '주스 같은', '크리미한', '시리얼 같은', '단맛의 균형', 
       '뛰어난 균형감', '조화로운', '투명한', '정돈된', '깔끔한 클린컵'
     ] 
   },
@@ -1006,7 +1006,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   <RatingSlider label="후미 (Aftertaste)" name="aftertaste" value={formData.aftertaste} onChange={handleChange} />
                   <RatingSlider label="단맛 (Sweetness)" name="sweetness" value={formData.sweetness} onChange={handleChange} />
                   <RatingSlider label="산미 (Acidity)" name="acidityRate" value={formData.acidityRate} onChange={handleChange} />
-                  <RatingSlider label="바디 (Body)" name="bodyRate" value={formData.bodyRate} onChange={handleChange} />
+                  <RatingSlider label="마우스필 (Mouthfeel)" name="bodyRate" value={formData.bodyRate} onChange={handleChange} />
                   <RatingSlider label="밸런스 (Balance)" name="balance" value={formData.balance} onChange={handleChange} />
                 </div>
               </div>

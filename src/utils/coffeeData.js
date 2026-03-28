@@ -133,7 +133,7 @@ export const FLAVOR_CONFIG = {
   '차와 같은': { color: '#AE667D', textColor: '#ffffff' }, // black tea
   '밝은 산미': { color: '#E4D711', textColor: '#111111' }, // citric acid
   '섬세한 산미': { color: '#B4C425', textColor: '#111111' }, // malic acid
-  '실키한 바디': { color: '#000000', textColor: '#ffffff' },
+  '실키한 마우스필': { color: '#000000', textColor: '#ffffff' },
   '벨벳 같은': { color: '#000000', textColor: '#ffffff' },
   '주스 같은': { color: '#000000', textColor: '#ffffff' },
   '크리미한': { color: '#000000', textColor: '#ffffff' },
