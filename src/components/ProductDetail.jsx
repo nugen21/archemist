@@ -996,7 +996,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
             <div className="max-w-7xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
-                추출 레시피
+                추출 레시피(핸드드립)
                 <div className="h-[1px] w-8 bg-copper/30"></div>
               </h3>
               <div className="bg-[#111211] p-8 sm:p-12 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden group">

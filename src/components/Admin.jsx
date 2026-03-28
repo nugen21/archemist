@@ -1091,7 +1091,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
             {(formData.category === 'bean' || formData.category === 'dripbag') && (
                 <div className="md:col-span-2 lg:col-span-3 space-y-12 mt-8 border-t border-gray-800 pt-10">
                   <h4 className="text-sm font-black text-copper uppercase tracking-[0.3em] flex items-center gap-4">
-                    추출 레시피 설정
+                    추출 레시피(핸드드립) 가이드 설정
                     <div className="h-[1px] flex-grow bg-white/5"></div>
                   </h4>
 
