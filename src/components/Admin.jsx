@@ -1002,7 +1002,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                   <div className="h-[1px] flex-grow bg-white/5"></div>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
-                  <RatingSlider label="프래그런스 (Fragrance)" name="flavor" value={formData.flavor} onChange={handleChange} />
+                  <RatingSlider label="향 (Fragrance)" name="flavor" value={formData.flavor} onChange={handleChange} />
                   <RatingSlider label="후미 (Aftertaste)" name="aftertaste" value={formData.aftertaste} onChange={handleChange} />
                   <RatingSlider label="단맛 (Sweetness)" name="sweetness" value={formData.sweetness} onChange={handleChange} />
                   <RatingSlider label="산미 (Acidity)" name="acidityRate" value={formData.acidityRate} onChange={handleChange} />

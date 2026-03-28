@@ -443,7 +443,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                         <button onClick={() => setActiveHelp(null)} className="text-gray-500 hover:text-white leading-none">&times;</button>
                       </div>
                       <p className="text-[10px] text-gray-400 leading-relaxed font-medium break-keep">
-                        프래그런스(Fragrance), 후미(Aftertaste), 산미(Acidity), 단맛(Sweetness), 마우스필(Mouthfeel), 밸런스(Balance) 등 커피의 매력을 결정하는 6가지 핵심 지표를 시각화한 결과물입니다. <br/><br/>
+                        향(Fragrance), 후미(Aftertaste), 산미(Acidity), 단맛(Sweetness), 마우스필(Mouthfeel), 밸런스(Balance) 등 커피의 매력을 결정하는 6가지 핵심 지표를 시각화한 결과물입니다. <br/><br/>
                         <span className="text-[9px] text-gray-500 italic font-bold leading-none">* 표기된 수치는 아키미스트 로스터의 주관적인 평가이며, 절대적인 수치가 아님을 안내 드립니다.</span>
                       </p>
                     </div>
@@ -552,7 +552,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     {/* Labels with Scores (Synchronized with cup note font style) */}
                     {(() => {
                       const stats = [
-                        { text: '프래그런스', val: product.flavor || 0 },
+                        { text: '향', val: product.flavor || 0 },
                         { text: '후미', val: product.aftertaste || 0 },
                         { text: '산미', val: product.acidityRate || 0 },
                         { text: '단맛', val: product.sweetness || 0 },
