@@ -44,9 +44,9 @@ export const FLAVOR_CONFIG = {
 
   // --- FLORAL (#EC008C) ---
   '꽃': { color: '#EC008C', textColor: '#ffffff' },
-  '자스민': { color: '#EC008C', textColor: '#ffffff' },
-  '장미': { color: '#EC008C', textColor: '#ffffff' },
-  '카모마일': { color: '#EC008C', textColor: '#ffffff' },
+  '자스민': { color: '#F8F7E5', textColor: '#111111' },
+  '장미': { color: '#E472A7', textColor: '#ffffff' },
+  '카모마일': { color: '#FBAF25', textColor: '#111111' },
   '히비스커스': { color: '#EC008C', textColor: '#ffffff' },
   '아카시아': { color: '#EC008C', textColor: '#ffffff' },
   '라벤더': { color: '#EC008C', textColor: '#ffffff' },
