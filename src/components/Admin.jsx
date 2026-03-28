@@ -885,8 +885,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               )}
 
               {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'coldbrew' || formData.category === 'beverage') && (
-                <div className={`md:col-span-2 lg:col-span-3 grid grid-cols-1 ${formData.category === 'bean' ? 'md:grid-cols-2' : ''} gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4`}>
-                  {formData.category === 'bean' && (
+                <div className={`md:col-span-2 lg:col-span-3 grid grid-cols-1 ${(formData.category === 'bean' || formData.category === 'beverage') ? 'md:grid-cols-2' : ''} gap-6 bg-[#0b0c0b]/50 p-6 rounded-2xl border border-gray-800/50 mt-4 mb-4`}>
+                  {(formData.category === 'bean' || formData.category === 'beverage') && (
                     <div className="flex flex-col gap-4">
                       <h4 className="text-[10px] font-black text-copper/60 uppercase tracking-widest pl-1 mb-1">홀빈 분석</h4>
                       <div className="grid grid-cols-2 gap-4">
