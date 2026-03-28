@@ -82,7 +82,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
               }}
             >
               <span 
-                className="text-[11px] font-black tracking-widest text-center uppercase drop-shadow-sm"
+                className="text-[15px] font-black tracking-widest text-center uppercase drop-shadow-sm"
                 style={{ color: textColor }}
               >
                 {trimmedNote}
