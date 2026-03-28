@@ -549,7 +549,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       })()}
                     </svg>
 
-                    {/* Labels with Scores */}
+                    {/* Labels with Scores (Moved closer to chart) */}
                     {(() => {
                       const stats = [
                         { text: '향', val: product.flavor || 0 },
@@ -562,9 +562,9 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       return stats.map((l, idx) => {
                         const angle = idx * 60 - 90;
                         const rad = (angle * Math.PI) / 180;
-                        // Slightly more spacing for larger labels (52 -> 58)
-                        const x = 50 + 58 * Math.cos(rad);
-                        const y = 50 + 58 * Math.sin(rad);
+                        // Moved closer to chart (58 -> 48)
+                        const x = 50 + 48 * Math.cos(rad);
+                        const y = 50 + 48 * Math.sin(rad);
                         
                         return (
                           <div 
@@ -576,10 +576,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               transform: 'translate(-50%, -50%)',
                             }}
                           >
-                            <span className="text-[13px] font-bold text-gray-200 tracking-tight leading-none">
+                            <span className="text-[13px] font-bold text-gray-200 tracking-tight leading-none drop-shadow-md">
                               {l.text}
                             </span>
-                            <span className="text-[14px] font-black tracking-tighter leading-none" style={{ color: '#a1764c' }}>
+                            <span className="text-[14px] font-black tracking-tighter leading-none drop-shadow-md" style={{ color: '#a1764c' }}>
                               {l.val > 0 ? l.val : '-'}
                             </span>
                           </div>
