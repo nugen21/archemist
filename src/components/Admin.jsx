@@ -1055,7 +1055,40 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
 
 
-              {(formData.category === 'bean' || formData.category === 'dripbag') && (
+              <div className="grid grid-cols-1 gap-8 pt-10 border-t border-gray-800 mt-10">
+              <div className="flex flex-col">
+                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">생두 상세 정보 / 상품 스토리 (HTML Editor)</label>
+                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[400px]">
+                  <style>{`
+                    .quill { height: 350px; display: flex; flex-direction: column; }
+                    .ql-container { flex-grow: 1; font-family: 'Pretendard', sans-serif; font-size: 14px; background: #0b0c0b; color: #e5e7eb; border: none !important; }
+                    .ql-toolbar { background: #1a1c1a; border: none !important; border-bottom: 1px solid #2d2f2d !important; }
+                    .ql-editor { min-height: 300px; padding: 20px; }
+                    .ql-snow.ql-toolbar button { stroke: #9ca3af; fill: #9ca3af; }
+                    .ql-snow.ql-toolbar button:hover, .ql-snow.ql-toolbar button.ql-active { color: #A1764C !important; }
+                    .ql-snow.ql-toolbar button:hover .ql-stroke, .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #A1764C !important; }
+                    .ql-snow.ql-toolbar .ql-picker { color: #9ca3af; }
+                    .ql-align-center { text-align: center !important; }
+                    .ql-align-right { text-align: right !important; }
+                    .ql-align-justify { text-align: justify !important; }
+                    .ql-align-center img { display: block; margin-left: auto !important; margin-right: auto !important; }
+                    .ql-align-right img { display: block; margin-left: auto !important; margin-right: 0 !important; }
+                    .ql-editor img { max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0; }
+                    .ql-editor p { margin: 0; padding: 0; min-height: 1em; }
+                    .ql-editor { font-size: 14px; font-weight: 500; color: #ccc; }
+                  `}</style>
+                  <ReactQuill 
+                    ref={recipeQuillRef}
+                    theme="snow" 
+                    value={formData.recipe} 
+                    onChange={(content) => setFormData(prev => ({ ...prev, recipe: content }))}
+                    modules={recipeModules}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {(formData.category === 'bean' || formData.category === 'dripbag') && (
                 <div className="md:col-span-2 lg:col-span-3 space-y-12 mt-8 border-t border-gray-800 pt-10">
                   <h4 className="text-sm font-black text-copper uppercase tracking-[0.3em] flex items-center gap-4">
                     추출 레시피 설정
@@ -1238,38 +1271,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
               )}
             </div>
             
-            <div className="grid grid-cols-1 gap-8 pt-4 border-t border-gray-800">
-              <div className="flex flex-col">
-                <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">생두 상세 정보 / 상품 스토리 (HTML Editor)</label>
-                <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[400px]">
-                  <style>{`
-                    .quill { height: 350px; display: flex; flex-direction: column; }
-                    .ql-container { flex-grow: 1; font-family: 'Pretendard', sans-serif; font-size: 14px; background: #0b0c0b; color: #e5e7eb; border: none !important; }
-                    .ql-toolbar { background: #1a1c1a; border: none !important; border-bottom: 1px solid #2d2f2d !important; }
-                    .ql-editor { min-height: 300px; padding: 20px; }
-                    .ql-snow.ql-toolbar button { stroke: #9ca3af; fill: #9ca3af; }
-                    .ql-snow.ql-toolbar button:hover, .ql-snow.ql-toolbar button.ql-active { color: #A1764C !important; }
-                    .ql-snow.ql-toolbar button:hover .ql-stroke, .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #A1764C !important; }
-                    .ql-snow.ql-toolbar .ql-picker { color: #9ca3af; }
-                    .ql-align-center { text-align: center !important; }
-                    .ql-align-right { text-align: right !important; }
-                    .ql-align-justify { text-align: justify !important; }
-                    .ql-align-center img { display: block; margin-left: auto !important; margin-right: auto !important; }
-                    .ql-align-right img { display: block; margin-left: auto !important; margin-right: 0 !important; }
-                    .ql-editor img { max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0; }
-                    .ql-editor p { margin: 0; padding: 0; min-height: 1em; }
-                    .ql-editor { font-size: 14px; font-weight: 500; color: #ccc; }
-                  `}</style>
-                  <ReactQuill 
-                    ref={recipeQuillRef}
-                    theme="snow" 
-                    value={formData.recipe} 
-                    onChange={(content) => setFormData(prev => ({ ...prev, recipe: content }))}
-                    modules={recipeModules}
-                  />
-                </div>
-              </div>
-            </div>
             
             <button type="submit" className="w-full bg-gradient-to-r from-yellow-700 via-copper to-yellow-600 text-[#111] font-bold py-5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.5)] hover:scale-[1.01] transition-all duration-300 text-lg tracking-widest uppercase">
               {editingId ? '정보 수정 완료' : '품목 등록 완료'}
