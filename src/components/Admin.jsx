@@ -1270,11 +1270,14 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               )}
             </div>
-            
-            
-            <button type="submit" className="w-full bg-gradient-to-r from-yellow-700 via-copper to-yellow-600 text-[#111] font-bold py-5 rounded-xl hover:shadow-[0_0_20px_rgba(161,118,76,0.5)] hover:scale-[1.01] transition-all duration-300 text-lg tracking-widest uppercase">
-              {editingId ? '정보 수정 완료' : '품목 등록 완료'}
-            </button>
+            <div className="md:col-span-2 lg:col-span-3 pt-12 mt-8 border-t border-gray-800">
+              <button 
+                type="submit" 
+                className="w-full relative z-[100] bg-gradient-to-r from-yellow-700 via-copper to-yellow-600 text-[#111] font-bold py-6 rounded-2xl hover:shadow-[0_0_30px_rgba(161,118,76,0.4)] hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 text-xl tracking-[0.3em] uppercase shadow-2xl"
+              >
+                {editingId ? '정보 수정 완료' : '품목 등록 완료'}
+              </button>
+            </div>
           </form>
         </div>
       ) : (
