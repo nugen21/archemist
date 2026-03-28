@@ -916,15 +916,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 </h3>
                   <p className="text-center text-[8.5px] text-gray-600 font-black uppercase tracking-widest mb-10 opacity-60">* DiFluid 측정 기준</p>
                 
-                <div className="relative bg-[#111211] border border-white/5 rounded-[2.5rem] overflow-hidden shadow-8xl group">
-                  <img 
-                    src="/images/grind/grind_guide_reference.jpg" 
-                    alt="원두 분쇄 가이드" 
-                    className="w-full h-auto object-cover opacity-95 transition-all duration-700 hover:opacity-100 hover:scale-[1.01]" 
-                  />
-                  {/* Subtle reflection overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111211]/30 to-transparent pointer-events-none"></div>
-                </div>
 
                 <div className="mt-6 px-2 sm:px-6">
                     <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-8">
