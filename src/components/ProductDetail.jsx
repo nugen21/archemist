@@ -931,7 +931,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                   <img 
                                     src={`/images/grind/${item.img}`} 
                                     alt={item.name} 
-                                    className="w-full h-full object-cover grayscale opacity-50 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-700 hover:scale-110" 
+                                    className="w-full h-full object-cover transition-all duration-700 hover:scale-110" 
                                   />
                                 </div>
                                 <span className="text-[10px] sm:text-[14px] md:text-[17px] font-black text-white uppercase tracking-[0.15em] block mb-1">{item.name}</span>
