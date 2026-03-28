@@ -549,33 +549,39 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       })()}
                     </svg>
 
-                    {/* Labels */}
+                    {/* Labels with Scores */}
                     {(() => {
-                      const labels = [
-                        { text: '향' },
-                        { text: '후미' },
-                        { text: '산미' },
-                        { text: '단맛' },
-                        { text: '바디' },
-                        { text: '밸런스' }
+                      const stats = [
+                        { text: '향', val: product.flavor || 0 },
+                        { text: '후미', val: product.aftertaste || 0 },
+                        { text: '산미', val: product.acidityRate || 0 },
+                        { text: '단맛', val: product.sweetness || 0 },
+                        { text: '바디', val: product.bodyRate || 0 },
+                        { text: '밸런스', val: product.balance || 0 }
                       ];
-                      return labels.map((l, idx) => {
+                      return stats.map((l, idx) => {
                         const angle = idx * 60 - 90;
                         const rad = (angle * Math.PI) / 180;
-                        const x = 50 + 52 * Math.cos(rad);
-                        const y = 50 + 52 * Math.sin(rad);
+                        // Slightly more spacing for larger labels (52 -> 58)
+                        const x = 50 + 58 * Math.cos(rad);
+                        const y = 50 + 58 * Math.sin(rad);
                         
                         return (
                           <div 
                             key={idx}
-                            className="absolute text-[9px] font-bold text-gray-400 whitespace-nowrap"
+                            className="absolute flex flex-col items-center justify-center gap-0.5 whitespace-nowrap"
                             style={{ 
                               left: `${x}%`, 
                               top: `${y}%`,
                               transform: 'translate(-50%, -50%)',
                             }}
                           >
-                            {l.text}
+                            <span className="text-[13px] font-bold text-gray-200 tracking-tight leading-none">
+                              {l.text}
+                            </span>
+                            <span className="text-[14px] font-black tracking-tighter leading-none" style={{ color: '#a1764c' }}>
+                              {l.val > 0 ? l.val : '-'}
+                            </span>
                           </div>
                         );
                       });
