@@ -6,134 +6,8 @@ import {
   Sparkles, Milk, Wind, Edit, Coffee, HelpCircle
 } from 'lucide-react';
 
-const FLAVOR_CONFIG = {
-  // Berries
-  '딸기': { image: '/assets/flavors/berries.png', color: '#ff4d6d' }, 
-  '라즈베리': { image: '/assets/flavors/berries.png', color: '#ff4d6d' }, 
-  '블루베리': { image: '/assets/flavors/berries.png', color: '#4361ee' }, 
-  '블랙베리': { image: '/assets/flavors/berries.png', color: '#7209b7' },
-  // Citrus
-  '레몬': { image: '/assets/flavors/citrus.png', color: '#fee440' }, 
-  '라임': { image: '/assets/flavors/citrus.png', color: '#aacc00' }, 
-  '오렌지': { image: '/assets/flavors/citrus.png', color: '#fb8500' }, 
-  '자몽': { image: '/assets/flavors/citrus.png', color: '#ff7b00' }, 
-  '베르가못': { image: '/assets/flavors/citrus.png', color: '#9ef01a' }, 
-  '귤': { image: '/assets/flavors/citrus.png', color: '#ff9100' },
-  // Stone Fruit
-  '복숭아': { image: '/assets/flavors/stone_fruit.png', color: '#ff9b54' }, 
-  '자두': { image: '/assets/flavors/stone_fruit.png', color: '#e01e37' }, 
-  '살구': { image: '/assets/flavors/stone_fruit.png', color: '#ffb38a' }, 
-  '체리': { image: '/assets/flavors/stone_fruit.png', color: '#c9184a' },
-  // Tropical
-  '망고': { image: '/assets/flavors/tropical.png', color: '#ffbe0b' }, 
-  '파인애플': { image: '/assets/flavors/tropical.png', color: '#ffd60a' }, 
-  '패션후르츠': { image: '/assets/flavors/tropical.png', color: '#fb5607' }, 
-  '리치': { image: '/assets/flavors/tropical.png', color: '#ff006e' }, 
-  '파파야': { image: '/assets/flavors/tropical.png', color: '#ff9f1c' },
-  '코코넛': { image: '/assets/flavors/tropical.png', color: '#fefae0' },
-  // Orchard
-  '사과': { image: '/assets/flavors/citrus.png', color: '#ef233c' }, // Fallback to citrus
-  '배': { image: '/assets/flavors/stone_fruit.png', color: '#d9ed92' }, // Fallback to stone fruit
-  '청포도': { image: '/assets/flavors/stone_fruit.png', color: '#b5e48c' }, 
-  '적포도': { image: '/assets/flavors/stone_fruit.png', color: '#9d4edd' }, 
-  '건포도': { image: '/assets/flavors/stone_fruit.png', color: '#5a189a' }, 
-  '무화과': { image: '/assets/flavors/stone_fruit.png', color: '#ae2012' },
-  // Floral
-  '자스민': { image: '/assets/flavors/flavor_jasmine.png', color: '#f8edeb' }, 
-  '오렌지 블로썸': { image: '/assets/flavors/flavor_jasmine.png', color: '#ffb5a7' }, 
-  '아카시아': { image: '/assets/flavors/flavor_jasmine.png', color: '#fcd5ce' }, 
-  '국화': { image: '/assets/flavors/flavor_jasmine.png', color: '#f9dcc4' }, 
-  '장미': { image: '/assets/flavors/floral.png', color: '#ff4d6d' }, 
-  '히비스커스': { image: '/assets/flavors/floral.png', color: '#e01e37' },
-  // Herbal
-  '허브': { image: '/assets/flavors/herbal.png', color: '#52b788' }, 
-  '라벤더': { image: '/assets/flavors/herbal.png', color: '#b79ced' }, 
-  '카모마일': { image: '/assets/flavors/herbal.png', color: '#f9f9f9' }, 
-  '민트': { image: '/assets/flavors/herbal.png', color: '#2d6a4f' }, 
-  '세이지': { image: '/assets/flavors/herbal.png', color: '#74c69d' }, 
-  '로즈마리': { image: '/assets/flavors/herbal.png', color: '#1b4332' }, 
-  '딜': { image: '/assets/flavors/herbal.png', color: '#95d5b2' },
-  // Sweet
-  '흑설탕': { image: '/assets/flavors/sweet.png', color: '#6f4e37' }, 
-  '백설탕': { image: '/assets/flavors/sweet.png', color: '#ffffff' }, 
-  '시럽': { image: '/assets/flavors/sweet.png', color: '#e85d04' }, 
-  '캐러멜': { image: '/assets/flavors/sweet.png', color: '#9d4203' }, 
-  '당밀': { image: '/assets/flavors/sweet.png', color: '#3d2b1f' }, 
-  '아카시아 꿀': { image: '/assets/flavors/sweet.png', color: '#ffd60a' }, 
-  '잡화 꿀': { image: '/assets/flavors/sweet.png', color: '#ffbe0b' },
-  // Chocolate
-  '다크 초콜릿': { image: '/assets/flavors/chocolate.png', color: '#2b1b17' }, 
-  '밀크 초콜릿': { image: '/assets/flavors/chocolate.png', color: '#7b3f00' }, 
-  '카카오': { image: '/assets/flavors/chocolate.png', color: '#4e342e' }, 
-  '화이트 초콜릿': { image: '/assets/flavors/chocolate.png', color: '#fefae0' },
-  // Nuts
-  '구운 아몬드': { image: '/assets/flavors/nuts.png', color: '#9c6644' }, 
-  '헤이즐넛': { image: '/assets/flavors/nuts.png', color: '#7f5539' }, 
-  '피넛': { image: '/assets/flavors/nuts.png', color: '#b08968' }, 
-  '호두': { image: '/assets/flavors/nuts.png', color: '#7b4b3a' }, 
-  '캐슈넛': { image: '/assets/flavors/nuts.png', color: '#ede0d4' },
-  // Grains
-  '보리': { image: '/assets/flavors/grains.png', color: '#e9c46a' }, 
-  '구운 빵': { image: '/assets/flavors/grains.png', color: '#f4a261' }, 
-  '시리얼': { image: '/assets/flavors/grains.png', color: '#e76f51' }, 
-  '호밀': { image: '/assets/flavors/grains.png', color: '#264653' }, 
-  '맥아': { image: '/assets/flavors/grains.png', color: '#2a9d8f' },
-  // Spices / Others (Cinnamon Focus)
-  '시나몬': { image: '/assets/flavors/flavor_cinnamon.png', color: '#bc6c25' }, 
-  '정향': { image: '/assets/flavors/flavor_cinnamon.png', color: '#603808' }, 
-  '육두구': { image: '/assets/flavors/flavor_cinnamon.png', color: '#8b5e34' }, 
-  '블랙 페퍼': { image: '/assets/flavors/flavor_cinnamon.png', color: '#212529' }, 
-  '생강': { image: '/assets/flavors/flavor_cinnamon.png', color: '#dda15e' },
-  '버터': { image: '/assets/flavors/batch_others.png', color: '#fefae0', objectPosition: '10% 90%', scale: '2' }, 
-  '크림': { image: '/assets/flavors/batch_others.png', color: '#ffffff', objectPosition: '10% 90%', scale: '2' }, 
-  '치즈': { image: '/assets/flavors/batch_others.png', color: '#fee440', objectPosition: '10% 90%', scale: '2' },
-  '가죽': { image: '/assets/flavors/batch_others.png', color: '#4e342e', objectPosition: '90% 90%', scale: '2' }, 
-  '흙내음': { image: '/assets/flavors/batch_others.png', color: '#582f0e', objectPosition: '90% 90%', scale: '2' }, 
-  '담뱃잎': { image: '/assets/flavors/batch_others.png', color: '#333d29', objectPosition: '90% 90%', scale: '2' }, 
-};
+import { FLAVOR_CONFIG, countryToCode, SENSORY_COLORS } from '../utils/coffeeData';
 
-const countryToCode = {
-  // South & Central America
-  '브라질': 'br', 'brazil': 'br', 'Brazil': 'br',
-  '콜롬비아': 'co', 'colombia': 'co', 'Colombia': 'co',
-  '파나마': 'pa', 'panama': 'pa', 'Panama': 'pa',
-  '과테말라': 'gt', 'guatemala': 'gt', 'Guatemala': 'gt',
-  '코스타리카': 'cr', 'costa rica': 'cr', 'Costa Rica': 'cr',
-  '온두라스': 'hn', 'honduras': 'hn', 'Honduras': 'hn',
-  '에콰도르': 'ec', 'ecuador': 'ec', 'Ecuador': 'ec',
-  '엘살바도르': 'sv', 'el salvador': 'sv', 'El Salvador': 'sv',
-  '니카라과': 'ni', 'nicaragua': 'ni', 'Nicaragua': 'ni',
-  '멕시코': 'mx', 'mexico': 'mx', 'Mexico': 'mx',
-  '페루': 'pe', 'peru': 'pe', 'Peru': 'pe',
-  '볼리비아': 'bo', 'bolivia': 'bo', 'Bolivia': 'bo',
-  '도미니카 공화국': 'do', 'dominican republic': 'do', 'Dominican Republic': 'do',
-  '자메이카': 'jm', 'jamaica': 'jm', 'Jamaica': 'jm',
-  // Africa
-  '에티오피아': 'et', 'ethiopia': 'et', 'Ethiopia': 'et',
-  '케냐': 'ke', 'kenya': 'ke', 'Kenya': 'ke',
-  '탄자니아': 'tz', 'tanzania': 'tz', 'Tanzania': 'tz',
-  '르완다': 'rw', 'rwanda': 'rw', 'Rwanda': 'rw',
-  '부룬디': 'bi', 'burundi': 'bi', 'Burundi': 'bi',
-  '우간다': 'ug', 'uganda': 'ug', 'Uganda': 'ug',
-  '콩고민주공화국': 'cd', 'dr congo': 'cd', 'DR Congo': 'cd', 'congo': 'cd',
-  '말라위': 'mw', 'malawi': 'mw', 'Malawi': 'mw',
-  '잠비아': 'zm', 'zambia': 'zm', 'Zambia': 'zm',
-  // Asia & Middle East
-  '예멘': 'ye', 'yemen': 'ye', 'Yemen': 'ye',
-  '베트남': 'vn', 'vietnam': 'vn', 'Vietnam': 'vn',
-  '인도네시아': 'id', 'indonesia': 'id', 'Indonesia': 'id',
-  '인도': 'in', 'india': 'in', 'India': 'in',
-  '태국': 'th', 'thailand': 'th', 'Thailand': 'th',
-  '라오스': 'la', 'laos': 'la', 'Laos': 'la',
-  '파푸아뉴기니': 'pg', 'papua new guinea': 'pg', 'Papua New Guinea': 'pg',
-  '필리핀': 'ph', 'philippines': 'ph', 'Philippines': 'ph',
-  '동티모르': 'tl', 'east timor': 'tl', 'East Timor': 'tl',
-  '미얀마': 'mm', 'myanmar': 'mm', 'Myanmar': 'mm',
-  '중국': 'cn', 'china': 'cn', 'China': 'cn',
-  // Others
-  '미국': 'us', 'usa': 'us', 'USA': 'us', 'United States': 'us',
-  '한국': 'kr', 'korea': 'kr', 'Korea': 'kr', 'South Korea': 'kr'
-};
 
 export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiveNumber }) {
   const [recipeTab, setRecipeTab] = useState('hot');
@@ -187,28 +61,31 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   const renderCupNotes = (notesString) => {
     if (!notesString) return null;
     
-    // Split by comma, space, or slash, then clean up
     const notes = Array.isArray(notesString) 
       ? notesString.filter(n => typeof n === 'string' && n.trim().length > 0)
       : String(notesString).split(/[,/|]+/).filter(n => n.trim().length > 0);
     
     return (
-      <div className="flex flex-wrap gap-4 justify-center px-4">
+      <div className="flex flex-wrap gap-3 justify-center px-4">
         {notes.map((note, idx) => {
-          const config = FLAVOR_CONFIG[note.trim()];
-          const categoryColor = config?.color || '#a1764c';
+          const trimmedNote = note.trim();
+          const config = FLAVOR_CONFIG[trimmedNote] || FLAVOR_CONFIG[trimmedNote.replace(/\s+/g, '')];
+          const bgColor = config?.color || '#a1764c';
+          const textColor = config?.textColor || '#ffffff';
           
           return (
             <div 
               key={idx} 
-              className="px-4 py-2 rounded-full border border-white/10 bg-[#131513] shadow-lg transition-all hover:-translate-y-1"
-              style={{ borderColor: `${categoryColor}40` }}
+              className="px-4 py-1.5 rounded-full shadow-lg transition-all hover:-translate-y-1 hover:brightness-110 border border-white/5"
+              style={{ 
+                backgroundColor: bgColor,
+              }}
             >
               <span 
-                className="text-[10px] font-black tracking-widest text-center uppercase"
-                style={{ color: categoryColor }}
+                className="text-[11px] font-black tracking-widest text-center uppercase drop-shadow-sm"
+                style={{ color: textColor }}
               >
-                {note}
+                {trimmedNote}
               </span>
             </div>
           );
@@ -581,19 +458,32 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                       { label: '단맛 (Sweetness)', val: product.sweetness || 0 },
                       { label: '바디 (Body)', val: product.bodyRate || 0 },
                       { label: '밸런스 (Balance)', val: product.balance || 0 }
-                    ].map((s, idx) => (
-                      <div key={idx} className="flex flex-col gap-2.5">
-                        <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                          <span>{s.label}</span>
-                          <span className="text-copper">{s.val > 0 ? s.val : '-'} / 5</span>
+                    ].map((s, idx) => {
+                      const style = SENSORY_COLORS[s.label] || { color: '#444', textColor: '#fff' };
+                      return (
+                        <div key={idx} className="flex flex-col gap-2.5">
+                          <div className="flex justify-between items-center h-5">
+                            <span 
+                              className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md shadow-sm border border-white/5"
+                              style={{ backgroundColor: style.color, color: style.textColor }}
+                            >
+                              {s.label}
+                            </span>
+                            <span className="text-copper text-[10px] font-bold">{s.val > 0 ? s.val : '-'} / 5</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 h-1.5">
+                            {[1, 2, 3, 4, 5].map(v => (
+                              <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? '' : 'bg-white/5'}`} 
+                                style={{ 
+                                  backgroundColor: v <= Number(s.val) ? style.color : undefined,
+                                  boxShadow: v <= Number(s.val) ? `0 0 8px ${style.color}40` : undefined
+                                }} 
+                              />
+                            ))}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1.5 h-1.5">
-                          {[1, 2, 3, 4, 5].map(v => (
-                            <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? 'bg-copper shadow-[0_0_8px_rgba(161,118,76,0.3)]' : 'bg-white/5'}`} />
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>

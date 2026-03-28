@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, HelpCircle } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
+import { FLAVOR_CONFIG } from '../utils/coffeeData';
 
 const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, setActiveXpHelp, isAdmin, onEdit }) => {
   if (!items || items.length === 0) return null;
@@ -160,9 +161,25 @@ const ProductSection = ({ title, category, icon, items, bgColor, activeXpHelp, s
                 </p>
               )}
 
-              <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3 font-medium overflow-hidden">
-                {product.cupNotes || "아키미스트 테이터들의 테이스팅 노트가 기록 중입니다."}
-              </p>
+              <div className="flex flex-wrap gap-1.5 mb-6 flex-grow items-start content-start overflow-hidden">
+                {product.cupNotes ? String(product.cupNotes).split(/[,/|]+/).filter(n => n.trim().length > 0).slice(0, 4).map((note, idx) => {
+                  const trimmedNote = note.trim();
+                  const config = FLAVOR_CONFIG[trimmedNote] || FLAVOR_CONFIG[trimmedNote.replace(/\s+/g, '')];
+                  const bgColor = config?.color || '#a1764c';
+                  const textColor = config?.textColor || '#ffffff';
+                  return (
+                    <span 
+                      key={idx} 
+                      className="px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-wider shadow-sm border border-white/5"
+                      style={{ backgroundColor: bgColor, color: textColor }}
+                    >
+                      {trimmedNote}
+                    </span>
+                  );
+                }) : (
+                  <p className="text-gray-600 text-[10px] font-medium italic">아키미스트 테이터들의 테이스팅 노트가 기록 중입니다.</p>
+                )}
+              </div>
             </div>
           ))}
         </div>

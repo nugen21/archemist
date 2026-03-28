@@ -2,48 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles, HelpCircle } from 'lucide-react';
 import { QRCodeCanvas } from 'qrcode.react';
 
-const countryToCode = {
-  // South & Central America
-  '브라질': 'br', 'brazil': 'br', 'Brazil': 'br',
-  '콜롬비아': 'co', 'colombia': 'co', 'Colombia': 'co',
-  '파나마': 'pa', 'panama': 'pa', 'Panama': 'pa',
-  '과테말라': 'gt', 'guatemala': 'gt', 'Guatemala': 'gt',
-  '코스타리카': 'cr', 'costa rica': 'cr', 'Costa Rica': 'cr',
-  '온두라스': 'hn', 'honduras': 'hn', 'Honduras': 'hn',
-  '에콰도르': 'ec', 'ecuador': 'ec', 'Ecuador': 'ec',
-  '엘살바도르': 'sv', 'el salvador': 'sv', 'El Salvador': 'sv',
-  '니카라과': 'ni', 'nicaragua': 'ni', 'Nicaragua': 'ni',
-  '멕시코': 'mx', 'mexico': 'mx', 'Mexico': 'mx',
-  '페루': 'pe', 'peru': 'pe', 'Peru': 'pe',
-  '볼리비아': 'bo', 'bolivia': 'bo', 'Bolivia': 'bo',
-  '도미니카 공화국': 'do', 'dominican republic': 'do', 'Dominican Republic': 'do',
-  '자메이카': 'jm', 'jamaica': 'jm', 'Jamaica': 'jm',
-  // Africa
-  '에티오피아': 'et', 'ethiopia': 'et', 'Ethiopia': 'et',
-  '케냐': 'ke', 'kenya': 'ke', 'Kenya': 'ke',
-  '탄자니아': 'tz', 'tanzania': 'tz', 'Tanzania': 'tz',
-  '르완다': 'rw', 'rwanda': 'rw', 'Rwanda': 'rw',
-  '부룬디': 'bi', 'burundi': 'bi', 'Burundi': 'bi',
-  '우간다': 'ug', 'uganda': 'ug', 'Uganda': 'ug',
-  '콩고민주공화국': 'cd', 'dr congo': 'cd', 'DR Congo': 'cd', 'congo': 'cd',
-  '말라위': 'mw', 'malawi': 'mw', 'Malawi': 'mw',
-  '잠비아': 'zm', 'zambia': 'zm', 'Zambia': 'zm',
-  // Asia & Middle East
-  '예멘': 'ye', 'yemen': 'ye', 'Yemen': 'ye',
-  '베트남': 'vn', 'vietnam': 'vn', 'Vietnam': 'vn',
-  '인도네시아': 'id', 'indonesia': 'id', 'Indonesia': 'id',
-  '인도': 'in', 'india': 'in', 'India': 'in',
-  '태국': 'th', 'thailand': 'th', 'Thailand': 'th',
-  '라오스': 'la', 'laos': 'la', 'Laos': 'la',
-  '파푸아뉴기니': 'pg', 'papua new guinea': 'pg', 'Papua New Guinea': 'pg',
-  '필리핀': 'ph', 'philippines': 'ph', 'Philippines': 'ph',
-  '동티모르': 'tl', 'east timor': 'tl', 'East Timor': 'tl',
-  '미얀마': 'mm', 'myanmar': 'mm', 'Myanmar': 'mm',
-  '중국': 'cn', 'china': 'cn', 'China': 'cn',
-  // Others
-  '미국': 'us', 'usa': 'us', 'USA': 'us', 'United States': 'us',
-  '한국': 'kr', 'korea': 'kr', 'Korea': 'kr', 'South Korea': 'kr'
-};
+import { countryToCode, FLAVOR_CONFIG } from '../utils/coffeeData';
+
 
 export default function RecommendedBeans({ isAdmin, onEdit, products }) {
   const [beans, setBeans] = useState([]);
@@ -282,9 +242,23 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
                   </div>
                 )}
                 {bean.cupNotes && (
-                  <p className="text-sm text-copper/90 font-medium leading-relaxed line-clamp-2 mb-6">
-                    {bean.cupNotes}
-                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {String(bean.cupNotes).split(/[,/|]+/).filter(n => n.trim().length > 0).slice(0, 4).map((note, idx) => {
+                      const trimmedNote = note.trim();
+                      const config = FLAVOR_CONFIG[trimmedNote] || FLAVOR_CONFIG[trimmedNote.replace(/\s+/g, '')];
+                      const bgColor = config?.color || '#a1764c';
+                      const textColor = config?.textColor || '#ffffff';
+                      return (
+                        <span 
+                          key={idx} 
+                          className="px-2.5 py-1 rounded-md text-[9px] font-black uppercase tracking-wider shadow-sm border border-white/5"
+                          style={{ backgroundColor: bgColor, color: textColor }}
+                        >
+                          {trimmedNote}
+                        </span>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
 
