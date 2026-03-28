@@ -100,6 +100,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
   const fileInputRef = useRef(null);
   const storyQuillRef = useRef(null);
   const recipeQuillRef = useRef(null);
+  const hotRecipeQuillRef = useRef(null);
+  const iceRecipeQuillRef = useRef(null);
   
   const [formData, setFormData] = useState(getInitialFormData());
 
@@ -145,6 +147,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
   const storyModules = React.useMemo(() => getQuillModules(storyQuillRef), []);
   const recipeModules = React.useMemo(() => getQuillModules(recipeQuillRef), []);
+  const hotRecipeModules = React.useMemo(() => getQuillModules(hotRecipeQuillRef), []);
+  const iceRecipeModules = React.useMemo(() => getQuillModules(iceRecipeQuillRef), []);
 
   const handleCupNoteToggle = (note) => {
     const currentNotes = (formData.cupNotes || "").split(/[,/|]+/).map(n => n.trim()).filter(Boolean);
@@ -1127,10 +1131,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       <label className="block text-[11px] font-medium text-gray-400 mb-2 tracking-wider uppercase">HOT 레시피 추가 코멘트</label>
                       <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[150px]">
                         <ReactQuill 
+                          ref={hotRecipeQuillRef}
                           theme="snow" 
                           value={formData.hot_comment} 
                           onChange={(content) => setFormData(prev => ({ ...prev, hot_comment: content }))}
-                          modules={quillModules}
+                          modules={hotRecipeModules}
                           style={{ height: '100px' }}
                         />
                       </div>
@@ -1213,10 +1218,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                       <label className="block text-[11px] font-medium text-gray-400 mb-2 tracking-wider uppercase">ICE 레시피 추가 코멘트</label>
                       <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[150px]">
                         <ReactQuill 
+                          ref={iceRecipeQuillRef}
                           theme="snow" 
                           value={formData.ice_comment} 
                           onChange={(content) => setFormData(prev => ({ ...prev, ice_comment: content }))}
-                          modules={quillModules}
+                          modules={iceRecipeModules}
                           style={{ height: '100px' }}
                         />
                       </div>
