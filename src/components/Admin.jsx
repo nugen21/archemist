@@ -98,30 +98,33 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
   const [isCupNoteExpanded, setIsCupNoteExpanded] = useState(false);
   const syncTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
-  const quillRef = useRef(null);
+  const storyQuillRef = useRef(null);
+  const recipeQuillRef = useRef(null);
   
   const [formData, setFormData] = useState(getInitialFormData());
 
-  const imageHandler = () => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
+  const createImageHandler = (quillRef) => {
+    return () => {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/*');
+      input.click();
 
-    input.onchange = async () => {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const quill = quillRef.current.getEditor();
-        const range = quill.getSelection();
-        quill.insertEmbed(range.index, 'image', e.target.result);
-        quill.setSelection(range.index + 1);
+      input.onchange = async () => {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const quill = quillRef.current.getEditor();
+          const range = quill.getSelection();
+          quill.insertEmbed(range.index, 'image', e.target.result);
+          quill.setSelection(range.index + 1);
+        };
+        reader.readAsDataURL(file);
       };
-      reader.readAsDataURL(file);
     };
   };
 
-  const quillModules = React.useMemo(() => ({
+  const getQuillModules = (quillRef) => ({
     toolbar: {
       container: [
         [{ 'header': [1, 2, 3, false] }],
@@ -135,10 +138,13 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
         ['clean']
       ],
       handlers: {
-        image: imageHandler
+        image: createImageHandler(quillRef)
       }
     }
-  }), []);
+  });
+
+  const storyModules = React.useMemo(() => getQuillModules(storyQuillRef), []);
+  const recipeModules = React.useMemo(() => getQuillModules(recipeQuillRef), []);
 
   const handleCupNoteToggle = (note) => {
     const currentNotes = (formData.cupNotes || "").split(/[,/|]+/).map(n => n.trim()).filter(Boolean);
@@ -727,11 +733,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">상품 한 줄 스토리 / 서브 설명 (Intro Story HTML)</label>
                 <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[150px]">
                   <ReactQuill 
-                    ref={quillRef}
+                    ref={storyQuillRef}
                     theme="snow" 
                     value={formData.story} 
                     onChange={(content) => setFormData(prev => ({ ...prev, story: content }))}
-                    modules={quillModules}
+                    modules={storyModules}
                     style={{ height: '120px' }}
                   />
                 </div>
@@ -1243,11 +1249,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     .ql-editor { font-size: 14px; font-weight: 500; color: #ccc; }
                   `}</style>
                   <ReactQuill 
-                    ref={quillRef}
+                    ref={recipeQuillRef}
                     theme="snow" 
                     value={formData.recipe} 
                     onChange={(content) => setFormData(prev => ({ ...prev, recipe: content }))}
-                    modules={quillModules}
+                    modules={recipeModules}
                   />
                 </div>
               </div>
