@@ -575,7 +575,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                               transform: 'translate(-50%, -50%)',
                             }}
                           >
-                            <span className="text-[12px] font-black tracking-widest text-white/50 uppercase drop-shadow-sm">
+                            <span className="text-[12px] font-black tracking-widest text-white uppercase drop-shadow-md">
                               {l.text}
                             </span>
                             <span className="text-[15px] font-black tracking-tighter text-white drop-shadow-md">
