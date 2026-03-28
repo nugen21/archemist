@@ -21,3 +21,13 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes pulse-subtle {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 4s ease-in-out infinite;
+}

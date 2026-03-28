@@ -449,28 +449,137 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     </div>
                   )}
                 </div>
-                <div className="flex flex-col gap-6 flex-grow">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
-                    {[
-                      { label: '향 (Flavor)', val: product.flavor || 0 },
-                      { label: '후미 (Aftertaste)', val: product.aftertaste || 0 },
-                      { label: '산미 (Acidity)', val: product.acidityRate || 0 },
-                      { label: '단맛 (Sweetness)', val: product.sweetness || 0 },
-                      { label: '바디 (Body)', val: product.bodyRate || 0 },
-                      { label: '밸런스 (Balance)', val: product.balance || 0 }
-                    ].map((s, idx) => (
-                      <div key={idx} className="flex flex-col gap-2.5">
-                        <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                          <span>{s.label}</span>
-                          <span className="text-white/80">{s.val > 0 ? s.val : '-'} / 5</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 h-1.5">
-                          {[1, 2, 3, 4, 5].map(v => (
-                            <div key={v} className={`h-full flex-grow rounded-full transition-all ${v <= Number(s.val) ? 'bg-white/60 shadow-[0_0_8px_rgba(255,255,255,0.1)]' : 'bg-white/5'}`} />
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                <div className="flex flex-col items-center justify-center flex-grow py-4">
+                  {/* Hexagonal Radar Chart (Spider Map) */}
+                  <div className="relative w-full max-w-[280px] aspect-square mx-auto">
+                    <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                      {/* Define Gradients & Filters */}
+                      <defs>
+                        <linearGradient id="spiderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#a1764c" stopOpacity="0.4" />
+                          <stop offset="100%" stopColor="#a1764c" stopOpacity="0.1" />
+                        </linearGradient>
+                        <filter id="glow">
+                          <feGaussianBlur stdDeviation="1.2" result="coloredBlur"/>
+                          <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                          </feMerge>
+                        </filter>
+                      </defs>
+
+                      {/* Radar Background Grids (Hexagons) */}
+                      {[1, 2, 3, 4, 5].map((step) => {
+                        const r = (step / 5) * 40;
+                        const points = [0, 60, 120, 180, 240, 300].map(angle => {
+                          const rad = ((angle - 90) * Math.PI) / 180;
+                          return `${50 + r * Math.cos(rad)},${50 + r * Math.sin(rad)}`;
+                        }).join(' ');
+                        return (
+                          <polygon 
+                            key={step}
+                            points={points}
+                            fill="none"
+                            stroke="white"
+                            strokeOpacity={0.08}
+                            strokeWidth="0.4"
+                          />
+                        );
+                      })}
+
+                      {/* Axis Lines */}
+                      {[0, 60, 120, 180, 240, 300].map((angle, idx) => {
+                        const rad = ((angle - 90) * Math.PI) / 180;
+                        return (
+                          <line
+                            key={idx}
+                            x1="50" y1="50"
+                            x2={50 + 40 * Math.cos(rad)}
+                            y2={50 + 40 * Math.sin(rad)}
+                            stroke="white"
+                            strokeOpacity={0.12}
+                            strokeWidth="0.4"
+                          />
+                        );
+                      })}
+
+                      {/* Data Polygon */}
+                      {(() => {
+                        const stats = [
+                          { val: product.flavor || 0 },
+                          { val: product.aftertaste || 0 },
+                          { val: product.acidityRate || 0 },
+                          { val: product.sweetness || 0 },
+                          { val: product.bodyRate || 0 },
+                          { val: product.balance || 0 }
+                        ];
+                        const points = stats.map((s, idx) => {
+                          const r = (Math.max(0.5, Math.min(5, Number(s.val))) / 5) * 40;
+                          const rad = ((idx * 60 - 90) * Math.PI) / 180;
+                          return `${50 + r * Math.cos(rad)},${50 + r * Math.sin(rad)}`;
+                        }).join(' ');
+                        
+                        return (
+                          <g filter="url(#glow)">
+                            <polygon 
+                              points={points} 
+                              fill="url(#spiderGradient)" 
+                              stroke="#a1764c" 
+                              strokeWidth="1.2"
+                              strokeLinejoin="round"
+                              className="animate-pulse-subtle"
+                            />
+                            {/* Inner nodes */}
+                            {stats.map((s, idx) => {
+                              const r = (Math.max(0.5, Math.min(5, Number(s.val))) / 5) * 40;
+                              const rad = ((idx * 60 - 90) * Math.PI) / 180;
+                              if (s.val <= 0) return null;
+                              return (
+                                <circle 
+                                  key={idx}
+                                  cx={50 + r * Math.cos(rad)} 
+                                  cy={50 + r * Math.sin(rad)} 
+                                  r="0.8" 
+                                  fill="#a1764c" 
+                                />
+                              );
+                            })}
+                          </g>
+                        );
+                      })()}
+                    </svg>
+
+                    {/* Labels */}
+                    {(() => {
+                      const labels = [
+                        { text: '향' },
+                        { text: '후미' },
+                        { text: '산미' },
+                        { text: '단맛' },
+                        { text: '바디' },
+                        { text: '밸런스' }
+                      ];
+                      return labels.map((l, idx) => {
+                        const angle = idx * 60 - 90;
+                        const rad = (angle * Math.PI) / 180;
+                        const x = 50 + 52 * Math.cos(rad);
+                        const y = 50 + 52 * Math.sin(rad);
+                        
+                        return (
+                          <div 
+                            key={idx}
+                            className="absolute text-[9px] font-bold text-gray-400 whitespace-nowrap"
+                            style={{ 
+                              left: `${x}%`, 
+                              top: `${y}%`,
+                              transform: 'translate(-50%, -50%)',
+                            }}
+                          >
+                            {l.text}
+                          </div>
+                        );
+                      });
+                    })()}
                   </div>
                 </div>
               </div>
