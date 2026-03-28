@@ -38,7 +38,7 @@ const getInitialFormData = () => ({
   greenBeanName: '', importer: '', scaScore: '',
   flavor: 3, aftertaste: 3, acidityRate: 3, sweetness: 3, bodyRate: 3, balance: 3,
   experience: 50,
-  showBasicInfo: true, showAnalysisInfo: true,
+  showBasicInfo: false, showAnalysisInfo: false,
   blend1: '', ratio1: '', blend2: '', ratio2: '', blend3: '', ratio3: '', blend4: '', ratio4: '',
   dt: '', dtr: '', roastCapacity: '', roasterComment: '',
   // Extraction Recipe (Hot)
