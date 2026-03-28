@@ -98,8 +98,47 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
   const [isCupNoteExpanded, setIsCupNoteExpanded] = useState(false);
   const syncTimeoutRef = useRef(null);
   const fileInputRef = useRef(null);
+  const quillRef = useRef(null);
   
   const [formData, setFormData] = useState(getInitialFormData());
+
+  const imageHandler = () => {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = async () => {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const quill = quillRef.current.getEditor();
+        const range = quill.getSelection();
+        quill.insertEmbed(range.index, 'image', e.target.result);
+        quill.setSelection(range.index + 1);
+      };
+      reader.readAsDataURL(file);
+    };
+  };
+
+  const quillModules = React.useMemo(() => ({
+    toolbar: {
+      container: [
+        [{ 'header': [1, 2, 3, false] }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'align': [] }],
+        ['link', 'image', 'video'],
+        ['clean']
+      ],
+      handlers: {
+        image: imageHandler
+      }
+    }
+  }), []);
 
   const handleCupNoteToggle = (note) => {
     const currentNotes = (formData.cupNotes || "").split(/[,/|]+/).map(n => n.trim()).filter(Boolean);
@@ -111,20 +150,6 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
       newNotes = [...currentNotes, note];
     }
     setFormData(prev => ({ ...prev, cupNotes: newNotes.join(', ') }));
-  };
-
-  const quillModules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
-      [{ 'size': ['small', false, 'large', 'huge'] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'indent': '-1' }, { 'indent': '+1' }],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'align': [] }],
-      ['link', 'image', 'video'],
-      ['clean']
-    ],
   };
   const loadBeans = async (forceFetch = true) => {
     try {
@@ -702,6 +727,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">상품 한 줄 스토리 / 서브 설명 (Intro Story HTML)</label>
                 <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[150px]">
                   <ReactQuill 
+                    ref={quillRef}
                     theme="snow" 
                     value={formData.story} 
                     onChange={(content) => setFormData(prev => ({ ...prev, story: content }))}
@@ -1217,6 +1243,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                     .ql-editor { font-size: 14px; font-weight: 500; color: #ccc; }
                   `}</style>
                   <ReactQuill 
+                    ref={quillRef}
                     theme="snow" 
                     value={formData.recipe} 
                     onChange={(content) => setFormData(prev => ({ ...prev, recipe: content }))}
