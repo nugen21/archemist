@@ -147,7 +147,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-30"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-copper/5 rounded-full blur-[150px] opacity-20"></div>
       
-      <div className="max-w-5xl mx-auto relative z-10 pt-8 px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto relative z-10 pt-8 px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-y-8 lg:gap-x-12 mb-10 items-start">
           
           {/* --- Tier 1: Hero Row (Image & Info) --- */}
@@ -711,7 +711,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
         <div className="mt-6 border-t border-white/5 pt-6 space-y-8">
           
           {/* 1. Shipping & Shelf Life Policy */}
-          <div className="max-w-5xl mx-auto text-center px-4">
+          <div className="max-w-7xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 배송 및 소비기한 안내
@@ -727,7 +727,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {/* 1.1 Detailed HTML Story (Moved from bottom) */}
           {product.recipe && (
-             <div className="max-w-5xl mx-auto px-4 mt-6">
+             <div className="max-w-7xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  상세 스토리
@@ -741,7 +741,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {/* 4. Green Bean Analysis (Optional) */}
           {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && product.showAnalysisInfo !== false && (
-            <div className="max-w-5xl mx-auto px-4 mt-6">
+            <div className="max-w-7xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
                  생두 분석 정보
@@ -767,7 +767,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {/* 4.1 Grind Guide Section */}
             {['bean', 'dripbag', 'beverage'].includes(product.category) && (
-              <div className="max-w-5xl mx-auto px-4 mt-8">
+              <div className="max-w-7xl mx-auto px-4 mt-8">
                 <h3 className="text-xl font-serif font-black text-white mb-2 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                   <div className="h-[1px] w-8 bg-white/10"></div>
                   분쇄 가이드
@@ -807,7 +807,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
           {/* 4.2 Recipe Section */}
           {['bean', 'dripbag', 'coldbrew', 'beverage'].includes(product.category) && (
-            <div className="max-w-5xl mx-auto text-center px-4">
+            <div className="max-w-7xl mx-auto text-center px-4">
               <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                 <div className="h-[1px] w-8 bg-copper/30"></div>
                 추출 레시피
@@ -994,7 +994,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
 
         {/* 5. Regulatory Product Information Notice (Table) */}
         {['bean', 'dripbag', 'coldbrew'].includes(product.category) && (
-          <div className="max-w-5xl mx-auto px-4 mt-20 mb-32 border-t border-white/5 pt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 relative z-10 text-center">
+          <div className="max-w-7xl mx-auto px-4 mt-20 mb-32 border-t border-white/5 pt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 relative z-10 text-center">
             <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
               <div className="h-[1px] w-6 bg-white/10"></div>
               상품 정보 제공 고시
