@@ -904,7 +904,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
              <div className="max-w-7xl mx-auto px-4 mt-6">
                <h3 className="text-xl font-serif font-black text-white mb-10 flex items-center justify-center gap-4 uppercase tracking-[0.2em]">
                  <div className="h-[1px] w-8 bg-white/10"></div>
-                 상세 스토리
+                 생두 정보
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
                <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content whitespace-pre-wrap relative" >
