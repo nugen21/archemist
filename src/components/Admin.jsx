@@ -1055,7 +1055,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
 
 
-              <div className="grid grid-cols-1 gap-8 pt-10 border-t border-gray-800 mt-10">
+              <div className="md:col-span-2 lg:col-span-3 space-y-10 mt-10 border-t border-gray-800 pt-10">
               <div className="flex flex-col">
                 <label className="block text-sm font-medium text-copper tracking-widest mb-3 uppercase">생두 상세 정보 / 상품 스토리 (HTML Editor)</label>
                 <div className="bg-[#0b0c0b] border border-gray-700/60 rounded-xl min-h-[400px]">
