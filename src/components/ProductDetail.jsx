@@ -929,16 +929,23 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 <div className="mt-6 px-2 sm:px-6">
                     <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-8">
                         {[
-                            { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루' },
-                            { name: '모카포트', value: '400~600μm', desc: '고운 소금' },
-                            { name: '핸드드립', value: '700~900μm', desc: '일반 꽃소금' },
-                            { name: '커피메이커', value: '800~1000μm', desc: '중간 소금' },
-                            { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금' }
+                            { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루', img: 'espresso.jpg' },
+                            { name: '모카포트', value: '400~600μm', desc: '고운 소금', img: 'mocha_pot.jpg' },
+                            { name: '핸드드립', value: '700~900μm', desc: '일반 꽃소금', img: 'hand_drip.jpg' },
+                            { name: '커피메이커', value: '800~1000μm', desc: '중간 소금', img: 'coffee_maker.jpg' },
+                            { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금', img: 'dutch.jpg' }
                         ].map((item, idx) => (
-                            <div key={idx} className="text-center group/item hover:translate-y-[-4px] transition-transform duration-300">
-                                <span className="text-[12px] sm:text-[16px] md:text-[20px] font-black text-white uppercase tracking-widest block mb-1">{item.name}</span>
-                                <span className="text-[11px] sm:text-[14px] font-bold text-copper/60 block">{item.value}</span>
-                                <span className="text-[10px] sm:text-[12px] text-gray-600 block mt-2 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
+                            <div key={idx} className="text-center group/item flex flex-col items-center">
+                                <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-4 border border-white/10 group-hover/item:border-copper/40 transition-all duration-500 shadow-xl">
+                                  <img 
+                                    src={`/images/grind/${item.img}`} 
+                                    alt={item.name} 
+                                    className="w-full h-full object-cover grayscale opacity-50 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-700 hover:scale-110" 
+                                  />
+                                </div>
+                                <span className="text-[10px] sm:text-[14px] md:text-[17px] font-black text-white uppercase tracking-[0.15em] block mb-1">{item.name}</span>
+                                <span className="text-[9px] sm:text-[12px] font-bold text-copper/60 block">{item.value}</span>
+                                <span className="text-[8px] sm:text-[10px] text-gray-600 block mt-2 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 whitespace-nowrap">{item.desc}</span>
                             </div>
                         ))}
                     </div>
