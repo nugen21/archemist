@@ -19,7 +19,6 @@ function App() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [lastScrollPos, setLastScrollPos] = useState(0);
 
   const loadProducts = async () => {
     // 1. First, quickly load from localStorage if available for instant UI response
@@ -69,7 +68,6 @@ function App() {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -77,33 +75,39 @@ function App() {
       const newHash = window.location.hash;
       const oldHash = currentPath;
       
-      // If navigating TO product detail center from something else, save scroll position
+      // If we are leaving the main list and heading to a detail page, save current scroll
       if (newHash.startsWith('#product/') && !oldHash.startsWith('#product/')) {
-        setLastScrollPos(window.scrollY);
-        console.log('Saving scroll position:', window.scrollY);
+        const scrollY = window.scrollY;
+        sessionStorage.setItem('last_scroll_pos', scrollY);
+        console.log('App: Saved scroll position to session:', scrollY);
       }
       
       setCurrentPath(newHash);
       
-      // Handle back or home navigation
-      if (newHash === '' || newHash === '#' || newHash === '#home') {
-        // Only restore if we have a saved position AND we came from a product
-        if (oldHash.startsWith('#product/')) {
+      // If we are returning to the main list (home or empty or sub-sections like #bean)
+      const isHome = newHash === '' || newHash === '#' || newHash === '#home' || newHash === '#bean' || newHash === '#brand';
+      const comingFromDetail = oldHash.startsWith('#product/');
+      
+      if (isHome && comingFromDetail) {
+        const savedPos = sessionStorage.getItem('last_scroll_pos');
+        if (savedPos) {
+          // Wait longer to ensure data is loaded and rendered
           setTimeout(() => {
-            window.scrollTo({ top: lastScrollPos, behavior: 'instant' });
-            console.log('Restoring scroll position:', lastScrollPos);
-          }, 0);
-        } else {
-          window.scrollTo(0, 0);
+            window.scrollTo({ top: parseInt(savedPos), behavior: 'auto' });
+            console.log('App: Restored scroll position from session:', savedPos);
+          }, 150);
         }
-      } else if (newHash === '#menu') {
-        window.scrollTo(0, 0);
+      } else if (!newHash.startsWith('#product/') && newHash !== '#admin') {
+        // Only scroll to top if not returning from detail and not going to same page
+        if (!newHash.includes(oldHash.replace('#', ''))) {
+           window.scrollTo(0, 0);
+        }
       }
     };
 
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
-  }, [currentPath, lastScrollPos]);
+  }, [currentPath]);
 
   // Handle scrolling to specific sections (like #bean, #brand, etc.)
   useEffect(() => {
