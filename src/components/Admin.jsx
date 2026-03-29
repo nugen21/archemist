@@ -58,8 +58,9 @@ const getInitialFormData = () => ({
   ice_p4_time: '', ice_p4_water: '',
   ice_weight: '', ice_tds: '',
   ice_comment: '',
-  // Extraction Recipe Custom Grind Image
-  recipe_grind_img: '',
+  // Extraction Recipe Custom Grind Images
+  hot_recipe_grind_img: '',
+  ice_recipe_grind_img: '',
   // Grind Guide Custom Images
   grind_img_espresso: '', grind_img_mocha: '', grind_img_handdrip: '', grind_img_dutch: ''
 });
@@ -1216,11 +1217,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                             placeholder="예: 25 clicks" 
                           />
                           <div className="relative group w-10 h-10 flex-shrink-0 mx-auto">
-                            <div className="w-full h-full rounded-lg bg-black/40 border border-white/10 flex items-center justify-center overflow-hidden relative group-hover:border-copper/30 transition-all">
-                              {formData.recipe_grind_img ? (
-                                <img src={formData.recipe_grind_img} alt="Recipe Grind" className="w-full h-full object-cover" />
+                            <div className="w-full h-full rounded-lg bg-red-950/20 border border-red-500/20 flex items-center justify-center overflow-hidden relative group-hover:border-red-500/40 transition-all shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                              {formData.hot_recipe_grind_img ? (
+                                <img src={formData.hot_recipe_grind_img} alt="HOT Grind" className="w-full h-full object-cover" />
                               ) : (
-                                <Coffee size={12} className="text-white/10" />
+                                <Coffee size={12} className="text-red-500/20" />
                               )}
                               <input 
                                 type="file" 
@@ -1241,7 +1242,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                                         canvas.width = w; canvas.height = h;
                                         ctx.drawImage(img, 0, 0, w, h);
                                         const compressed = canvas.toDataURL('image/jpeg', 0.8);
-                                        setFormData(prev => ({ ...prev, recipe_grind_img: compressed }));
+                                        setFormData(prev => ({ ...prev, hot_recipe_grind_img: compressed }));
                                       };
                                       img.src = re.target.result;
                                     };
@@ -1251,8 +1252,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                                 className="absolute inset-0 opacity-0 cursor-pointer z-10"
                               />
                             </div>
-                            {formData.recipe_grind_img && (
-                              <button onClick={() => setFormData(prev => ({ ...prev, recipe_grind_img: '' }))} className="absolute -top-1 -right-1 p-0.5 bg-red-500 rounded-full text-white z-20 hover:scale-110 transition-all">
+                            {formData.hot_recipe_grind_img && (
+                              <button onClick={() => setFormData(prev => ({ ...prev, hot_recipe_grind_img: '' }))} className="absolute -top-1 -right-1 p-0.5 bg-red-600 rounded-full text-white z-20 hover:scale-110 transition-all shadow-lg">
                                 <Trash2 size={8} />
                               </button>
                             )}
@@ -1355,11 +1356,11 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                             placeholder="예: 22 clicks" 
                           />
                           <div className="relative group w-10 h-10 flex-shrink-0 mx-auto">
-                            <div className="w-full h-full rounded-lg bg-black/40 border border-white/10 flex items-center justify-center overflow-hidden relative group-hover:border-copper/30 transition-all">
-                              {formData.recipe_grind_img ? (
-                                <img src={formData.recipe_grind_img} alt="Recipe Grind" className="w-full h-full object-cover" />
+                            <div className="w-full h-full rounded-lg bg-blue-950/20 border border-blue-500/20 flex items-center justify-center overflow-hidden relative group-hover:border-blue-500/40 transition-all shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                              {formData.ice_recipe_grind_img ? (
+                                <img src={formData.ice_recipe_grind_img} alt="ICE Grind" className="w-full h-full object-cover" />
                               ) : (
-                                <Coffee size={12} className="text-white/10" />
+                                <Coffee size={12} className="text-blue-500/20" />
                               )}
                               <input 
                                 type="file" 
@@ -1380,7 +1381,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                                         canvas.width = w; canvas.height = h;
                                         ctx.drawImage(img, 0, 0, w, h);
                                         const compressed = canvas.toDataURL('image/jpeg', 0.8);
-                                        setFormData(prev => ({ ...prev, recipe_grind_img: compressed }));
+                                        setFormData(prev => ({ ...prev, ice_recipe_grind_img: compressed }));
                                       };
                                       img.src = re.target.result;
                                     };
@@ -1390,8 +1391,8 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                                 className="absolute inset-0 opacity-0 cursor-pointer z-10"
                               />
                             </div>
-                            {formData.recipe_grind_img && (
-                              <button onClick={() => setFormData(prev => ({ ...prev, recipe_grind_img: '' }))} className="absolute -top-1 -right-1 p-0.5 bg-red-500 rounded-full text-white z-20 hover:scale-110 transition-all">
+                            {formData.ice_recipe_grind_img && (
+                              <button onClick={() => setFormData(prev => ({ ...prev, ice_recipe_grind_img: '' }))} className="absolute -top-1 -right-1 p-0.5 bg-blue-600 rounded-full text-white z-20 hover:scale-110 transition-all shadow-lg">
                                 <Trash2 size={8} />
                               </button>
                             )}

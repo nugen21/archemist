@@ -1017,15 +1017,15 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                 <div className="text-copper/50 group-hover/card:text-copper transition-colors">{item.icon}</div>
                                 <div className="flex items-center gap-2">
                                   <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest leading-none">{item.label}</span>
-                                  {item.label === '분쇄도' && product.recipe_grind_img && (
+                                  {item.label === '분쇄도' && product[`${recipeTab}_recipe_grind_img`] && (
                                     <div 
                                       className="w-6 h-6 rounded-md overflow-hidden border border-white/10 cursor-zoom-in hover:border-copper/40 transition-all active:scale-95 shadow-md relative z-20"
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        setSelectedGrindImage(product.recipe_grind_img);
+                                        setSelectedGrindImage(product[`${recipeTab}_recipe_grind_img`]);
                                       }}
                                     >
-                                      <img src={product.recipe_grind_img} alt="Grind Ref" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+                                      <img src={product[`${recipeTab}_recipe_grind_img`]} alt="Grind Ref" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
                                     </div>
                                   )}
                                 </div>
