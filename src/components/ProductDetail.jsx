@@ -923,18 +923,17 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                             { name: '커피메이커', value: '800~1000μm', desc: '중간 소금', img: 'coffee_maker.jpg' },
                             { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금', img: 'dutch.jpg' }
                         ].map((item, idx) => (
-                            <div key={idx} className="text-center group/item flex flex-col items-center">
-                                <div className="w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-4 border border-white/10 group-hover/item:border-copper/40 transition-all duration-500 shadow-xl">
-                                  <img 
-                                    src={`/images/grind/${item.img}`} 
-                                    alt={item.name} 
-                                    className="w-full h-full object-cover transition-all duration-700 hover:scale-110" 
-                                  />
-                                </div>
-                                <span className="text-[10px] sm:text-[14px] md:text-[17px] font-black text-white uppercase tracking-[0.15em] block mb-1">{item.name}</span>
-                                <span className="text-[9px] sm:text-[12px] font-bold text-copper/60 block">{item.value}</span>
-                                <span className="text-[8px] sm:text-[10px] text-gray-600 block mt-2 whitespace-nowrap">{item.desc}</span>
-                            </div>
+                            <StepCard 
+                              key={idx} 
+                              step={{
+                                level: idx + 1,
+                                step: idx + 1,
+                                title: item.name,
+                                desc: item.value,
+                                detail: item.desc,
+                                img: `/images/grind/${item.img}`
+                              }} 
+                            />
                         ))}
                     </div>
                 </div>
