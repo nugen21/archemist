@@ -101,10 +101,12 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
       className="flex flex-col items-center group/step cursor-zoom-in"
       onClick={() => setSelectedGrindImage(step.img)}
     >
-      <div className="relative mb-4 w-full aspect-square max-w-[110px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors shadow-2xl">
-        <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
-        <div className="absolute top-2.5 left-2.5 text-copper font-serif font-black text-sm opacity-40">{step.step}</div>
-      </div>
+      {step.img && (
+        <div className="relative mb-4 w-full aspect-square max-w-[110px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors shadow-2xl">
+          <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
+          <div className="absolute top-2.5 left-2.5 text-copper font-serif font-black text-sm opacity-40">{step.step}</div>
+        </div>
+      )}
       <h4 className="text-base sm:text-lg font-serif font-black text-white mb-2 tracking-[0.15em]">{step.title}</h4>
       <p className="text-copper text-[10px] font-black mb-3 tracking-widest uppercase">{step.desc}</p>
       <p className="text-gray-500 text-xs leading-relaxed max-w-[180px] break-keep font-medium">{step.detail}</p>
@@ -917,10 +919,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 <div className="mt-6 px-2 sm:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 md:gap-12 max-w-5xl mx-auto">
                         {[
-                            { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루', img: 'espresso.jpg', custom: product.grind_img_espresso },
-                            { name: '모카포트', value: '400~600μm', desc: '고운 소금', img: 'mocha_pot.jpg', custom: product.grind_img_mocha },
-                            { name: '핸드드립', value: '700~900μm', desc: '일반 꽃소금', img: 'hand_drip.jpg', custom: product.grind_img_handdrip },
-                            { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금', img: 'dutch.jpg', custom: product.grind_img_dutch }
+                            { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루', custom: product.grind_img_espresso },
+                            { name: '모카포트', value: '400~600μm', desc: '고운 소금', custom: product.grind_img_mocha },
+                            { name: '핸드드립', value: '700~900μm', desc: '일반 꽃소금', custom: product.grind_img_handdrip },
+                            { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금', custom: product.grind_img_dutch }
                         ].map((item, idx) => (
                             <StepCard 
                               key={idx} 
@@ -930,7 +932,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                 title: item.name,
                                 desc: item.value,
                                 detail: item.desc,
-                                img: item.custom || `/images/grind/${item.img}`
+                                img: item.custom
                               }} 
                             />
                         ))}
