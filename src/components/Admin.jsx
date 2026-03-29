@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { QrCode, Download, Trash2, Edit2, Star, Eye, EyeOff } from 'lucide-react';
+import { QrCode, Download, Trash2, Edit2, Star, Eye, EyeOff, Coffee } from 'lucide-react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { FLAVOR_CONFIG } from '../utils/coffeeData';
