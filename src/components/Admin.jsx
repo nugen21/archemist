@@ -58,6 +58,8 @@ const getInitialFormData = () => ({
   ice_p4_time: '', ice_p4_water: '',
   ice_weight: '', ice_tds: '',
   ice_comment: '',
+  // Extraction Recipe Custom Grind Image
+  recipe_grind_img: '',
   // Grind Guide Custom Images
   grind_img_espresso: '', grind_img_mocha: '', grind_img_handdrip: '', grind_img_dutch: ''
 });
@@ -581,6 +583,7 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
     setBeans(updatedGlobal);
     localStorage.setItem('archemist_beans', JSON.stringify(updatedGlobal));
     syncWithGitHub(updatedGlobal);
+    
     setDraggedIndex(null);
   };
   // -----------------------------
@@ -1202,7 +1205,60 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
 
                     <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
                       <InputField label="원두량" name="hot_coffee_amount" value={formData.hot_coffee_amount} onChange={handleChange} placeholder="예: 20g" />
-                      <InputField label="분쇄도" name="hot_grind" value={formData.hot_grind} onChange={handleChange} placeholder="예: 25 clicks" />
+                      <div className="w-full">
+                        <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">분쇄도 (이미지 포함)</label>
+                        <div className="flex gap-2 items-start">
+                          <input 
+                            name="hot_grind" 
+                            value={formData.hot_grind} 
+                            onChange={handleChange} 
+                            className="flex-grow bg-[#0b0c0b] border border-gray-700/60 rounded-lg px-4 py-3 text-gray-200 focus:outline-none focus:border-copper transition-colors placeholder:text-gray-600 shadow-inner" 
+                            placeholder="예: 25 clicks" 
+                          />
+                          <div className="relative group w-12 h-12 flex-shrink-0">
+                            <div className="w-full h-full rounded-lg bg-black/40 border border-white/10 flex items-center justify-center overflow-hidden relative group-hover:border-copper/30 transition-all">
+                              {formData.recipe_grind_img ? (
+                                <img src={formData.recipe_grind_img} alt="Recipe Grind" className="w-full h-full object-cover" />
+                              ) : (
+                                <Coffee size={14} className="text-white/10" />
+                              )}
+                              <input 
+                                type="file" 
+                                accept="image/*" 
+                                onChange={(e) => {
+                                  const file = e.target.files[0];
+                                  if (file) {
+                                    const reader = new FileReader();
+                                    reader.onload = (re) => {
+                                      const img = new Image();
+                                      img.onload = () => {
+                                        const canvas = document.createElement('canvas');
+                                        const ctx = canvas.getContext('2d');
+                                        const MAX_SIZE = 400;
+                                        let w = img.width; let h = img.height;
+                                        if (w>h) { if(w>MAX_SIZE){h*=MAX_SIZE/w;w=MAX_SIZE;} } 
+                                        else { if(h>MAX_SIZE){w*=MAX_SIZE/h;h=MAX_SIZE;} }
+                                        canvas.width = w; canvas.height = h;
+                                        ctx.drawImage(img, 0, 0, w, h);
+                                        const compressed = canvas.toDataURL('image/jpeg', 0.8);
+                                        setFormData(prev => ({ ...prev, recipe_grind_img: compressed }));
+                                      };
+                                      img.src = re.target.result;
+                                    };
+                                    reader.readAsDataURL(file);
+                                  }
+                                }}
+                                className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                              />
+                            </div>
+                            {formData.recipe_grind_img && (
+                              <button onClick={() => setFormData(prev => ({ ...prev, recipe_grind_img: '' }))} className="absolute -top-1.5 -right-1.5 p-1 bg-red-500 rounded-full text-white z-20 hover:scale-110 active:scale-90 transition-all shadow-lg">
+                                <Trash2 size={8} />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
                       <InputField label="물 온도" name="hot_temp" value={formData.hot_temp} onChange={handleChange} placeholder="예: 94°C" />
                       <div className="w-full">
                         <label className="block text-[11px] font-medium text-gray-400 mb-1.5 tracking-wider uppercase">추출 비율</label>
