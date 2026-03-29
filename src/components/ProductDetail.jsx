@@ -915,12 +915,11 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 
 
                 <div className="mt-6 px-2 sm:px-6">
-                    <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-8">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 md:gap-12 max-w-5xl mx-auto">
                         {[
                             { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루', img: 'espresso.jpg' },
                             { name: '모카포트', value: '400~600μm', desc: '고운 소금', img: 'mocha_pot.jpg' },
                             { name: '핸드드립', value: '700~900μm', desc: '일반 꽃소금', img: 'hand_drip.jpg' },
-                            { name: '커피메이커', value: '800~1000μm', desc: '중간 소금', img: 'coffee_maker.jpg' },
                             { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금', img: 'dutch.jpg' }
                         ].map((item, idx) => (
                             <StepCard 
