@@ -370,14 +370,26 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
       alert('품목이 성공적으로 등록되었습니다.');
     }
     
-    localStorage.setItem('archemist_beans', JSON.stringify(updated));
-    resetForm();
-    setBeans(updated);
-    window.dispatchEvent(new CustomEvent('beansUpdated', { detail: updated }));
-    setActiveTab('manage'); // Automatically go back to list
-    
-    // Auto-Sync to GitHub
-    syncWithGitHub(updated);
+    try {
+      localStorage.setItem('archemist_beans', JSON.stringify(updated));
+      console.log('Admin: Successfully saved updated state to localStorage');
+      
+      resetForm();
+      setBeans(updated);
+      window.dispatchEvent(new CustomEvent('beansUpdated', { detail: updated }));
+      setActiveTab('manage'); // Automatically go back to list
+      
+      // Auto-Sync to GitHub
+      syncWithGitHub(updated);
+    } catch (err) {
+      console.error('Admin: Failed to save to localStorage (Quota likely exceeded):', err);
+      if (err.name === 'QuotaExceededError' || err.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+        alert('저장 공간이 부족합니다. 분쇄 가이드 이미지의 용량을 줄이거나 파일 개수를 조절해 주세요.');
+      } else {
+        alert('정보 저장 중 오류가 발생했습니다: ' + err.message);
+      }
+      // Don't reset form or redirect, let user fix and try again
+    }
   };
 
   const resetForm = () => {
@@ -1124,7 +1136,27 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                                 const file = e.target.files[0];
                                 if (file) {
                                   const reader = new FileReader();
-                                  reader.onload = (re) => setFormData(prev => ({ ...prev, [grind.key]: re.target.result }));
+                                  reader.onload = (re) => {
+                                    const img = new Image();
+                                    img.onload = () => {
+                                      const canvas = document.createElement('canvas');
+                                      const ctx = canvas.getContext('2d');
+                                      const MAX_SIZE = 400; // Small circular thumb size is enough
+                                      let w = img.width;
+                                      let h = img.height;
+                                      if (w > h) {
+                                        if (w > MAX_SIZE) { h *= MAX_SIZE / w; w = MAX_SIZE; }
+                                      } else {
+                                        if (h > MAX_SIZE) { w *= MAX_SIZE / h; h = MAX_SIZE; }
+                                      }
+                                      canvas.width = w;
+                                      canvas.height = h;
+                                      ctx.drawImage(img, 0, 0, w, h);
+                                      const compressed = canvas.toDataURL('image/jpeg', 0.8);
+                                      setFormData(prev => ({ ...prev, [grind.key]: compressed }));
+                                    };
+                                    img.src = re.target.result;
+                                  };
                                   reader.readAsDataURL(file);
                                 }
                               }}
