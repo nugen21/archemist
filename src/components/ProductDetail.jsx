@@ -3,7 +3,7 @@ import {
   Filter, Droplet, Thermometer, Timer, Target, Scale, MessageCircle, ArrowLeft, ShoppingBag, ExternalLink,
   Cherry, Citrus, Apple, Grape, Sun, TreePalm, 
   Flower2, Sprout, Leaf, Candy, Bean, Nut, Wheat, 
-  Sparkles, Milk, Wind, Edit, Coffee, HelpCircle
+  Sparkles, Milk, Wind, Edit, Coffee, HelpCircle, X
 } from 'lucide-react';
 
 import { FLAVOR_CONFIG, countryToCode } from '../utils/coffeeData';
@@ -94,8 +94,13 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
     );
   };
 
+  const [selectedGrindImage, setSelectedGrindImage] = useState(null);
+
   const StepCard = ({ step }) => (
-    <div className="flex flex-col items-center group/step">
+    <div 
+      className="flex flex-col items-center group/step cursor-zoom-in"
+      onClick={() => setSelectedGrindImage(`/images/grind_guide/grind_${step.level}.jpg`)}
+    >
       <div className="relative mb-6 w-full aspect-square max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors shadow-2xl">
         <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
         <div className="absolute top-4 left-4 text-copper font-serif font-black text-xl opacity-40">{step.step}</div>
@@ -1171,9 +1176,33 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
           </div>
         )}
       
-      {/* Visual Alchemy - Floating Particles */}
-      <div className="absolute top-1/4 left-10 w-1 h-1 bg-copper rounded-full blur-[2px] animate-pulse opacity-40"></div>
-      <div className="absolute bottom-1/4 right-20 w-1.5 h-1.5 bg-copper rounded-full blur-[3px] animate-pulse delay-700 opacity-30"></div>
+      {/* Grind Image Modal */}
+      {selectedGrindImage && (
+        <div 
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-10 bg-[#0b0c0b]/95 backdrop-blur-xl animate-in fade-in duration-300 transition-all cursor-zoom-out"
+          onClick={() => setSelectedGrindImage(null)}
+        >
+          <div className="relative max-w-5xl w-full h-full flex flex-col items-center justify-center gap-8">
+            <button 
+              className="absolute top-0 right-0 p-4 text-white/50 hover:text-white transition-colors"
+              onClick={() => setSelectedGrindImage(null)}
+            >
+              <X size={32} strokeWidth={1.5} />
+            </button>
+            <div className="relative group overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-black/40">
+               <img 
+                 src={selectedGrindImage} 
+                 alt="Grind Detail" 
+                 className="max-h-[85vh] w-auto object-contain animate-in zoom-in-95 duration-500 rounded-[2rem]"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-8">
+                  <span className="text-copper font-serif font-black text-xl tracking-widest uppercase mb-4">Archemist Grind Guide</span>
+               </div>
+            </div>
+            <p className="text-gray-500 font-bold text-sm tracking-[0.3em] uppercase">Click anywhere to close</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
