@@ -105,7 +105,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
         <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
         <div className="absolute top-4 left-4 text-copper font-serif font-black text-xl opacity-40">{step.step}</div>
       </div>
-      <h4 className="text-xl font-serif font-black text-white mb-2 tracking-[0.2em]">{step.title}</h4>
+      <h4 className="text-base sm:text-lg font-serif font-black text-white mb-2 tracking-[0.15em]">{step.title}</h4>
       <p className="text-copper text-[10px] font-black mb-3 tracking-widest uppercase">{step.desc}</p>
       <p className="text-gray-500 text-xs leading-relaxed max-w-[180px] break-keep font-medium">{step.detail}</p>
     </div>
