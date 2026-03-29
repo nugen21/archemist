@@ -99,7 +99,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
   const StepCard = ({ step }) => (
     <div 
       className="flex flex-col items-center group/step cursor-zoom-in"
-      onClick={() => setSelectedGrindImage(`/images/grind_guide/grind_${step.level}.jpg`)}
+      onClick={() => setSelectedGrindImage(step.img)}
     >
       <div className="relative mb-6 w-full aspect-square max-w-[200px] mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/5 group-hover/step:border-copper/30 transition-colors shadow-2xl">
         <img src={step.img} alt={step.title} className="w-full h-full object-cover opacity-80 group-hover/step:opacity-100 group-hover/step:scale-105 transition-all duration-700" />
