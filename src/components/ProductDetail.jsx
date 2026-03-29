@@ -102,6 +102,15 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
     const translateContent = async (content, setTranslated, setIsTranslating) => {
       if (!content) return;
       
+      // 1. First check if it ALREADY contains Korean characters.
+      // If there is even one Korean character, we assume it's already localized or mixed, so we DON'T translate.
+      const hasKorean = /[\uac00-\ud7af]/.test(content);
+      if (hasKorean) {
+        setTranslated(null);
+        return;
+      }
+
+      // 2. Only if no Korean is present, check for significant English content (20+ chars)
       const englishMatch = content.match(/[a-zA-Z\s]{20,}/g);
       if (!englishMatch) {
         setTranslated(null);
