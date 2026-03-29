@@ -93,56 +93,6 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
       </div>
     );
   };
-  const [translatedRecipe, setTranslatedRecipe] = useState(null);
-  const [translatedStory, setTranslatedStory] = useState(null);
-  const [isTranslating, setIsTranslating] = useState(false);
-  const [isTranslatingStory, setIsTranslatingStory] = useState(false);
-
-  useEffect(() => {
-    const translateContent = async (content, setTranslated, setIsTranslating) => {
-      if (!content) return;
-      
-      // 1. First check if it ALREADY contains Korean characters.
-      // If there is even one Korean character, we assume it's already localized or mixed, so we DON'T translate.
-      const hasKorean = /[\uac00-\ud7af]/.test(content);
-      if (hasKorean) {
-        setTranslated(null);
-        return;
-      }
-
-      // 2. Only if no Korean is present, check for significant English content (20+ chars)
-      const englishMatch = content.match(/[a-zA-Z\s]{20,}/g);
-      if (!englishMatch) {
-        setTranslated(null);
-        return;
-      }
-
-      try {
-        setIsTranslating(true);
-        const parts = content.split(/(<[^>]+>)/g);
-        const translatedParts = await Promise.all(parts.map(async (part) => {
-          if (part.startsWith('<') && part.endsWith('>')) return part;
-          if (!part.trim() || !/[a-zA-Z]/.test(part)) return part;
-          
-          try {
-            const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(part)}&langpair=en|ko`);
-            const data = await res.json();
-            return data.responseData?.translatedText || part;
-          } catch (e) {
-            return part;
-          }
-        }));
-        setTranslated(translatedParts.join(''));
-      } catch (err) {
-        console.error("Translation error:", err);
-      } finally {
-        setIsTranslating(false);
-      }
-    };
-
-    translateContent(product?.recipe, setTranslatedRecipe, setIsTranslating);
-    translateContent(product?.story, setTranslatedStory, setIsTranslatingStory);
-  }, [product?.recipe, product?.story]);
 
   const StepCard = ({ step }) => (
     <div className="flex flex-col items-center group/step">
@@ -916,21 +866,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                  생두 정보
                  <div className="h-[1px] w-8 bg-white/10"></div>
                </h3>
-               <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content whitespace-pre-wrap relative" >
-                 {isAdmin && isTranslating && (
-                   <div className="absolute top-4 right-8 flex items-center gap-2 animate-pulse">
-                     <span className="w-1.5 h-1.5 rounded-full bg-copper"></span>
-                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Translating from English...</span>
-                   </div>
-                 )}
-                 {isAdmin && !isTranslating && translatedRecipe && (
-                   <div className="absolute top-4 right-8 flex items-center gap-2">
-                     <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">AI 한국어 번역 완료</span>
-                   </div>
-                 )}
-                 <div dangerouslySetInnerHTML={{ __html: translatedRecipe || product.recipe }} />
-               </div>
+               <div className="bg-[#111211] border border-white/5 p-8 sm:p-12 lg:p-16 rounded-[3rem] prose prose-lg prose-invert max-w-none hover:border-copper/20 transition-all font-sans overflow-hidden break-words text-gray-200 text-base sm:text-lg md:text-xl html-content whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: product.recipe }} />
             </div>
           )}
 
@@ -1179,24 +1115,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                     <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity pointer-events-none">
                       <Droplet size={200} className="text-copper" />
                     </div>
-                    <div className="relative">
-                      {isAdmin && isTranslatingStory && (
-                        <div className="flex items-center gap-2 mb-2 animate-pulse">
-                          <span className="w-1.5 h-1.5 rounded-full bg-copper"></span>
-                          <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Translating Intro...</span>
-                        </div>
-                      )}
-                      {isAdmin && !isTranslatingStory && translatedStory && (
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">AI 한글 번역</span>
-                        </div>
-                      )}
-                      <div 
-                        className="text-gray-400 text-sm sm:text-base leading-[1.8] font-medium break-keep relative z-10 html-content prose prose-invert max-w-none whitespace-pre-wrap"
-                        dangerouslySetInnerHTML={{ __html: translatedStory || product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다." }}
-                      />
-                    </div>
+                    <div 
+                      className="text-gray-400 text-sm sm:text-base leading-[1.8] font-medium break-keep relative z-10 html-content prose prose-invert max-w-none whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{ __html: product.story || "정밀한 추출 가이드가 준비 중입니다. 매장에 방문하시면 바리스타가 직접 안내해 드립니다." }}
+                    />
                   </>
                 )}
               </div>
