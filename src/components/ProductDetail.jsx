@@ -1013,10 +1013,23 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                 icon: <Droplet size={14} className="text-blue-400" /> 
                               }
                             ].filter(Boolean).map((item, idx) => (
-                              <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5">
-                                <div className="text-copper/50">{item.icon}</div>
-                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{item.label}</span>
-                                <span className="text-sm font-bold text-white">{item.value || '-'}</span>
+                              <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-1.5 group/card transition-all hover:bg-white/[0.08]">
+                                <div className="text-copper/50 group-hover/card:text-copper transition-colors">{item.icon}</div>
+                                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest leading-none">{item.label}</span>
+                                <div className="flex flex-col items-center gap-2">
+                                  <span className="text-sm font-bold text-white leading-tight">{item.value || '-'}</span>
+                                  {item.label === '분쇄도' && product.grind_img_handdrip && (
+                                    <div 
+                                      className="w-10 h-10 rounded-lg overflow-hidden border border-white/10 cursor-zoom-in hover:border-copper/40 transition-all active:scale-95 shadow-lg relative z-20"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedGrindImage(product.grind_img_handdrip);
+                                      }}
+                                    >
+                                      <img src={product.grind_img_handdrip} alt="Grind Reference" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+                                    </div>
+                                  )}
+                                </div>
                               </div>
                             ))}
                           </div>
