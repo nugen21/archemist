@@ -57,7 +57,9 @@ const getInitialFormData = () => ({
   ice_p3_time: '', ice_p3_water: '',
   ice_p4_time: '', ice_p4_water: '',
   ice_weight: '', ice_tds: '',
-  ice_comment: ''
+  ice_comment: '',
+  // Grind Guide Custom Images
+  grind_img_espresso: '', grind_img_mocha: '', grind_img_handdrip: '', grind_img_dutch: ''
 });
 
 const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, externalProducts, onEditTriggered }) => {
@@ -1087,6 +1089,70 @@ const Admin = ({ isAdmin, setAdminAuth, initialEditingId, clearEditingId, extern
                 </div>
               </div>
             </div>
+
+            {(formData.category === 'bean' || formData.category === 'dripbag' || formData.category === 'beverage') && (
+                <div className="md:col-span-2 lg:col-span-3 space-y-12 mt-12 border-t border-gray-800 pt-10">
+                  <h4 className="text-sm font-black text-copper uppercase tracking-[0.3em] flex items-center gap-4">
+                    분쇄 가이드 이미지 설정 (선택사항)
+                    <div className="h-[1px] flex-grow bg-white/5"></div>
+                  </h4>
+                  <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">미등록 시 기본 시스템 이미지가 노출됩니다.</p>
+                  
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[
+                      { key: 'grind_img_espresso', label: '에스프레소' },
+                      { key: 'grind_img_mocha', label: '모카포트' },
+                      { key: 'grind_img_handdrip', label: '핸드드립' },
+                      { key: 'grind_img_dutch', label: '더치' }
+                    ].map((grind, gIdx) => (
+                      <div key={gIdx} className="space-y-4">
+                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">{grind.label}</label>
+                        <div className="relative group">
+                          <div className="aspect-square rounded-2xl bg-black border border-white/5 overflow-hidden flex items-center justify-center relative">
+                            {formData[grind.key] ? (
+                              <img src={formData[grind.key]} alt={grind.label} className="w-full h-full object-cover" />
+                            ) : (
+                              <div className="text-white/10 flex flex-col items-center gap-2">
+                                <Coffee size={24} />
+                                <span className="text-[8px] font-bold uppercase tracking-tighter invisible group-hover:visible transition-all">No Custom Image</span>
+                              </div>
+                            )}
+                            <input 
+                              type="file" 
+                              accept="image/*" 
+                              onChange={(e) => {
+                                const file = e.target.files[0];
+                                if (file) {
+                                  const reader = new FileReader();
+                                  reader.onload = (re) => setFormData(prev => ({ ...prev, [grind.key]: re.target.result }));
+                                  reader.readAsDataURL(file);
+                                }
+                              }}
+                              className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                            />
+                            {formData[grind.key] && (
+                              <button 
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setFormData(prev => ({ ...prev, [grind.key]: '' }));
+                                }}
+                                className="absolute top-2 right-2 p-1.5 bg-red-500/80 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-20"
+                              >
+                                <Trash2 size={12} />
+                              </button>
+                            )}
+                          </div>
+                          <div className="mt-2 text-center">
+                             <span className="text-[8px] font-black text-white/20 uppercase tracking-widest group-hover:text-copper/50 transition-colors">
+                               {formData[grind.key] ? '이미지 교체' : '이미지 업로드'}
+                             </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+            )}
 
             {(formData.category === 'bean' || formData.category === 'dripbag') && (
                 <div className="md:col-span-2 lg:col-span-3 space-y-12 mt-8 border-t border-gray-800 pt-10">

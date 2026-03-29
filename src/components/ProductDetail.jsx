@@ -917,10 +917,10 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                 <div className="mt-6 px-2 sm:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 md:gap-12 max-w-5xl mx-auto">
                         {[
-                            { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루', img: 'espresso.jpg' },
-                            { name: '모카포트', value: '400~600μm', desc: '고운 소금', img: 'mocha_pot.jpg' },
-                            { name: '핸드드립', value: '700~900μm', desc: '일반 꽃소금', img: 'hand_drip.jpg' },
-                            { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금', img: 'dutch.jpg' }
+                            { name: '에스프레소', value: '200~400μm', desc: '고운 밀가루', img: 'espresso.jpg', custom: product.grind_img_espresso },
+                            { name: '모카포트', value: '400~600μm', desc: '고운 소금', img: 'mocha_pot.jpg', custom: product.grind_img_mocha },
+                            { name: '핸드드립', value: '700~900μm', desc: '일반 꽃소금', img: 'hand_drip.jpg', custom: product.grind_img_handdrip },
+                            { name: '더치', value: '900~1100μm', desc: '굵은 바다 소금', img: 'dutch.jpg', custom: product.grind_img_dutch }
                         ].map((item, idx) => (
                             <StepCard 
                               key={idx} 
@@ -930,7 +930,7 @@ export default function ProductDetail({ product, onBack, isAdmin, onEdit, archiv
                                 title: item.name,
                                 desc: item.value,
                                 detail: item.desc,
-                                img: `/images/grind/${item.img}`
+                                img: item.custom || `/images/grind/${item.img}`
                               }} 
                             />
                         ))}
