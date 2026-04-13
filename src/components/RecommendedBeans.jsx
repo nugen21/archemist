@@ -47,7 +47,7 @@ export default function RecommendedBeans({ isAdmin, onEdit, products }) {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-8 relative">
           <h2 className="text-4xl sm:text-5xl font-serif font-extrabold text-white mb-4 tracking-tight italic drop-shadow-[0_0_20px_rgba(161,118,76,0.2)]">
-            로스터의 선택
+            아키미스트 로스터스의 선택
           </h2>
           <p className="text-gray-400 font-serif italic text-lg sm:text-xl max-w-2xl mx-auto">아키미스트가 엄선한 이달의 최상위 셀렉션</p>
         </div>
